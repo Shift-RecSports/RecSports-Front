@@ -1,0 +1,64 @@
+<mat-sidenav-container>
+  <div class="background-image">
+    <div class="login-container">
+      <div>
+        <h1 class="login-heading">RecSports</h1>
+        <div class="header-image-container">
+          <img
+            class="header-image"
+            src="/assets/img/recsports_logo.png"
+            alt="recsports logo"
+          />
+        </div>
+      </div>
+
+      <!-- Sign In Form -->
+      <form
+        class="login-form-container"
+        [formGroup]="loginform"
+        (ngSubmit)="onLogin()"
+      >
+        <div class="login-input-container">
+          <label class="login-input-label" for="floatingInput">Matrícula</label>
+          <mat-form-field appearance="fill">
+            <mat-label>A0XXXXXXX</mat-label>
+            <input matInput formControlName="matricula" />
+          </mat-form-field>
+        </div>
+        <div class="login-input-container">
+          <label class="login-input-label" for="floatingInput"
+            >Contraseña</label
+          >
+          <mat-form-field appearance="fill">
+            <mat-label>Contraseña</mat-label>
+            <input
+              matInput
+              [type]="hide ? 'password' : 'text'"
+              formControlName="password"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+            >
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+
+        <div class="login-button-container">
+          <button
+            class="login-button"
+            mat-raised-button
+            type="submit"
+            style="background-color: #00035e; color: white"
+          >
+            Iniciar Sesión
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</mat-sidenav-container>

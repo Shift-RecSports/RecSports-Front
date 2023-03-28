@@ -1,0 +1,9 @@
+.grid-container {
+  position: relative;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+.mapa-container {
+  padding: 6rem 1rem 1rem 8rem;
+}
