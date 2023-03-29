@@ -15,6 +15,7 @@ import { AuthService } from '../service/auth.service';
 export class AuthGuard implements CanActivate {
   constructor(private service: AuthService, private router: Router) {}
 
+  // TODO: Search for specific routes that a certain user cannot access
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { userLogin, user } from './UserTypes';
+import { userLogin, user } from './types';
 
 @Injectable({
   providedIn: 'root',
@@ -17,21 +17,36 @@ export class AuthService {
     // const response = await this.http.post(this.apiurl, user);
 
     // TOOD: Comment
-    const userRole =
-      userLogin.matricula.toLowerCase() === 'alumno'
-        ? 'alumno'
-        : userLogin.matricula.toLowerCase() === 'admin'
-        ? 'admin'
-        : 'entrenador';
-    //
+    let userRole;
+
+    switch (userLogin.matricula.toLowerCase()) {
+      case 'entrenador': {
+        userRole = 'entrenador';
+        break;
+      }
+      case 'admin': {
+        userRole = 'admin';
+        break;
+      }
+      default: {
+        userRole = 'alumno';
+        break;
+      }
+    }
 
     const userData: user = {
       matricula: userLogin.matricula,
       userRole: userRole,
     };
 
-    sessionStorage.setItem('user', userData.matricula);
-    sessionStorage.setItem('userrole', userData.userRole);
+    sessionStorage.setItem(
+      'user',
+      userData.matricula ? userData.matricula : ''
+    );
+    sessionStorage.setItem(
+      'userrole',
+      userData.userRole ? userData.userRole : ''
+    );
 
     return userData;
   }
@@ -41,12 +56,12 @@ export class AuthService {
   }
 
   GetUserName() {
-    return sessionStorage.getItem('user')!;
+    return sessionStorage.getItem('user')?.toString();
   }
 
   GetUserRole() {
-    return sessionStorage.getItem('userRole') != null
-      ? sessionStorage.getItem('userRole')!.toString()
-      : '';
+    return sessionStorage.getItem('userrole') != null
+      ? sessionStorage.getItem('userrole')?.toString().toUpperCase()
+      : 'd';
   }
 }

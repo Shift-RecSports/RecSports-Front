@@ -29,7 +29,7 @@
 
 .header-toolbar {
   position: fixed;
-  padding: 2.5rem 0 2.5rem 2rem;
+  padding: 2.5rem 6.3rem 2.5rem 2rem;
 }
 
 .header-title {
@@ -67,4 +67,39 @@
 
 .sidebar-element-text {
   font-size: 0.8rem;
+}
+
+.header-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.header-user {
+  display: flex;
+  padding: 0 2rem 0 0;
+  line-height: 1.1rem;
+}
+
+.header-user-info {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem 0 0;
+  text-align: center;
+}
+
+.header-user-matricula {
+}
+
+.header-user-role {
+  font-size: 0.8rem;
+}
+
+.header-user-button {
+  display: block;
+}
+
+.logOut-icon {
+  transform: scale(1.8);
+  color: white;
 }
