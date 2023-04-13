@@ -7,3 +7,75 @@
 .deportes-container {
   padding: 6rem 1rem 1rem 8rem;
 }
+
+
+.searchBox {
+  margin: 0 auto;
+  background: #ffff;
+  box-shadow: 0 5px 5px #888888;
+  width: 50%;
+  height: 30px;
+  border-radius: 30px;
+  padding: 10px;
+
+}
+
+.searchButton {
+  color: white;
+  float: right;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--blueTec1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}
+
+.searchInput {
+  border:none;
+  background: none;
+  outline:none;
+  float:left;
+ 
+  color: var(--my-color);
+  font-size: 16px;
+ 
+  transition: 0.4s;
+  line-height: 30px;
+  padding: 0 0px;
+  width: 50%;
+  padding: 0 6px;
+
+}
+
+.tarjeta-deporte {
+  background-image:  linear-gradient(to right, rgb(22, 38, 134,0.8),rgb(255, 255, 255,0.0)),
+  url("https://conecta.tec.mx/sites/default/files/styles/header_full/public/2019-04/Estadio-borregos1920.jpg?h=920929c4&itok=qJq33r8o");
+  height: 200px;
+  width: 30%;
+  background-position: center center;
+  background-size: cover;
+  border-radius: 25px;
+  background-repeat: no-repeat;
+  margin: 20px;
+
+}
+
+.nombre_canchas{
+  font-size: 15px;
+  color: var(--gray);
+}
+
+.nombre_deporte{
+  font-size: 30px;
+  color: white;
+}
+
+.reserva_ahora{
+  font-size: 20px;
+  color: white;
+}
+
+
