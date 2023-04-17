@@ -1,0 +1,181 @@
+.grid-container {
+  position: relative;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+.deporte-container {
+  padding: 6rem 1rem 1rem 8rem;
+}
+
+@media (max-width: 960px) {
+  .deporte-container {
+    padding: 6rem 1rem 1rem 1rem;
+  }
+}
+
+.deporte-content {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0.5rem;
+}
+
+.deporte-header-content {
+  background-image: linear-gradient(
+      to right,
+      rgb(22, 38, 134, 0.8),
+      rgb(255, 255, 255, 0)
+    ),
+    url("https://conecta.tec.mx/sites/default/files/styles/header_full/public/2019-04/Estadio-borregos1920.jpg?h=920929c4&itok=qJq33r8o");
+  background-position: center center;
+  background-size: cover;
+  border-radius: 2rem;
+  box-shadow: 0.5rem 0.5rem 1rem 0.5rem rgba(0, 0, 0, 0.15);
+
+  min-height: 30vh;
+  margin-bottom: 2rem;
+  display: flex;
+}
+
+.deporte-header-text {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: flex-end;
+  align-items: flex-start;
+
+  color: white;
+  padding: 2rem;
+}
+
+.deporte-header-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.deporte-header-descripcion {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.deporte-espacio-container {
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0.5rem 0.5rem 1rem 0.5rem rgba(0, 0, 0, 0.15);
+  margin-bottom: 2rem;
+
+  padding: 1rem 2rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.deporte-espacio-title {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.deporte-espacio-list {
+  padding: 1rem 0 1rem 0;
+
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.deporte-espacio-fondo {
+  background-image: linear-gradient(
+      to right,
+      rgb(22, 38, 134, 0.8),
+      rgb(255, 255, 255, 0)
+    ),
+    url("https://conecta.tec.mx/sites/default/files/styles/header_full/public/2019-04/Estadio-borregos1920.jpg?h=920929c4&itok=qJq33r8o");
+  background-position: center center;
+  background-size: cover;
+  border-radius: 2rem;
+  box-shadow: 0.5rem 0.5rem 1rem 0.5rem rgba(0, 0, 0, 0.15);
+
+  padding: 1rem;
+  min-height: 15vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.deporte-reservacion-container {
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0.5rem 0.5rem 1rem 0.5rem rgba(0, 0, 0, 0.15);
+  margin-bottom: 2rem;
+
+  padding: 1.5rem 2rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.deporte-reservacion-title {
+  align-self: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.deporte-reservacion-button-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.deporte-reservacion-button-container {
+  padding: 0.5rem;
+}
+
+.deporte-reservacion-button-list button {
+}
+
+.deporte-reservacion-table {
+}
+
+.mat-unselected {
+  background-color: #e7e7e7;
+  color: #152586;
+}
+
+.mat-today {
+  background-color: #e7e7e7;
+  color: black;
+  border: 2px solid #152586;
+}
+
+@media (min-width: 1000px) {
+  .deporte-header-text {
+    max-width: 40%;
+  }
+  .deporte-header-title {
+    font-size: 3rem;
+    font-weight: 700;
+  }
+
+  .deporte-header-descripcion {
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.5rem;
+  }
+
+  .deporte-espacio-fondo {
+    margin-right: 2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .deporte-espacio-fondo {
+    margin-right: 2rem;
+  }
+}
+
+@media (max-width: 1000px) {
+  .deporte-espacio-fondo {
+    margin-bottom: 1rem;
+  }
+}

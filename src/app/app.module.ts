@@ -18,6 +18,7 @@ import { MatMenuModule } from '@angular/material/menu';
 
 import { GimnasioComponent } from './gimnasio/gimnasio.component';
 import { DeportesComponent } from './deportes/deportes.component';
+import { DeporteSeleccionadoComponent } from './deportes/deporte-seleccionado/deporte-seleccionado.component';
 import { CalendarioComponent } from './calendario/calendario.component';
 import { NoticiasComponent } from './noticias/noticias.component';
 import { MapaComponent } from './mapa/mapa.component';
@@ -42,6 +43,7 @@ registerLocaleData(en);
     HomeComponent,
     GimnasioComponent,
     DeportesComponent,
+    DeporteSeleccionadoComponent,
     CalendarioComponent,
     NoticiasComponent,
     MapaComponent,

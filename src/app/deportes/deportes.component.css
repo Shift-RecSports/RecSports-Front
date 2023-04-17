@@ -8,6 +8,12 @@
   padding: 6rem 1rem 1rem 8rem;
 }
 
+@media (max-width: 960px) {
+  .deportes-container {
+    padding: 6rem 1rem 1rem 1rem;
+  }
+}
+
 .deportes-title-header {
   width: 100%;
 
@@ -67,19 +73,18 @@
       rgb(255, 255, 255, 0)
     ),
     url("https://conecta.tec.mx/sites/default/files/styles/header_full/public/2019-04/Estadio-borregos1920.jpg?h=920929c4&itok=qJq33r8o");
+
   background-position: center center;
   background-size: cover;
   border-radius: 2rem;
-
+  box-shadow: 0.5rem 0.5rem 1rem 0.5rem rgba(0, 0, 0, 0.15);
   min-height: 30vh;
   margin: 1.5rem;
-  padding: 0;
 }
 
 .tarjeta-deporte-button {
   background: none;
   border: none;
-  font: inherit;
   cursor: pointer;
   outline: inherit;
 
@@ -89,13 +94,17 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: flex-start;
   padding: 1.5rem;
 }
 
 .tarjeta-deporte-descripcion {
   padding-top: 2rem;
-  line-height: 1.5rem;
-  box-shadow: 0 1rem 1rem 0.5rem rgba(0, 0, 0, 0.1);
+  line-height: 1.6rem;
+
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
 
 .nombre_canchas {

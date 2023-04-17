@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { MapaComponent } from './mapa/mapa.component';
 import { NoticiasComponent } from './noticias/noticias.component';
+import { DeporteSeleccionadoComponent } from './deportes/deporte-seleccionado/deporte-seleccionado.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,11 @@ const routes: Routes = [
   {
     path: 'deportes',
     component: DeportesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'deportes/futbol',
+    component: DeporteSeleccionadoComponent,
     canActivate: [AuthGuard],
   },
   {
