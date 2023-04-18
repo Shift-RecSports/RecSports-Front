@@ -24,6 +24,7 @@ import { NoticiasComponent } from './noticias/noticias.component';
 import { MapaComponent } from './mapa/mapa.component';
 import { EncuestaComponent } from './encuesta/encuesta.component';
 import { LoginComponent } from './login/login.component';
+import { ReservacionesComponent } from './reservaciones/reservaciones.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from './material.module';
@@ -33,6 +34,7 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 registerLocaleData(en);
 
@@ -49,6 +51,7 @@ registerLocaleData(en);
     MapaComponent,
     EncuestaComponent,
     LoginComponent,
+    ReservacionesComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +71,7 @@ registerLocaleData(en);
     AngularMaterialModule,
     HttpClientModule,
     NzGridModule,
+    ScrollingModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],

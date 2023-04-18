@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { MapaComponent } from './mapa/mapa.component';
 import { NoticiasComponent } from './noticias/noticias.component';
 import { DeporteSeleccionadoComponent } from './deportes/deporte-seleccionado/deporte-seleccionado.component';
+import { ReservacionesComponent } from './reservaciones/reservaciones.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'reservaciones',
+    component: ReservacionesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'calendario',
     component: CalendarioComponent,
     canActivate: [AuthGuard],
@@ -52,7 +58,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'encuestas',
+    path: 'encuesta',
     component: EncuestaComponent,
     canActivate: [AuthGuard],
   },

@@ -194,7 +194,7 @@
   border-top: 2px solid #152586;
   transform: translateY(
     /* CAMBIR PARA VER           |                 |        */
-      calc(4rem + ((100 / 16) * ((14 - 6) - (0.01 * (14 - 6))) * 1%))
+      calc(4rem + ((100 / 16) * ((16 - 6) - (0.01 * (16 - 6))) * 1%))
   );
 }
 
