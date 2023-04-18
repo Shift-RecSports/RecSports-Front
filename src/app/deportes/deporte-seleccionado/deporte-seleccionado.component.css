@@ -29,7 +29,7 @@
     url("https://conecta.tec.mx/sites/default/files/styles/header_full/public/2019-04/Estadio-borregos1920.jpg?h=920929c4&itok=qJq33r8o");
   background-position: center center;
   background-size: cover;
-  border-radius: 2rem;
+  border-radius: 1rem;
   box-shadow: 0.5rem 0.5rem 1rem 0.5rem rgba(0, 0, 0, 0.15);
 
   min-height: 30vh;
@@ -91,7 +91,7 @@
     url("https://conecta.tec.mx/sites/default/files/styles/header_full/public/2019-04/Estadio-borregos1920.jpg?h=920929c4&itok=qJq33r8o");
   background-position: center center;
   background-size: cover;
-  border-radius: 2rem;
+  border-radius: 1rem;
   box-shadow: 0.5rem 0.5rem 1rem 0.5rem rgba(0, 0, 0, 0.15);
 
   padding: 1rem;
@@ -124,29 +124,140 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
 }
 
 .deporte-reservacion-button-container {
-  padding: 0.5rem;
+  padding: 0.5rem 1rem 0 1rem;
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.deporte-reservacion-button-list button {
+.deporte-reservacion-button-past {
+  padding-top: 1rem;
 }
 
-.deporte-reservacion-table {
+.deporte-reservacion-dia {
+  font-size: 1rem;
+  color: #bec2dd;
+  padding-top: 0.5rem;
+}
+
+.deporte-reservacion-dia-text {
+  color: #152586;
+  font-weight: 900;
+}
+
+.deporte-reservacion-dia-disabled {
+  font-size: 1rem;
+}
+
+.mat-button-disabled {
+  background-color: #bec2dd;
+  color: white;
+}
+
+.mat-button-selected {
+  font-weight: 900;
+  background-color: #152586;
+  color: white;
 }
 
 .mat-unselected {
+  font-weight: 900;
   background-color: #e7e7e7;
-  color: #152586;
+  color: black;
 }
 
 .mat-today {
+  font-weight: 900;
   background-color: #e7e7e7;
   color: black;
-  border: 2px solid #152586;
+  border: 2px solid black;
+  border-style: dashed;
 }
+
+/* TABLE RESERVACIONES */
+.deporte-reservacion-table-container {
+  padding: 0 1rem 0 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.deporte-tiempo-linea {
+  position: absolute;
+  height: 100%;
+  width: 90%;
+  margin-left: 5rem;
+
+  border-top: 2px solid #152586;
+  transform: translateY(
+    /* CAMBIR PARA VER           |                 |        */
+      calc(4rem + ((100 / 16) * ((14 - 6) - (0.01 * (14 - 6))) * 1%))
+  );
+}
+
+.deporte-tiempo-circulo {
+  height: 1rem;
+  width: 1rem;
+
+  border-radius: 100%;
+  margin-left: -0.5rem;
+  margin-top: -0.55rem;
+  background-color: #152586;
+}
+
+.mat-column-demo-position {
+  width: 2rem;
+  padding-right: 1.6rem;
+  text-align: center;
+}
+
+.mat-column-demo-name {
+  padding-left: 1.4rem;
+}
+
+.deporte-reservacion-cell {
+  vertical-align: top;
+}
+
+.spacer {
+  height: 0.5rem;
+}
+
+.mat-divider {
+  border-top-width: 0.2rem;
+  border-top-style: dashed;
+}
+
+.deporte-reservacion-hora {
+  font-size: 1rem;
+  font-weight: 900;
+  color: #cfcfcf;
+}
+
+.mat-horario {
+  background-color: #4959bf;
+  border-radius: 0.6rem;
+  padding: 1.3rem 2.5rem;
+  font-size: 1.2rem;
+  margin-right: 1rem;
+}
+
+.mat-horario-disabled {
+  background-color: #c9cdeb;
+  border-radius: 0.6rem;
+  padding: 1.3rem 2.5rem;
+  font-size: 1.2rem;
+  margin-right: 1rem;
+}
+
+.deporte-reservacion-horario {
+  color: white;
+  font-weight: 900;
+}
+/* END TABLA RESERVACIONES */
 
 @media (min-width: 1000px) {
   .deporte-header-text {
