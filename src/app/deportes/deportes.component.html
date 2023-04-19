@@ -94,5 +94,13 @@
         </div>
       </div>
     </div>
+
+    <div *ngIf="showAgregarButton">
+      <div class="deportes-agregar-container">
+        <button mat-button color="button-agregar" (click)="onAgregarDeporte()">
+          <div class="deportes-agregar-text">Agregar Deporte</div>
+        </button>
+      </div>
+    </div>
   </div>
 </div>

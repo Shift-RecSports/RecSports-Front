@@ -6,6 +6,7 @@
 
 .deportes-container {
   padding: 6rem 1rem 1rem 8rem;
+  position: relative;
 }
 
 @media (max-width: 960px) {
@@ -120,4 +121,22 @@
 .reserva_ahora {
   font-size: 20px;
   color: white;
+}
+
+.deportes-agregar-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 3rem;
+}
+
+.mat-button-agregar {
+  border: 0.2rem solid #162686;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.deportes-agregar-text {
+  color: #162686;
+  font-size: 1.2rem;
 }

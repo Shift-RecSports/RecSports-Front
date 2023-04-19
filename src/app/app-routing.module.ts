@@ -11,6 +11,7 @@ import { MapaComponent } from './mapa/mapa.component';
 import { NoticiasComponent } from './noticias/noticias.component';
 import { DeporteSeleccionadoComponent } from './deportes/deporte-seleccionado/deporte-seleccionado.component';
 import { ReservacionesComponent } from './reservaciones/reservaciones.component';
+import { NuevoDeporteComponent } from './deportes/components/nuevo-deporte/nuevo-deporte.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,11 @@ const routes: Routes = [
   {
     path: 'deportes/futbol',
     component: DeporteSeleccionadoComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'deportes/nuevo',
+    component: NuevoDeporteComponent,
     canActivate: [AuthGuard],
   },
   {

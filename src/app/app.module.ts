@@ -35,6 +35,7 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { NuevoDeporteComponent } from './deportes/components/nuevo-deporte/nuevo-deporte.component';
 
 registerLocaleData(en);
 
@@ -52,6 +53,7 @@ registerLocaleData(en);
     EncuestaComponent,
     LoginComponent,
     ReservacionesComponent,
+    NuevoDeporteComponent,
   ],
   imports: [
     BrowserModule,

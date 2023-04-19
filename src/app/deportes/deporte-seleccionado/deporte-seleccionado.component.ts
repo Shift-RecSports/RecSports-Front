@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 
-interface PeriodicElement {
+interface HorarioReservacion {
   name: string;
   hora: string;
   repetition: number;
   disabled: boolean;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
+const HORARIOS_RESERVACION: HorarioReservacion[] = [
   { hora: '06:00', name: 'CDB1 | Cancha 2 ', repetition: 1, disabled: true },
   { hora: '07:00', name: 'CDB1 | Cancha 2 ', repetition: 3, disabled: true },
   { hora: '08:00', name: 'CDB1 | Cancha 2 ', repetition: 1, disabled: true },
@@ -32,5 +32,5 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class DeporteSeleccionadoComponent {
   displayedColumns: string[] = ['demo-position', 'demo-name'];
-  dataSource = ELEMENT_DATA;
+  dataSource = HORARIOS_RESERVACION;
 }
