@@ -7,6 +7,8 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
 
 import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
+import { AuthService } from 'src/app/service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nuevo-deporte',
@@ -29,7 +31,11 @@ export class NuevoDeporteComponent {
   selectedFileNames: string[] = [];
   preview: string = '';
 
-  constructor(private uploadService: FileUploadService) {}
+  constructor(
+    private uploadService: FileUploadService,
+    private service: AuthService,
+    private router: Router
+  ) {}
 
   changeSelectedEspacios(espacios: string[]) {
     this.espaciosSelected = espacios;
@@ -97,8 +103,10 @@ export class NuevoDeporteComponent {
       );
     }
   }
-  ngOnInit(): void {}
-  // FINISH UPLOAD IMAGES
+
+  onCancelClick() {
+    this.router.navigate(['/deportes']);
+  }
 }
 
 // SERVICE FOR IMAGES

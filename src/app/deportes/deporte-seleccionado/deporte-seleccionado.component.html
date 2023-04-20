@@ -10,6 +10,11 @@
             nisi nisl. Mauris a lacinia dui.
           </div>
         </div>
+        <div *ngIf="showEditButton" class="deportes-edit-container">
+          <button mat-button color="button-edit" (click)="onEditDeporte()">
+            <div class="deportes-edit-text">Editar</div>
+          </button>
+        </div>
       </div>
       <div class="deporte-espacio-container">
         <div class="deporte-espacio-title">Espacios</div>

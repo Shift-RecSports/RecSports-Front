@@ -58,6 +58,27 @@
   font-weight: 500;
 }
 
+.deportes-edit-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding-bottom: 1rem;
+  padding-right: 1rem;
+}
+
+.mat-button-edit {
+  border: 0.2rem solid #162686;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.deportes-edit-text {
+  color: #162686;
+  font-size: 1.2rem;
+}
+
 .deporte-espacio-container {
   background-color: white;
   border-radius: 1rem;

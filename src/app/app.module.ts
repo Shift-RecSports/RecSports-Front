@@ -36,6 +36,7 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NuevoDeporteComponent } from './deportes/components/nuevo-deporte/nuevo-deporte.component';
+import { EspaciosFormularioComponent } from './deportes/components/espacios-formulario/espacios-formulario.component';
 
 registerLocaleData(en);
 
@@ -54,6 +55,7 @@ registerLocaleData(en);
     LoginComponent,
     ReservacionesComponent,
     NuevoDeporteComponent,
+    EspaciosFormularioComponent,
   ],
   imports: [
     BrowserModule,

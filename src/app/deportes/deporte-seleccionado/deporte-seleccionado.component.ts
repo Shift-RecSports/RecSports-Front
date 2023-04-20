@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/service/auth.service';
 
 interface HorarioReservacion {
   name: string;
@@ -33,4 +35,15 @@ const HORARIOS_RESERVACION: HorarioReservacion[] = [
 export class DeporteSeleccionadoComponent {
   displayedColumns: string[] = ['demo-position', 'demo-name'];
   dataSource = HORARIOS_RESERVACION;
+  showEditButton = false;
+
+  constructor(private service: AuthService, private router: Router) {
+    if (this.service.isLoggedIn() && this.service.GetUserRole() == 'ADMIN') {
+      this.showEditButton = true;
+    }
+  }
+
+  onEditDeporte() {
+    this.router.navigate(['/deportes/nuevo']);
+  }
 }

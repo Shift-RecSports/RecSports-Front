@@ -12,6 +12,7 @@ import { NoticiasComponent } from './noticias/noticias.component';
 import { DeporteSeleccionadoComponent } from './deportes/deporte-seleccionado/deporte-seleccionado.component';
 import { ReservacionesComponent } from './reservaciones/reservaciones.component';
 import { NuevoDeporteComponent } from './deportes/components/nuevo-deporte/nuevo-deporte.component';
+import { EspaciosFormularioComponent } from './deportes/components/espacios-formulario/espacios-formulario.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,11 @@ const routes: Routes = [
   {
     path: 'deportes/nuevo',
     component: NuevoDeporteComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'espacios/nuevo',
+    component: EspaciosFormularioComponent,
     canActivate: [AuthGuard],
   },
   {

@@ -1,8 +1,8 @@
 <div class="grid-container">
-  <div class="nuevo-deporte-container">
-    <div class="nuevo-container">
-      <div class="nuevo-header">Crear nuevo deporte</div>
-      <div class="nuevo-form">
+  <div class="espacios-formulario-container">
+    <div class="espacios-container">
+      <div class="espacio-header">Crear nuevo Espacio</div>
+      <div class="espacio-form">
         <div nz-row>
           <div
             nz-col
@@ -11,9 +11,9 @@
             nzMd="12"
             nzLg="12"
             nzXl="12"
-            class="nuevo-form-item"
+            class="espacio-form-item"
           >
-            <div class="nuevo-form-title">Nombre del deporte</div>
+            <div class="espacio-form-title">Nombre del Espacio</div>
             <mat-form-field appearance="outline" class="input-container">
               <input matInput placeholder="Escribe..." />
             </mat-form-field>
@@ -26,11 +26,11 @@
             nzMd="12"
             nzLg="12"
             nzXl="12"
-            class="nuevo-form-item"
+            class="espacio-form-item"
           >
-            <div class="nuevo-form-title">Áreas deportivas</div>
+            <div class="espacio-form-title">Áreas deportivas</div>
 
-            <div *ngIf="espaciosSelected.length != 0">
+            <!-- <div *ngIf="espaciosSelected.length != 0">
               <div class="form-horarios-selected">
                 <button
                   mat-button
@@ -45,9 +45,9 @@
                   </div>
                 </button>
               </div>
-            </div>
+            </div> -->
 
-            <mat-form-field appearance="outline" class="input-container">
+            <!-- <mat-form-field appearance="outline" class="input-container">
               <mat-label>Selecciona</mat-label>
               <mat-select
                 #matRef
@@ -56,12 +56,12 @@
                 (selectionChange)="changeSelectedEspacios($event.value)"
               >
                 <mat-select-trigger>
-                  {{espacios.value?.[0] || ''}}
+                  {{ espacios.value ? espacios.value[0] : "" }}
                   <span
-                    *ngIf="(espacios.value?.length || 0) > 1"
+                    *ngIf="espacios.value!.length > 1"
                     class="example-additional-selection"
                   >
-                    (+{{ (espacios.value?.length || 0) - 1 }})
+                    (+{{ espacios.value!.length - 1 }})
                   </span>
                 </mat-select-trigger>
 
@@ -71,7 +71,7 @@
                   >{{ espacio }}</mat-option
                 >
               </mat-select>
-            </mat-form-field>
+            </mat-form-field> -->
           </div>
 
           <div
@@ -81,12 +81,12 @@
             nzMd="12"
             nzLg="12"
             nzXl="12"
-            class="nuevo-form-item"
+            class="espacio-form-item"
           >
-            <div class="nuevo-form-title">Carga de archivos</div>
+            <div class="espacio-form-title">Carga de archivos</div>
 
             <!-- CARGA DE IMAGEN -->
-            <mat-form-field appearance="outline" class="input-container">
+            <!-- <mat-form-field appearance="outline" class="input-container">
               <mat-toolbar>
                 <div ondrag="uploadFiles()">
                   <input hidden matInput />
@@ -105,9 +105,9 @@
                 </div>
               </mat-toolbar>
             </mat-form-field>
-            <div *ngIf="preview != ''" class="nuevo-form-archivo">
+            <div *ngIf="preview != ''" class="espacio-form-archivo">
               <b>Imagen:</b> {{ selectedFileNames[0] }}
-            </div>
+            </div> -->
           </div>
 
           <div
@@ -117,9 +117,9 @@
             nzMd="12"
             nzLg="12"
             nzXl="12"
-            class="nuevo-form-item"
+            class="espacio-form-item"
           >
-            <div class="nuevo-form-title">Descripción</div>
+            <div class="espacio-form-title">Descripción</div>
             <mat-form-field appearance="outline" class="input-container">
               <textarea
                 matInput
@@ -138,9 +138,9 @@
             nzMd="12"
             nzLg="12"
             nzXl="12"
-            class="nuevo-form-item"
+            class="espacio-form-item"
           >
-            <div *ngIf="preview != ''" class="image-preview">
+            <!-- <div *ngIf="preview != ''" class="image-preview">
               <div class="preview-container">
                 <div class="preview-filter">
                   <div class="capitals">BÁSQUETBOL</div>
@@ -148,7 +148,7 @@
                 </div>
                 <img [src]="preview" class="preview" />
               </div>
-            </div>
+            </div> -->
           </div>
 
           <div
@@ -158,20 +158,20 @@
             nzMd="12"
             nzLg="12"
             nzXl="12"
-            class="nuevo-form-item"
+            class="espacio-form-item"
           >
-            <div class="buttons-container">
+            <!-- <div class="buttons-container">
               <button
                 mat-button
                 color="button-cancelar"
                 (click)="onCancelClick()"
               >
-                <div class="deportes-cancelar-text">Cancelar</div>
+                <div class="espacio-cancelar-text">Cancelar</div>
               </button>
               <button mat-button color="button-guardar">
-                <div class="deportes-guardar-text">Guardar</div>
+                <div class="espacio-guardar-text">Guardar</div>
               </button>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
