@@ -1,5 +1,106 @@
 <div class="grid-container">
   <div class="deportes-container">
-    <p>Deportes works!</p>
+    <div class="deportes-title-header">
+      <div class="deportes-title">Busca tu deporte</div>
+      <div class="deportes-searchbox">
+        <input
+          class="searchbox-field"
+          type="text"
+          name=""
+          placeholder="Buscar..."
+        />
+        <button class="searchbox-button" href="#">
+          <i class="material-icons"> search </i>
+        </button>
+      </div>
+    </div>
+
+    <div nz-row>
+      <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="6" nzXl="6">
+        <div class="tarjeta-deporte">
+          <button class="tarjeta-deporte-button" (click)="onSelectDeporte()">
+            <div class="tarjeta-deporte-descripcion">
+              <div class="nombre_canchas capitals">WELLNESS CENTER & CDB1</div>
+              <div class="nombre_deporte capitals">BÁSQUETBOL</div>
+            </div>
+            <div class="reserva_ahora capitals">RESERVA AHORA</div>
+          </button>
+        </div>
+      </div>
+      <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="6" nzXl="6">
+        <div class="tarjeta-deporte">
+          <button class="tarjeta-deporte-button" (click)="onSelectDeporte()">
+            <div class="tarjeta-deporte-descripcion">
+              <div class="nombre_canchas capitals">WELLNESS CENTER & CDB1</div>
+              <div class="nombre_deporte capitals">FUTBÓL</div>
+            </div>
+            <div class="reserva_ahora capitals">RESERVA AHORA</div>
+          </button>
+        </div>
+      </div>
+      <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="6" nzXl="6">
+        <div class="tarjeta-deporte">
+          <button class="tarjeta-deporte-button" (click)="onSelectDeporte()">
+            <div class="tarjeta-deporte-descripcion">
+              <div class="nombre_canchas capitals">WELLNESS CENTER & CDB1</div>
+              <div class="nombre_deporte capitals">FUTBÓL RÁPIDO</div>
+            </div>
+            <div class="reserva_ahora capitals">RESERVA AHORA</div>
+          </button>
+        </div>
+      </div>
+      <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="6" nzXl="6">
+        <div class="tarjeta-deporte">
+          <button class="tarjeta-deporte-button" (click)="onSelectDeporte()">
+            <div class="tarjeta-deporte-descripcion">
+              <div class="nombre_canchas capitals">WELLNESS CENTER & CDB1</div>
+              <div class="nombre_deporte capitals">TENNIS</div>
+            </div>
+            <div class="reserva_ahora capitals">RESERVA AHORA</div>
+          </button>
+        </div>
+      </div>
+      <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="6" nzXl="6">
+        <div class="tarjeta-deporte">
+          <button class="tarjeta-deporte-button" (click)="onSelectDeporte()">
+            <div class="tarjeta-deporte-descripcion">
+              <div class="nombre_canchas capitals">WELLNESS CENTER & CDB1</div>
+              <div class="nombre_deporte capitals">NATACIÓN</div>
+            </div>
+            <div class="reserva_ahora capitals">RESERVA AHORA</div>
+          </button>
+        </div>
+      </div>
+      <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="6" nzXl="6">
+        <div class="tarjeta-deporte">
+          <button class="tarjeta-deporte-button" (click)="onSelectDeporte()">
+            <div class="tarjeta-deporte-descripcion">
+              <div class="nombre_canchas capitals">WELLNESS CENTER & CDB1</div>
+              <div class="nombre_deporte capitals">YOGA</div>
+            </div>
+            <div class="reserva_ahora capitals">RESERVA AHORA</div>
+          </button>
+        </div>
+      </div>
+      <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="6" nzXl="6">
+        <div class="tarjeta-deporte">
+          <button class="tarjeta-deporte-button" (click)="onSelectDeporte()">
+            <div class="tarjeta-deporte-descripcion">
+              <div class="nombre_canchas capitals">WELLNESS CENTER & CDB1</div>
+              <div class="nombre_deporte capitals">SPINNING</div>
+            </div>
+            <div class="reserva_ahora capitals">RESERVA AHORA</div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="showAgregarButton">
+      <div class="deportes-agregar-container">
+        <button mat-button color="button-agregar" (click)="onAgregarDeporte()">
+          <div class="deportes-agregar-text">Agregar Deporte</div>
+        </button>
+      </div>
+    </div>
   </div>
 </div>

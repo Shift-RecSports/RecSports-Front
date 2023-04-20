@@ -1,4 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
 
+
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.title900{
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 900;
+    font-size: 30px;
+}
+
+.title300{
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 300;
+    font-size: 30px;
+}
+
+.capitals{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;  
+}
+
+
+:root {
+    --blueTec1: rgb(22, 38, 134);
+    --gray: rgb(193, 189, 189);
+  }
+
+
+
+
+
+
+

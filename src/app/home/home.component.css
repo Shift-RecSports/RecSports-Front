@@ -8,6 +8,12 @@
   padding: 6rem 1rem 1rem 8rem;
 }
 
+@media (max-width: 960px) {
+  .home-container {
+    padding: 6rem 1rem 1rem 1rem;
+  }
+}
+
 .dashboard-card {
   position: absolute;
   top: 15px;

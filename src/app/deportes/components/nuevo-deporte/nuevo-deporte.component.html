@@ -1,0 +1,180 @@
+<div class="grid-container">
+  <div class="nuevo-deporte-container">
+    <div class="nuevo-container">
+      <div class="nuevo-header">Crear nuevo deporte</div>
+      <div class="nuevo-form">
+        <div nz-row>
+          <div
+            nz-col
+            nzXs="24"
+            nzSm="24"
+            nzMd="12"
+            nzLg="12"
+            nzXl="12"
+            class="nuevo-form-item"
+          >
+            <div class="nuevo-form-title">Nombre del deporte</div>
+            <mat-form-field appearance="outline" class="input-container">
+              <input matInput placeholder="Escribe..." />
+            </mat-form-field>
+          </div>
+
+          <div
+            nz-col
+            nzXs="24"
+            nzSm="24"
+            nzMd="12"
+            nzLg="12"
+            nzXl="12"
+            class="nuevo-form-item"
+          >
+            <div class="nuevo-form-title">Áreas deportivas</div>
+
+            <div *ngIf="espaciosSelected.length != 0">
+              <div class="form-horarios-selected">
+                <button
+                  mat-button
+                  *ngFor="let espacio of espaciosSelected"
+                  color="button-horario"
+                  (click)="removeSelectedEspacio(espacio)"
+                >
+                  <div class="form-button-horario">
+                    <div class="form-horario-text">{{ espacio }}</div>
+
+                    <mat-icon [ngStyle]="{ color: 'white' }">clear</mat-icon>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <mat-form-field appearance="outline" class="input-container">
+              <mat-label>Selecciona</mat-label>
+              <mat-select
+                #matRef
+                [formControl]="espacios"
+                multiple
+                (selectionChange)="changeSelectedEspacios($event.value)"
+              >
+                <mat-select-trigger>
+                  {{espacios.value?.[0] || ''}}
+                  <span
+                    *ngIf="(espacios.value?.length || 0) > 1"
+                    class="example-additional-selection"
+                  >
+                    (+{{ (espacios.value?.length || 0) - 1 }})
+                  </span>
+                </mat-select-trigger>
+
+                <mat-option
+                  *ngFor="let espacio of listaEspacios"
+                  [value]="espacio"
+                  >{{ espacio }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div
+            nz-col
+            nzXs="24"
+            nzSm="24"
+            nzMd="12"
+            nzLg="12"
+            nzXl="12"
+            class="nuevo-form-item"
+          >
+            <div class="nuevo-form-title">Carga de archivos</div>
+
+            <!-- CARGA DE IMAGEN -->
+            <mat-form-field appearance="outline" class="input-container">
+              <mat-toolbar>
+                <div ondrag="uploadFiles()">
+                  <input hidden matInput />
+                  <input
+                    style="width: 100%; background-color: white"
+                    type="file"
+                    id="fileInput"
+                    name="fileInput"
+                    accept="image/*"
+                    (change)="selectFiles($event)"
+                  />
+                  <div class="image-text">
+                    <span class="drop-image-text">Arrastra y suelta o </span>
+                    <span class="navigate-image-text">Navega dispositivo</span>
+                  </div>
+                </div>
+              </mat-toolbar>
+            </mat-form-field>
+            <div *ngIf="preview != ''" class="nuevo-form-archivo">
+              <b>Imagen:</b> {{ selectedFileNames[0] }}
+            </div>
+          </div>
+
+          <div
+            nz-col
+            nzXs="24"
+            nzSm="24"
+            nzMd="12"
+            nzLg="12"
+            nzXl="12"
+            class="nuevo-form-item"
+          >
+            <div class="nuevo-form-title">Descripción</div>
+            <mat-form-field appearance="outline" class="input-container">
+              <textarea
+                matInput
+                placeholder="Escribe..."
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="3"
+                cdkAutosizeMaxRows="3"
+              ></textarea>
+            </mat-form-field>
+          </div>
+
+          <div
+            nz-col
+            nzXs="24"
+            nzSm="24"
+            nzMd="12"
+            nzLg="12"
+            nzXl="12"
+            class="nuevo-form-item"
+          >
+            <div *ngIf="preview != ''" class="image-preview">
+              <div class="preview-container">
+                <div class="preview-filter">
+                  <div class="capitals">BÁSQUETBOL</div>
+                  <div class="reserva_ahora capitals">RESERVA AHORA</div>
+                </div>
+                <img [src]="preview" class="preview" />
+              </div>
+            </div>
+          </div>
+
+          <div
+            nz-col
+            nzXs="24"
+            nzSm="24"
+            nzMd="12"
+            nzLg="12"
+            nzXl="12"
+            class="nuevo-form-item"
+          >
+            <div class="buttons-container">
+              <button
+                mat-button
+                color="button-cancelar"
+                (click)="onCancelClick()"
+              >
+                <div class="deportes-cancelar-text">Cancelar</div>
+              </button>
+              <button mat-button color="button-guardar">
+                <div class="deportes-guardar-text">Guardar</div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

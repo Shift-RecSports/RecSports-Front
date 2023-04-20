@@ -18,15 +18,27 @@ import { MatMenuModule } from '@angular/material/menu';
 
 import { GimnasioComponent } from './gimnasio/gimnasio.component';
 import { DeportesComponent } from './deportes/deportes.component';
+import { DeporteSeleccionadoComponent } from './deportes/deporte-seleccionado/deporte-seleccionado.component';
 import { CalendarioComponent } from './calendario/calendario.component';
 import { NoticiasComponent } from './noticias/noticias.component';
 import { MapaComponent } from './mapa/mapa.component';
 import { EncuestaComponent } from './encuesta/encuesta.component';
 import { LoginComponent } from './login/login.component';
+import { ReservacionesComponent } from './reservaciones/reservaciones.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from './material.module';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 import { HttpClientModule } from '@angular/common/http';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { NuevoDeporteComponent } from './deportes/components/nuevo-deporte/nuevo-deporte.component';
+import { EspaciosFormularioComponent } from './deportes/components/espacios-formulario/espacios-formulario.component';
+
+registerLocaleData(en);
 
 @NgModule({
   declarations: [
@@ -35,11 +47,15 @@ import { HttpClientModule } from '@angular/common/http';
     HomeComponent,
     GimnasioComponent,
     DeportesComponent,
+    DeporteSeleccionadoComponent,
     CalendarioComponent,
     NoticiasComponent,
     MapaComponent,
     EncuestaComponent,
     LoginComponent,
+    ReservacionesComponent,
+    NuevoDeporteComponent,
+    EspaciosFormularioComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,8 +74,10 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     AngularMaterialModule,
     HttpClientModule,
+    NzGridModule,
+    ScrollingModule,
   ],
-  providers: [],
+  providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

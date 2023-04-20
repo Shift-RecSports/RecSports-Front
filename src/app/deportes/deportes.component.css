@@ -6,4 +6,137 @@
 
 .deportes-container {
   padding: 6rem 1rem 1rem 8rem;
+  position: relative;
+}
+
+@media (max-width: 960px) {
+  .deportes-container {
+    padding: 6rem 1rem 1rem 1rem;
+  }
+}
+
+.deportes-title-header {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+.deportes-title {
+  font-size: 2rem;
+  font-weight: 700;
+  padding: 1rem;
+}
+
+.deportes-searchbox {
+  background: white;
+  box-shadow: 0 0 1rem 0.5rem rgba(0, 0, 0, 0.05);
+
+  width: 50%;
+  border-radius: 2rem;
+  padding: 0.5rem;
+}
+
+.searchbox-field {
+  border: none;
+  background: none;
+  outline: none;
+  float: left;
+
+  color: var(--my-color);
+  font-size: 1rem;
+
+  transition: 0.4s;
+  line-height: 1.8rem;
+  width: 50%;
+  padding: 0 0.5rem;
+}
+
+.searchbox-button {
+  color: white;
+  float: right;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--blueTec1);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tarjeta-deporte {
+  background-image: linear-gradient(
+      to right,
+      rgb(22, 38, 134, 0.8),
+      rgb(255, 255, 255, 0)
+    ),
+    url("https://conecta.tec.mx/sites/default/files/styles/header_full/public/2019-04/Estadio-borregos1920.jpg?h=920929c4&itok=qJq33r8o");
+
+  background-position: center center;
+  background-size: cover;
+  border-radius: 2rem;
+  box-shadow: 0.5rem 0.5rem 1rem 0.5rem rgba(0, 0, 0, 0.15);
+  min-height: 30vh;
+  margin: 1.5rem;
+}
+
+.tarjeta-deporte-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: inherit;
+
+  height: 30vh;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1.5rem;
+}
+
+.tarjeta-deporte-descripcion {
+  padding-top: 2rem;
+  line-height: 1.6rem;
+
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.nombre_canchas {
+  font-size: 0.8rem;
+  color: var(--gray);
+}
+
+.nombre_deporte {
+  font-size: 1.8rem;
+  color: white;
+}
+
+.reserva_ahora {
+  font-size: 20px;
+  color: white;
+}
+
+.deportes-agregar-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 3rem;
+}
+
+.mat-button-agregar {
+  border: 0.2rem solid #162686;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.deportes-agregar-text {
+  color: #162686;
+  font-size: 1.2rem;
 }
