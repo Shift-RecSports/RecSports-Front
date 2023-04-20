@@ -42,6 +42,30 @@
   padding-bottom: 0.5rem;
 }
 
+.form-horarios-selected {
+  display: flex;
+  gap: 0.5rem;
+  padding-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.mat-button-horario {
+  background-color: #0033a0;
+  padding: 1.3rem 1rem 1.3rem 1rem;
+}
+
+.form-button-horario {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.form-horario-text {
+  color: white;
+  font-size: 1rem;
+  padding-right: 0.5rem;
+}
+
 .input-container {
   width: 100%;
 }

@@ -29,9 +29,42 @@
             class="nuevo-form-item"
           >
             <div class="nuevo-form-title">Áreas deportivas</div>
+
+            <div *ngIf="espaciosSelected.length != 0">
+              <div class="form-horarios-selected">
+                <button
+                  mat-button
+                  *ngFor="let espacio of espaciosSelected"
+                  color="button-horario"
+                  (click)="removeSelectedEspacio(espacio)"
+                >
+                  <div class="form-button-horario">
+                    <div class="form-horario-text">{{ espacio }}</div>
+
+                    <mat-icon [ngStyle]="{ color: 'white' }">clear</mat-icon>
+                  </div>
+                </button>
+              </div>
+            </div>
+
             <mat-form-field appearance="outline" class="input-container">
               <mat-label>Selecciona</mat-label>
-              <mat-select [formControl]="espacios" multiple>
+              <mat-select
+                #matRef
+                [formControl]="espacios"
+                multiple
+                (selectionChange)="changeSelectedEspacios($event.value)"
+              >
+                <mat-select-trigger>
+                  {{ espacios.value ? espacios.value[0] : "" }}
+                  <span
+                    *ngIf="espacios.value!.length > 1"
+                    class="example-additional-selection"
+                  >
+                    (+{{ espacios.value!.length - 1 }})
+                  </span>
+                </mat-select-trigger>
+
                 <mat-option
                   *ngFor="let espacio of listaEspacios"
                   [value]="espacio"

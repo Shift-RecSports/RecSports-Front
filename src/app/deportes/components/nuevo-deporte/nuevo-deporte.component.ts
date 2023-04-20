@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpRequest, HttpEvent } from '@angular/common/http';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
+
+import { MatOption } from '@angular/material/core';
+import { MatSelect } from '@angular/material/select';
 
 @Component({
   selector: 'app-nuevo-deporte',
@@ -12,15 +15,12 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
 })
 export class NuevoDeporteComponent {
   espacios = new FormControl('');
+  espaciosSelected: string[] = [];
   listaEspacios: string[] = [
-    'CBD1 | Cancha1',
-    'CBD2 | Cancha1',
-    'CBD1 | Cancha2',
-    'CBD2 | Cancha2',
-    'CBD1 | Cancha1',
-    'CBD2 | Cancha1',
-    'CBD1 | Cancha2',
-    'CBD2 | Cancha2',
+    'CBD1 - Cancha1',
+    'CBD2 - Cancha1',
+    'CBD1 - Cancha2',
+    'CBD2 - Cancha2',
   ];
 
   // CODE FOR UPLOADING IMAGES - Refactor
@@ -30,11 +30,30 @@ export class NuevoDeporteComponent {
   preview: string = '';
 
   constructor(private uploadService: FileUploadService) {}
+
+  changeSelectedEspacios(espacios: string[]) {
+    this.espaciosSelected = espacios;
+  }
+
+  @ViewChild('matRef') matRef: MatSelect;
+  removeSelectedEspacio(espaciosSelected: string) {
+    this.matRef.options.forEach((data: MatOption) => {
+      if (data._text?.nativeElement.innerHTML == espaciosSelected) {
+        data.deselect();
+      }
+    });
+  }
+
+  compareEspacios(object1: any, object2: any) {
+    return object1 && object2 && object1.id == object2.id;
+  }
+
   selectFiles(event: any): void {
     this.selectedFileNames = [];
     this.selectedFiles = event.target.files;
 
     this.preview = '';
+
     if (this.selectedFiles && this.selectedFiles[0]) {
       const numberOfFiles = this.selectedFiles.length;
       for (let i = 0; i < numberOfFiles; i++) {
