@@ -15,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { GimnasioComponent } from './gimnasio/gimnasio.component';
 import { DeportesComponent } from './deportes/deportes.component';
@@ -76,6 +77,7 @@ registerLocaleData(en);
     HttpClientModule,
     NzGridModule,
     ScrollingModule,
+    MatAutocompleteModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],

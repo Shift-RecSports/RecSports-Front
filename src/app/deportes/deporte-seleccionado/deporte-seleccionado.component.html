@@ -38,6 +38,25 @@
               <div>Cancha 3</div>
             </div>
           </div>
+          <div
+            nz-col
+            nzXs="24"
+            nzSm="24"
+            nzMd="12"
+            nzLg="5"
+            nzXl="5"
+            class="deporte-espacio-agregarContainer"
+          >
+            <button
+              mat-button
+              class="deporte-espacio-agregar"
+              (click)="onCrearEspacio()"
+            >
+              <mat-icon [ngStyle]="{ color: '#E4E4E4', transform: 'scale(2)' }"
+                >add</mat-icon
+              >
+            </button>
+          </div>
           <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="5" nzXl="5"></div>
           <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="4" nzXl="5"></div>
         </div>

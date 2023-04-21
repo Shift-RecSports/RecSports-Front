@@ -46,4 +46,8 @@ export class DeporteSeleccionadoComponent {
   onEditDeporte() {
     this.router.navigate(['/deportes/nuevo']);
   }
+
+  onCrearEspacio() {
+    this.router.navigate(['/espacios/nuevo']);
+  }
 }

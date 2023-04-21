@@ -135,10 +135,10 @@
   z-index: 1;
   border-radius: 2rem;
 
-  padding: 4rem 2rem 2rem 2rem;
+  padding: 2rem 2rem 2rem 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
   text-align: left;
   font-size: 1.8rem;
   font-weight: 900;
