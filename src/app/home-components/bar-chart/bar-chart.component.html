@@ -1,0 +1,216 @@
+<p>"working bar chart"</p>
+<div id="chart-container"></div>
+
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script>
+      var margin = {
+          top: 20,
+          right: 20,
+          bottom: 30,
+          left: 40
+        },
+        width = 960 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
+  
+      var timeFormatter = d3.time.format("%Y%m%d %H:%M");
+  
+      var x = d3.time.scale()
+        .range([0,width])
+        .domain([timeFormatter.parse("20230421 06:00"), timeFormatter.parse("20230421 22:00")])
+  
+      var y = d3.scale.linear()
+        .range([height, 0]);
+  
+      var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom")
+        .tickFormat(d3.time.format("%H"));
+  
+      var yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("left")
+        .tickSize(-width)
+        .tickPadding(10)
+        .tickFormat(d3.format("d"))
+        .innerTickSize(-width)
+        .outerTickSize(0);
+  
+      var svg = d3.select("body").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  
+      var data = [
+        { letter: 1, 
+          col1: 200, 
+          col2: 0, 
+          startTime: "20230421 06:00", 
+          endTime: "20230421 07:00", 
+        },
+        { letter: 2, 
+          col1: 275, 
+          col2: 0, 
+          startTime: "20230421 7:00", 
+          endTime: "20230421 8:00", 
+        }, 
+        { letter: 3, 
+          col1: 270, 
+          col2: 0, 
+          startTime: "20230421 8:00", 
+          endTime: "20230421 9:00", 
+        },
+        { letter: 4, 
+          col1: 210, 
+          col2: 100, 
+          startTime: "20230421 9:00", 
+          endTime: "20230421 10:00",
+        },
+        { letter: 5, 
+          col1: 190, 
+          col2: 0, 
+          startTime: "20230421 10:00", 
+          endTime: "20230421 11:00", 
+        },
+        { letter: 6, 
+          col1: 170, 
+          col2: 0, 
+          startTime: "20230421 11:00", 
+          endTime: "20230421 12:00",  
+        },
+        { letter: 7, 
+          col1: 150, 
+          col2: 0, 
+          startTime: "20230421 12:00", 
+          endTime: "20230421 13:00",  
+        },
+        { letter: 8, 
+          col1: 85, 
+          col2: 0, 
+          startTime: "20230421 13:00", 
+          endTime: "20230421 14:00",  
+        },
+        { letter: 9, 
+          col1: 120, 
+          col2: 0, 
+          startTime: "20230421 14:00", 
+          endTime: "20230421 15:00",  
+        },
+        { letter: 10, 
+          col1: 200, 
+          col2: 0, 
+          startTime: "20230421 15:00", 
+          endTime: "20230421 16:00",  
+        },
+        { letter: 11, 
+          col1: 170, 
+          col2: 0, 
+          startTime: "20230421 16:00", 
+          endTime: "20230421 17:00",  
+        },
+        { letter: 12, 
+          col1: 270, 
+          col2: 0, 
+          startTime: "20230421 17:00", 
+          endTime: "20230421 18:00",  
+        },
+        { letter: 13, 
+          col1: 350, 
+          col2: 0, 
+          startTime: "20230421 18:00", 
+          endTime: "20230421 19:00",  
+        },
+        { letter: 14, 
+          col1: 300, 
+          col2: 0, 
+          startTime: "20230421 19:00", 
+          endTime: "20230421 20:00",  
+        },
+        { letter: 15, 
+          col1: 275, 
+          col2: 0, 
+          startTime: "20230421 20:00", 
+          endTime: "20230421 21:00",  
+        },
+        { letter: 16, 
+          col1: 250, 
+          col2: 0, 
+          startTime: "20230421 21:00", 
+          endTime: "20230421 22:00",  
+        },
+  
+      ];
+  
+      y.domain([0, d3.max(data, function(d) {
+        return d.col1 > d.col2 ? d.col1 : d.col2;
+      })]);
+  
+      svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+  
+      svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis)
+        .selectAll("line")
+        .style("stroke-dasharray", "3,3")
+        .style("stroke", "gray")
+        .style("opacity", "0.2");
+  
+      svg.selectAll(".y.axis text")
+        .style("fill", "black")
+        .style("text-anchor", "end");
+  
+  
+      var bars1 = svg.selectAll(".bar1")
+        .data(data)
+        .enter()
+        .append("rect")
+        .attr("class", "bar1")
+        .attr("x", function(d) {
+          return x(timeFormatter.parse(d.startTime));
+        })
+        .attr("width", function(d,i){
+          return x(timeFormatter.parse(d.endTime)) - x(timeFormatter.parse(d.startTime)) - 1;
+        })
+        .attr("y", function(d) {
+          return y(d.col1);
+        })
+        .attr("height", function(d) {
+          return height - y(d.col1);
+        })
+        .attr("rx", 5) // add rounded edges
+        .attr("ry", 5);
+  
+  var bars2 = svg.selectAll(".bar2")
+      .data(data)
+      .enter()
+      .append("rect")
+      .attr("class", "bar2")
+      .attr("x", function(d) {
+        return x(timeFormatter.parse(d.startTime));
+      })
+      .attr("width", function(d,i){
+        return x(timeFormatter.parse(d.endTime)) - x(timeFormatter.parse(d.startTime)) - 1;
+      })
+      .attr("y", function(d) {
+        return y(d.col2);
+      })
+      .attr("height", function(d) {
+        return height - y(d.col2);
+      })
+      .attr("rx", 5) // add rounded edges
+      .attr("ry", 5);
+  
+  
+      function type(d) {
+        d.col1 = +d.col1;
+        d.col2 = +d.col2;
+        d.startTime = timeFormatter.parse(d.startTime);
+        d.endTime = timeFormatter.parse(d.endTime);
+        return d;
+      }
+    </script>
+</body>

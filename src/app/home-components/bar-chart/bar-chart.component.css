@@ -1,0 +1,52 @@
+#chart-container {
+    border: 1px solid #ccc;
+}
+
+.bar1 {
+    fill: #E8E8E8;
+    opacity: 1;
+}
+  
+.bar2 {
+    fill: #0033A0;
+    opacity: 1;
+}
+  
+.bar1:hover {
+    fill: #ADADAD;
+}
+  
+.axis {
+    font: 10px sans-serif;
+}
+  
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+  
+.x.axis path {
+    display: none;
+}
+
+.y.axis .tick line {
+    stroke: #000;
+}
+
+.y.axis text {
+    fill: black;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.x.axis text {
+    fill: black;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.y.axis path {
+    display: none;
+}

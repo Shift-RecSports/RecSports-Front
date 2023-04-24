@@ -23,6 +23,8 @@ import { NoticiasComponent } from './noticias/noticias.component';
 import { MapaComponent } from './mapa/mapa.component';
 import { EncuestaComponent } from './encuesta/encuesta.component';
 import { LoginComponent } from './login/login.component';
+import { BarChartComponent } from './home-components/bar-chart/bar-chart.component';
+
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from './material.module';
@@ -31,6 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
+import * as Chart from 'chart.js';
 import en from '@angular/common/locales/en';
 
 registerLocaleData(en);
@@ -47,6 +50,7 @@ registerLocaleData(en);
     MapaComponent,
     EncuestaComponent,
     LoginComponent,
+    BarChartComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +70,7 @@ registerLocaleData(en);
     AngularMaterialModule,
     HttpClientModule,
     NzGridModule,
+    BrowserModule, 
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],
