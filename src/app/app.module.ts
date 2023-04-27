@@ -16,6 +16,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ApiService } from './service/api.service';
 
 import { GimnasioComponent } from './gimnasio/gimnasio.component';
 import { DeportesComponent } from './deportes/deportes.component';
@@ -26,6 +28,10 @@ import { MapaComponent } from './mapa/mapa.component';
 import { EncuestaComponent } from './encuesta/encuesta.component';
 import { LoginComponent } from './login/login.component';
 import { ReservacionesComponent } from './reservaciones/reservaciones.component';
+import { ModalReservacionComponent } from './deportes/deporte-seleccionado/modal-reservacion/modal-reservacion.component';
+
+import { RegistroEntradaComponent } from './gimnasio/registro-entrada/registro-entrada.component';
+import { RegistroSalidaComponent } from './gimnasio/registro-salida/registro-salida.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from './material.module';
@@ -57,6 +63,9 @@ registerLocaleData(en);
     ReservacionesComponent,
     NuevoDeporteComponent,
     EspaciosFormularioComponent,
+    ModalReservacionComponent,
+    RegistroEntradaComponent,
+    RegistroSalidaComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,8 +87,9 @@ registerLocaleData(en);
     NzGridModule,
     ScrollingModule,
     MatAutocompleteModule,
+    MatDialogModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [{ provide: NZ_I18N, useValue: en_US }, ApiService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

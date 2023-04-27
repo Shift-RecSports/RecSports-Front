@@ -9,6 +9,8 @@ import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
 import { AuthService } from 'src/app/service/auth.service';
 import { Router } from '@angular/router';
+import { ApiService } from 'src/app/service/api.service';
+import { newDeporte } from 'src/app/classes/deportes';
 
 @Component({
   selector: 'app-nuevo-deporte',
@@ -34,7 +36,8 @@ export class NuevoDeporteComponent {
   constructor(
     private uploadService: FileUploadService,
     private service: AuthService,
-    private router: Router
+    private router: Router,
+    private _apiService: ApiService
   ) {}
 
   changeSelectedEspacios(espacios: string[]) {
@@ -106,6 +109,20 @@ export class NuevoDeporteComponent {
 
   onCancelClick() {
     this.router.navigate(['/deportes']);
+  }
+
+  async onGuardarClick() {
+    const url = '';
+    const body: newDeporte = {
+      nombre: '',
+      espacios: ['', ''], // idEspacios
+      imagen: '',
+      descripcion: '',
+    };
+
+    await this._apiService.get(url, body).subscribe((data) => {
+      console.log(data);
+    });
   }
 }
 
