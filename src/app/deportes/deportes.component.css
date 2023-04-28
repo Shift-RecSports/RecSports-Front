@@ -73,7 +73,119 @@
       rgb(22, 38, 134, 0.8),
       rgb(255, 255, 255, 0)
     ),
-    url("https://conecta.tec.mx/sites/default/files/styles/header_full/public/2019-04/Estadio-borregos1920.jpg?h=920929c4&itok=qJq33r8o");
+    url("http://www.abemexico.org/wp-content/uploads/2018/10/T201819MTYoct.jpg");
+
+  background-position: center center;
+  background-size: cover;
+  border-radius: 2rem;
+  box-shadow: 0.5rem 0.5rem 1rem 0.5rem rgba(0, 0, 0, 0.15);
+  min-height: 30vh;
+  margin: 1.5rem;
+}
+
+.tarjeta-deporte-2 {
+  background-image: linear-gradient(
+      to right,
+      rgb(22, 38, 134, 0.8),
+      rgb(255, 255, 255, 0)
+    ),
+    url("https://conecta.tec.mx/sites/default/files/styles/header_full/public/2019-04/Estadio-borregos1920.jpg?h=920929c4&itok=qJq33ro");
+
+  background-position: center center;
+  background-size: cover;
+  border-radius: 2rem;
+  box-shadow: 0.5rem 0.5rem 1rem 0.5rem rgba(0, 0, 0, 0.15);
+  min-height: 30vh;
+  margin: 1.5rem;
+}
+
+.tarjeta-deporte-3 {
+  background-image: linear-gradient(
+      to right,
+      rgb(22, 38, 134, 0.8),
+      rgb(255, 255, 255, 0)
+    ),
+    url("https://tec.mx/sites/default/files/inline-images/fut-rapido-uno.jpg");
+
+  background-position: center center;
+  background-size: cover;
+  border-radius: 2rem;
+  box-shadow: 0.5rem 0.5rem 1rem 0.5rem rgba(0, 0, 0, 0.15);
+  min-height: 30vh;
+  margin: 1.5rem;
+}
+
+.tarjeta-deporte-4 {
+  background-image: linear-gradient(
+      to right,
+      rgb(22, 38, 134, 0.8),
+      rgb(255, 255, 255, 0)
+    ),
+    url("https://tec.mx/sites/default/files/inline-images/cem-tenis-cancha_0.jpg");
+
+  background-position: center center;
+  background-size: cover;
+  border-radius: 2rem;
+  box-shadow: 0.5rem 0.5rem 1rem 0.5rem rgba(0, 0, 0, 0.15);
+  min-height: 30vh;
+  margin: 1.5rem;
+}
+
+.tarjeta-deporte-5 {
+  background-image: linear-gradient(
+      to right,
+      rgb(22, 38, 134, 0.8),
+      rgb(255, 255, 255, 0)
+    ),
+    url("https://tec.mx/sites/default/files/inline-images/alberca-cem-instalacion.jpg");
+
+  background-position: center center;
+  background-size: cover;
+  border-radius: 2rem;
+  box-shadow: 0.5rem 0.5rem 1rem 0.5rem rgba(0, 0, 0, 0.15);
+  min-height: 30vh;
+  margin: 1.5rem;
+}
+
+.tarjeta-deporte-6 {
+  background-image: linear-gradient(
+      to right,
+      rgb(22, 38, 134, 0.8),
+      rgb(255, 255, 255, 0)
+    ),
+    url("https://upress.mx/eluniversitario/images/784/Deportes/Tenis/Banner.jpg");
+
+  background-position: center center;
+  background-size: cover;
+  border-radius: 2rem;
+  box-shadow: 0.5rem 0.5rem 1rem 0.5rem rgba(0, 0, 0, 0.15);
+  min-height: 30vh;
+  margin: 1.5rem;
+}
+
+.tarjeta-deporte-7 {
+  background-image: linear-gradient(
+      to right,
+      rgb(22, 38, 134, 0.8),
+      rgb(255, 255, 255, 0)
+    ),
+    url("https://conecta.tec.mx/sites/default/files/styles/header_wide/public/2022-05/ciclismo-indoors-wellness-center.jpg?itok=i3DFCjds");
+
+  background-position: center center;
+  background-size: cover;
+  border-radius: 2rem;
+  box-shadow: 0.5rem 0.5rem 1rem 0.5rem rgba(0, 0, 0, 0.15);
+  min-height: 30vh;
+  margin: 1.5rem;
+}
+
+.tarjeta-deporte-8 {
+  background-image: linear-gradient(
+      to right,
+      rgb(22, 38, 134, 0.8),
+      rgb(255, 255, 255, 0)
+    ),
+    url("https://tec.mx/sites/default/files/inline-images/fut-rapido-uno.jpg");
 
   background-position: center center;
   background-size: cover;

@@ -37,7 +37,7 @@ const REGISTRO_DATA: Registro[] = [
   },
   {
     matricula: 'A02212445',
-    nombre: 'Pedro Gonzales',
+    nombre: 'Pedro Gonzalez',
     entrada: '11:40',
     salida: '',
   },
