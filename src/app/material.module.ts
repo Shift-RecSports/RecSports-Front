@@ -17,7 +17,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   imports: [
@@ -39,6 +39,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTooltipModule,
     MatTableModule,
     MatPaginatorModule,
+    MatDividerModule,
   ],
   exports: [
     MatButtonModule,
@@ -57,6 +58,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTooltipModule,
     MatTableModule,
     MatPaginatorModule,
+    MatDividerModule,
   ],
   providers: [MatDatepickerModule],
 })

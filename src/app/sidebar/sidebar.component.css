@@ -71,6 +71,7 @@
 
 .header-container {
   display: flex;
+  align-items: center;
   width: 100%;
   justify-content: space-between;
 }
@@ -81,7 +82,33 @@
   line-height: 1.1rem;
 }
 
+/* MIR RESERVACIONES */
+
+.mat-perfil {
+  background-color: #f5f8ff;
+  border-radius: 1rem;
+}
+
+/* .header-user-menu {
+} */
+
 .header-user-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.header-user-icon {
+  background-color: #98b7f2;
+  border-radius: 100%;
+}
+
+.header-user-name {
+  font-weight: 900;
+  padding: 0 0.5rem 0 0.5rem;
+}
+
+/* .header-user-info {
   display: flex;
   flex-direction: column;
   padding: 0 1rem 0 0;
@@ -90,8 +117,9 @@
 
 .header-user-role {
   font-size: 0.8rem;
-}
+} */
 
+/* TERMINA */
 .header-user-button {
   display: block;
 }

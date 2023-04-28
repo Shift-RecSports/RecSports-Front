@@ -5,5 +5,79 @@
 }
 
 .gimnasio-container {
-  padding: 6rem 1rem 1rem 8rem;
+  padding: 6rem 3rem 1rem 9rem;
+}
+
+@media (max-width: 960px) {
+  .gimnasio-container {
+    padding: 6rem 1rem 1rem 1rem;
+  }
+}
+
+.gimnasio-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0 1rem 0;
+}
+
+.gimnasio-registro-estatus {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  color: #c22424;
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.gimnasio-descarga-container {
+  display: flex;
+  align-items: center;
+}
+
+.gimnasio-descarga {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  gap: 0.5rem;
+  margin-right: 1rem;
+  padding: 2rem 1.5rem 2rem 1.5rem;
+
+  color: #0033a0;
+}
+
+.fecha-input {
+  margin-bottom: -1rem;
+}
+
+.gimnasio-descarga-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #0033a0;
+}
+
+.gimnasio-calendar {
+  display: flex;
+  padding-top: 0.5rem;
+}
+
+.mat-header-cell {
+  background: #0033a0;
+}
+
+.table-container {
+  border-radius: 1rem;
+  overflow: hidden !important;
+  box-shadow: 0.2rem 0.2rem 0.5rem 0.2rem rgba(0, 0, 0, 0.1);
+}
+
+.table-header {
+  background-color: #0033a0 !important;
+  color: white;
+  font-size: 1.3rem;
+}
+
+.table-header-padding {
+  padding-left: 2rem;
 }

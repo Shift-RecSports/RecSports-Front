@@ -9,6 +9,12 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { MapaComponent } from './mapa/mapa.component';
 import { NoticiasComponent } from './noticias/noticias.component';
+import { DeporteSeleccionadoComponent } from './deportes/deporte-seleccionado/deporte-seleccionado.component';
+import { ReservacionesComponent } from './reservaciones/reservaciones.component';
+import { NuevoDeporteComponent } from './deportes/components/nuevo-deporte/nuevo-deporte.component';
+import { EspaciosFormularioComponent } from './deportes/components/espacios-formulario/espacios-formulario.component';
+import { RegistroEntradaComponent } from './gimnasio/registro-entrada/registro-entrada.component';
+import { RegistroSalidaComponent } from './gimnasio/registro-salida/registro-salida.component';
 
 const routes: Routes = [
   {
@@ -26,8 +32,38 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'gimnasio/entrada',
+    component: RegistroEntradaComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'gimnasio/salida',
+    component: RegistroSalidaComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'deportes',
     component: DeportesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'deportes/futbol',
+    component: DeporteSeleccionadoComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'deportes/nuevo',
+    component: NuevoDeporteComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'espacios/nuevo',
+    component: EspaciosFormularioComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'reservaciones',
+    component: ReservacionesComponent,
     canActivate: [AuthGuard],
   },
   {
@@ -46,7 +82,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'encuestas',
+    path: 'encuesta',
     component: EncuestaComponent,
     canActivate: [AuthGuard],
   },

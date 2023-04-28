@@ -15,16 +15,24 @@ import { HomeComponent } from './home/home.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ApiService } from './service/api.service';
 
 import { GimnasioComponent } from './gimnasio/gimnasio.component';
 import { DeportesComponent } from './deportes/deportes.component';
+import { DeporteSeleccionadoComponent } from './deportes/deporte-seleccionado/deporte-seleccionado.component';
 import { CalendarioComponent } from './calendario/calendario.component';
 import { NoticiasComponent } from './noticias/noticias.component';
 import { MapaComponent } from './mapa/mapa.component';
 import { EncuestaComponent } from './encuesta/encuesta.component';
 import { LoginComponent } from './login/login.component';
 import { BarChartComponent } from './home-components/bar-chart/bar-chart.component';
+import { ReservacionesComponent } from './reservaciones/reservaciones.component';
+import { ModalReservacionComponent } from './deportes/deporte-seleccionado/modal-reservacion/modal-reservacion.component';
 
+import { RegistroEntradaComponent } from './gimnasio/registro-entrada/registro-entrada.component';
+import { RegistroSalidaComponent } from './gimnasio/registro-salida/registro-salida.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from './material.module';
@@ -36,12 +44,12 @@ import { registerLocaleData } from '@angular/common';
 import * as d3 from 'd3';
 import en from '@angular/common/locales/en';
 import { NewsComponent } from './home-components/news/news.component';
-
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { DeportesFavComponent } from './home-components/deportes-fav/deportes-fav.component';
-
-
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { NuevoDeporteComponent } from './deportes/components/nuevo-deporte/nuevo-deporte.component';
+import { EspaciosFormularioComponent } from './deportes/components/espacios-formulario/espacios-formulario.component';
 
 registerLocaleData(en);
 
@@ -52,6 +60,7 @@ registerLocaleData(en);
     HomeComponent,
     GimnasioComponent,
     DeportesComponent,
+    DeporteSeleccionadoComponent,
     CalendarioComponent,
     NoticiasComponent,
     MapaComponent,
@@ -60,6 +69,12 @@ registerLocaleData(en);
     BarChartComponent,
     NewsComponent,
     DeportesFavComponent
+    ReservacionesComponent,
+    NuevoDeporteComponent,
+    EspaciosFormularioComponent,
+    ModalReservacionComponent,
+    RegistroEntradaComponent,
+    RegistroSalidaComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,8 +97,11 @@ registerLocaleData(en);
     BrowserModule, 
     NzCarouselModule,
     NzButtonModule,
+    ScrollingModule,
+    MatAutocompleteModule,
+    MatDialogModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [{ provide: NZ_I18N, useValue: en_US }, ApiService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

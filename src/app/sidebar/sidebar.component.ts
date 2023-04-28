@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -13,6 +14,7 @@ import { Router } from '@angular/router';
 })
 export class SidebarComponent {
   user: user;
+  userName: string;
   navbarFlags: navbarFlags;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
@@ -29,12 +31,21 @@ export class SidebarComponent {
   ) {
     this.user = { matricula: '', userRole: '' };
     this.navbarFlags = defaultNavbarFlags;
+    this.userName = '';
 
     if (this.service.isLoggedIn()) {
       this.user = {
         matricula: this.service.GetUserName() ? this.service.GetUserName() : '',
         userRole: this.service.GetUserRole(),
       };
+
+      if (this.user.userRole == 'ALUMNO') {
+        this.userName = 'Sasha Morosov';
+      } else if (this.user.userRole == 'ADMIN') {
+        this.userName = 'Admin';
+      } else {
+        this.userName = 'Entrenador';
+      }
 
       // Activate/Disactivate Navbar components
       this.navbarFlags = activateNavbarFlags(
@@ -48,6 +59,10 @@ export class SidebarComponent {
 
   onLogOut() {
     this.router.navigate(['login']);
+  }
+
+  onMisReservaciones() {
+    this.router.navigate(['reservaciones']);
   }
 }
 

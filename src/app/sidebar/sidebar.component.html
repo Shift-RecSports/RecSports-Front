@@ -101,23 +101,51 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <div class="header-container">
-        <span class="header-title">RecSports Website</span>
+        <span class="header-title">Athletic</span>
         <div class="header-user">
-          <div class="header-user-info">
+          <!-- <div class="header-user-info">
             <span class="header-user-matricula">{{ user.matricula }}</span>
             <span class="header-user-role">{{ user.userRole }}</span>
-          </div>
-
+          </div> -->
           <button
+            mat-button
+            color="perfil"
+            class="header-user-menu"
+            [matMenuTriggerFor]="menu"
+            [ngStyle]="{ padding: '1.5rem 0.5rem 1.5rem 0.5rem' }"
+          >
+            <div class="header-user-info">
+              <button
+                mat-mini-fab
+                color="primary"
+                class="header-user-icon"
+                aria-label="Example icon button with a menu icon"
+                [ngStyle]="{ transform: 'scale(0.8)', boxShadow: 'none' }"
+              >
+                SM
+              </button>
+              <div class="header-user-name">{{ userName }}</div>
+              <mat-icon>keyboard_arrow_down</mat-icon>
+            </div>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="onMisReservaciones()">
+              Mis Reservaciones
+            </button>
+            <button mat-menu-item (click)="onLogOut()">Cerrar Sesión</button>
+          </mat-menu>
+
+          <!-- <button
             class="header-user-button"
             mat-raised-button
             style="background-color: #00035e; color: white"
             (click)="onLogOut()"
+            
           >
             <mat-icon class="logOut-icon" fontSet="material-icons-outlined"
               >account_circle</mat-icon
             >
-          </button>
+          </button> -->
         </div>
       </div>
     </mat-toolbar>
