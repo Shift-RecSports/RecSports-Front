@@ -27,6 +27,7 @@ import { NoticiasComponent } from './noticias/noticias.component';
 import { MapaComponent } from './mapa/mapa.component';
 import { EncuestaComponent } from './encuesta/encuesta.component';
 import { LoginComponent } from './login/login.component';
+import { BarChartComponent } from './home-components/bar-chart/bar-chart.component';
 import { ReservacionesComponent } from './reservaciones/reservaciones.component';
 import { ModalReservacionComponent } from './deportes/deporte-seleccionado/modal-reservacion/modal-reservacion.component';
 
@@ -40,7 +41,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
+import * as d3 from 'd3';
 import en from '@angular/common/locales/en';
+import { NewsComponent } from './home-components/news/news.component';
+import { NzCarouselModule } from 'ng-zorro-antd/carousel';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { DeportesFavComponent } from './home-components/deportes-fav/deportes-fav.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NuevoDeporteComponent } from './deportes/components/nuevo-deporte/nuevo-deporte.component';
 import { EspaciosFormularioComponent } from './deportes/components/espacios-formulario/espacios-formulario.component';
@@ -60,6 +66,9 @@ registerLocaleData(en);
     MapaComponent,
     EncuestaComponent,
     LoginComponent,
+    BarChartComponent,
+    NewsComponent,
+    DeportesFavComponent
     ReservacionesComponent,
     NuevoDeporteComponent,
     EspaciosFormularioComponent,
@@ -85,6 +94,9 @@ registerLocaleData(en);
     AngularMaterialModule,
     HttpClientModule,
     NzGridModule,
+    BrowserModule, 
+    NzCarouselModule,
+    NzButtonModule,
     ScrollingModule,
     MatAutocompleteModule,
     MatDialogModule,
