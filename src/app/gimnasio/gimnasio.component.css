@@ -43,6 +43,12 @@
   gap: 0.5rem;
   margin-right: 1rem;
   padding: 2rem 1.5rem 2rem 1.5rem;
+
+  color: #0033a0;
+}
+
+.fecha-input {
+  margin-bottom: -1rem;
 }
 
 .gimnasio-descarga-text {
@@ -58,4 +64,20 @@
 
 .mat-header-cell {
   background: #0033a0;
+}
+
+.table-container {
+  border-radius: 1rem;
+  overflow: hidden !important;
+  box-shadow: 0.2rem 0.2rem 0.5rem 0.2rem rgba(0, 0, 0, 0.1);
+}
+
+.table-header {
+  background-color: #0033a0 !important;
+  color: white;
+  font-size: 1.3rem;
+}
+
+.table-header-padding {
+  padding-left: 2rem;
 }
