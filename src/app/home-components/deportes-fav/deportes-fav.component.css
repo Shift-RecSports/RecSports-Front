@@ -1,0 +1,13 @@
+.tarjeta-deporte-fav {
+    border-radius: 2rem;
+    background: rgb(22, 38, 134, 0.8);
+
+    border: none;
+
+    min-height: 100px;
+    min-width: 50px;
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    padding: 0;
+}

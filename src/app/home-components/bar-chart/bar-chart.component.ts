@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
 import { timeFormat } from "d3-time-format";
+import { timeParse } from 'd3-time-format';
+
+
 
 
 @Component({
@@ -14,7 +17,7 @@ export class BarChartComponent implements OnInit {
 
   private data = [
     { letter: 1, 
-      col1: 200, 
+      col1: 400, 
       col2: 0, 
       startTime: "20230421 06:00", 
       endTime: "20230421 07:00", 
@@ -112,6 +115,8 @@ export class BarChartComponent implements OnInit {
 
   ];
 
+  private svg: any;
+
   private margin = {
     top: 20,
     right: 20,
@@ -119,79 +124,127 @@ export class BarChartComponent implements OnInit {
     left: 40
   };
   
-  private width = 960 - this.margin.left - this.margin.right;
-  private height = 500 - this.margin.top - this.margin.bottom;
+  private width = 700 - this.margin.left - this.margin.right;
+  private height = 200 - this.margin.top - this.margin.bottom;
 
-  private timeFormatter = timeFormat("%Y%m%d %H:%M");
+  private timeParser = timeParse("%Y%m%d %H:%M");
+  private x = d3.scaleTime()
+    .range([0, this.width])
+    .domain([this.timeParser("20230421 06:00")!, this.timeParser("20230421 22:00")!]);
 
-  //private timeFormatter = d3.time.format("%Y%m%d %H:%M");
+  private y = d3.scaleLinear()
+    .range([this.height, 0]);
 
-  ngOnInit(): void {
- 
-    
+  private xAxis = d3.axisBottom<Date>(this.x)
+    .tickFormat(d3.timeFormat("%H"));
+
+  private yAxis = d3.axisLeft(this.y)
+    .tickSize(-this.width)
+    .tickPadding(10)
+    .tickFormat(d3.format("d"))
+    .tickSizeInner(-this.width)
+    .tickSizeOuter(0);
+
+  
+  private createSvg(): void {
+    this.svg = d3.select(document.querySelector("#chart-container"))
+      .append("svg")
+      .attr("width", this.width + this.margin.left + this.margin.right)
+      .attr("height", this.height + this.margin.top + this.margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
   }
-}
 
-/*
+  private drawBars(data: any[]): void {
+    
+    // Create the X-axis band scale
+    var x = d3.scaleTime()
+      .range([0, this.width])
+      .domain([this.timeParser("20230421 06:00")!, this.timeParser("20230421 22:00")!])
 
-private x = d3.time.scale()
-      .range([0,width])
-      .domain([timeFormatter.parse("20230421 06:00"), timeFormatter.parse("20230421 22:00")])
+    // Draw the X-axis on the DOM
+    this.svg.append("g")
+      .attr("transform", "translate(0," + this.height + ")")
+      .call(d3.axisBottom(x))
+      .selectAll("text")
 
-    var y = d3.scale.linear()
-      .range([height, 0]);
+    
 
-    var xAxis = d3.svg.axis()
-      .scale(x)
-      .orient("bottom")
-      .tickFormat(d3.time.format("%H"));
+    // Create the Y-axis band scale
+    const y = d3.scaleLinear()
+      .range([this.height, 0]);
 
-    var yAxis = d3.svg.axis()
-      .scale(y)
-      .orient("left")
-      .tickSize(-width)
+    // Draw the Y-axis on the DOM
+    this.svg.append("g")
+      .call(d3.axisLeft(y)
+      .tickSize(-this.width)
       .tickPadding(10)
       .tickFormat(d3.format("d"))
-      .innerTickSize(-width)
-      .outerTickSize(0);
+      .tickSizeInner(-this.width)
+      .tickSizeOuter(0));
 
 
 
+    // Create and fill bars
 
+    const bars1 = this.svg.selectAll(".bar1")
+      .data(this.data)
+      .enter()
+      .append("rect")
+      .attr("class", "bar1")
+      .attr("x", function(d: any) {
+        return x(timeParse("%Y%m%d %H:%M")(d.startTime)!);
+      })
+      .attr("width", this.width / this.data.length - 1)
+      /*
+      .attr("width", function(d : any, i : number){
+        const startTime = timeParse("%Y%m%d %H:%M")(d.startTime)!;
+        const endTime = timeParse("%Y%m%d %H:%M")(d.endTime)!;
+        return x(endTime) - x(startTime) - 1;
+      })
+      */
+      .attr("y", function(d : any) {
+        return y(d.col1);
+      })
+      .attr("height", (d : any) => {
+        return this.height - y(d.col1);
+      })
+      .attr("fill", "#d04a35")
+      .attr("rx", 5) // add rounded edges
+      .attr("ry", 5);
 
+    const bars2 = this.svg.selectAll(".bar2")
+      .data(this.data)
+      .enter()
+      .append("rect")
+      .attr("class", "bar2")
+      .attr("x", function(d: any) {
+        return x(timeParse("%Y%m%d %H:%M")(d.startTime)!);
+      })
+      /*
+      .attr("width", function(d : any, i : number){
+        const startTime = timeParse("%Y%m%d %H:%M")(d.startTime)!;
+        const endTime = timeParse("%Y%m%d %H:%M")(d.endTime)!;
+        return x(endTime) - x(startTime) - 1;
+      })
+      */
+      .attr("width", this.width / this.data.length - 1)
+      .attr("y", function(d : any) {
+        return y(d.col2);
+      })
+      .attr("height", (d : any) => {
+        return this.height - y(d.col1);
+      })
+      .attr("rx", 5) // add rounded edges
+      .attr("ry", 5);
 
-var svg = d3.select("chart-container")
-  .append("svg")
-  .attr("width", width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  }
 
-
-
-
-var x = d3.time.scale()
-  .range([0,width])
-  .domain([timeFormatter.parse("20230421 06:00"), timeFormatter.parse("20230421 22:00")])
-
-var y = d3.scale.linear()
-  .range([height, 0]);
-
-var xAxis = d3.svg.axis()
-  .scale(x)
-  .orient("bottom")
-  .tickFormat(d3.time.format("%H"));
-
-var yAxis = d3.svg.axis()
-  .scale(y)
-  .orient("left")
-  .tickSize(-width)
-  .tickPadding(10)
-  .tickFormat(d3.format("d"))
-  .innerTickSize(-width)
-  .outerTickSize(0);
-
-*/
+  ngOnInit(): void {
+    this.createSvg();
+    this.drawBars(this.data);
+  }
+}
 
 
 

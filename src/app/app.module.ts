@@ -33,8 +33,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
-import * as Chart from 'chart.js';
+import * as d3 from 'd3';
 import en from '@angular/common/locales/en';
+import { NewsComponent } from './home-components/news/news.component';
+
+import { NzCarouselModule } from 'ng-zorro-antd/carousel';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { DeportesFavComponent } from './home-components/deportes-fav/deportes-fav.component';
+
+
 
 registerLocaleData(en);
 
@@ -50,7 +57,9 @@ registerLocaleData(en);
     MapaComponent,
     EncuestaComponent,
     LoginComponent,
-    BarChartComponent
+    BarChartComponent,
+    NewsComponent,
+    DeportesFavComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +80,8 @@ registerLocaleData(en);
     HttpClientModule,
     NzGridModule,
     BrowserModule, 
+    NzCarouselModule,
+    NzButtonModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],

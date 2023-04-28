@@ -2,11 +2,11 @@
   <div class="home-container">
     <nz-content>
       <div nz-col>
-        <div nz-row style="width:100%; height: 30vh;">
+        <div nz-row style="width:100%; height: 40vh;">
             <div nz-col id="bar-card" style="width:100vh;" class="cards-dashboard">
                 <div>
                     Tendencia de concurrencia
-                    <app-bar-chart></app-bar-chart>
+                    <!-- <app-bar-chart></app-bar-chart> -->
                 </div>
             </div>
 
@@ -20,25 +20,24 @@
         </div>
 
 
-        <div nz-row style="height: 15vh;"></div>
+        <div nz-row style="height: 3vh;"></div>
 
 
         <div nz-row style="height: 43vh;">
 
-          <div nz-col style="width:calc(80vh);" class="news-card">
-            <div>
-              Noticias
-            </div>
-            <app-bar></app-bar>
+          <div nz-col style="width:calc(80vh);">
+            <app-news></app-news>
           </div>
 
           <div nz-col style="width: 24px"></div>
 
           <div nz-col style="width:calc(80vh);" class="cards-dashboard">
+            <a nz-button nzType="link">
+              Oferta de deportes
+            </a>
             <div>
-              Deportes
+              <!-- <app-deportes-fav></app-deportes-fav> -->
             </div>
-            <app-bar></app-bar>
           </div>
             
         </div>

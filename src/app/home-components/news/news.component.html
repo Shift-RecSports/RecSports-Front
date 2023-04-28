@@ -1,0 +1,11 @@
+<nz-carousel nzAutoPlay>
+    <div nz-carousel-content class="news-card" *ngFor="let news of newsArray">
+        <div class="inner-card">
+            <p class="news-place">{{ news.place }}</p>
+            <h3>{{ news.title }}</h3>
+            <p class="news-date">{{ news.date }}</p>
+        </div>
+    </div>
+</nz-carousel>
+
+<!-- cambia div para bottom text -->
