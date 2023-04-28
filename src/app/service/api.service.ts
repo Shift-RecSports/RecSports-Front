@@ -10,7 +10,7 @@ export class ApiService {
 
   //GET
   get(url: string): Observable<any> {
-    return this.httpClient.get(url);
+    return this.httpClient.get('/deportes');
   }
 
 

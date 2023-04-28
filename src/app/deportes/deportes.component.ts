@@ -24,10 +24,10 @@ export class DeportesComponent {
   }
 
   ngOnInit() {
-    const url = '';
+    const url = '/deportes';
 
     this._apiService.get(url).subscribe((data) => {
-      this.listaDeportes = data;
+      //this.listaDeportes = data;
       console.log(data);
     });
   }

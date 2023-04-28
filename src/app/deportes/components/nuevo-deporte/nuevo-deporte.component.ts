@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/service/auth.service';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
 import { newDeporte } from 'src/app/classes/deportes';
+import { Deporte } from 'src/app/classes/deportes';
 
 @Component({
   selector: 'app-nuevo-deporte',
@@ -113,16 +114,25 @@ export class NuevoDeporteComponent {
 
   async onGuardarClick() {
     const url = '';
-    const body: newDeporte = {
-      nombre: '',
-      espacios: ['', ''], // idEspacios
-      imagen: '',
-      descripcion: '',
-    };
+    // const body: newDeporte = {
+    //   nombre: '',
+    //   espacios: ['', ''], // idEspacios
+    //   imagen: '',
+    //   descripcion: '',
+    // };
+    const body  = 
+    {
+      "id": "DPT001",
+      "nombre": "Fútbol",
+      "descripcion": "Deporte que se juega con una pelota en un campo rectangular",
+      "materiales": "Pelota, porterías, calzado deportivo",
+      "imagen": "https://ejemplo.com/futbol.png",
+      "duracion": 90
+  };
 
-    await this._apiService.get(url, body).subscribe((data) => {
-      console.log(data);
-    });
+    // await this._apiService.get(url, body).subscribe((data) => {
+    //   console.log(data);
+    // });
   }
 }
 
