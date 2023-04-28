@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
+import { ApiService } from '../service/api.service';
+import { DeporteItem } from '../classes/deportes';
 
 @Component({
   selector: 'app-deportes',
@@ -9,11 +11,25 @@ import { AuthService } from '../service/auth.service';
 })
 export class DeportesComponent {
   showAgregarButton = false;
+  listaDeportes: DeporteItem[];
 
-  constructor(private service: AuthService, private router: Router) {
+  constructor(
+    private service: AuthService,
+    private router: Router,
+    private _apiService: ApiService
+  ) {
     if (this.service.isLoggedIn() && this.service.GetUserRole() == 'ADMIN') {
       this.showAgregarButton = true;
     }
+  }
+
+  ngOnInit() {
+    const url = '';
+
+    this._apiService.get(url).subscribe((data) => {
+      this.listaDeportes = data;
+      console.log(data);
+    });
   }
 
   onSelectDeporte() {

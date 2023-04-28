@@ -83,6 +83,36 @@
             nzXl="12"
             class="nuevo-form-item"
           >
+            <div class="nuevo-form-title">Materiales</div>
+            <mat-form-field appearance="outline" class="input-container">
+              <input matInput placeholder="Escribe..." />
+            </mat-form-field>
+          </div>
+
+          <div
+            nz-col
+            nzXs="24"
+            nzSm="24"
+            nzMd="12"
+            nzLg="12"
+            nzXl="12"
+            class="nuevo-form-item"
+          >
+            <div class="nuevo-form-title">Descripción</div>
+            <mat-form-field appearance="outline" class="input-container">
+              <input matInput placeholder="Escribe..." />
+            </mat-form-field>
+          </div>
+
+          <div
+            nz-col
+            nzXs="24"
+            nzSm="24"
+            nzMd="12"
+            nzLg="12"
+            nzXl="12"
+            class="nuevo-form-item"
+          >
             <div class="nuevo-form-title">Carga de archivos</div>
 
             <!-- CARGA DE IMAGEN -->
@@ -119,27 +149,6 @@
             nzXl="12"
             class="nuevo-form-item"
           >
-            <div class="nuevo-form-title">Descripción</div>
-            <mat-form-field appearance="outline" class="input-container">
-              <textarea
-                matInput
-                placeholder="Escribe..."
-                cdkTextareaAutosize
-                cdkAutosizeMinRows="3"
-                cdkAutosizeMaxRows="3"
-              ></textarea>
-            </mat-form-field>
-          </div>
-
-          <div
-            nz-col
-            nzXs="24"
-            nzSm="24"
-            nzMd="12"
-            nzLg="12"
-            nzXl="12"
-            class="nuevo-form-item"
-          >
             <div *ngIf="preview != ''" class="image-preview">
               <div class="preview-container">
                 <div class="preview-filter">
@@ -155,9 +164,9 @@
             nz-col
             nzXs="24"
             nzSm="24"
-            nzMd="12"
-            nzLg="12"
-            nzXl="12"
+            nzMd="24"
+            nzLg="24"
+            nzXl="24"
             class="nuevo-form-item"
           >
             <div class="buttons-container">

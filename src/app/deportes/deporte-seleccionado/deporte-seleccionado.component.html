@@ -10,6 +10,7 @@
             nisi nisl. Mauris a lacinia dui.
           </div>
         </div>
+
         <div *ngIf="showEditButton" class="deportes-edit-container">
           <button mat-button color="button-edit" (click)="onEditDeporte()">
             <div class="deportes-edit-text">Editar</div>
@@ -99,7 +100,12 @@
             </button>
             <div class="deporte-reservacion-dia">Lun.</div>
           </div>
-          <div class="deporte-reservacion-button-container">
+
+          <!-- MARTES -->
+          <div
+            *ngIf="selectedDay == 2"
+            class="deporte-reservacion-button-container"
+          >
             <button mat-fab color="button-selected" aria-label="date">
               12
             </button>
@@ -107,20 +113,135 @@
               Mar.
             </div>
           </div>
-          <div class="deporte-reservacion-button-container">
-            <button mat-fab color="unselected" aria-label="date">13</button>
+
+          <div
+            *ngIf="selectedDay != 2"
+            class="deporte-reservacion-button-container"
+          >
+            <button
+              mat-fab
+              color="unselected"
+              aria-label="date"
+              (click)="onSelectDay(2)"
+            >
+              12
+            </button>
+            <div class="deporte-reservacion-dia">Mar.</div>
+          </div>
+
+          <!-- MIERCOLES -->
+          <div
+            *ngIf="selectedDay == 3"
+            class="deporte-reservacion-button-container"
+          >
+            <button mat-fab color="button-selected" aria-label="date">
+              13
+            </button>
+            <div class="deporte-reservacion-dia deporte-reservacion-dia-text">
+              Mie.
+            </div>
+          </div>
+
+          <div
+            *ngIf="selectedDay != 3"
+            class="deporte-reservacion-button-container"
+          >
+            <button
+              mat-fab
+              color="unselected"
+              aria-label="date"
+              (click)="onSelectDay(3)"
+            >
+              13
+            </button>
             <div class="deporte-reservacion-dia">Mie.</div>
           </div>
-          <div class="deporte-reservacion-button-container">
-            <button mat-fab color="today" aria-label="date">14</button>
+
+          <!-- JUEVES -->
+          <div
+            *ngIf="selectedDay == 4"
+            class="deporte-reservacion-button-container"
+          >
+            <button mat-fab color="button-selected" aria-label="date">
+              14
+            </button>
+            <div class="deporte-reservacion-dia deporte-reservacion-dia-text">
+              Jue.
+            </div>
+          </div>
+
+          <div
+            *ngIf="selectedDay != 4"
+            class="deporte-reservacion-button-container"
+          >
+            <button
+              mat-fab
+              color="unselected"
+              aria-label="date"
+              (click)="onSelectDay(4)"
+            >
+              14
+            </button>
             <div class="deporte-reservacion-dia">Jue.</div>
           </div>
-          <div class="deporte-reservacion-button-container">
-            <button mat-fab color="unselected" aria-label="date">15</button>
+          <!-- <div class="deporte-reservacion-button-container">
+            <button mat-fab color="today" aria-label="date">14</button>
+            <div class="deporte-reservacion-dia">Jue.</div>
+          </div> -->
+
+          <!-- VIERNES -->
+          <div
+            *ngIf="selectedDay == 5"
+            class="deporte-reservacion-button-container"
+          >
+            <button mat-fab color="button-selected" aria-label="date">
+              15
+            </button>
+            <div class="deporte-reservacion-dia deporte-reservacion-dia-text">
+              Vie.
+            </div>
+          </div>
+
+          <div
+            *ngIf="selectedDay != 5"
+            class="deporte-reservacion-button-container"
+          >
+            <button
+              mat-fab
+              color="unselected"
+              aria-label="date"
+              (click)="onSelectDay(5)"
+            >
+              15
+            </button>
             <div class="deporte-reservacion-dia">Vie.</div>
           </div>
-          <div class="deporte-reservacion-button-container">
-            <button mat-fab color="unselected" aria-label="date">16</button>
+
+          <!-- MARTES -->
+          <div
+            *ngIf="selectedDay == 6"
+            class="deporte-reservacion-button-container"
+          >
+            <button mat-fab color="button-selected" aria-label="date">
+              16
+            </button>
+            <div class="deporte-reservacion-dia deporte-reservacion-dia-text">
+              Sab.
+            </div>
+          </div>
+
+          <div
+            *ngIf="selectedDay != 6"
+            class="deporte-reservacion-button-container"
+          >
+            <button
+              mat-fab
+              color="unselected"
+              aria-label="date"
+              (click)="onSelectDay(6)"
+            >
+              16
+            </button>
             <div class="deporte-reservacion-dia">Sab.</div>
           </div>
 
@@ -146,6 +267,8 @@
             ></button>
           </div>
         </div>
+
+        <!-- TABLA RESERVACIONES -->
 
         <div class="deporte-reservacion-table-container">
           <div class="deporte-tiempo-linea">
@@ -175,6 +298,7 @@
                 <div *ngIf="element.disabled === false; else disabled_button">
                   <button
                     mat-button
+                    (click)="openDialog()"
                     color="horario"
                     *ngFor="let _ of [].constructor(element.repetition)"
                   >
@@ -205,16 +329,6 @@
               </td>
             </ng-container>
 
-            <!-- <tr
-              mat-header-row
-              [style.border-bottom]="'3px solid rgba(0,0,0,0)'"
-              *matHeaderRowDef="displayedColumns"
-            ></tr>
-            <tr
-              mat-row
-              [style.border-bottom]="'3px solid rgba(0,0,0,0)'"
-              *matRowDef="let row; columns: displayedColumns"
-            ></tr> -->
             <tr
               mat-header-row
               *matHeaderRowDef="displayedColumns"

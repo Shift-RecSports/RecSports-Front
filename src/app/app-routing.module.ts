@@ -13,6 +13,8 @@ import { DeporteSeleccionadoComponent } from './deportes/deporte-seleccionado/de
 import { ReservacionesComponent } from './reservaciones/reservaciones.component';
 import { NuevoDeporteComponent } from './deportes/components/nuevo-deporte/nuevo-deporte.component';
 import { EspaciosFormularioComponent } from './deportes/components/espacios-formulario/espacios-formulario.component';
+import { RegistroEntradaComponent } from './gimnasio/registro-entrada/registro-entrada.component';
+import { RegistroSalidaComponent } from './gimnasio/registro-salida/registro-salida.component';
 
 const routes: Routes = [
   {
@@ -27,6 +29,16 @@ const routes: Routes = [
   {
     path: 'gimnasio',
     component: GimnasioComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'gimnasio/entrada',
+    component: RegistroEntradaComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'gimnasio/salida',
+    component: RegistroSalidaComponent,
     canActivate: [AuthGuard],
   },
   {
