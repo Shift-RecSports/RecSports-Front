@@ -1,0 +1,73 @@
+nz-progress {
+    margin-right: 8px;
+    margin-bottom: 8px;
+    display: inline-block;
+}
+
+.title {
+    font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+
+    color: #000000;
+}
+
+.outer-chart-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 15px;
+}
+
+.fraccion {
+    font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+
+    display: flex;
+    align-items: center;
+}
+
+.labels-outer-div {
+    /* labels */
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 5px 0px;
+    gap: 10px;
+
+
+    /* Inside auto layout */
+    flex: none;
+    order: 3;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.labels-text {
+    font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 20px;
+
+    display: flex;
+    align-items: center;
+
+    color: #1D2129;
+}
+
+.blue-label {
+    color: #0033A0;
+}
+
+.white-label {
+    color: #E8E8E8;
+}
+
