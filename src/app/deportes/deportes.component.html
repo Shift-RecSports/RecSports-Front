@@ -16,7 +16,7 @@
     </div>
 
     <div nz-row>
-      <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="6" nzXl="6">
+      <!-- <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="6" nzXl="6">
         <div class="tarjeta-deporte">
           <button class="tarjeta-deporte-button" (click)="onSelectDeporte()">
             <div class="tarjeta-deporte-descripcion">
@@ -90,6 +90,34 @@
               <div class="nombre_deporte capitals">SPINNING</div>
             </div>
             <div class="reserva_ahora capitals">RESERVA AHORA</div>
+          </button>
+        </div>
+      </div> -->
+      <div
+        nz-col
+        nzXs="24"
+        nzSm="24"
+        nzMd="12"
+        nzLg="6"
+        nzXl="6"
+        *ngFor="let deporte of listaDeportes"
+      >
+        <div class="tarjeta-deporte-10">
+          <button class="tarjeta-deporte-button-1" (click)="onSelectDeporte()">
+            <div class="tarjeta-deporte-descripcion-1">
+              <div>
+                <div class="nombre_canchas capitals">
+                  WELLNESS CENTER & CDB1
+                </div>
+                <div class="nombre_deporte capitals">
+                  {{ deporte.nombre.toUpperCase() }}
+                </div>
+              </div>
+
+              <div class="reserva_ahora capitals">RESERVA AHORA</div>
+            </div>
+
+            <img [src]="deporte.imagen" class="preview" />
           </button>
         </div>
       </div>

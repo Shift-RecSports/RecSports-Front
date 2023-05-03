@@ -195,6 +195,89 @@
   margin: 1.5rem;
 }
 
+.tarjeta-deporte-10 {
+  margin: 1.5rem;
+  border-radius: 2rem;
+  box-shadow: 0.5rem 0.5rem 1rem 0.5rem rgba(0, 0, 0, 0.15);
+}
+
+.tarjeta-deporte-button-1 {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: inherit;
+
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  overflow: hidden;
+
+  position: relative;
+}
+
+.tarjeta-deporte-descripcion-1 {
+  position: absolute;
+  background: linear-gradient(
+    to right,
+    rgb(22, 38, 134, 0.8),
+    rgb(255, 255, 255, 0)
+  );
+
+  height: 30vh;
+
+  z-index: 1;
+  border-radius: 2rem;
+
+  padding: 3.5rem 1.5rem 1.5rem 1.5rem;
+  line-height: 1.6rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: white;
+}
+
+.preview-container {
+  position: relative;
+  border-radius: 2rem;
+}
+
+.preview-filter {
+  position: absolute;
+  background: linear-gradient(
+    to right,
+    rgb(22, 38, 134, 0.8),
+    rgb(255, 255, 255, 0)
+  );
+  width: 100%;
+
+  z-index: 1;
+  border-radius: 2rem;
+
+  padding: 4rem 2rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: white;
+}
+
+.preview {
+  width: 100%;
+  border-radius: 2rem;
+  height: 30vh;
+  object-fit: cover;
+}
+
 .tarjeta-deporte-button {
   background: none;
   border: none;

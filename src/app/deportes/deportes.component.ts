@@ -11,7 +11,7 @@ import { DeporteItem } from '../classes/deportes';
 })
 export class DeportesComponent {
   showAgregarButton = false;
-  listaDeportes: DeporteItem[];
+  listaDeportes: DeporteItem[] = [];
 
   constructor(
     private service: AuthService,
@@ -27,8 +27,8 @@ export class DeportesComponent {
     const url = '/deportes';
 
     this._apiService.get(url).subscribe((data) => {
-      //this.listaDeportes = data;
-      console.log(data);
+      this.listaDeportes = data;
+      console.log(this.listaDeportes);
     });
   }
 
