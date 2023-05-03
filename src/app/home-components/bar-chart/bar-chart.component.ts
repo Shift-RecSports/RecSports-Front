@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
 import { timeParse } from 'd3-time-format';
 import * as moment from 'moment';
+import { ConcurrenciaGimnasio } from 'src/app/classes/aforos';
+import { ApiService } from 'src/app/service/api.service';
+
 
 @Component({
   selector: 'app-bar-chart',
@@ -12,6 +15,30 @@ import * as moment from 'moment';
 
 export class BarChartComponent implements OnInit {
 
+  constructor(private _apiService: ApiService){}
+
+  data: ConcurrenciaGimnasio[] = [];
+  //num_semana!: number;
+  selectedOption = null;
+  dia_semana: number = 1;
+
+  fechaInicio = new Date(2023, 1, 13);
+  fechaFin = new Date(2023, 5, 25);
+  diasExcluidos = [new Date(2023, 3, 3), new Date(2023, 3, 4), new Date(2023, 3, 5), new Date(2023, 3, 6), new Date(2023, 3, 7),new Date(2023, 3, 8),new Date(2023, 3, 9)];
+  num_semana: number = this.getNumSemana(this.fechaInicio, this.fechaFin, this.diasExcluidos);
+
+  private getNumSemana(fechaInicio: Date, fechaFin: Date, diasExcluidos: Date[] = []): number {
+    const today = new Date();
+    const timeDiff = today.getTime() - fechaInicio.getTime();
+    const daysDiff = Math.floor(timeDiff / (24 * 60 * 60 * 1000)); // Get the difference in whole days
+    const daysCounted = Array.from({ length: daysDiff + 1 }, (_, i) => new Date(fechaInicio.getTime() + i * 24 * 60 * 60 * 1000))
+      .filter(date => !diasExcluidos.some(d => d.toDateString() === date.toDateString())); // Get all the counted days, excluding the vacation days
+    const weekNumber = Math.floor(daysCounted.length / 7) + 1; // Calculate the week number based on the number of counted days
+    return (weekNumber - 1) % 6 + 1; // Convert the value to the range of 1-6, looping back to 1 if it exceeds 6
+  }
+  
+
+  /*
   public data = [
     { letter: 1, 
       col1: 400, 
@@ -111,6 +138,7 @@ export class BarChartComponent implements OnInit {
     },
 
   ];
+  */
 
   private svg: any;
 
@@ -118,13 +146,14 @@ export class BarChartComponent implements OnInit {
     top: 20,
     right: 20,
     bottom: 30,
-    left: 40
+    left: 20
   };
   
-  private width = 770 - this.margin.left - this.margin.right;
-  private height = 300 - this.margin.top - this.margin.bottom;
+  private width = 900 - this.margin.left - this.margin.right;
+  private height = 350 - this.margin.top - this.margin.bottom;
 
   private timeParser = timeParse("%Y%m%d %H:%M");
+  private hourParser = timeParse("%H:%M");
   private x = d3.scaleTime()
     .range([0, this.width])
     .domain([this.timeParser("06:00")!, this.timeParser("22:00")!]);
@@ -154,9 +183,17 @@ export class BarChartComponent implements OnInit {
 
   private drawBars(data: any[]): void {
     // Create the X-axis band scale
+
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
+    const day = currentDate.getDate().toString().padStart(2, "0");
+    const currentDateStr = `${year}${month}${day}`;
+
     var x = d3.scaleTime()
       .range([0, this.width])
-      .domain([this.timeParser("20230421 06:00")!, this.timeParser("20230421 22:00")!])
+      //.domain([this.timeParser(currentDateStr + "06:00")!, this.timeParser(currentDateStr + "22:00")!])
+      .domain([this.hourParser("06:00")!, this.hourParser("22:00")!])
 
     // Draw the X-axis on the DOM
     this.svg.append("g")
@@ -199,8 +236,8 @@ export class BarChartComponent implements OnInit {
       .style("stroke-dasharray", "2,2");
 
     const totalBarWidth = this.data.reduce((acc, d) => {
-    const startDate = moment(d.startTime, "YYYYMMDD HH:mm").toDate();
-    const endDate = moment(d.endTime, "YYYYMMDD HH:mm").toDate();
+    const startDate = moment(d.hora_inicio, "YYYYMMDD HH:mm").toDate();
+    const endDate = moment(d.hora_fin, "YYYYMMDD HH:mm").toDate();
     const barWidth = 0.8 * (x(endDate) - x(startDate));
     return acc + barWidth;
     }, 0);
@@ -265,8 +302,66 @@ export class BarChartComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    console.log(this.dia_semana);
+    console.log(this.num_semana);
+    console.log(this.fechaInicio);
+    console.log(this.fechaFin);
+    
+
+    const url = '/api/concurrencias-aforo-gimnasio/' + this.num_semana + '/' + this.dia_semana;
+
+    this._apiService.get(url).subscribe((data) => {
+      this.data = data;
+      console.log(data);
+    });
+
     this.createSvg();
     this.drawBars(this.data);
+
+  }
+
+
+  onOptionChange() {
+    console.log(this.selectedOption);
+    if (this.selectedOption === "lunes") {
+      this.dia_semana = 1;
+    } 
+    else if (this.selectedOption === 'martes') {
+      this.dia_semana = 2;
+    }
+    else if (this.selectedOption === 'miercoles') {
+      this.dia_semana = 3;
+    }
+    else if (this.selectedOption === 'jueves') {
+      this.dia_semana = 4;
+    }
+    else if (this.selectedOption === 'viernes') {
+      this.dia_semana = 5;
+    }
+    else if (this.selectedOption === 'sabado') {
+      this.dia_semana = 6;
+    }
+    else if (this.selectedOption === 'domingo') {
+      this.dia_semana = 7;
+    }
+
+    console.log(this.dia_semana);
+    console.log(this.num_semana);
+    console.log(this.fechaInicio);
+    console.log(this.fechaFin);
+    
+
+    const url = '/api/concurrencias-aforo-gimnasio/' + this.num_semana + '/' + this.dia_semana;
+
+    this._apiService.get(url).subscribe((data) => {
+      this.data = data;
+      console.log(data);
+    });
+
+    this.createSvg();
+    this.drawBars(this.data);
+
   }
 }
 

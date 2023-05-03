@@ -4,15 +4,14 @@
     </div>
     <div class="upper-right-div">
         <div>
-            <nz-select ngModel="Martes">
-                <nz-option nzValue="Lunes" nzLabel="Lunes" nzDisabled ></nz-option>
-                <nz-option nzValue="Martes" nzLabel="Martes"></nz-option>
-                <nz-option nzValue="Miercoles" nzLabel="Miércoles"></nz-option>
-                <nz-option nzValue="Jueves" nzLabel="Jueves"></nz-option>
-                <nz-option nzValue="Viernes" nzLabel="Viernes"></nz-option>
-                <nz-option nzValue="Sabado" nzLabel="Sábado"></nz-option>
-                <nz-option nzValue="Domingo" nzLabel="Domingo"></nz-option>
-
+            <nz-select [(ngModel)]="selectedOption" (ngModelChange)="onOptionChange()">
+                <nz-option nzValue="lunes" nzLabel="Lunes"></nz-option>
+                <nz-option nzValue="martes" nzLabel="Martes"></nz-option>
+                <nz-option nzValue="miercoles" nzLabel="Miércoles"></nz-option>
+                <nz-option nzValue="jueves" nzLabel="Jueves"></nz-option>
+                <nz-option nzValue="viernes" nzLabel="Viernes"></nz-option>
+                <nz-option nzValue="sabado" nzLabel="Sábado"></nz-option>
+                <nz-option nzValue="domingo" nzLabel="Domingo"></nz-option>
             </nz-select>
         </div>
         <div class="realtime-minicard">
