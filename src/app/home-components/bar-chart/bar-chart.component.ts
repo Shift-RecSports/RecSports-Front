@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
-import { timeFormat } from "d3-time-format";
 import { timeParse } from 'd3-time-format';
-
-
-
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-bar-chart',
@@ -15,7 +12,7 @@ import { timeParse } from 'd3-time-format';
 
 export class BarChartComponent implements OnInit {
 
-  private data = [
+  public data = [
     { letter: 1, 
       col1: 400, 
       col2: 0, 
@@ -124,13 +121,13 @@ export class BarChartComponent implements OnInit {
     left: 40
   };
   
-  private width = 700 - this.margin.left - this.margin.right;
-  private height = 200 - this.margin.top - this.margin.bottom;
+  private width = 770 - this.margin.left - this.margin.right;
+  private height = 300 - this.margin.top - this.margin.bottom;
 
   private timeParser = timeParse("%Y%m%d %H:%M");
   private x = d3.scaleTime()
     .range([0, this.width])
-    .domain([this.timeParser("20230421 06:00")!, this.timeParser("20230421 22:00")!]);
+    .domain([this.timeParser("06:00")!, this.timeParser("22:00")!]);
 
   private y = d3.scaleLinear()
     .range([this.height, 0]);
@@ -144,8 +141,8 @@ export class BarChartComponent implements OnInit {
     .tickFormat(d3.format("d"))
     .tickSizeInner(-this.width)
     .tickSizeOuter(0);
+    
 
-  
   private createSvg(): void {
     this.svg = d3.select(document.querySelector("#chart-container"))
       .append("svg")
@@ -156,7 +153,6 @@ export class BarChartComponent implements OnInit {
   }
 
   private drawBars(data: any[]): void {
-    
     // Create the X-axis band scale
     var x = d3.scaleTime()
       .range([0, this.width])
@@ -167,78 +163,106 @@ export class BarChartComponent implements OnInit {
       .attr("transform", "translate(0," + this.height + ")")
       .call(d3.axisBottom(x))
       .selectAll("text")
+      .attr('font-weight', 'bold')
+      .attr('font-family', 'Helvetica Neue');
 
-    
-
-    // Create the Y-axis band scale
+    // Set the domain of the y scale to the minimum and maximum values in your data
     const y = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.col1)])
+      .range([0, this.height]);
+
+    // Customize the Y-axis ticks and labels
+    const yAxis = d3.axisLeft(y)
+      .tickSize(-this.width)
+      .tickPadding(10)
+      .tickSizeInner(-this.width)
+      .tickSizeOuter(0);
+
+    // Define the domain and range for the Y-axis scale
+    const yScale = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.col1)])
       .range([this.height, 0]);
 
-    // Draw the Y-axis on the DOM
+    
+    //Draw the Y-axis on the DOM
     this.svg.append("g")
-      .call(d3.axisLeft(y)
+      .call(d3.axisLeft(yScale)
       .tickSize(-this.width)
       .tickPadding(10)
       .tickFormat(d3.format("d"))
       .tickSizeInner(-this.width)
-      .tickSizeOuter(0));
+      .tickSizeOuter(0))
+      .attr('font-weight', 'bold')
+      .style("font-family", "Helvetica")
+      .selectAll("line")
+      .style("stroke", "#ccc")
+      .style("stroke-dasharray", "2,2");
 
+    const totalBarWidth = this.data.reduce((acc, d) => {
+    const startDate = moment(d.startTime, "YYYYMMDD HH:mm").toDate();
+    const endDate = moment(d.endTime, "YYYYMMDD HH:mm").toDate();
+    const barWidth = 0.8 * (x(endDate) - x(startDate));
+    return acc + barWidth;
+    }, 0);
+      
+    const totalSpaceWidth = (this.data.length - 1) * 10; // 10px space between bars
+    
+    const barWidthFactor = (this.width - totalSpaceWidth) / totalBarWidth;
 
 
     // Create and fill bars
+    const bars2 = this.svg.selectAll(".bar2")
+      .data(this.data)
+      .enter()
+      .append("rect")
+      .attr("class", "bar2")
+      .attr("x", function(d: any, i: number) {
+        const startDate = moment(d.startTime, "YYYYMMDD HH:mm").toDate();
+        return x(startDate);
+      })
+      .attr("width", function(d : any, i : number){
+        const startDate = moment(d.startTime, "YYYYMMDD HH:mm").toDate();
+        const endDate = moment(d.endTime, "YYYYMMDD HH:mm").toDate();
+        const barWidth = 0.8 * (x(endDate) - x(startDate));
+        return (barWidth + 8) * barWidthFactor;
+      })
+      .attr("y", function(d: any) {
+        return yScale(d.col1);
+      })
+      .attr("height", function(d : any, i : number){
+        return yScale(0) - yScale(d.col1);
+      })
+      .attr("rx", 5) // add rounded edges
+      .attr("ry", 5)
+      .attr("fill", "#E8E8E8");
 
     const bars1 = this.svg.selectAll(".bar1")
       .data(this.data)
       .enter()
       .append("rect")
       .attr("class", "bar1")
-      .attr("x", function(d: any) {
-        return x(timeParse("%Y%m%d %H:%M")(d.startTime)!);
+      .attr("x", function(d: any, i: number) {
+        const startDate = moment(d.startTime, "YYYYMMDD HH:mm").toDate();
+        return x(startDate);
       })
-      .attr("width", this.width / this.data.length - 1)
-      /*
       .attr("width", function(d : any, i : number){
-        const startTime = timeParse("%Y%m%d %H:%M")(d.startTime)!;
-        const endTime = timeParse("%Y%m%d %H:%M")(d.endTime)!;
-        return x(endTime) - x(startTime) - 1;
+        const startDate = moment(d.startTime, "YYYYMMDD HH:mm").toDate();
+        const endDate = moment(d.endTime, "YYYYMMDD HH:mm").toDate();
+        const barWidth = 0.8 * (x(endDate) - x(startDate));
+        return (barWidth + 8) * barWidthFactor;
       })
-      */
-      .attr("y", function(d : any) {
-        return y(d.col1);
+      .attr("y", function(d: any) {
+        return yScale(d.col2);
       })
-      .attr("height", (d : any) => {
-        return this.height - y(d.col1);
-      })
-      .attr("fill", "#d04a35")
-      .attr("rx", 5) // add rounded edges
-      .attr("ry", 5);
-
-    const bars2 = this.svg.selectAll(".bar2")
-      .data(this.data)
-      .enter()
-      .append("rect")
-      .attr("class", "bar2")
-      .attr("x", function(d: any) {
-        return x(timeParse("%Y%m%d %H:%M")(d.startTime)!);
-      })
-      /*
-      .attr("width", function(d : any, i : number){
-        const startTime = timeParse("%Y%m%d %H:%M")(d.startTime)!;
-        const endTime = timeParse("%Y%m%d %H:%M")(d.endTime)!;
-        return x(endTime) - x(startTime) - 1;
-      })
-      */
-      .attr("width", this.width / this.data.length - 1)
-      .attr("y", function(d : any) {
-        return y(d.col2);
-      })
-      .attr("height", (d : any) => {
-        return this.height - y(d.col1);
+      .attr("height", function(d : any, i : number){
+        return yScale(0) - yScale(d.col2);
       })
       .attr("rx", 5) // add rounded edges
-      .attr("ry", 5);
-
+      .attr("ry", 5)
+      .attr("fill", "#0033A0");
+    
   }
+
 
   ngOnInit(): void {
     this.createSvg();

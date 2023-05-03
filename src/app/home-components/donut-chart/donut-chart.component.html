@@ -1,0 +1,19 @@
+<div class="title">
+    Aforo actual del gimnasio
+</div>
+<div class="outer-chart-div">
+    <nz-progress [nzStrokeColor]="{ '100%': '#0033A0' }" [nzPercent]="percent" nzType="circle" [nzWidth]="180" [nzStrokeWidth]="12"></nz-progress>
+    <div class="fraccion">
+        {{actual}} / {{aforo}}
+    </div>
+    <div class="labels-outer-div">
+        <div class="labels-text">
+            <mat-icon class="blue-label">stop</mat-icon>
+            Aforo actual
+        </div>
+        <div class="labels-text">
+            <mat-icon class="white-label">stop</mat-icon>
+            Aforo máximo
+        </div>
+    </div>
+</div>
