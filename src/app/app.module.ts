@@ -68,7 +68,7 @@ registerLocaleData(en);
     LoginComponent,
     BarChartComponent,
     NewsComponent,
-    DeportesFavComponent
+    DeportesFavComponent,
     ReservacionesComponent,
     NuevoDeporteComponent,
     EspaciosFormularioComponent,
