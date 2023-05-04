@@ -2,13 +2,13 @@
   <div class="gimnasio-container">
     <div class="gimnasio-header">
       <div class="gimnasio-registro-estatus">
-        <mat-icon
+        <!-- <mat-icon
           aria-hidden="false"
           aria-label="Example donwload icon"
           fontIcon="error"
           [style]="{ transform: 'scale(1.5)' }"
         ></mat-icon>
-        <div>Registro Invalido: A00824394</div>
+        <div>Registro Invalido: A00824394</div> -->
       </div>
 
       <div class="gimnasio-descarga-container">
@@ -38,6 +38,8 @@
               [matDatepicker]="picker"
               [style]="{ fontSize: '1.2rem' }"
               [formControl]="date"
+              (dateInput)="onFechaChange('input', $event)"
+              (dateChange)="onFechaChange('change', $event)"
             />
 
             <mat-datepicker-toggle

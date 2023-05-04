@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 import { ApiService } from '../service/api.service';
-import { DeporteItem } from '../classes/deportes';
+import { Deporte } from '../classes/deportes';
 
 @Component({
   selector: 'app-deportes',
@@ -11,7 +11,7 @@ import { DeporteItem } from '../classes/deportes';
 })
 export class DeportesComponent {
   showAgregarButton = false;
-  listaDeportes: DeporteItem[] = [];
+  listaDeportes: Deporte[] = [];
 
   constructor(
     private service: AuthService,
@@ -28,12 +28,12 @@ export class DeportesComponent {
 
     this._apiService.get(url).subscribe((data) => {
       this.listaDeportes = data;
-      console.log(this.listaDeportes);
+      // console.log(this.listaDeportes);
     });
   }
 
-  onSelectDeporte() {
-    this.router.navigate(['/deportes/futbol']);
+  onSelectDeporte(deportedId: Deporte) {
+    this.router.navigate([`/deportes/${deportedId.id}`]);
   }
 
   onAgregarDeporte() {

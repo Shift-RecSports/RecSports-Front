@@ -6,11 +6,6 @@ import { HttpClient } from '@angular/common/http';
 export class ApiService {
   constructor(private httpClient: HttpClient) {}
 
-  //GET
-  // get(url: string): Observable<any> {
-  //   return this.httpClient.get('/api'+url);
-  // }
-
   // GET
   get(url: string, query = {}): Observable<any> {
     return this.httpClient.get('/api' + url, query);
@@ -18,9 +13,16 @@ export class ApiService {
 
   // POST
   post(url: string, body: {}): Observable<any> {
-    return this.httpClient.get('/api' + url, body);
+    return this.httpClient.post('/api' + url, JSON.stringify(body));
   }
 
-  // UPDATE
+  // PUT
+  put(url: string, body: {}): Observable<any> {
+    return this.httpClient.put('/api' + url, JSON.stringify(body));
+  }
+
   // DELETE
+  delete(url: string): Observable<any> {
+    return this.httpClient.delete('/api' + url);
+  }
 }

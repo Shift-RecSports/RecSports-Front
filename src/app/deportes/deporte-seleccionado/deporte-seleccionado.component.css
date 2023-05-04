@@ -20,7 +20,7 @@
   padding: 1rem 0.5rem;
 }
 
-.deporte-header-content {
+/* .deporte-header-content {
   background-image: linear-gradient(
       to right,
       rgb(22, 38, 134, 0.8),
@@ -35,6 +35,38 @@
   min-height: 30vh;
   margin-bottom: 2rem;
   display: flex;
+} */
+
+.deporte-header-content {
+  border-radius: 1rem;
+  box-shadow: 0.5rem 0.5rem 1rem 0.5rem rgba(0, 0, 0, 0.15);
+
+  min-height: 30vh;
+  margin-bottom: 2rem;
+  display: flex;
+  position: relative;
+}
+
+.deporte-header-text-container {
+  position: absolute;
+  background: linear-gradient(
+    to right,
+    rgb(22, 38, 134, 0.8),
+    rgb(255, 255, 255, 0)
+  );
+  height: 30vh;
+  width: 100%;
+
+  z-index: 1;
+  border-radius: 1rem;
+  display: flex;
+}
+
+.deporte-header-image {
+  width: 100%;
+  border-radius: 1rem;
+  height: 30vh;
+  object-fit: cover;
 }
 
 .deporte-header-text {

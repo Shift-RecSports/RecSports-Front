@@ -1,0 +1,40 @@
+.modal-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  font-weight: 900;
+  font-size: 1.4rem;
+}
+
+.title-info {
+  color: black;
+  padding-right: 1rem;
+}
+
+.modal-confirmar {
+  padding-top: 1rem;
+  align-self: center;
+  width: 100%;
+}
+
+.mat-cancel-button {
+  background-color: #152586;
+  color: white;
+}
+
+.mat-confirm-button {
+  background-color: #152586;
+  color: white;
+  padding: 1.5rem;
+  font-size: 1rem;
+  border-radius: 0.8rem;
+  width: 100%;
+}

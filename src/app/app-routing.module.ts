@@ -49,7 +49,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'deportes/futbol',
+    path: 'deportes/:id',
     component: DeporteSeleccionadoComponent,
     canActivate: [AuthGuard],
   },
