@@ -30,12 +30,11 @@ import { LoginComponent } from './login/login.component';
 import { BarChartComponent } from './home-components/bar-chart/bar-chart.component';
 import { ReservacionesComponent } from './reservaciones/reservaciones.component';
 import { ModalReservacionComponent } from './deportes/deporte-seleccionado/modal-reservacion/modal-reservacion.component';
+import { ModalComponent } from './reservaciones/modal/modal.component';
 
 import { DeportesFavComponent } from './home-components/deportes-fav/deportes-fav.component';
 import { NewsComponent } from './home-components/news/news.component';
 import { DonutChartComponent } from './home-components/donut-chart/donut-chart.component';
-
-
 
 import { RegistroEntradaComponent } from './gimnasio/registro-entrada/registro-entrada.component';
 import { RegistroSalidaComponent } from './gimnasio/registro-salida/registro-salida.component';
@@ -55,7 +54,6 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NuevoDeporteComponent } from './deportes/components/nuevo-deporte/nuevo-deporte.component';
 import { EspaciosFormularioComponent } from './deportes/components/espacios-formulario/espacios-formulario.component';
-
 
 registerLocaleData(en);
 
@@ -82,6 +80,7 @@ registerLocaleData(en);
     ModalReservacionComponent,
     RegistroEntradaComponent,
     RegistroSalidaComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,7 +100,7 @@ registerLocaleData(en);
     AngularMaterialModule,
     HttpClientModule,
     NzGridModule,
-    BrowserModule, 
+    BrowserModule,
     NzCarouselModule,
     NzButtonModule,
     ScrollingModule,

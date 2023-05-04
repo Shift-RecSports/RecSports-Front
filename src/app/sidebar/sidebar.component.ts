@@ -53,7 +53,7 @@ export class SidebarComponent {
         defaultNavbarFlags
       );
 
-      console.log(this.navbarFlags);
+      // console.log(this.navbarFlags);
     }
   }
 

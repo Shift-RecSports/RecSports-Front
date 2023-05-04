@@ -1,0 +1,44 @@
+<div mat-dialog-content class="modal-container">
+  <div class="modal-header">
+    <div class="modal-title title-info">¿Desea cancelar la Reservacion?</div>
+
+    <div>
+      <button
+        mat-mini-fab
+        color="cancel-button"
+        [ngStyle]="{ color: '#E4E4E4', transform: 'scale(0.8)' }"
+        (click)="onNoClick()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div style="padding-top: 1rem">
+    <div>
+      <span class="modal-title">Fecha: </span>
+      <span class="modal-text">{{ data.selectedReservacion.dia }}</span>
+    </div>
+
+    <div>
+      <span class="modal-title">Horario: </span>
+      <span class="modal-text">{{ data.selectedReservacion.horario }}</span>
+    </div>
+
+    <div>
+      <span class="modal-title">Área: </span>
+      <span class="modal-text">{{ data.selectedReservacion.zona }}</span>
+    </div>
+
+    <div>
+      <span class="modal-title">Cancha: </span>
+      <span class="modal-text">{{ data.selectedReservacion.espacio }}</span>
+    </div>
+
+    <div class="modal-confirmar">
+      <button color="confirm-button" mat-button (click)="onConfirmClick()">
+        Confirmar Reservación
+      </button>
+    </div>
+  </div>
+</div>

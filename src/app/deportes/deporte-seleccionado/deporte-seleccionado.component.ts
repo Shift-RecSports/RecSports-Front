@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalReservacionComponent } from './modal-reservacion/modal-reservacion.component';
+import { ApiService } from 'src/app/service/api.service';
+import { Deporte } from 'src/app/classes/deportes';
 
 interface HorarioReservacion {
   name: string;
@@ -10,6 +13,14 @@ interface HorarioReservacion {
   repetition: number;
   disabled: boolean;
 }
+
+// interface HorarioReservacion {
+//   espacio: string;
+//   zona: string;
+//   hora: string;
+//   estatusReserva: string;
+//   matricula: string;
+// }
 
 const HORARIOS_RESERVACION: HorarioReservacion[] = [
   { hora: '06:00', name: 'CDB1 | Cancha 2 ', repetition: 1, disabled: true },
@@ -71,6 +82,10 @@ const HORARIOS_RESERVACION_3: HorarioReservacion[] = [
   styleUrls: ['./deporte-seleccionado.component.css'],
 })
 export class DeporteSeleccionadoComponent {
+  // Routing
+  private sub: any;
+  deporte: Deporte;
+
   displayedColumns: string[] = ['demo-position', 'demo-name'];
   dataSource = HORARIOS_RESERVACION;
   showEditButton = false;
@@ -85,11 +100,26 @@ export class DeporteSeleccionadoComponent {
   constructor(
     private service: AuthService,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private route: ActivatedRoute,
+    private _apiService: ApiService
   ) {
     if (this.service.isLoggedIn() && this.service.GetUserRole() == 'ADMIN') {
       this.showEditButton = true;
     }
+  }
+
+  ngOnInit() {
+    this.sub = this.route.params.subscribe((params) => {
+      const url = `/deportes/${params['id']}`;
+      this._apiService.get(url).subscribe((data) => {
+        this.deporte = data;
+      });
+    });
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
   onSelectDay(day: number) {

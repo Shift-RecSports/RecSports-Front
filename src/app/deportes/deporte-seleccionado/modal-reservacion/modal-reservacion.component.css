@@ -12,12 +12,35 @@
 .modal-title {
   font-weight: 900;
   font-size: 1.4rem;
+}
+
+.title-info {
   color: black;
+  padding-right: 1rem;
+}
+
+.title-success {
+  color: rgb(20, 76, 2);
+  padding-right: 1rem;
+}
+
+.title-failed {
+  color: rgb(76, 2, 2);
+  padding-right: 1rem;
 }
 
 .mat-cancel-button {
   background-color: #152586;
   color: white;
+}
+
+.mat-success-button {
+  background-color: rgb(20, 76, 2);
+  color: white;
+  padding: 1.5rem;
+  font-size: 1rem;
+  border-radius: 0.8rem;
+  width: 100%;
 }
 
 .mat-confirm-button {
@@ -26,6 +49,7 @@
   padding: 1.5rem;
   font-size: 1rem;
   border-radius: 0.8rem;
+  width: 100%;
 }
 
 .modal-info {
@@ -42,7 +66,12 @@
   color: black;
 }
 
+.remainder-text {
+  padding-top: 1rem;
+}
+
 .modal-confirmar {
   padding-top: 1rem;
   align-self: center;
+  width: 100%;
 }

@@ -86,6 +86,28 @@
           </div></a
         >
       </div>
+
+      <div *ngIf="navbarFlags.entradaFlag">
+        <a mat-list-item routerLink="gimnasio/entrada" class="sidebar-button">
+          <div class="sidebar-list-element">
+            <mat-icon class="sidebar-icon" fontSet="material-icons-outlined"
+              >chat icon</mat-icon
+            ><span class="sidebar-element-text">Registrar</span>
+            <span class="sidebar-element-text">Entrada</span>
+          </div></a
+        >
+      </div>
+
+      <div *ngIf="navbarFlags.salidaFlag">
+        <a mat-list-item routerLink="gimnasio/salida" class="sidebar-button">
+          <div class="sidebar-list-element">
+            <mat-icon class="sidebar-icon" fontSet="material-icons-outlined"
+              >chat icon</mat-icon
+            ><span class="sidebar-element-text">Registrar</span>
+            <span class="sidebar-element-text">Salida</span>
+          </div></a
+        >
+      </div>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
