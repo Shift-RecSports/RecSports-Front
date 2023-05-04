@@ -86,6 +86,28 @@
           </div></a
         >
       </div>
+
+      <div *ngIf="navbarFlags.entradaFlag">
+        <a mat-list-item routerLink="gimnasio/entrada" class="sidebar-button">
+          <div class="sidebar-list-element">
+            <mat-icon class="sidebar-icon" fontSet="material-icons-outlined"
+              >arrow_forward</mat-icon
+            ><span class="sidebar-element-text">Registrar</span>
+            <span class="sidebar-element-text">Entrada</span>
+          </div></a
+        >
+      </div>
+
+      <div *ngIf="navbarFlags.salidaFlag">
+        <a mat-list-item routerLink="gimnasio/salida" class="sidebar-button">
+          <div class="sidebar-list-element">
+            <mat-icon class="sidebar-icon" fontSet="material-icons-outlined"
+              >arrow_back</mat-icon
+            ><span class="sidebar-element-text">Registrar</span>
+            <span class="sidebar-element-text">Salida</span>
+          </div></a
+        >
+      </div>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -122,7 +144,7 @@
                 aria-label="Example icon button with a menu icon"
                 [ngStyle]="{ transform: 'scale(0.8)', boxShadow: 'none' }"
               >
-                SM
+                {{ userName[0] }}
               </button>
               <div class="header-user-name">{{ userName }}</div>
               <mat-icon>keyboard_arrow_down</mat-icon>
@@ -134,18 +156,6 @@
             </button>
             <button mat-menu-item (click)="onLogOut()">Cerrar Sesión</button>
           </mat-menu>
-
-          <!-- <button
-            class="header-user-button"
-            mat-raised-button
-            style="background-color: #00035e; color: white"
-            (click)="onLogOut()"
-            
-          >
-            <mat-icon class="logOut-icon" fontSet="material-icons-outlined"
-              >account_circle</mat-icon
-            >
-          </button> -->
         </div>
       </div>
     </mat-toolbar>

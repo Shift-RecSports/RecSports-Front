@@ -1,9 +1,9 @@
-export class DeporteItem {
-  idDeporte: string;
-  nombre: string;
-  areas: string[]; // Areas - CBD1, CBD2
-  imagen: string;
-}
+// export class DeporteItem {
+//   idDeporte: string;
+//   nombre: string;
+//   areas: string[]; // Areas - CBD1, CBD2
+//   imagen: string;
+// }
 
 export class EspacioItem {
   idEspacio: string;
@@ -18,7 +18,6 @@ export class newDeporte {
   descripcion: string;
 }
 
-
 export class Deporte {
   id: string;
   nombre: string;
@@ -27,7 +26,14 @@ export class Deporte {
   imagen: string;
   duracion: number;
 
-  constructor(id: string, nombre: string, descripcion: string, materiales: string, imagen: string, duracion: number) {
+  constructor(
+    id: string,
+    nombre: string,
+    descripcion: string,
+    materiales: string,
+    imagen: string,
+    duracion: number
+  ) {
     this.id = id;
     this.nombre = nombre;
     this.descripcion = descripcion;

@@ -2,21 +2,27 @@
   <div class="deporte-container">
     <div class="deporte-content">
       <div class="deporte-header-content">
-        <div class="deporte-header-text">
-          <div class="deporte-header-title">FÚTBOL</div>
-          <div class="deporte-header-descripcion">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-            aliquet luctus nulla, nec sagittis tortor aliquam eget. Donec non
-            nisi nisl. Mauris a lacinia dui.
+        <div></div>
+        <div class="deporte-header-text-container">
+          <div class="deporte-header-text">
+            <div class="deporte-header-title">
+              {{ deporte.nombre.toUpperCase() }}
+            </div>
+            <div class="deporte-header-descripcion">
+              {{ deporte.descripcion }}
+            </div>
+          </div>
+
+          <div *ngIf="showEditButton" class="deportes-edit-container">
+            <button mat-button color="button-edit" (click)="onEditDeporte()">
+              <div class="deportes-edit-text">Editar</div>
+            </button>
           </div>
         </div>
 
-        <div *ngIf="showEditButton" class="deportes-edit-container">
-          <button mat-button color="button-edit" (click)="onEditDeporte()">
-            <div class="deportes-edit-text">Editar</div>
-          </button>
-        </div>
+        <img [src]="deporte.imagen" class="deporte-header-image" />
       </div>
+
       <div class="deporte-espacio-container">
         <div class="deporte-espacio-title">Espacios</div>
 
@@ -47,6 +53,7 @@
             nzLg="5"
             nzXl="5"
             class="deporte-espacio-agregarContainer"
+            *ngIf="showAddEspacio"
           >
             <button
               mat-button
