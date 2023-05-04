@@ -89,6 +89,7 @@ export class DeporteSeleccionadoComponent {
   displayedColumns: string[] = ['demo-position', 'demo-name'];
   dataSource = HORARIOS_RESERVACION;
   showEditButton = false;
+  showAddEspacio = false;
 
   selectedDay = 2;
   selectedReservacion = {
@@ -106,6 +107,7 @@ export class DeporteSeleccionadoComponent {
   ) {
     if (this.service.isLoggedIn() && this.service.GetUserRole() == 'ADMIN') {
       this.showEditButton = true;
+      this.showAddEspacio = true;
     }
   }
 

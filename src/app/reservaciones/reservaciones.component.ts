@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ApiService } from '../service/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from './modal/modal.component';
+import { AuthService } from '../service/auth.service';
 
 export interface reservacion {
   id: string;
@@ -33,8 +34,18 @@ export class ReservacionesComponent {
   listaReservaciones: reservacion[] = [];
   matricula: string;
 
-  constructor(private _apiService: ApiService, public dialog: MatDialog) {
-    this.matricula = 'A01284184';
+  constructor(
+    private _apiService: ApiService,
+    public dialog: MatDialog,
+    private service: AuthService
+  ) {
+    this.matricula = '';
+
+    if (this.service.isLoggedIn()) {
+      this.matricula = this.service.GetUserName()
+        ? this.service.GetUserName()!
+        : '';
+    }
   }
 
   ngOnInit() {
