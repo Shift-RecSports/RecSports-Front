@@ -1,0 +1,46 @@
+<div class="grid-container">
+    <div class="home-container">
+      <nz-content>
+        <div nz-col>
+          <div nz-row style="width:100%; height: 48vh;">
+              <div nz-col id="bar-card" style="width:100vh;" class="cards-dashboard">
+                  <div>
+                      <app-bar-chart></app-bar-chart>
+                  </div>
+              </div>
+  
+              <div nz-col style="width: 24px"></div>
+              
+              <div nz-col id="donut-card" style="width:60vh;" class="cards-dashboard">
+                <div>
+  
+                  <app-donut-chart></app-donut-chart>
+                </div>
+              </div>
+          </div>
+  
+          <div nz-row style="height: 32vh; padding-top: 2vh;">
+  
+            <div nz-col style="width:80vh" class="button-cards-dashboard">
+                <div class="outer-button-div">
+                    <button type="button" class="button" routerLink="/gimnasio/entrada">Registrar entrada</button>
+                </div>
+            </div>
+  
+            <div nz-col style="width: 24px"></div>
+  
+            <div nz-col style="width:80vh;" class="button-cards-dashboard">
+                <div class="outer-button-div">
+                    <button type="button" class="button" routerLink="/gimnasio/salida">Registrar salidas</button>
+                </div>
+            </div>
+              
+          </div>
+          
+      </div>
+        
+      </nz-content>
+  
+    </div>
+</div>
+  

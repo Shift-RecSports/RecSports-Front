@@ -149,8 +149,8 @@ export class BarChartComponent implements OnInit {
     left: 20
   };
   
-  private width = 900 - this.margin.left - this.margin.right;
-  private height = 350 - this.margin.top - this.margin.bottom;
+  private width = 800 - this.margin.left - this.margin.right;
+  private height = 300 - this.margin.top - this.margin.bottom;
 
   private timeParser = timeParse("%Y%m%d %H:%M");
   private hourParser = timeParse("%H:%M");
@@ -309,9 +309,10 @@ export class BarChartComponent implements OnInit {
     console.log(this.fechaFin);
     
 
-    const url = '/api/concurrencias-aforo-gimnasio/' + this.num_semana + '/' + this.dia_semana;
+    const url = '/concurrencias-aforo-gimnasio/' + this.num_semana + '/' + this.dia_semana;
 
     this._apiService.get(url).subscribe((data) => {
+      console.log(url);
       this.data = data;
       console.log(data);
     });
@@ -352,11 +353,12 @@ export class BarChartComponent implements OnInit {
     console.log(this.fechaFin);
     
 
-    const url = '/api/concurrencias-aforo-gimnasio/' + this.num_semana + '/' + this.dia_semana;
+    const url = '/concurrencias-aforo-gimnasio/' + this.num_semana + '/' + this.dia_semana;
 
     this._apiService.get(url).subscribe((data) => {
       this.data = data;
       console.log(data);
+      console.log(url);
     });
 
     this.createSvg();

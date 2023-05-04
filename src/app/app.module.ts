@@ -55,6 +55,10 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NuevoDeporteComponent } from './deportes/components/nuevo-deporte/nuevo-deporte.component';
 import { EspaciosFormularioComponent } from './deportes/components/espacios-formulario/espacios-formulario.component';
+import { HomeEntrenadorComponent } from './home-entrenador/home-entrenador.component';
+
+import { NzInputModule } from 'ng-zorro-antd/input';
+
 
 
 registerLocaleData(en);
@@ -82,6 +86,7 @@ registerLocaleData(en);
     ModalReservacionComponent,
     RegistroEntradaComponent,
     RegistroSalidaComponent,
+    HomeEntrenadorComponent,
   ],
   imports: [
     BrowserModule,
@@ -109,6 +114,7 @@ registerLocaleData(en);
     MatDialogModule,
     NzProgressModule,
     NzSelectModule,
+    NzInputModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }, ApiService],
   bootstrap: [AppComponent],

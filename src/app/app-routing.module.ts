@@ -15,6 +15,8 @@ import { NuevoDeporteComponent } from './deportes/components/nuevo-deporte/nuevo
 import { EspaciosFormularioComponent } from './deportes/components/espacios-formulario/espacios-formulario.component';
 import { RegistroEntradaComponent } from './gimnasio/registro-entrada/registro-entrada.component';
 import { RegistroSalidaComponent } from './gimnasio/registro-salida/registro-salida.component';
+import { HomeEntrenadorComponent } from './home-entrenador/home-entrenador.component';
+
 
 const routes: Routes = [
   {
@@ -85,6 +87,12 @@ const routes: Routes = [
     path: 'encuesta',
     component: EncuestaComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'home-entrenador',
+    component: HomeEntrenadorComponent,
+    canActivate: [AuthGuard],
+
   },
 ];
 
