@@ -308,9 +308,9 @@
                 <div>
                   <button
                     mat-button
-                    (click)="openDialog()"
                     color="horario"
                     *ngFor="let reservacion of arrayReservacion[dataSource[i]]"
+                    (click)="openDialog(reservacion)"
                   >
                     <div class="deporte-reservacion-horario">
                       {{ reservacion.espacio_nombre }}

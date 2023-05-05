@@ -236,9 +236,9 @@ export class DeporteSeleccionadoComponent {
     // }
   }
 
-  openDialog(): void {
+  openDialog(reservacion: newHorarioReservacion): void {
     const dialogRef = this.dialog.open(ModalReservacionComponent, {
-      data: { selectedReservacion: this.selectedReservacion },
+      data: { reservacion: reservacion },
     });
   }
 
