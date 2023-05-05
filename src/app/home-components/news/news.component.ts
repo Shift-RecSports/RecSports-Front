@@ -1,32 +1,58 @@
 import { Component, OnInit } from '@angular/core';
+
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/service/auth.service';
+import { MatDialog } from '@angular/material/dialog';
 import { ApiService } from 'src/app/service/api.service';
-import { Noticia } from 'src/app/classes/noticia';
+import { Noticia } from 'src/app/classes/noticias';
 
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.css']
 })
-export class NewsComponent implements OnInit {
+
+
+
+export class NewsComponent implements OnInit{
+
+  // Routing
+  private sub: any;
+  listaNoticias: Noticia[] = [];
+  url: string = ''
+
+  newsArray = [
+    { title: 'Borregos MTY vs. Borregos QTO', date: '03 - 10 - 2023   10:00', place: 'Estadio Banorte' },
+    { title: 'Dua Lipa: World Tour', date: '16 - 04 - 2024   20:00', place: 'Estadio Banorte' },
+  ];
 
   constructor(
-    private _apiService: ApiService) {}
+    private service: AuthService,
+    private router: Router,
+    public dialog: MatDialog,
+    private route: ActivatedRoute,
+    private _apiService: ApiService
+  ) {
+   
+  }
 
-  data: Noticia[] = [];
-
-
-  ngOnInit(): void {
-
-    const url = '/noticias';
-
-    this._apiService.get(url).subscribe((data) => {
-      this.data = data;
-      console.log(data);
+  ngOnInit():void {
+    this.sub = this.route.params.subscribe((params) => {
+      const url = `/noticias`;
+      this._apiService.get(url).subscribe((data) => {
+        this.listaNoticias = data;
+        console.log(data)
+      });
     });
 
+    
   }
 
   redirectToUrl(url: string) {
-    window.location.href = url;
+    window.open(url, '_blank');
   }
+
+  
 }
+

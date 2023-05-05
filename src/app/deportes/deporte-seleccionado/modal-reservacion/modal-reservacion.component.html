@@ -40,24 +40,31 @@
     "
   >
     <div class="modal-info">
-      <span class="modal-title">Área: </span>
-      <span class="modal-text">CBD1</span>
+      <span class="modal-title">Fecha: </span>
+      <span class="modal-text">{{ this.data.reservacion.fecha }}</span>
     </div>
 
     <div>
-      <span class="modal-title">Cancha: </span>
-      <span class="modal-text">Cancha 1</span>
+      <span class="modal-title">Área - Cancha: </span>
+      <span class="modal-text">{{ this.data.reservacion.espacio_nombre }}</span>
     </div>
 
     <div>
       <span class="modal-title">Hora: </span>
-      <span class="modal-text">9:00am - 10:00am</span>
+      <span class="modal-text">{{
+        this.data.reservacion.hora_seleccionada
+      }}</span>
     </div>
 
-    <div class="modal-info">
-      <span class="modal-subtitle">Recuerda traer: </span>
-      <span class="modal-text">Balón</span>
+    <div>
+      <span class="modal-title">Zona: </span>
+      <span class="modal-text">{{ this.data.reservacion.zona }}</span>
     </div>
+    <!-- 
+    <div class="modal-info">
+      <span class="modal-subtitle"></span>
+      <span class="modal-text">{{ this.data.reservacion.zona }}</span>
+    </div> -->
 
     <div *ngIf="showSucces">
       <span class="modal-text remainder-text"
