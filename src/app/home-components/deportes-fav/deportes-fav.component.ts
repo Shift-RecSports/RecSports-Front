@@ -14,4 +14,5 @@ export class DeportesFavComponent {
     this.router.navigate(['/deportes/futbol']);
   }
 
+
 }

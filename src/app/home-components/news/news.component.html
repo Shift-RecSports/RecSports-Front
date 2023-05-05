@@ -16,13 +16,15 @@
     <div nz-carousel-content *ngFor="let news of data">
       <div class="news-card" [style.backgroundImage]="'linear-gradient(180deg, rgba(0, 0, 0, 0.29) 4%, #01329E 104%),url(' + news.imagen + ')'" (click)="redirectToUrl(news.url)">
         <div class="inner-card">
-          <p class="news-place">{{ news.fecha }}</p>
-          <h3>{{ news.id }}</h3>
-          <p class="news-date">{{ news.horario }}</p>
+          <p class="news-place">{{ news.lugar }}</p>
+          <h3>{{ news.titulo }}</h3>
+          <p class="news-date">{{ news.fecha }}" "{{news.hora}}</p>
         </div>
       </div>
     </div>
 </nz-carousel>
+
+
 
 
 <!--

@@ -1,18 +1,16 @@
-import {
-  HttpClient,
-  HttpEvent,
-  HttpEventType,
-  HttpRequest,
-  HttpResponse,
-} from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpEventType, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
-import { Router } from '@angular/router';
+import { Route, Router } from '@angular/router';
 import { Observable, map, startWith } from 'rxjs';
 import { AuthService } from 'src/app/service/auth.service';
+import { Espacio } from 'src/app/classes/espacios';
+
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { ApiService } from 'src/app/service/api.service';
 
 @Component({
   selector: 'app-espacios-formulario',
@@ -20,6 +18,7 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./espacios-formulario.component.css'],
 })
 export class EspaciosFormularioComponent {
+
   areas = new FormControl('');
   options: string[] = ['CBD1', 'CBD2', 'Wellness Center'];
 
@@ -42,11 +41,24 @@ export class EspaciosFormularioComponent {
 
   filteredOptions: Observable<string[]>;
 
+  formularioEspacios!: FormGroup;
+  message: string = '';
+
   constructor(
     private uploadService: FileUploadService,
     private service: AuthService,
-    private router: Router
-  ) {}
+    private router: Router,
+    public formulario: FormBuilder,
+    private _apiService: ApiService,
+  ) {
+    this.formularioEspacios=this.formulario.group({
+      nombre:[''],
+      hora_inicio:[''],
+      hora_fin:[''],
+      aforo:[''],
+      zona:[''],
+    })
+  }
 
   @ViewChild('matRef') matRef: MatSelect;
   removeSelectedHorario(horariosSelected: string) {
@@ -129,6 +141,20 @@ export class EspaciosFormularioComponent {
         }
       );
     }
+  }
+
+  enviarDatos() {
+
+    console.log("Boton presionado");
+
+    console.log(this.formularioEspacios);
+    
+    const url = '/espacios';
+
+    this._apiService.post(url, {body: this.formularioEspacios}).subscribe((data) => {
+      this.message = `Matricula registrada con éxito: ${data.matricula}`;
+    });
+
   }
 
   onCancelClick() {

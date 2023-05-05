@@ -2,8 +2,8 @@
   <div class="espacios-formulario-container">
     <div class="espacios-container">
       <div class="espacio-header">Crear nuevo Espacio</div>
-      <div class="espacio-form">
-        <div nz-row>
+      <form class="espacio-form" (ngSubmit)="enviarDatos()" [formGroup]="formularioEspacios">
+        <div nz-row >
           <div
             nz-col
             nzXs="24"
@@ -190,20 +190,17 @@
             class="espacio-form-item"
           >
             <div class="buttons-container">
-              <button
-                mat-button
-                color="button-cancelar"
-                (click)="onCancelClick()"
-              >
+              <button mat-button color="button-cancelar" (click)="onCancelClick()">
                 <div class="espacio-cancelar-text">Cancelar</div>
               </button>
-              <button mat-button color="button-guardar">
+
+              <button type="submit" mat-button color="button-guardar"> (click)="enviarDatos()"
                 <div class="espacio-guardar-text">Guardar</div>
               </button>
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>

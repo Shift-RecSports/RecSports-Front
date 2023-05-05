@@ -4,6 +4,7 @@ import { timeParse } from 'd3-time-format';
 import * as moment from 'moment';
 import { ConcurrenciaGimnasio } from 'src/app/classes/aforos';
 import { ApiService } from 'src/app/service/api.service';
+import { Subscription, switchMap, timer } from 'rxjs';
 
 
 @Component({
@@ -14,8 +15,10 @@ import { ApiService } from 'src/app/service/api.service';
 
 
 export class BarChartComponent implements OnInit {
+  timerSubscription: Subscription;
 
-  constructor(private _apiService: ApiService){}
+  constructor(
+    private _apiService: ApiService){}
 
   data: ConcurrenciaGimnasio[] = [];
   //num_semana!: number;
@@ -146,23 +149,29 @@ export class BarChartComponent implements OnInit {
     top: 20,
     right: 20,
     bottom: 30,
-    left: 20
+    left: 30
   };
   
   private width = 800 - this.margin.left - this.margin.right;
   private height = 300 - this.margin.top - this.margin.bottom;
 
-  private timeParser = timeParse("%Y%m%d %H:%M");
-  private hourParser = timeParse("%H:%M");
+  private timeParser = timeParse("%Y%m%d %H:%M:%S");
+  public hourParser = timeParse("%H:%M:%S");
+  /*
   private x = d3.scaleTime()
     .range([0, this.width])
-    .domain([this.timeParser("06:00")!, this.timeParser("22:00")!]);
+    .domain([this.hourParser("06:00:00")!, this.hourParser("22:00:00")!]);
+  */
+
+  private x = d3.scaleLinear()
+    .domain([6, 22])
+    .range([0, this.width]);
 
   private y = d3.scaleLinear()
     .range([this.height, 0]);
 
-  private xAxis = d3.axisBottom<Date>(this.x)
-    .tickFormat(d3.timeFormat("%H"));
+  private xAxis = d3.axisBottom<Number>(this.x)
+    //.tickFormat(d3.timeFormat("%H"));
 
   private yAxis = d3.axisLeft(this.y)
     .tickSize(-this.width)
@@ -180,8 +189,10 @@ export class BarChartComponent implements OnInit {
       .append("g")
       .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
   }
+  
+  private drawBars(data: ConcurrenciaGimnasio[]): void {
 
-  private drawBars(data: any[]): void {
+    //console.log("Draw Bars: " + this.data);
     // Create the X-axis band scale
 
     const currentDate = new Date();
@@ -192,8 +203,12 @@ export class BarChartComponent implements OnInit {
 
     var x = d3.scaleTime()
       .range([0, this.width])
-      //.domain([this.timeParser(currentDateStr + "06:00")!, this.timeParser(currentDateStr + "22:00")!])
-      .domain([this.hourParser("06:00")!, this.hourParser("22:00")!])
+      .domain([this.hourParser("06:00:00")!, this.hourParser("22:00:00")!])
+      .nice()
+      console.log(this.hourParser("06:00:00"));
+      console.log(this.hourParser("22:00:00"));
+      console.log("X-AXIS RANGE" + x.range());
+
 
     // Draw the X-axis on the DOM
     this.svg.append("g")
@@ -205,7 +220,8 @@ export class BarChartComponent implements OnInit {
 
     // Set the domain of the y scale to the minimum and maximum values in your data
     const y = d3.scaleLinear()
-      .domain([0, d3.max(data, d => d.col1)])
+      .domain([0,350])
+      //.domain([0, d3.max(data, d => d.historico!)])
       .range([0, this.height]);
 
     // Customize the Y-axis ticks and labels
@@ -217,7 +233,8 @@ export class BarChartComponent implements OnInit {
 
     // Define the domain and range for the Y-axis scale
     const yScale = d3.scaleLinear()
-      .domain([0, d3.max(data, d => d.col1)])
+      .domain([0,350])
+      //.domain([0, d3.max(data, d => d.historico!)])
       .range([this.height, 0]);
 
     
@@ -235,18 +252,7 @@ export class BarChartComponent implements OnInit {
       .style("stroke", "#ccc")
       .style("stroke-dasharray", "2,2");
 
-    const totalBarWidth = this.data.reduce((acc, d) => {
-    const startDate = moment(d.hora_inicio, "YYYYMMDD HH:mm").toDate();
-    const endDate = moment(d.hora_fin, "YYYYMMDD HH:mm").toDate();
-    const barWidth = 0.8 * (x(endDate) - x(startDate));
-    return acc + barWidth;
-    }, 0);
-      
-    const totalSpaceWidth = (this.data.length - 1) * 10; // 10px space between bars
     
-    const barWidthFactor = (this.width - totalSpaceWidth) / totalBarWidth;
-
-
     // Create and fill bars
     const bars2 = this.svg.selectAll(".bar2")
       .data(this.data)
@@ -254,20 +260,31 @@ export class BarChartComponent implements OnInit {
       .append("rect")
       .attr("class", "bar2")
       .attr("x", function(d: any, i: number) {
-        const startDate = moment(d.startTime, "YYYYMMDD HH:mm").toDate();
-        return x(startDate);
+        return x(d.hora_inicio);
       })
       .attr("width", function(d : any, i : number){
-        const startDate = moment(d.startTime, "YYYYMMDD HH:mm").toDate();
-        const endDate = moment(d.endTime, "YYYYMMDD HH:mm").toDate();
-        const barWidth = 0.8 * (x(endDate) - x(startDate));
-        return (barWidth + 8) * barWidthFactor;
+        //const startDate = moment(d.hora_inicio, "HH:mm:ss").toDate();
+        //const endDate = moment(d.hora_fin, "HH:mm:ss").toDate();
+        //console.log("x(d.hora_inicio)" + d.hora_inicio);
+        //console.log("x(d.hora_fin)" + x(d.hora_fin));
+
+        const int_horaInicio = parseInt(d.hora_inicio.split(":")[0], 10);
+        const int_horaFin = parseInt(d.hora_fin.split(":")[0], 10);
+
+        console.log(int_horaInicio)
+        console.log(int_horaFin)
+
+        const barWidth = int_horaFin - int_horaFin;
+        console.log("BARWIDTH: " + barWidth);
+        const final = barWidth;
+        return final;
       })
       .attr("y", function(d: any) {
-        return yScale(d.col1);
+        return yScale(d.historico);
       })
       .attr("height", function(d : any, i : number){
-        return yScale(0) - yScale(d.col1);
+        console.log(yScale(d.historico));
+        return yScale(0) - yScale(d.historico);
       })
       .attr("rx", 5) // add rounded edges
       .attr("ry", 5)
@@ -279,20 +296,17 @@ export class BarChartComponent implements OnInit {
       .append("rect")
       .attr("class", "bar1")
       .attr("x", function(d: any, i: number) {
-        const startDate = moment(d.startTime, "YYYYMMDD HH:mm").toDate();
-        return x(startDate);
+        return x(d.hora_inicio);
       })
       .attr("width", function(d : any, i : number){
-        const startDate = moment(d.startTime, "YYYYMMDD HH:mm").toDate();
-        const endDate = moment(d.endTime, "YYYYMMDD HH:mm").toDate();
-        const barWidth = 0.8 * (x(endDate) - x(startDate));
-        return (barWidth + 8) * barWidthFactor;
+        const barWidth = 0.8 * (x(d.hora_fin) - x(d.hora_inicio));
+        return barWidth;
       })
       .attr("y", function(d: any) {
-        return yScale(d.col2);
+        return yScale(d.actual);
       })
       .attr("height", function(d : any, i : number){
-        return yScale(0) - yScale(d.col2);
+        return yScale(0) - yScale(d.actual);
       })
       .attr("rx", 5) // add rounded edges
       .attr("ry", 5)
@@ -300,9 +314,73 @@ export class BarChartComponent implements OnInit {
     
   }
 
+  /*
+  const url = '/concurrencias-aforo-gimnasio/' + this.num_semana + '/' + this.dia_semana;
+
+    this._apiService.get(url).subscribe((dataResponse: ConcurrenciaGimnasio[]) => {
+      console.log(url);
+      this.data = dataResponse;
+      console.log("This is data 1" + this.data);
+      this.data.forEach(item => {
+        console.log('Hora inicio:', item.hora_inicio);
+        console.log('historico:', item.historico);
+        console.log('actual:', item.actual);
+      });
+    });
+
+    */
+
+
+
+  changeDateSelected(numSemana: number, diaSemana: number) {
+
+    const url = '/concurrencias-aforo-gimnasio/' + numSemana + '/' + diaSemana;
+
+    this.timerSubscription = timer(0, 10000)
+      .pipe(switchMap(() => this._apiService.get(url)))
+      .subscribe((data: ConcurrenciaGimnasio[]) => {
+        console.log('reload de data concurrenciaGimnasio');
+        this.data = data;
+
+        //console.log(data.filter(d => d.historico === undefined));
+        // filter out data with undefined historico values
+        this.data = data.filter(d => d.historico !== undefined);
+
+        //console.log('DATA TEST: ' + data);
+        /*
+        this.data.forEach(item => {
+          console.log('Hora inicio:', item.hora_inicio);
+          console.log('historico:', item.historico);
+          console.log('actual:', item.actual);
+        });
+        */
+
+        this.drawBars(this.data);
+
+      });
+  }
+
+  /*
+  changeDateSelected(day: Date = new Date()) {
+    this.daySelected = `${day.getFullYear()}-${
+      day.getMonth() + 1
+    }-${day.getDay()}`;
+
+    this.url = `/registros-gimnasio/fecha=${this.daySelected}&offset=${this.page}`;
+    this.timerSubscription = timer(0, 10000)
+      .pipe(switchMap(() => this._apiService.get(this.url)))
+      .subscribe((data) => {
+        console.log('reload');
+        this.listaRegistros = data;
+        this.dataSource.data = this.listaRegistros;
+      });
+  }
+  */
+
 
   ngOnInit(): void {
 
+    /*
     console.log(this.dia_semana);
     console.log(this.num_semana);
     console.log(this.fechaInicio);
@@ -311,14 +389,22 @@ export class BarChartComponent implements OnInit {
 
     const url = '/concurrencias-aforo-gimnasio/' + this.num_semana + '/' + this.dia_semana;
 
-    this._apiService.get(url).subscribe((data) => {
+    this._apiService.get(url).subscribe((dataResponse: ConcurrenciaGimnasio[]) => {
       console.log(url);
-      this.data = data;
-      console.log(data);
+      this.data = dataResponse;
+      console.log("This is data 1" + this.data);
+      this.data.forEach(item => {
+        console.log('Hora inicio:', item.hora_inicio);
+        console.log('historico:', item.historico);
+        console.log('actual:', item.actual);
+      });
     });
 
+    */
+
+    this.changeDateSelected(5, 5);
     this.createSvg();
-    this.drawBars(this.data);
+    //this.drawBars(this.data);
 
   }
 
@@ -351,21 +437,7 @@ export class BarChartComponent implements OnInit {
     console.log(this.num_semana);
     console.log(this.fechaInicio);
     console.log(this.fechaFin);
-    
-
-    const url = '/concurrencias-aforo-gimnasio/' + this.num_semana + '/' + this.dia_semana;
-
-    this._apiService.get(url).subscribe((data) => {
-      this.data = data;
-      console.log(data);
-      console.log(url);
-    });
-
-    this.createSvg();
-    this.drawBars(this.data);
 
   }
 }
-
-
 
