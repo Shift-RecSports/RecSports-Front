@@ -6,7 +6,7 @@
         <div class="deporte-header-text-container">
           <div class="deporte-header-text">
             <div class="deporte-header-title">
-              {{ deporte.nombre }}
+              {{ deporte.nombre.toUpperCase() }}
             </div>
             <div class="deporte-header-descripcion">
               {{ deporte.descripcion }}
@@ -27,24 +27,17 @@
         <div class="deporte-espacio-title">Espacios</div>
 
         <div nz-row class="deporte-espacio-list">
-          <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="5" nzXl="5">
-            <div class="deporte-espacio-fondo">
-              <div>CBD1</div>
-              <div>Cancha 1</div>
+         
+            <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="5" nzXl="5" *ngFor="let espacio of listaEspacios">
+              <div class="deporte-espacio-fondo" [style.background-image]= 
+              "'linear-gradient(180deg, rgba(0, 0, 0, 0.29) 4%, #01329E 104%),url(' + espacio.imagen + ')'">
+                <div>{{espacio.zona}}</div>
+                <div>{{espacio.nombre}}</div>
+              </div>
             </div>
-          </div>
-          <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="5" nzXl="5">
-            <div class="deporte-espacio-fondo">
-              <div>CBD2</div>
-              <div>Cancha 2</div>
-            </div>
-          </div>
-          <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="5" nzXl="5">
-            <div class="deporte-espacio-fondo">
-              <div>CBD1</div>
-              <div>Cancha 3</div>
-            </div>
-          </div>
+
+          
+          
           <div
             nz-col
             nzXs="24"

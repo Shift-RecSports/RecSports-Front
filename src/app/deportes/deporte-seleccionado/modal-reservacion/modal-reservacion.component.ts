@@ -13,6 +13,7 @@ import { ApiService } from 'src/app/service/api.service';
   templateUrl: './modal-reservacion.component.html',
   styleUrls: ['./modal-reservacion.component.css'],
 })
+
 export class ModalReservacionComponent {
   showLoading: boolean = false;
   showSucces: boolean = false;
