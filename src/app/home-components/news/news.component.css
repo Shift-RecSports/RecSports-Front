@@ -6,10 +6,10 @@
     border-radius: 16px;
 }
 
-/*
-background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.29) 4%, #01329E 104%),
-      url("https://conecta.tec.mx/sites/default/files/styles/header_full/public/2019-04/Estadio-borregos1920.jpg?h=920929c4&itok=qJq33r8o");
-*/
+
+.news-card {
+    height: 10vh; 
+  }
 
 
 h3 {

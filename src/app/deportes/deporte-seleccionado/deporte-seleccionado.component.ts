@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalReservacionComponent } from './modal-reservacion/modal-reservacion.component';
 import { ApiService } from 'src/app/service/api.service';
 import { Deporte } from 'src/app/classes/deportes';
+import { Espacio } from 'src/app/classes/espacios';
 
 interface HorarioReservacion {
   name: string;
@@ -146,6 +147,10 @@ export class DeporteSeleccionadoComponent {
   private sub2: any;
   deporte: Deporte;
 
+  listaEspacios: Espacio[] = [];
+  url: string = ''
+
+
   displayedColumns: string[] = ['demo-position', 'demo-name'];
 
   horariosDisponibles: newHorarioReservacion[];
@@ -196,6 +201,11 @@ export class DeporteSeleccionadoComponent {
       const url = `/deportes/${params['id']}`;
       this._apiService.get(url).subscribe((data) => {
         this.deporte = data;
+  
+        this.url = `/espacios/deporte=${params['id']}`;
+        this._apiService.get(this.url).subscribe((data) => {
+          this.listaEspacios = data;
+        });
       });
     });
 
@@ -219,7 +229,7 @@ export class DeporteSeleccionadoComponent {
       });
     });
   }
-
+  
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
