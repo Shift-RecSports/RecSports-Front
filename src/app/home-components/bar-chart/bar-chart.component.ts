@@ -25,6 +25,11 @@ export class BarChartComponent implements OnInit {
   selectedOption = null;
   dia_semana: number = 1;
 
+  url : string = ""
+  percent : any
+  aforo : any
+  actual : any
+
   fechaInicio = new Date(2023, 1, 13);
   fechaFin = new Date(2023, 5, 25);
   diasExcluidos = [new Date(2023, 3, 3), new Date(2023, 3, 4), new Date(2023, 3, 5), new Date(2023, 3, 6), new Date(2023, 3, 7),new Date(2023, 3, 8),new Date(2023, 3, 9)];
@@ -38,6 +43,11 @@ export class BarChartComponent implements OnInit {
       .filter(date => !diasExcluidos.some(d => d.toDateString() === date.toDateString())); // Get all the counted days, excluding the vacation days
     const weekNumber = Math.floor(daysCounted.length / 7) + 1; // Calculate the week number based on the number of counted days
     return (weekNumber - 1) % 6 + 1; // Convert the value to the range of 1-6, looping back to 1 if it exceeds 6
+  }
+  
+  public convertTimeToHour(timeString: string) {
+    const hour = timeString.split(':')[0];
+    return Number(hour);
   }
   
 
@@ -190,6 +200,7 @@ export class BarChartComponent implements OnInit {
       .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
   }
   
+
   private drawBars(data: ConcurrenciaGimnasio[]): void {
 
     //console.log("Draw Bars: " + this.data);
@@ -260,24 +271,17 @@ export class BarChartComponent implements OnInit {
       .append("rect")
       .attr("class", "bar2")
       .attr("x", function(d: any, i: number) {
-        return x(d.hora_inicio);
+        console.log("LOOK HERE")
+        console.log(d.hora_inicio);
+        console.log(x(d.hora_inicio));
+
+        const hour = d.hora_inicio.split(':')[0];
+        console.log(x(Number(hour)));
+        return Number(hour)*46.8-280;
       })
       .attr("width", function(d : any, i : number){
-        //const startDate = moment(d.hora_inicio, "HH:mm:ss").toDate();
-        //const endDate = moment(d.hora_fin, "HH:mm:ss").toDate();
-        //console.log("x(d.hora_inicio)" + d.hora_inicio);
-        //console.log("x(d.hora_fin)" + x(d.hora_fin));
-
-        const int_horaInicio = parseInt(d.hora_inicio.split(":")[0], 10);
-        const int_horaFin = parseInt(d.hora_fin.split(":")[0], 10);
-
-        console.log(int_horaInicio)
-        console.log(int_horaFin)
-
-        const barWidth = int_horaFin - int_horaFin;
-        console.log("BARWIDTH: " + barWidth);
-        const final = barWidth;
-        return final;
+        return 45;
+        
       })
       .attr("y", function(d: any) {
         return yScale(d.historico);
@@ -300,13 +304,15 @@ export class BarChartComponent implements OnInit {
       })
       .attr("width", function(d : any, i : number){
         const barWidth = 0.8 * (x(d.hora_fin) - x(d.hora_inicio));
-        return barWidth;
+        return 45;
       })
       .attr("y", function(d: any) {
         return yScale(d.actual);
       })
       .attr("height", function(d : any, i : number){
-        return yScale(0) - yScale(d.actual);
+        
+        console.log(d.actual)
+        //return d.actual;
       })
       .attr("rx", 5) // add rounded edges
       .attr("ry", 5)
@@ -336,28 +342,14 @@ export class BarChartComponent implements OnInit {
 
     const url = '/concurrencias-aforo-gimnasio/' + numSemana + '/' + diaSemana;
 
-    this.timerSubscription = timer(0, 10000)
-      .pipe(switchMap(() => this._apiService.get(url)))
-      .subscribe((data: ConcurrenciaGimnasio[]) => {
-        console.log('reload de data concurrenciaGimnasio');
-        this.data = data;
-
-        //console.log(data.filter(d => d.historico === undefined));
-        // filter out data with undefined historico values
-        this.data = data.filter(d => d.historico !== undefined);
-
-        //console.log('DATA TEST: ' + data);
-        /*
-        this.data.forEach(item => {
-          console.log('Hora inicio:', item.hora_inicio);
-          console.log('historico:', item.historico);
-          console.log('actual:', item.actual);
-        });
-        */
-
-        this.drawBars(this.data);
-
-      });
+    this._apiService.get(url).subscribe((data: ConcurrenciaGimnasio[]) => {
+      this.data = data;
+      console.log(data);
+    
+      this.createSvg();
+      this.drawBars(this.data);
+    });
+        //this.aforo = data.aforo;
   }
 
   /*
@@ -379,7 +371,6 @@ export class BarChartComponent implements OnInit {
 
 
   ngOnInit(): void {
-
     /*
     console.log(this.dia_semana);
     console.log(this.num_semana);
@@ -402,9 +393,8 @@ export class BarChartComponent implements OnInit {
 
     */
 
-    this.changeDateSelected(5, 5);
-    this.createSvg();
-    //this.drawBars(this.data);
+    this.changeDateSelected(5, 1);
+
 
   }
 
@@ -432,6 +422,10 @@ export class BarChartComponent implements OnInit {
     else if (this.selectedOption === 'domingo') {
       this.dia_semana = 7;
     }
+
+    d3.selectAll("svg:not(.ant-progress-circle)").remove();
+    console.log(d3.selectAll('svg'));
+    this.changeDateSelected(5, this.dia_semana);
 
     console.log(this.dia_semana);
     console.log(this.num_semana);
