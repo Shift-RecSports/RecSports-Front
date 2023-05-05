@@ -28,6 +28,14 @@ export class NuevoDeporteComponent {
     'CBD2 - Cancha2',
   ];
 
+  message: string = '';
+
+  nombre: string;
+  descripcion: string;
+  materiales: string;
+  imagen: string;
+  duracion: number;
+
   // CODE FOR UPLOADING IMAGES - Refactor
   // REFERENCE: https://www.bezkoder.com/angular-material-15-image-upload-preview/
   selectedFiles?: FileList;
@@ -39,7 +47,13 @@ export class NuevoDeporteComponent {
     private service: AuthService,
     private router: Router,
     private _apiService: ApiService
-  ) {}
+  ) {
+    this.nombre = '';
+    this.descripcion = '';
+    this.materiales = '';
+    this.imagen = 'https://javier.rodriguez.org.mx/itesm/borregos/borrego-blue.png';
+    this.duracion = 0;
+  }
 
   changeSelectedEspacios(espacios: string[]) {
     this.espaciosSelected = espacios;
@@ -106,6 +120,25 @@ export class NuevoDeporteComponent {
         }
       );
     }
+  }
+
+  enviarDatos() {
+
+    console.log("Boton presionado");
+    
+    const url = '/deportes';
+
+    this._apiService
+    .post(url, {nombre: this.nombre, 
+                descripcion: this.descripcion, 
+                materiales: this.materiales,
+                imagen: this.imagen,
+                duracion: this.duracion})
+    .subscribe((data) => {
+      console.log(data);
+      this.message = `Deporte ${data.nombre} registrado con éxito}`;
+    });
+
   }
 
   onCancelClick() {
