@@ -171,7 +171,7 @@ export class DeporteSeleccionadoComponent {
   showEditButton = false;
   showAddEspacio = false;
 
-  selectedDay = 2;
+  selectedDay = 5;
   selectedReservacion = {
     hora: '06:00',
     area: 'CBD1',

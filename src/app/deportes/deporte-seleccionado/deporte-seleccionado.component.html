@@ -97,7 +97,7 @@
 
           <div class="deporte-reservacion-button-container">
             <button mat-fab color="button-disabled" disabled aria-label="date">
-              01
+              31
             </button>
             <div class="deporte-reservacion-dia">Dom.</div>
           </div>
@@ -109,19 +109,16 @@
           </div>
 
           <!-- MARTES -->
-          <div
-            *ngIf="selectedDay == 2"
-            class="deporte-reservacion-button-container"
-          >
-            <button mat-fab color="button-selected" aria-label="date">
+          <div class="deporte-reservacion-button-container">
+            <!-- <button mat-fab color="button-selected" aria-label="date"> -->
+            <button mat-fab color="button-disabled" disabled aria-label="date">
               02
             </button>
-            <div class="deporte-reservacion-dia deporte-reservacion-dia-text">
-              Mar.
-            </div>
+            <!-- <div class="deporte-reservacion-dia deporte-reservacion-dia-text"> -->
+            <div class="deporte-reservacion-dia">Mar.</div>
           </div>
 
-          <div
+          <!-- <div
             *ngIf="selectedDay != 2"
             class="deporte-reservacion-button-container"
           >
@@ -134,10 +131,17 @@
               02
             </button>
             <div class="deporte-reservacion-dia">Mar.</div>
-          </div>
+          </div> -->
 
           <!-- MIERCOLES -->
-          <div
+          <div class="deporte-reservacion-button-container">
+            <button mat-fab color="button-disabled" disabled aria-label="date">
+              03
+            </button>
+            <div class="deporte-reservacion-dia">Mie.</div>
+          </div>
+
+          <!-- <div
             *ngIf="selectedDay == 3"
             class="deporte-reservacion-button-container"
           >
@@ -162,10 +166,17 @@
               03
             </button>
             <div class="deporte-reservacion-dia">Mie.</div>
-          </div>
+          </div> -->
 
           <!-- JUEVES -->
-          <div
+          <div class="deporte-reservacion-button-container">
+            <button mat-fab color="button-disabled" disabled aria-label="date">
+              04
+            </button>
+            <div class="deporte-reservacion-dia">Jue.</div>
+          </div>
+
+          <!-- <div
             *ngIf="selectedDay == 4"
             class="deporte-reservacion-button-container"
           >
@@ -190,7 +201,7 @@
               04
             </button>
             <div class="deporte-reservacion-dia">Jue.</div>
-          </div>
+          </div> -->
           <!-- <div class="deporte-reservacion-button-container">
             <button mat-fab color="today" aria-label="date">14</button>
             <div class="deporte-reservacion-dia">Jue.</div>
@@ -230,7 +241,7 @@
             class="deporte-reservacion-button-container"
           >
             <button mat-fab color="button-selected" aria-label="date">
-              05
+              06
             </button>
             <div class="deporte-reservacion-dia deporte-reservacion-dia-text">
               Sab.
@@ -251,6 +262,32 @@
             </button>
             <div class="deporte-reservacion-dia">Sab.</div>
           </div>
+          <!-- <div
+            *ngIf="selectedDay == 6"
+            class="deporte-reservacion-button-container"
+          >
+            <button mat-fab color="button-selected" aria-label="date">
+              06
+            </button>
+            <div class="deporte-reservacion-dia deporte-reservacion-dia-text">
+              Sab.
+            </div>
+          </div>
+
+          <div
+            *ngIf="selectedDay != 6"
+            class="deporte-reservacion-button-container"
+          >
+            <button
+              mat-fab
+              color="unselected"
+              aria-label="date"
+              (click)="onSelectDay(6)"
+            >
+              06
+            </button>
+            <div class="deporte-reservacion-dia">Sab.</div>
+          </div> -->
 
           <div
             class="deporte-reservacion-button-container deporte-reservacion-button-past"
