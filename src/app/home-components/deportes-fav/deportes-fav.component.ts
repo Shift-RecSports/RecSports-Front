@@ -38,4 +38,5 @@ export class DeportesFavComponent {
     this.router.navigate(['/deportes/dep007']);
   }
 
+
 }

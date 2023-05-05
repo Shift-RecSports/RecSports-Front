@@ -1,18 +1,36 @@
-import {
-  HttpClient,
-  HttpEvent,
-  HttpEventType,
-  HttpRequest,
-  HttpResponse,
-} from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpEventType, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
-import { Router } from '@angular/router';
+import { Route, Router } from '@angular/router';
 import { Observable, map, startWith } from 'rxjs';
 import { AuthService } from 'src/app/service/auth.service';
+import { Espacio } from 'src/app/classes/espacios';
+
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { ApiService } from 'src/app/service/api.service';
+
+export class RegistroEntradaComponent {
+  matricula: string;
+  message: string;
+
+  constructor(private _apiService: ApiService) {
+    this.matricula = '';
+    this.message = '';
+  }
+
+  onSubmitMatricula() {
+    const url = `/registros-gimnasio/matricula`;
+
+    this._apiService
+      .post(url, { matricula: this.matricula })
+      .subscribe((data) => {
+        this.message = `Matricula registrada con éxito: ${data.matricula}`;
+      });
+  }
+}
 
 @Component({
   selector: 'app-espacios-formulario',
@@ -20,8 +38,17 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./espacios-formulario.component.css'],
 })
 export class EspaciosFormularioComponent {
+
   areas = new FormControl('');
   options: string[] = ['CBD1', 'CBD2', 'Wellness Center'];
+
+  nombre: string;
+  hora_inicio: string;
+  hora_fin: string;
+  aforo: string;
+  zona: string;
+  imagen: string;
+  deporte: string;
 
   horarios = new FormControl('');
   horariosSelected: string[] = [];
@@ -42,11 +69,24 @@ export class EspaciosFormularioComponent {
 
   filteredOptions: Observable<string[]>;
 
+  formularioEspacios!: FormGroup;
+  message: string = '';
+
   constructor(
     private uploadService: FileUploadService,
     private service: AuthService,
-    private router: Router
-  ) {}
+    private router: Router,
+    public formulario: FormBuilder,
+    private _apiService: ApiService,
+  ) {
+    this.nombre = '';
+    this.hora_inicio = '08:00:00';
+    this.hora_fin = '19:00:00';
+    this.aforo = '';
+    this.zona = '';
+    this.imagen = 'https://javier.rodriguez.org.mx/itesm/borregos/borrego-blue.png';
+    this.deporte = '';
+  }
 
   @ViewChild('matRef') matRef: MatSelect;
   removeSelectedHorario(horariosSelected: string) {
@@ -129,6 +169,27 @@ export class EspaciosFormularioComponent {
         }
       );
     }
+  }
+
+  enviarDatos() {
+
+    console.log("Boton presionado");
+    
+    const url = '/espacios';
+
+    this._apiService
+    .post(url, {nombre: this.nombre, 
+                hora_inicio: this.hora_inicio, 
+                hora_fin: this.hora_fin,
+                aforo: this.aforo,
+                zona: this.zona,
+                imagen: this.imagen,
+                deporte: this.deporte})
+    .subscribe((data) => {
+      console.log(data);
+      this.message = `Deporte ${data.nombre} registrado con éxito}`;
+    });
+
   }
 
   onCancelClick() {

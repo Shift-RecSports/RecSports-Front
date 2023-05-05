@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
 import { Aforo } from 'src/app/classes/aforos';
+import { Subscription, switchMap, timer } from 'rxjs';
 
 
 @Component({
@@ -20,9 +21,22 @@ export class DonutChartComponent implements OnInit {
   constructor(
     private _apiService: ApiService) {}
 
+  timerSubscription: Subscription;
 
   ngOnInit(): void {
     const url = '/aforo-actual';
+
+    this.timerSubscription = timer(0, 10000)
+      .pipe(switchMap(() => this._apiService.get(url)))
+      .subscribe((data) => {
+        console.log('reload de data concurrenciaGimnasio');
+        this.percent = Math.round(data.actual / data.aforo)
+        this.actual = data.actual;
+        this.aforo = data.aforo;
+
+      });
+
+    /*
 
     this._apiService.get(url).subscribe((data) => {
       this.aforo = new Aforo(data.actual, data.aforo);
@@ -32,6 +46,8 @@ export class DonutChartComponent implements OnInit {
 
       console.log(data);
     });
+
+    */
 
 
   }

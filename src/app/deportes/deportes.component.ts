@@ -37,6 +37,6 @@ export class DeportesComponent {
   }
 
   onAgregarDeporte() {
-    this.router.navigate(['/deportes/nuevo']);
+    this.router.navigate(['/deporte/nuevo']);
   }
 }

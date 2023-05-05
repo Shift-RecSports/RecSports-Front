@@ -1,4 +1,3 @@
-
 <nz-carousel nzAutoPlay>
     <div nz-carousel-content class="news-card" *ngFor="let noticia of listaNoticias" [style.background-image]= 
     "'linear-gradient(180deg, rgba(0, 0, 0, 0.29) 4%, #01329E 104%),url(' + noticia.imagen + ')'" (click)="redirectToUrl(noticia.url)">
@@ -9,21 +8,6 @@
         </div>
     </div>
 </nz-carousel>
-
-
-
-
-
-
-
-<!--
-id: string;
-fecha: string;
-horario: string;
-url: string;
-imagen: string;
--->
-
 
 
 <!-- cambia div para bottom text -->

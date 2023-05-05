@@ -10,9 +10,9 @@ export class Aforo {
 }
 
 export class ConcurrenciaGimnasio {
-    hora_inicio: string;
-    hora_fin: string;
-    historico: number;
+    hora_inicio!: string;
+    hora_fin!: string;
+    historico!: number;
     actual: number;
   
     constructor(hora_inicio:string, hora_fin:string, historico:number, actual: number) {
