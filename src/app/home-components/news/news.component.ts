@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
@@ -6,12 +7,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { ApiService } from 'src/app/service/api.service';
 import { Noticia } from 'src/app/classes/noticias';
 
-
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.css']
 })
+
 
 
 export class NewsComponent implements OnInit{
@@ -52,10 +53,6 @@ export class NewsComponent implements OnInit{
     window.open(url, '_blank');
   }
 
-  
-
-
-  
   
 }
 

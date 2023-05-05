@@ -37,6 +37,7 @@ interface reservacionType {
   templateUrl: './modal-reservacion.component.html',
   styleUrls: ['./modal-reservacion.component.css'],
 })
+
 export class ModalReservacionComponent {
   showLoading: boolean = false;
   showSucces: boolean = false;

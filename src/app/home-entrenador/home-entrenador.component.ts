@@ -1,25 +1,13 @@
 import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-import { Router } from '@angular/router';
-
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  selector: 'app-home-entrenador',
+  templateUrl: './home-entrenador.component.html',
+  styleUrls: ['./home-entrenador.component.css']
 })
-export class HomeComponent {
-
-  constructor(
-    private breakpointObserver: BreakpointObserver,
-    private router: Router) {}
-
-  onSelectDeportes() {
-    this.router.navigate(['/deportes']);
-  }
-
-
+export class HomeEntrenadorComponent {
   /** Based on the screen size, switch from standard to one column per row */
   cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
@@ -40,4 +28,7 @@ export class HomeComponent {
       ];
     })
   );
+
+  constructor(private breakpointObserver: BreakpointObserver) {}
+
 }

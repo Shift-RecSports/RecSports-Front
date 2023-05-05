@@ -26,7 +26,7 @@ export class DonutChartComponent implements OnInit {
 
     this._apiService.get(url).subscribe((data) => {
       this.aforo = new Aforo(data.actual, data.aforo);
-      this.percent = data.actual / data.aforo;
+      this.percent = Math.round(data.actual / data.aforo)
       this.actual = data.actual;
       this.aforo = data.aforo;
 
