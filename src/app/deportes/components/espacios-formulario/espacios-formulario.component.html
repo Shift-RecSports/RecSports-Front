@@ -2,7 +2,6 @@
   <div class="espacios-formulario-container">
     <div class="espacios-container">
       <div class="espacio-header">Crear nuevo Espacio</div>
-      <form class="espacio-form" (ngSubmit)="enviarDatos()" [formGroup]="formularioEspacios">
         <div nz-row >
           <div
             nz-col
@@ -15,7 +14,7 @@
           >
             <div class="espacio-form-title">Nombre del Espacio</div>
             <mat-form-field appearance="outline" class="input-container">
-              <input matInput placeholder="Escribe..." />
+              <input matInput placeholder="Escribe..." [(ngModel)]="nombre"/>
             </mat-form-field>
           </div>
 
@@ -42,6 +41,7 @@
                 matInput
                 [formControl]="areas"
                 [matAutocomplete]="auto"
+                [(ngModel)]="zona"
               />
               <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                 <mat-option
@@ -65,8 +65,79 @@
           >
             <div class="espacio-form-title">Aforo</div>
             <mat-form-field appearance="outline" class="input-container">
-              <input matInput placeholder="Escribe..." />
+              <input matInput placeholder="Escribe..." [(ngModel)]="aforo"/>
             </mat-form-field>
+          </div>
+
+          <div
+          nz-col
+          nzXs="24"
+          nzSm="24"
+          nzMd="12"
+          nzLg="12"
+          nzXl="12"
+          class="espacio-form-item"
+        >
+          <div class="espacio-form-title">Deporte</div>
+          <mat-form-field appearance="outline" class="input-container">
+            <input matInput placeholder="Escribe..." [(ngModel)]="deporte"/>
+          </mat-form-field>
+        </div>
+
+          <div
+            nz-col
+            nzXs="24"
+            nzSm="24"
+            nzMd="12"
+            nzLg="12"
+            nzXl="12"
+            class="espacio-form-item"
+          >
+            <div class="espacio-form-title">Carga de archivos</div>
+
+            <!-- CARGA DE IMAGEN -->
+            <mat-form-field appearance="outline" class="input-container">
+              <mat-toolbar>
+                <div ondrag="uploadFiles()">
+                  <input hidden matInput />
+                  <input
+                    style="width: 100%; background-color: white"
+                    type="file"
+                    id="fileInput"
+                    name="fileInput"
+                    accept="image/*"
+                    (change)="selectFiles($event)"
+                  />
+                  <div class="image-text">
+                    <span class="drop-image-text">Arrastra y suelta</span>
+                    <span class="navigate-image-text">Navega dispositivo</span>
+                  </div>
+                </div>
+              </mat-toolbar>
+            </mat-form-field>
+            <div *ngIf="preview != ''" class="espacio-form-archivo">
+              <b>Imagen:</b> {{ selectedFileNames[0] }}
+            </div>
+          </div>
+
+          <div
+            nz-col
+            nzXs="24"
+            nzSm="24"
+            nzMd="12"
+            nzLg="12"
+            nzXl="12"
+            class="espacio-form-item"
+          >
+            <div *ngIf="preview != ''" class="image-preview">
+              <div class="preview-container">
+                <div class="preview-filter">
+                  <div class="capitals">CDB1</div>
+                  <div class="capitals">Cancha 3</div>
+                </div>
+                <img [src]="preview" class="preview" />
+              </div>
+            </div>
           </div>
 
           <div
@@ -128,62 +199,6 @@
             nz-col
             nzXs="24"
             nzSm="24"
-            nzMd="12"
-            nzLg="12"
-            nzXl="12"
-            class="espacio-form-item"
-          >
-            <div class="espacio-form-title">Carga de archivos</div>
-
-            <!-- CARGA DE IMAGEN -->
-            <mat-form-field appearance="outline" class="input-container">
-              <mat-toolbar>
-                <div ondrag="uploadFiles()">
-                  <input hidden matInput />
-                  <input
-                    style="width: 100%; background-color: white"
-                    type="file"
-                    id="fileInput"
-                    name="fileInput"
-                    accept="image/*"
-                    (change)="selectFiles($event)"
-                  />
-                  <div class="image-text">
-                    <span class="drop-image-text">Arrastra y suelta o </span>
-                    <span class="navigate-image-text">Navega dispositivo</span>
-                  </div>
-                </div>
-              </mat-toolbar>
-            </mat-form-field>
-            <div *ngIf="preview != ''" class="espacio-form-archivo">
-              <b>Imagen:</b> {{ selectedFileNames[0] }}
-            </div>
-          </div>
-
-          <div
-            nz-col
-            nzXs="24"
-            nzSm="24"
-            nzMd="12"
-            nzLg="12"
-            nzXl="12"
-            class="espacio-form-item"
-          >
-            <div *ngIf="preview != ''" class="image-preview">
-              <div class="preview-container">
-                <div class="preview-filter">
-                  <div class="capitals">CDB1</div>
-                  <div class="capitals">Cancha 3</div>
-                </div>
-                <img [src]="preview" class="preview" />
-              </div>
-            </div>
-          </div>
-
-          <div
-            nz-col
-            nzXs="24"
-            nzSm="24"
             nzMd="24"
             nzLg="24"
             nzXl="24"
@@ -194,13 +209,13 @@
                 <div class="espacio-cancelar-text">Cancelar</div>
               </button>
 
-              <button type="submit" mat-button color="button-guardar"> (click)="enviarDatos()"
+              <button mat-button color="button-guardar" (click)="enviarDatos()">
                 <div class="espacio-guardar-text">Guardar</div>
               </button>
             </div>
           </div>
         </div>
-      </form>
+      
     </div>
   </div>
 </div>

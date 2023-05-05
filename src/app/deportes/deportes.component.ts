@@ -28,7 +28,7 @@ export class DeportesComponent {
 
     this._apiService.get(url).subscribe((data) => {
       this.listaDeportes = data;
-      // console.log(this.listaDeportes);
+       console.log(this.listaDeportes);
     });
   }
 
@@ -37,6 +37,6 @@ export class DeportesComponent {
   }
 
   onAgregarDeporte() {
-    this.router.navigate(['/deportes/nuevo']);
+    this.router.navigate(['/deporte/nuevo']);
   }
 }

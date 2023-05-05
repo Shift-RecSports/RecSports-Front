@@ -136,6 +136,7 @@
 
   display: flex;
   align-items: center;
+  
 }
 
 .deporte-espacio-fondo {
@@ -353,6 +354,12 @@
   .deporte-espacio-fondo {
     margin-right: 2rem;
   }
+  .deporte-espacio-list .deporte-espacio-fondo {
+    margin-bottom: 1rem; 
+  }
+
+  
+
 }
 
 @media (min-width: 768px) {

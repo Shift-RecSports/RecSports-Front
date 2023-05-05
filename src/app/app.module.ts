@@ -84,8 +84,8 @@ registerLocaleData(en);
     ModalReservacionComponent,
     RegistroEntradaComponent,
     RegistroSalidaComponent,
+    HomeEntrenadorComponent,
     ModalComponent,
-    HomeEntrenadorComponent
   ],
   imports: [
     BrowserModule,
