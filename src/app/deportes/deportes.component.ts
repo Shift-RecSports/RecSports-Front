@@ -28,7 +28,7 @@ export class DeportesComponent {
 
     this._apiService.get(url).subscribe((data) => {
       this.listaDeportes = data;
-      // console.log(this.listaDeportes);
+       console.log(this.listaDeportes);
     });
   }
 
