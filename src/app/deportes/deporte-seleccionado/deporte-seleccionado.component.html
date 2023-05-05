@@ -71,7 +71,7 @@
       </div>
 
       <div class="deporte-reservacion-container">
-        <div class="deporte-reservacion-title">Febrero</div>
+        <div class="deporte-reservacion-title">Mayo</div>
         <div class="deporte-reservacion-button-list">
           <div
             class="deporte-reservacion-button-container deporte-reservacion-button-past"
@@ -97,13 +97,13 @@
 
           <div class="deporte-reservacion-button-container">
             <button mat-fab color="button-disabled" disabled aria-label="date">
-              10
+              01
             </button>
             <div class="deporte-reservacion-dia">Dom.</div>
           </div>
           <div class="deporte-reservacion-button-container">
             <button mat-fab color="button-disabled" disabled aria-label="date">
-              11
+              01
             </button>
             <div class="deporte-reservacion-dia">Lun.</div>
           </div>
@@ -114,7 +114,7 @@
             class="deporte-reservacion-button-container"
           >
             <button mat-fab color="button-selected" aria-label="date">
-              12
+              02
             </button>
             <div class="deporte-reservacion-dia deporte-reservacion-dia-text">
               Mar.
@@ -131,7 +131,7 @@
               aria-label="date"
               (click)="onSelectDay(2)"
             >
-              12
+              02
             </button>
             <div class="deporte-reservacion-dia">Mar.</div>
           </div>
@@ -142,7 +142,7 @@
             class="deporte-reservacion-button-container"
           >
             <button mat-fab color="button-selected" aria-label="date">
-              13
+              03
             </button>
             <div class="deporte-reservacion-dia deporte-reservacion-dia-text">
               Mie.
@@ -159,7 +159,7 @@
               aria-label="date"
               (click)="onSelectDay(3)"
             >
-              13
+              03
             </button>
             <div class="deporte-reservacion-dia">Mie.</div>
           </div>
@@ -170,7 +170,7 @@
             class="deporte-reservacion-button-container"
           >
             <button mat-fab color="button-selected" aria-label="date">
-              14
+              04
             </button>
             <div class="deporte-reservacion-dia deporte-reservacion-dia-text">
               Jue.
@@ -187,7 +187,7 @@
               aria-label="date"
               (click)="onSelectDay(4)"
             >
-              14
+              04
             </button>
             <div class="deporte-reservacion-dia">Jue.</div>
           </div>
@@ -202,7 +202,7 @@
             class="deporte-reservacion-button-container"
           >
             <button mat-fab color="button-selected" aria-label="date">
-              15
+              05
             </button>
             <div class="deporte-reservacion-dia deporte-reservacion-dia-text">
               Vie.
@@ -219,7 +219,7 @@
               aria-label="date"
               (click)="onSelectDay(5)"
             >
-              15
+              05
             </button>
             <div class="deporte-reservacion-dia">Vie.</div>
           </div>
@@ -230,7 +230,7 @@
             class="deporte-reservacion-button-container"
           >
             <button mat-fab color="button-selected" aria-label="date">
-              16
+              05
             </button>
             <div class="deporte-reservacion-dia deporte-reservacion-dia-text">
               Sab.
@@ -247,7 +247,7 @@
               aria-label="date"
               (click)="onSelectDay(6)"
             >
-              16
+              06
             </button>
             <div class="deporte-reservacion-dia">Sab.</div>
           </div>
@@ -287,7 +287,9 @@
             <ng-container matColumnDef="demo-position">
               <th mat-header-cell *matHeaderCellDef></th>
               <td mat-cell *matCellDef="let element">
-                <div class="deporte-reservacion-hora">{{ element.hora }}</div>
+                <div class="deporte-reservacion-hora">
+                  {{ element }}
+                </div>
               </td>
             </ng-container>
 
@@ -302,15 +304,16 @@
                 <mat-divider></mat-divider>
                 <div class="spacer"></div>
 
-                <div *ngIf="element.disabled === false; else disabled_button">
+                <!-- <div *ngIf="element.disabled === false; else disabled_button"> -->
+                <div>
                   <button
                     mat-button
                     (click)="openDialog()"
                     color="horario"
-                    *ngFor="let _ of [].constructor(element.repetition)"
+                    *ngFor="let reservacion of arrayReservacion[dataSource[i]]"
                   >
                     <div class="deporte-reservacion-horario">
-                      {{ element.name }}
+                      {{ reservacion.espacio_nombre }}
                     </div>
                   </button>
                 </div>
@@ -321,7 +324,7 @@
                   <div class="spacer"></div>
                 </div>
 
-                <ng-template #disabled_button>
+                <!-- <ng-template #disabled_button>
                   <button
                     mat-button
                     disabled
@@ -329,10 +332,10 @@
                     *ngFor="let _ of [].constructor(element.repetition)"
                   >
                     <div class="deporte-reservacion-horario">
-                      {{ element.name }}
+                      {{ element.espacio_nombre }}
                     </div>
                   </button>
-                </ng-template>
+                </ng-template> -->
               </td>
             </ng-container>
 
