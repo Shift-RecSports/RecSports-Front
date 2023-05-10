@@ -57,6 +57,8 @@ import { EspaciosFormularioComponent } from './deportes/components/espacios-form
 import { HomeEntrenadorComponent } from './home-entrenador/home-entrenador.component';
 
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { MatSliderModule } from '@angular/material/slider';
+
 
 
 registerLocaleData(en);
@@ -113,7 +115,8 @@ registerLocaleData(en);
     MatDialogModule,
     NzProgressModule,
     NzSelectModule,
-    NzInputModule
+    NzInputModule,
+    MatSliderModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }, ApiService],
   bootstrap: [AppComponent],

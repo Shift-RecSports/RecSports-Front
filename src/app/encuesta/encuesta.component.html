@@ -1,5 +1,23 @@
 <div class="grid-container">
   <div class="encuesta-container">
-    <p>Encuesta works!</p>
+    <p class="titulo-encuesta">Encuesta de satisfacción</p>
+    <p class="texto-evalua">Del 0 al 10 evalúa tu experiencia con RecSports</p>
+    <div class="slider">
+      <mat-slider min="0" max="10" step="1" showTickMarks discrete [displayWith]="formatLabel">
+        <input matSliderThumb>
+      </mat-slider>
+    </div>
+    <p class="texto-opinion">Compártenos tu opinión</p>
+    <div class="inputs">
+      <form>
+        <mat-form-field class="text-field">
+          <mat-label>Tema</mat-label>
+          <input matInput placeholder="Tema" value="">
+        </mat-form-field>
+      </form>
+      <input class="text-field" nz-input placeholder="Basic usage"/>
+    <button class="boton-encuesta">Enviar</button>
+    </div>
   </div>
 </div>
+
