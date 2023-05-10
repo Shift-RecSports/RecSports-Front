@@ -1,6 +1,26 @@
 <div mat-dialog-content class="modal-container">
   <div class="modal-header">
-    <div class="modal-title">Informacion de Reservación</div>
+    <div
+      *ngIf="showLoading == false && showFailed == false && showSucces == false"
+      class="modal-title title-info"
+    >
+      Informacion de Reservación
+    </div>
+    <div *ngIf="showLoading" class="modal-title title-info">
+      Validando reservación
+    </div>
+    <div *ngIf="showSucces" class="modal-title title-success">
+      Reservacion confirmada
+      <mat-icon
+        aria-hidden="success"
+        aria-label="Example donwload icon"
+        fontIcon="error"
+      ></mat-icon>
+    </div>
+    <div *ngIf="showFailed" class="modal-title title-failed">
+      Reservacion fallida
+    </div>
+
     <div>
       <button
         mat-mini-fab
@@ -12,36 +32,67 @@
       </button>
     </div>
   </div>
-  <div>
+
+  <div
+    *ngIf="
+      (showLoading == false && showFailed == false && showSucces == false) ||
+      showSucces
+    "
+  >
     <div class="modal-info">
-      <span class="modal-title">Área: </span>
-      <span class="modal-text">CBD1</span>
+      <span class="modal-title">Fecha: </span>
+      <span class="modal-text">{{ this.data.reservacion.fecha }}</span>
     </div>
 
     <div>
-      <span class="modal-title">Cancha: </span>
-      <span class="modal-text">Cancha 1</span>
+      <span class="modal-title">Área - Cancha: </span>
+      <span class="modal-text">{{ this.data.reservacion.espacio_nombre }}</span>
     </div>
 
     <div>
       <span class="modal-title">Hora: </span>
-      <span class="modal-text">9:00am - 10:00am</span>
-    </div>
-
-    <div class="modal-info">
-      <span class="modal-subtitle">Recuerda traer: </span>
-      <span class="modal-text">Balón</span>
+      <span class="modal-text">{{
+        this.data.reservacion.hora_seleccionada
+      }}</span>
     </div>
 
     <div>
-      <span class="modal-text"
+      <span class="modal-title">Zona: </span>
+      <span class="modal-text">{{ this.data.reservacion.zona }}</span>
+    </div>
+    <!-- 
+    <div class="modal-info">
+      <span class="modal-subtitle"></span>
+      <span class="modal-text">{{ this.data.reservacion.zona }}</span>
+    </div> -->
+
+    <div *ngIf="showSucces">
+      <span class="modal-text remainder-text"
         >Tienes 15 minutos de tolerancia para tu reservación</span
       >
     </div>
   </div>
-  <div class="modal-confirmar">
-    <button color="confirm-button" mat-button (click)="onNoClick()">
+  <div
+    class="modal-confirmar"
+    *ngIf="showLoading == false && showFailed == false && showSucces == false"
+  >
+    <button color="confirm-button" mat-button (click)="onConfirmClick()">
       Confirmar Reservación
     </button>
+  </div>
+
+  <div class="modal-confirmar" *ngIf="showSucces">
+    <button
+      color="success-button"
+      mat-button
+      (click)="onMisReservacionesClick()"
+    >
+      Ver "Mis Reservaciones"
+    </button>
+  </div>
+
+  <div *ngIf="showLoading">Cargando... (icon)</div>
+  <div *ngIf="showFailed">
+    Vuelva a intentar o seleccione otro horarios disponible
   </div>
 </div>

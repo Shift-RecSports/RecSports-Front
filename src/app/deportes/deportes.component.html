@@ -16,80 +16,34 @@
     </div>
 
     <div nz-row>
-      <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="6" nzXl="6">
-        <div class="tarjeta-deporte">
-          <button class="tarjeta-deporte-button" (click)="onSelectDeporte()">
-            <div class="tarjeta-deporte-descripcion">
-              <div class="nombre_canchas capitals">WELLNESS CENTER & CDB1</div>
-              <div class="nombre_deporte capitals">BÁSQUETBOL</div>
+      <div
+        nz-col
+        nzXs="24"
+        nzSm="24"
+        nzMd="12"
+        nzLg="6"
+        nzXl="6"
+        *ngFor="let deporte of listaDeportes"
+      >
+        <div class="tarjeta-deporte-10">
+          <button
+            class="tarjeta-deporte-button-1"
+            (click)="onSelectDeporte(deporte)"
+          >
+            <div class="tarjeta-deporte-descripcion-1">
+              <div>
+                <div class="nombre_canchas capitals">
+                  WELLNESS CENTER & CDB1
+                </div>
+                <div class="nombre_deporte capitals">
+                  {{ deporte.nombre.toUpperCase() }}
+                </div>
+              </div>
+
+              <div class="reserva_ahora capitals">RESERVA AHORA</div>
             </div>
-            <div class="reserva_ahora capitals">RESERVA AHORA</div>
-          </button>
-        </div>
-      </div>
-      <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="6" nzXl="6">
-        <div class="tarjeta-deporte-2">
-          <button class="tarjeta-deporte-button" (click)="onSelectDeporte()">
-            <div class="tarjeta-deporte-descripcion">
-              <div class="nombre_canchas capitals">WELLNESS CENTER & CDB1</div>
-              <div class="nombre_deporte capitals">FUTBÓL</div>
-            </div>
-            <div class="reserva_ahora capitals">RESERVA AHORA</div>
-          </button>
-        </div>
-      </div>
-      <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="6" nzXl="6">
-        <div class="tarjeta-deporte-3">
-          <button class="tarjeta-deporte-button" (click)="onSelectDeporte()">
-            <div class="tarjeta-deporte-descripcion">
-              <div class="nombre_canchas capitals">WELLNESS CENTER & CDB1</div>
-              <div class="nombre_deporte capitals">FUTBÓL RÁPIDO</div>
-            </div>
-            <div class="reserva_ahora capitals">RESERVA AHORA</div>
-          </button>
-        </div>
-      </div>
-      <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="6" nzXl="6">
-        <div class="tarjeta-deporte-4">
-          <button class="tarjeta-deporte-button" (click)="onSelectDeporte()">
-            <div class="tarjeta-deporte-descripcion">
-              <div class="nombre_canchas capitals">WELLNESS CENTER & CDB1</div>
-              <div class="nombre_deporte capitals">TENNIS</div>
-            </div>
-            <div class="reserva_ahora capitals">RESERVA AHORA</div>
-          </button>
-        </div>
-      </div>
-      <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="6" nzXl="6">
-        <div class="tarjeta-deporte-5">
-          <button class="tarjeta-deporte-button" (click)="onSelectDeporte()">
-            <div class="tarjeta-deporte-descripcion">
-              <div class="nombre_canchas capitals">WELLNESS CENTER & CDB1</div>
-              <div class="nombre_deporte capitals">NATACIÓN</div>
-            </div>
-            <div class="reserva_ahora capitals">RESERVA AHORA</div>
-          </button>
-        </div>
-      </div>
-      <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="6" nzXl="6">
-        <div class="tarjeta-deporte-6">
-          <button class="tarjeta-deporte-button" (click)="onSelectDeporte()">
-            <div class="tarjeta-deporte-descripcion">
-              <div class="nombre_canchas capitals">WELLNESS CENTER & CDB1</div>
-              <div class="nombre_deporte capitals">YOGA</div>
-            </div>
-            <div class="reserva_ahora capitals">RESERVA AHORA</div>
-          </button>
-        </div>
-      </div>
-      <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="6" nzXl="6">
-        <div class="tarjeta-deporte-7">
-          <button class="tarjeta-deporte-button" (click)="onSelectDeporte()">
-            <div class="tarjeta-deporte-descripcion">
-              <div class="nombre_canchas capitals">WELLNESS CENTER & CDB1</div>
-              <div class="nombre_deporte capitals">SPINNING</div>
-            </div>
-            <div class="reserva_ahora capitals">RESERVA AHORA</div>
+
+            <img [src]="deporte.imagen" class="preview" />
           </button>
         </div>
       </div>

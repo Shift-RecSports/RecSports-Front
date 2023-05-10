@@ -39,13 +39,14 @@ export class SidebarComponent {
         userRole: this.service.GetUserRole(),
       };
 
-      if (this.user.userRole == 'ALUMNO') {
-        this.userName = 'Sasha Morosov';
-      } else if (this.user.userRole == 'ADMIN') {
-        this.userName = 'Admin';
-      } else {
-        this.userName = 'Entrenador';
-      }
+      this.userName = this.user.matricula!;
+      // if (this.user.userRole == 'ALUMNO') {
+      //   this.userName = 'Sasha Morosov';
+      // } else if (this.user.userRole == 'ADMIN') {
+      //   this.userName = 'Admin';
+      // } else {
+      //   this.userName = 'Entrenador';
+      // }
 
       // Activate/Disactivate Navbar components
       this.navbarFlags = activateNavbarFlags(
@@ -53,7 +54,7 @@ export class SidebarComponent {
         defaultNavbarFlags
       );
 
-      console.log(this.navbarFlags);
+      // console.log(this.navbarFlags);
     }
   }
 

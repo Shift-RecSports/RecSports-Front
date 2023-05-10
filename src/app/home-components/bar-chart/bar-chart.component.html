@@ -1,2 +1,39 @@
-<p>"working bar chart"</p>
+<div class="upper-div">
+    <div class="title">
+        Tendencia de concurrencias
+    </div>
+    <div class="upper-right-div">
+        <div>
+            <nz-select [(ngModel)]="selectedOption" (ngModelChange)="onOptionChange()">
+                <nz-option nzValue="lunes" nzLabel="Lunes"></nz-option>
+                <nz-option nzValue="martes" nzLabel="Martes"></nz-option>
+                <nz-option nzValue="miercoles" nzLabel="Miércoles"></nz-option>
+                <nz-option nzValue="jueves" nzLabel="Jueves"></nz-option>
+                <nz-option nzValue="viernes" nzLabel="Viernes"></nz-option>
+                <nz-option nzValue="sabado" nzLabel="Sábado"></nz-option>
+                <nz-option nzValue="domingo" nzLabel="Domingo"></nz-option>
+            </nz-select>
+        </div>
+        <div class="realtime-minicard">
+            <div class="realtime-minicard-text">
+                TIEMPO REAL
+            </div>
+        </div>
+    </div>
+    
+</div>
 <div id="chart-container"></div>
+
+<!--
+<div class="outer-bar-chart-div">
+    <div class="y-axis-title-text">
+        Cantidad de personas
+    </div>
+    <div>
+        <div id="chart-container"></div>
+        <div>Horario del gimnasio</div>
+
+    </div>
+
+</div>
+-->

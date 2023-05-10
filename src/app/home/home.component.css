@@ -44,8 +44,6 @@
   background-size: cover;
   border-radius: 2rem;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
-  margin: 1.5rem;
-  padding: 0;
 }
 
 .donut-card {
@@ -55,13 +53,6 @@
   border-radius: 2rem;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
 
-  margin: 1.5rem;
-}
-
-@media (max-width: 960px) {
-  .donut-card {
-    padding: 6rem;
-  }
 }
 
 .sports-card {
@@ -91,4 +82,14 @@
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
   border-radius: 16px;
   padding: 24px;
+}
+
+.link-text {
+  font-family: 'Helvetica';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+
+  color: #000000;
 }
