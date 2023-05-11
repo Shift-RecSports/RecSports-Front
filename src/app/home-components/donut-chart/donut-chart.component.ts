@@ -28,6 +28,7 @@ export class DonutChartComponent implements OnInit {
       .subscribe((data) => {
         console.log('reload de data concurrenciaGimnasio');
         this.percent = Math.round((data.actual / data.aforo) * 100);
+
         this.actual = data.actual;
         this.aforo = data.aforo;
       });
