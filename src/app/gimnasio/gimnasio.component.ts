@@ -32,7 +32,7 @@ export class GimnasioComponent {
     // const currentYear = new Date().getFullYear();
     // TODO: Change maxDate to current day
     this.minDate = new Date(2023, 0, 1);
-    this.maxDate = new Date(2023, 5, 31);
+    this.maxDate = new Date(2025, 5, 31);
     this.daySelected = '';
     this.page = 0;
   }
@@ -48,9 +48,9 @@ export class GimnasioComponent {
   }
 
   changeDateSelected(day: Date = new Date()) {
-    this.daySelected = `${day.getFullYear()}-${
-      day.getMonth() + 1
-    }-${day.getDay()}`;
+    this.daySelected = `${day.getFullYear()}-${day.getMonth() + 1}-${10}`;
+
+    console.log(this.daySelected);
 
     this.url = `/registros-gimnasio/fecha=${this.daySelected}&offset=${this.page}`;
     this.timerSubscription = timer(0, 10000)
