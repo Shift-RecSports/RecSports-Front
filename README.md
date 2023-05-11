@@ -1,4 +1,4 @@
-# RecSports-Back
+# RecSports-FrontEnd
 Frontend de RecSports
 
 Repositorio de Frontend aplicación web con Angular. 
