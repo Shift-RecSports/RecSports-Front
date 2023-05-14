@@ -84,7 +84,7 @@ function activateNavbarFlags(userRole: string, navbarFlags: navbarFlags) {
     navbarFlags.inicioFlag = true;
     navbarFlags.gimnasioFlag = true;
     navbarFlags.deportesFlag = true;
-    navbarFlags.calendarioFlag = true;
+    navbarFlags.calendarioFlag = false;
     navbarFlags.noticasFlag = true;
     navbarFlags.mapaFlag = true;
     navbarFlags.encuestaFlag = true;
@@ -104,7 +104,7 @@ function activateNavbarFlags(userRole: string, navbarFlags: navbarFlags) {
     navbarFlags.inicioFlag = true;
     navbarFlags.gimnasioFlag = false;
     navbarFlags.deportesFlag = true;
-    navbarFlags.calendarioFlag = true;
+    navbarFlags.calendarioFlag = false;
     navbarFlags.noticasFlag = false;
     navbarFlags.mapaFlag = true;
     navbarFlags.encuestaFlag = true;
