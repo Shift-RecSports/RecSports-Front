@@ -4,7 +4,11 @@
       *ngIf="showLoading == false && showFailed == false && showSucces == false"
       class="modal-title title-info"
     >
-      Informacion de Reservación
+      {{
+        this.data.reservacion.estatus == "2"
+          ? "Reservado por Alumno!!!"
+          : "Información de Reservación"
+      }}
     </div>
     <div *ngIf="showLoading" class="modal-title title-info">
       Validando reservación
@@ -45,11 +49,6 @@
     </div>
 
     <div>
-      <span class="modal-title">Área - Cancha: </span>
-      <span class="modal-text">{{ this.data.reservacion.espacio_nombre }}</span>
-    </div>
-
-    <div>
       <span class="modal-title">Hora: </span>
       <span class="modal-text">{{
         this.data.reservacion.hora_seleccionada
@@ -57,14 +56,21 @@
     </div>
 
     <div>
+      <span class="modal-title">Cancha: </span>
+      <span class="modal-text">{{ this.data.reservacion.espacio_nombre }}</span>
+    </div>
+
+    <div>
       <span class="modal-title">Zona: </span>
       <span class="modal-text">{{ this.data.reservacion.zona }}</span>
     </div>
-    <!-- 
-    <div class="modal-info">
-      <span class="modal-subtitle"></span>
-      <span class="modal-text">{{ this.data.reservacion.zona }}</span>
-    </div> -->
+
+    <div *ngIf="this.data.reservacion.estatus == '2'">
+      <span class="modal-title">Alumno: </span>
+      <span class="modal-text">{{
+        this.data.reservacion.matricula_alumno
+      }}</span>
+    </div>
 
     <div *ngIf="showSucces">
       <span class="modal-text remainder-text"
@@ -76,8 +82,22 @@
     class="modal-confirmar"
     *ngIf="showLoading == false && showFailed == false && showSucces == false"
   >
-    <button color="confirm-button" mat-button (click)="onConfirmClick()">
+    <button
+      *ngIf="this.data.reservacion.estatus == '1'"
+      color="confirm-button"
+      mat-button
+      (click)="onConfirmClick()"
+    >
       Confirmar Reservación
+    </button>
+
+    <button
+      *ngIf="this.data.reservacion.estatus == '2'"
+      color="cancel-reservacion-button"
+      mat-button
+      (click)="onCancelReservacion()"
+    >
+      Cancelar Reservación
     </button>
   </div>
 

@@ -109,7 +109,7 @@
 
           <!-- DAYS OF THE WEEK -->
           <div *ngFor="let item of daysOfTheWeek; index as i">
-            <div *ngIf="i >= selectedDay; else disabledDay">
+            <div *ngIf="i >= todayDay; else disabledDay">
               <div
                 *ngIf="selectedDay == i"
                 class="deporte-reservacion-button-container"
@@ -213,16 +213,44 @@
 
                 <!-- <div *ngIf="element.disabled === false; else disabled_button"> -->
                 <div>
-                  <button
-                    mat-button
-                    color="horario"
+                  <div
                     *ngFor="let reservacion of arrayReservacion[dataSource[i]]"
-                    (click)="openDialog(reservacion)"
+                    style="display: inline-block"
                   >
-                    <div class="deporte-reservacion-horario">
-                      {{ reservacion.espacio_nombre }}
-                    </div>
-                  </button>
+                    <button
+                      mat-button
+                      color="horario"
+                      (click)="openDialog(reservacion)"
+                      *ngIf="reservacion.estatus == '1'"
+                    >
+                      <div class="deporte-reservacion-horario">
+                        {{ reservacion.espacio_nombre }}
+                      </div>
+                    </button>
+
+                    <button
+                      mat-button
+                      color="horario-activo"
+                      *ngIf="reservacion.estatus == '2'"
+                      (click)="openDialog(reservacion)"
+                    >
+                      <div class="deporte-reservacion-horario">
+                        {{ reservacion.espacio_nombre }}
+                      </div>
+                    </button>
+
+                    <button
+                      mat-button
+                      color="horario-expirado"
+                      *ngIf="reservacion.estatus == '3'"
+                      (click)="openDialog(reservacion)"
+                      disabled
+                    >
+                      <div class="deporte-reservacion-horario">
+                        {{ reservacion.espacio_nombre }}
+                      </div>
+                    </button>
+                  </div>
                 </div>
 
                 <div *ngIf="i == 14">
@@ -230,19 +258,6 @@
                   <mat-divider></mat-divider>
                   <div class="spacer"></div>
                 </div>
-
-                <!-- <ng-template #disabled_button>
-                  <button
-                    mat-button
-                    disabled
-                    color="horario-disabled"
-                    *ngFor="let _ of [].constructor(element.repetition)"
-                  >
-                    <div class="deporte-reservacion-horario">
-                      {{ element.espacio_nombre }}
-                    </div>
-                  </button>
-                </ng-template> -->
               </td>
             </ng-container>
 

@@ -105,10 +105,13 @@ export class DeporteSeleccionadoComponent {
 
   showEditButton = false;
   showAddEspacio = false;
+  showAllReservaciones = false;
 
   selectedDay: number = 5;
+  todayDay: number = 0;
   daySelected: string = '';
   daysOfTheWeek: Date[] = [];
+  todayDate: Date = new Date();
   daysOfTheWeekInString = [
     'Dom.',
     'Lun.',
@@ -129,13 +132,14 @@ export class DeporteSeleccionadoComponent {
     if (this.service.isLoggedIn() && this.service.GetUserRole() == 'ADMIN') {
       this.showEditButton = true;
       this.showAddEspacio = true;
+      this.showAllReservaciones = true;
     }
   }
 
   ngOnInit() {
     const today = new Date();
-    this.initializeDate(today);
     this.daySelected = this.DateToString(today);
+    this.initializeDate(today);
 
     this.sub = this.route.params.subscribe((params) => {
       const url = `/deportes/${params['id']}`;
@@ -154,15 +158,22 @@ export class DeporteSeleccionadoComponent {
 
       this._apiService.get(url).subscribe((data) => {
         this.horariosDisponibles = data;
-        console.log(this.horariosDisponibles);
 
-        this.horariosDisponibles.forEach((reservacion) => {
-          if (reservacion.estatus == '1') {
+        if (this.showAllReservaciones) {
+          this.horariosDisponibles.forEach((reservacion) => {
             this.arrayReservacion[reservacion.hora_seleccionada].push(
               reservacion
             );
-          }
-        });
+          });
+        } else {
+          this.horariosDisponibles.forEach((reservacion) => {
+            if (reservacion.estatus == '1') {
+              this.arrayReservacion[reservacion.hora_seleccionada].push(
+                reservacion
+              );
+            }
+          });
+        }
 
         this.dataSource = Object.keys(this.arrayReservacion) as arrOfHorarios[];
       });
@@ -175,7 +186,10 @@ export class DeporteSeleccionadoComponent {
   }
 
   initializeDate(day: Date = new Date()) {
+    this.todayDate = day;
+    this.todayDay = day.getDay();
     this.selectedDay = day.getDay();
+
     this.daysOfTheWeek = [
       new Date(day.setDate(day.getDate() - day.getDay())),
       new Date(day.setDate(day.getDate() - day.getDay() + 1)),
@@ -221,13 +235,23 @@ export class DeporteSeleccionadoComponent {
       const url = `/reservaciones/deporte=${params['id']}&fecha=${this.daySelected}`;
       this._apiService.get(url).subscribe((data) => {
         this.horariosDisponibles = data;
-        this.horariosDisponibles.forEach((reservacion) => {
-          if (reservacion.estatus == '1') {
+
+        if (this.showAllReservaciones) {
+          this.horariosDisponibles.forEach((reservacion) => {
             this.arrayReservacion[reservacion.hora_seleccionada].push(
               reservacion
             );
-          }
-        });
+          });
+        } else {
+          this.horariosDisponibles.forEach((reservacion) => {
+            if (reservacion.estatus == '1') {
+              this.arrayReservacion[reservacion.hora_seleccionada].push(
+                reservacion
+              );
+            }
+          });
+        }
+
         this.dataSource = Object.keys(this.arrayReservacion) as arrOfHorarios[];
       });
     });
@@ -235,7 +259,7 @@ export class DeporteSeleccionadoComponent {
 
   openDialog(reservacion: newHorarioReservacion): void {
     const dialogRef = this.dialog.open(ModalReservacionComponent, {
-      data: { reservacion: reservacion },
+      data: { reservacion: reservacion, refreshDay: this.onSelectDay },
     });
   }
 

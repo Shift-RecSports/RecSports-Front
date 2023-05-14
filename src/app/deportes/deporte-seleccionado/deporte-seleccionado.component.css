@@ -136,7 +136,6 @@
 
   display: flex;
   align-items: center;
-  
 }
 
 .deporte-espacio-fondo {
@@ -322,8 +321,16 @@
   margin-right: 1rem;
 }
 
-.mat-horario-disabled {
+.mat-horario-activo {
   background-color: #c9cdeb;
+  border-radius: 0.6rem;
+  padding: 1.3rem 2.5rem;
+  font-size: 1.2rem;
+  margin-right: 1rem;
+}
+
+.mat-horario-expirado {
+  background-color: #d3d3d3;
   border-radius: 0.6rem;
   padding: 1.3rem 2.5rem;
   font-size: 1.2rem;
@@ -355,11 +362,8 @@
     margin-right: 2rem;
   }
   .deporte-espacio-list .deporte-espacio-fondo {
-    margin-bottom: 1rem; 
+    margin-bottom: 1rem;
   }
-
-  
-
 }
 
 @media (min-width: 768px) {
