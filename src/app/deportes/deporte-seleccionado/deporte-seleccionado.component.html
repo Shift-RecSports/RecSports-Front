@@ -27,17 +27,28 @@
         <div class="deporte-espacio-title">Espacios</div>
 
         <div nz-row class="deporte-espacio-list">
-         
-            <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="5" nzXl="5" *ngFor="let espacio of listaEspacios">
-              <div class="deporte-espacio-fondo" [style.background-image]= 
-              "'linear-gradient(180deg, rgba(0, 0, 0, 0.29) 4%, #01329E 104%),url(' + espacio.imagen + ')'">
-                <div>{{espacio.zona}}</div>
-                <div>{{espacio.nombre}}</div>
-              </div>
+          <div
+            nz-col
+            nzXs="24"
+            nzSm="24"
+            nzMd="12"
+            nzLg="5"
+            nzXl="5"
+            *ngFor="let espacio of listaEspacios"
+          >
+            <div
+              class="deporte-espacio-fondo"
+              [style.background-image]="
+                'linear-gradient(180deg, rgba(0, 0, 0, 0.29) 4%, #01329E 104%),url(' +
+                espacio.imagen +
+                ')'
+              "
+            >
+              <div>{{ espacio.zona }}</div>
+              <div>{{ espacio.nombre }}</div>
             </div>
+          </div>
 
-          
-          
           <div
             nz-col
             nzXs="24"
@@ -64,7 +75,15 @@
       </div>
 
       <div class="deporte-reservacion-container">
-        <div class="deporte-reservacion-title">Mayo</div>
+        <div class="deporte-reservacion-title">
+          {{
+            daysOfTheWeek[selectedDay]
+              .toLocaleString("es", {
+                month: "long"
+              })
+              .toUpperCase()
+          }}
+        </div>
         <div class="deporte-reservacion-button-list">
           <div
             class="deporte-reservacion-button-container deporte-reservacion-button-past"
@@ -88,199 +107,57 @@
             ></button>
           </div>
 
-          <div class="deporte-reservacion-button-container">
-            <button mat-fab color="button-disabled" disabled aria-label="date">
-              31
-            </button>
-            <div class="deporte-reservacion-dia">Dom.</div>
-          </div>
-          <div class="deporte-reservacion-button-container">
-            <button mat-fab color="button-disabled" disabled aria-label="date">
-              01
-            </button>
-            <div class="deporte-reservacion-dia">Lun.</div>
-          </div>
+          <!-- DAYS OF THE WEEK -->
+          <div *ngFor="let item of daysOfTheWeek; index as i">
+            <div *ngIf="i >= selectedDay; else disabledDay">
+              <div
+                *ngIf="selectedDay == i"
+                class="deporte-reservacion-button-container"
+              >
+                <button mat-fab color="button-selected" aria-label="date">
+                  {{ item.getDate() }}
+                </button>
+                <div
+                  class="deporte-reservacion-dia deporte-reservacion-dia-text"
+                >
+                  {{ daysOfTheWeekInString[item.getDay()] }}
+                </div>
+              </div>
 
-          <!-- MARTES -->
-          <div class="deporte-reservacion-button-container">
-            <!-- <button mat-fab color="button-selected" aria-label="date"> -->
-            <button mat-fab color="button-disabled" disabled aria-label="date">
-              02
-            </button>
-            <!-- <div class="deporte-reservacion-dia deporte-reservacion-dia-text"> -->
-            <div class="deporte-reservacion-dia">Mar.</div>
-          </div>
-
-          <!-- <div
-            *ngIf="selectedDay != 2"
-            class="deporte-reservacion-button-container"
-          >
-            <button
-              mat-fab
-              color="unselected"
-              aria-label="date"
-              (click)="onSelectDay(2)"
-            >
-              02
-            </button>
-            <div class="deporte-reservacion-dia">Mar.</div>
-          </div> -->
-
-          <!-- MIERCOLES -->
-          <div class="deporte-reservacion-button-container">
-            <button mat-fab color="button-disabled" disabled aria-label="date">
-              03
-            </button>
-            <div class="deporte-reservacion-dia">Mie.</div>
-          </div>
-
-          <!-- <div
-            *ngIf="selectedDay == 3"
-            class="deporte-reservacion-button-container"
-          >
-            <button mat-fab color="button-selected" aria-label="date">
-              03
-            </button>
-            <div class="deporte-reservacion-dia deporte-reservacion-dia-text">
-              Mie.
+              <div
+                *ngIf="selectedDay != i"
+                class="deporte-reservacion-button-container"
+              >
+                <button
+                  mat-fab
+                  color="unselected"
+                  aria-label="date"
+                  (click)="onSelectDay(i)"
+                >
+                  {{ item.getDate() }}
+                </button>
+                <div class="deporte-reservacion-dia">
+                  {{ daysOfTheWeekInString[item.getDay()] }}
+                </div>
+              </div>
             </div>
+
+            <ng-template #disabledDay>
+              <div class="deporte-reservacion-button-container">
+                <button
+                  mat-fab
+                  color="button-disabled"
+                  disabled
+                  aria-label="date"
+                >
+                  {{ item.getDate() }}
+                </button>
+                <div class="deporte-reservacion-dia">
+                  {{ daysOfTheWeekInString[item.getDay()] }}
+                </div>
+              </div>
+            </ng-template>
           </div>
-
-          <div
-            *ngIf="selectedDay != 3"
-            class="deporte-reservacion-button-container"
-          >
-            <button
-              mat-fab
-              color="unselected"
-              aria-label="date"
-              (click)="onSelectDay(3)"
-            >
-              03
-            </button>
-            <div class="deporte-reservacion-dia">Mie.</div>
-          </div> -->
-
-          <!-- JUEVES -->
-          <div class="deporte-reservacion-button-container">
-            <button mat-fab color="button-disabled" disabled aria-label="date">
-              04
-            </button>
-            <div class="deporte-reservacion-dia">Jue.</div>
-          </div>
-
-          <!-- <div
-            *ngIf="selectedDay == 4"
-            class="deporte-reservacion-button-container"
-          >
-            <button mat-fab color="button-selected" aria-label="date">
-              04
-            </button>
-            <div class="deporte-reservacion-dia deporte-reservacion-dia-text">
-              Jue.
-            </div>
-          </div>
-
-          <div
-            *ngIf="selectedDay != 4"
-            class="deporte-reservacion-button-container"
-          >
-            <button
-              mat-fab
-              color="unselected"
-              aria-label="date"
-              (click)="onSelectDay(4)"
-            >
-              04
-            </button>
-            <div class="deporte-reservacion-dia">Jue.</div>
-          </div> -->
-          <!-- <div class="deporte-reservacion-button-container">
-            <button mat-fab color="today" aria-label="date">14</button>
-            <div class="deporte-reservacion-dia">Jue.</div>
-          </div> -->
-
-          <!-- VIERNES -->
-          <div
-            *ngIf="selectedDay == 5"
-            class="deporte-reservacion-button-container"
-          >
-            <button mat-fab color="button-selected" aria-label="date">
-              05
-            </button>
-            <div class="deporte-reservacion-dia deporte-reservacion-dia-text">
-              Vie.
-            </div>
-          </div>
-
-          <div
-            *ngIf="selectedDay != 5"
-            class="deporte-reservacion-button-container"
-          >
-            <button
-              mat-fab
-              color="unselected"
-              aria-label="date"
-              (click)="onSelectDay(5)"
-            >
-              05
-            </button>
-            <div class="deporte-reservacion-dia">Vie.</div>
-          </div>
-
-          <!-- MARTES -->
-          <div
-            *ngIf="selectedDay == 6"
-            class="deporte-reservacion-button-container"
-          >
-            <button mat-fab color="button-selected" aria-label="date">
-              06
-            </button>
-            <div class="deporte-reservacion-dia deporte-reservacion-dia-text">
-              Sab.
-            </div>
-          </div>
-
-          <div
-            *ngIf="selectedDay != 6"
-            class="deporte-reservacion-button-container"
-          >
-            <button
-              mat-fab
-              color="unselected"
-              aria-label="date"
-              (click)="onSelectDay(6)"
-            >
-              06
-            </button>
-            <div class="deporte-reservacion-dia">Sab.</div>
-          </div>
-          <!-- <div
-            *ngIf="selectedDay == 6"
-            class="deporte-reservacion-button-container"
-          >
-            <button mat-fab color="button-selected" aria-label="date">
-              06
-            </button>
-            <div class="deporte-reservacion-dia deporte-reservacion-dia-text">
-              Sab.
-            </div>
-          </div>
-
-          <div
-            *ngIf="selectedDay != 6"
-            class="deporte-reservacion-button-container"
-          >
-            <button
-              mat-fab
-              color="unselected"
-              aria-label="date"
-              (click)="onSelectDay(6)"
-            >
-              06
-            </button>
-            <div class="deporte-reservacion-dia">Sab.</div>
-          </div> -->
 
           <div
             class="deporte-reservacion-button-container deporte-reservacion-button-past"
