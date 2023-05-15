@@ -18,10 +18,8 @@ export class RegistroSalidaComponent {
   onSubmitMatricula() {
     const url = `/registros-gimnasio/matricula`;
 
-    console.log(this.matricula);
-
     this._apiService
-      .put(url, { matricula: this.matricula })
+      .put(url, { matricula: this.matricula.toUpperCase() })
       .subscribe((data) => {
         this.message = `Registro salida con éxito: ${data.matricula}`;
       });

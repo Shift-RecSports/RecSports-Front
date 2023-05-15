@@ -17,7 +17,6 @@ import { RegistroEntradaComponent } from './gimnasio/registro-entrada/registro-e
 import { RegistroSalidaComponent } from './gimnasio/registro-salida/registro-salida.component';
 import { HomeEntrenadorComponent } from './home-entrenador/home-entrenador.component';
 
-
 const routes: Routes = [
   {
     path: 'login',
@@ -68,11 +67,11 @@ const routes: Routes = [
     component: ReservacionesComponent,
     canActivate: [AuthGuard],
   },
-  {
-    path: 'calendario',
-    component: CalendarioComponent,
-    canActivate: [AuthGuard],
-  },
+  // {
+  //   path: 'calendario',
+  //   component: CalendarioComponent,
+  //   canActivate: [AuthGuard],
+  // },
   {
     path: 'noticias',
     component: NoticiasComponent,
@@ -92,7 +91,6 @@ const routes: Routes = [
     path: 'home-entrenador',
     component: HomeEntrenadorComponent,
     canActivate: [AuthGuard],
-
   },
 ];
 
