@@ -8,6 +8,8 @@
           type="text"
           name=""
           placeholder="Buscar..."
+          #searchBar
+          (keyup)="searchTerm(searchBar.value)"
         />
         <button class="searchbox-button" href="#">
           <i class="material-icons"> search </i>
@@ -23,7 +25,7 @@
         nzMd="12"
         nzLg="6"
         nzXl="6"
-        *ngFor="let deporte of listaDeportes"
+        *ngFor="let deporte of showedDeportes"
       >
         <div class="tarjeta-deporte-10">
           <button

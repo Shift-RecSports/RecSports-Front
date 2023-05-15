@@ -1,5 +1,27 @@
 <div class="grid-container">
   <div class="encuesta-container">
-    <p>Encuesta works!</p>
+    <p class="titulo-encuesta">Encuesta de satisfacción</p>
+    <br>
+    <p class="texto-evalua">Del 0 al 10 evalúa tu experiencia con RecSports</p>
+    <div class="slider">
+      <mat-slider min="0" max="10" step="1" showTickMarks discrete [displayWith]="formatLabel">
+        <input matSliderThumb>
+      </mat-slider>
+      <div class="slider-tick-container">
+        <div class="slider-tick" *ngFor="let tick of tickValues">{{tick}}</div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <p class="texto-opinion">Compártenos tu opinión</p>
+    <div class="inputs">
+      <input class="text-field-tema" nz-input placeholder="Tema..."/>
+      <br> 
+      <textarea class="text-field-mensaje" placeholder="Escribe aqui..." [nzAutosize]="{ minRows: 1, maxRows: 3 }" maxlength="400"></textarea>
+      <br>
+    <button class="boton-encuesta">Enviar</button>
+    </div>
   </div>
 </div>
+

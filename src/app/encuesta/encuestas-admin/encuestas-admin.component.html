@@ -1,0 +1,34 @@
+<div class="grid-container">
+    <div class="encuesta-container">
+      <p class="titulo-encuesta">Encuesta de los usuarios</p>
+      <p class="subtitulo-encuesta">Promedio de las encuestas</p>
+      <div class="tarjeta-promedio">
+        <mat-slider
+          class="slider-promedio"
+          [disabled]=true
+          [max]=10
+          [min]=0
+          [step]=1
+          [showTickMarks]=false>
+        <input matSliderThumb [(ngModel)]="value">
+      </mat-slider>
+      </div>
+      <br>
+      <p class="subtitulo-encuesta">Respuetas de los usuarios</p>
+      <div class="respuestas-encuesta">
+        <div class="card">
+          <p class="titulo-respuesta">#1</p>
+          <mat-slider
+            class="slider-respueta"
+            [disabled]=true
+            [max]=10
+            [min]=0
+            [step]=1
+            [showTickMarks]=false>
+            <input matSliderThumb [(ngModel)]="value">
+          </mat-slider>
+          <p class="mensaje-respuesta"> lorem ipsum dolor sit amet, consectetur adipiscing elit. donec aliquet luctus nulla, nec sagittisrotor aliquam eget.</p>
+        </div>
+      </div>
+    </div>
+  </div>

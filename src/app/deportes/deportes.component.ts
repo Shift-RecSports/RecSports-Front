@@ -12,6 +12,7 @@ import { Deporte } from '../classes/deportes';
 export class DeportesComponent {
   showAgregarButton = false;
   listaDeportes: Deporte[] = [];
+  showedDeportes: Deporte[] = [];
 
   constructor(
     private service: AuthService,
@@ -28,7 +29,16 @@ export class DeportesComponent {
 
     this._apiService.get(url).subscribe((data) => {
       this.listaDeportes = data;
-       console.log(this.listaDeportes);
+      this.showedDeportes = this.listaDeportes;
+    });
+  }
+
+  searchTerm(term: string) {
+    this.showedDeportes = this.listaDeportes.filter((deporte) => {
+      const name = deporte.nombre
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+      return name.includes(term.toUpperCase());
     });
   }
 
