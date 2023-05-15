@@ -60,8 +60,7 @@ import { HomeEntrenadorComponent } from './home-entrenador/home-entrenador.compo
 
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { MatSliderModule } from '@angular/material/slider';
-
-
+import { ModalBorrarEspacioComponent } from './deportes/deporte-seleccionado/modal-borrar-espacio/modal-borrar-espacio.component';
 
 registerLocaleData(en);
 
@@ -91,6 +90,7 @@ registerLocaleData(en);
     HomeEntrenadorComponent,
     ModalComponent,
     EncuestasAdminComponent,
+    ModalBorrarEspacioComponent,
   ],
   imports: [
     BrowserModule,
@@ -119,7 +119,7 @@ registerLocaleData(en);
     NzProgressModule,
     NzSelectModule,
     NzInputModule,
-    MatSliderModule
+    MatSliderModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }, ApiService],
   bootstrap: [AppComponent],

@@ -7,6 +7,7 @@ import { ModalReservacionComponent } from './modal-reservacion/modal-reservacion
 import { ApiService } from 'src/app/service/api.service';
 import { Deporte } from 'src/app/classes/deportes';
 import { Espacio } from 'src/app/classes/espacios';
+import { ModalBorrarEspacioComponent } from './modal-borrar-espacio/modal-borrar-espacio.component';
 
 interface newHorarioReservacion {
   id: string;
@@ -106,6 +107,7 @@ export class DeporteSeleccionadoComponent {
   showEditButton = false;
   showAddEspacio = false;
   showAllReservaciones = false;
+  showDeleteEspacio = false;
 
   selectedDay: number = 5;
   todayDay: number = 0;
@@ -133,6 +135,7 @@ export class DeporteSeleccionadoComponent {
       this.showEditButton = true;
       this.showAddEspacio = true;
       this.showAllReservaciones = true;
+      this.showDeleteEspacio = true;
     }
   }
 
@@ -260,6 +263,12 @@ export class DeporteSeleccionadoComponent {
   openDialog(reservacion: newHorarioReservacion): void {
     const dialogRef = this.dialog.open(ModalReservacionComponent, {
       data: { reservacion: reservacion, refreshDay: this.onSelectDay },
+    });
+  }
+
+  openDeleteEspacio(espacio: Espacio): void {
+    const dialogRef = this.dialog.open(ModalBorrarEspacioComponent, {
+      data: { espacio: espacio },
     });
   }
 

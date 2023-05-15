@@ -35,18 +35,16 @@ export class LoginComponent {
         matricula: this.loginform.value.matricula!,
         password: this.loginform.value.password!,
       };
-      
+
       await this.service.Login(user);
 
-      if(this.loginform.value.matricula == "entrenador"){
+      if (this.loginform.value.matricula == 'entrenador') {
         this.router.navigate(['/home-entrenador']);
-      }
-      else {
+      } else {
         this.router.navigate(['']);
-      };
+      }
 
       // Add error handling
-      
     }
   }
 

@@ -20,23 +20,6 @@
   padding: 1rem 0.5rem;
 }
 
-/* .deporte-header-content {
-  background-image: linear-gradient(
-      to right,
-      rgb(22, 38, 134, 0.8),
-      rgb(255, 255, 255, 0)
-    ),
-    url("https://conecta.tec.mx/sites/default/files/styles/header_full/public/2019-04/Estadio-borregos1920.jpg?h=920929c4&itok=qJq33r8o");
-  background-position: center center;
-  background-size: cover;
-  border-radius: 1rem;
-  box-shadow: 0.5rem 0.5rem 1rem 0.5rem rgba(0, 0, 0, 0.15);
-
-  min-height: 30vh;
-  margin-bottom: 2rem;
-  display: flex;
-} */
-
 .deporte-header-content {
   border-radius: 1rem;
   box-shadow: 0.5rem 0.5rem 1rem 0.5rem rgba(0, 0, 0, 0.15);
@@ -156,6 +139,14 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  position: relative;
+}
+
+.espacio-delete-button {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  background-color: #c22424;
 }
 
 .deporte-espacio-agregarContainer {
@@ -212,6 +203,18 @@
 
 .deporte-reservacion-button-past {
   padding-top: 1rem;
+}
+
+@media (max-width: 1200px) {
+  .deporte-reservacion-button-past {
+    display: none;
+  }
+}
+
+@media (max-width: 960px) {
+  .deporte-reservacion-button-list {
+    flex-wrap: wrap;
+  }
 }
 
 .deporte-reservacion-dia {
@@ -377,3 +380,9 @@
     margin-bottom: 1rem;
   }
 }
+
+/* ::-webkit-scrollbar {
+  height: 1px;
+  width: 1px;
+  border: 1px solid transparent;
+} */
