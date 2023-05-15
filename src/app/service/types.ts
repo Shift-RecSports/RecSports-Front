@@ -18,4 +18,5 @@ export interface navbarFlags {
   encuestaFlag: boolean;
   entradaFlag: boolean;
   salidaFlag: boolean;
+  encuestaAdminFlag: boolean;
 }
