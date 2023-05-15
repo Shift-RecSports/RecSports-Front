@@ -158,12 +158,12 @@ export class BarChartComponent implements OnInit {
   private margin = {
     top: 20,
     right: 20,
-    bottom: 30,
+    bottom: 16,
     left: 30
   };
   
-  private width = 800 - this.margin.left - this.margin.right;
-  private height = 300 - this.margin.top - this.margin.bottom;
+  private width = 820 - this.margin.left - this.margin.right;
+  private height = 320 - this.margin.top - this.margin.bottom;
 
   private timeParser = timeParse("%Y%m%d %H:%M:%S");
   public hourParser = timeParse("%H:%M:%S");
@@ -277,10 +277,10 @@ export class BarChartComponent implements OnInit {
 
         const hour = d.hora_inicio.split(':')[0];
         console.log(x(Number(hour)));
-        return Number(hour)*46.8-280;
+        return Number(hour)*57.3-341;
       })
       .attr("width", function(d : any, i : number){
-        return 45;
+        return 54;
         
       })
       .attr("y", function(d: any) {
