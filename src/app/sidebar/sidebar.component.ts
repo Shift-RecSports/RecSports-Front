@@ -77,6 +77,7 @@ const defaultNavbarFlags = {
   encuestaFlag: false,
   entradaFlag: false,
   salidaFlag: false,
+  encuestaAdminFlag: false,
 };
 
 function activateNavbarFlags(userRole: string, navbarFlags: navbarFlags) {
@@ -87,7 +88,8 @@ function activateNavbarFlags(userRole: string, navbarFlags: navbarFlags) {
     navbarFlags.calendarioFlag = false;
     navbarFlags.noticasFlag = true;
     navbarFlags.mapaFlag = true;
-    navbarFlags.encuestaFlag = true;
+    navbarFlags.encuestaFlag = false;
+    navbarFlags.encuestaAdminFlag = true;
     navbarFlags.entradaFlag = false;
     navbarFlags.salidaFlag = false;
   } else if (userRole == 'ENTRENADOR') {
@@ -98,6 +100,7 @@ function activateNavbarFlags(userRole: string, navbarFlags: navbarFlags) {
     navbarFlags.noticasFlag = false;
     navbarFlags.mapaFlag = false;
     navbarFlags.encuestaFlag = false;
+    navbarFlags.encuestaAdminFlag = false;
     navbarFlags.entradaFlag = true;
     navbarFlags.salidaFlag = true;
   } else {
@@ -108,6 +111,7 @@ function activateNavbarFlags(userRole: string, navbarFlags: navbarFlags) {
     navbarFlags.noticasFlag = false;
     navbarFlags.mapaFlag = true;
     navbarFlags.encuestaFlag = true;
+    navbarFlags.encuestaAdminFlag = false;
     navbarFlags.entradaFlag = false;
     navbarFlags.salidaFlag = false;
   }
