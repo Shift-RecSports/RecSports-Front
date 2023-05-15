@@ -39,6 +39,8 @@ import { DonutChartComponent } from './home-components/donut-chart/donut-chart.c
 import { RegistroEntradaComponent } from './gimnasio/registro-entrada/registro-entrada.component';
 import { RegistroSalidaComponent } from './gimnasio/registro-salida/registro-salida.component';
 
+import { EncuestasAdminComponent } from './encuesta/encuestas-admin/encuestas-admin.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from './material.module';
 import { NzGridModule } from 'ng-zorro-antd/grid';
@@ -88,6 +90,7 @@ registerLocaleData(en);
     RegistroSalidaComponent,
     HomeEntrenadorComponent,
     ModalComponent,
+    EncuestasAdminComponent,
   ],
   imports: [
     BrowserModule,
