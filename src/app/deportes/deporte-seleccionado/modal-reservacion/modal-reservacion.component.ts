@@ -30,6 +30,7 @@ interface reservacionType {
     espacio_nombre: string;
     disabled: boolean;
   };
+  refreshDay: (id: number) => void;
 }
 
 @Component({
@@ -37,14 +38,13 @@ interface reservacionType {
   templateUrl: './modal-reservacion.component.html',
   styleUrls: ['./modal-reservacion.component.css'],
 })
-
 export class ModalReservacionComponent {
   showLoading: boolean = false;
   showSucces: boolean = false;
   showFailed: boolean = false;
 
   constructor(
-    public dialogRef: MatDialogRef<ModalReservacionComponent>, // @Inject(MAT_DIALOG_DATA) public data: DialogData4
+    public dialogRef: MatDialogRef<ModalReservacionComponent>,
     private _apiService: ApiService,
     private service: AuthService,
     private router: Router,
@@ -77,6 +77,25 @@ export class ModalReservacionComponent {
           //   this.showFailed = true
           // }
         });
+    }
+  }
+
+  async onCancelReservacion() {
+    if (this.service.isLoggedIn() && this.service.GetUserRole() == 'ADMIN') {
+      const url = `/reservaciones/${this.data.reservacion.id}`;
+
+      const body = {
+        hora_seleccionada: this.data.reservacion.hora_seleccionada,
+        matricula_alumno: null,
+        fecha: this.data.reservacion.fecha,
+        espacio: this.data.reservacion.espacio,
+        estatus: 1,
+      };
+
+      this._apiService.put(url, body).subscribe((data) => {
+        this.onNoClick();
+        window.location.reload();
+      });
     }
   }
 

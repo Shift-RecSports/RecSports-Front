@@ -14,7 +14,7 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 })
 export class GimnasioComponent {
   displayedColumns: string[] = ['matricula', 'nombre', 'entrada', 'salida'];
-  listaRegistros: Registro[];
+  listaRegistros: Registro[] = [];
   dataSource = new MatTableDataSource<Registro>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -48,15 +48,27 @@ export class GimnasioComponent {
   }
 
   changeDateSelected(day: Date = new Date()) {
-    this.daySelected = `${day.getFullYear()}-${day.getMonth() + 1}-${10}`;
-
-    console.log(this.daySelected);
+    this.daySelected = `${day.getFullYear()}-${
+      day.getMonth() + 1
+    }-${day.getDate()}`;
 
     this.url = `/registros-gimnasio/fecha=${this.daySelected}&offset=${this.page}`;
     this.timerSubscription = timer(0, 10000)
       .pipe(switchMap(() => this._apiService.get(this.url)))
       .subscribe((data) => {
-        console.log('reload');
+        // MARK: this loop converts 09:00:00 into 09:00
+        for (let i = 0; i < data.length; i++) {
+          data[i].entrada = data[i].entrada.substring(
+            0,
+            data[i].entrada.lastIndexOf(':')
+          );
+
+          data[i].salida = data[i].salida.substring(
+            0,
+            data[i].salida.lastIndexOf(':')
+          );
+        }
+
         this.listaRegistros = data;
         this.dataSource.data = this.listaRegistros;
       });

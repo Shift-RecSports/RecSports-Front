@@ -19,7 +19,7 @@ export class RegistroEntradaComponent {
     const url = `/registros-gimnasio/matricula`;
 
     this._apiService
-      .post(url, { matricula: this.matricula })
+      .post(url, { matricula: this.matricula.toUpperCase() })
       .subscribe((data) => {
         this.message = `Matricula registrada con éxito: ${data.matricula}`;
       });
