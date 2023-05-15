@@ -16,6 +16,7 @@ import { EspaciosFormularioComponent } from './deportes/components/espacios-form
 import { RegistroEntradaComponent } from './gimnasio/registro-entrada/registro-entrada.component';
 import { RegistroSalidaComponent } from './gimnasio/registro-salida/registro-salida.component';
 import { HomeEntrenadorComponent } from './home-entrenador/home-entrenador.component';
+import { EncuestasAdminComponent } from './encuesta/encuestas-admin/encuestas-admin.component';
 
 const routes: Routes = [
   {
@@ -85,6 +86,11 @@ const routes: Routes = [
   {
     path: 'encuesta',
     component: EncuestaComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'encuesta-admin',
+    component: EncuestasAdminComponent,
     canActivate: [AuthGuard],
   },
   {

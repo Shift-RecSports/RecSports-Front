@@ -77,6 +77,16 @@
         >
       </div>
 
+      <div *ngIf="navbarFlags.encuestaAdminFlag">
+        <a mat-list-item routerLink="encuesta-admin" class="sidebar-button">
+          <div class="sidebar-list-element">
+            <mat-icon class="sidebar-icon" fontSet="material-icons-outlined"
+              >chat icon</mat-icon
+            ><span class="sidebar-element-text">Encuesta</span>
+          </div></a
+        >
+      </div>
+
       <div *ngIf="navbarFlags.encuestaFlag">
         <a mat-list-item routerLink="encuesta" class="sidebar-button">
           <div class="sidebar-list-element">
