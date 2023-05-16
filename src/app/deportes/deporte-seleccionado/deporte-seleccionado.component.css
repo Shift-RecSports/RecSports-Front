@@ -82,6 +82,14 @@
   padding-right: 1rem;
 }
 
+/* Mobile */
+@media (max-width: 600px) {
+  .deportes-edit-container {
+    position: absolute;
+    bottom: 0;
+  }
+}
+
 .mat-button-edit {
   border: 0.2rem solid #162686;
   background-color: #ffffff;
@@ -381,8 +389,66 @@
   }
 }
 
+@media (max-width: 600px) {
+  .mat-horario {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .mat-horario-activo {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .mat-horario-expirado {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .deporte-reservacion-container {
+    padding: 1.5rem 0 1rem 0;
+  }
+
+  .deporte-reservacion-hora {
+    font-size: 0.9rem;
+  }
+
+  .mat-horario {
+    padding: 1.3rem 2rem;
+    font-size: 1.1rem;
+    margin-right: 0;
+  }
+
+  .mat-horario-activo {
+    padding: 1.3rem 2rem;
+    font-size: 1.1rem;
+    margin-right: 0;
+  }
+
+  .mat-horario-expirado {
+    padding: 1.3rem 2rem;
+    font-size: 1.1rem;
+    margin-right: 0;
+  }
+}
 /* ::-webkit-scrollbar {
   height: 1px;
   width: 1px;
   border: 1px solid transparent;
+}
+
+.width-large {
+  width: 100rem;
+}
+
+.width-medium {
+  width: 60rem;
+}
+
+.width-small {
+  width: 35rem;
+}
+
+.width-xsmall {
+  width: 10rem;
 } */

@@ -197,7 +197,10 @@
 
         <!-- TABLA RESERVACIONES -->
 
-        <div class="deporte-reservacion-table-container">
+        <div
+          class="deporte-reservacion-table-container"
+          style="overflow-x: auto; white-space: nowrap"
+        >
           <!-- <div class="deporte-tiempo-linea">
             <div class="deporte-tiempo-circulo"></div>
           </div> -->
@@ -225,10 +228,15 @@
                 <div class="spacer"></div>
 
                 <!-- <div
-                  style="
-                    overflow-x: auto;
-                    white-space: nowrap;
-                    witdh: calc(100% - 80px);
+                  style="overflow-x: auto; white-space: nowrap"
+                  [ngClass]="
+                    currentBreakpoint == breakpointLarge
+                      ? 'width-large'
+                      : currentBreakpoint == breakpointMedium
+                      ? 'width-medium'
+                      : currentBreakpoint == breakpointSmall
+                      ? 'width-small'
+                      : 'width-xsmall'
                   "
                 > -->
                 <div>

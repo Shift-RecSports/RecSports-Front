@@ -32,7 +32,9 @@
 
 .gimnasio-descarga-container {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 
 .gimnasio-descarga {
@@ -80,4 +82,27 @@
 
 .table-header-padding {
   padding-left: 2rem;
+}
+
+.cell-text {
+  font-size: 1.1rem;
+}
+
+@media (max-width: 960px) {
+  .gimnasio-descarga-text {
+    display: none;
+  }
+
+  .table-header {
+    font-size: 0.8rem;
+  }
+
+  .cell-text {
+    font-size: 0.8rem;
+  }
+
+  .table-container {
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+  }
 }

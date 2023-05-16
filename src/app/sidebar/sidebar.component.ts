@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
@@ -6,6 +6,7 @@ import { map, shareReplay } from 'rxjs/operators';
 import { user, navbarFlags } from '../service/types';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
+import { MatDrawer } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-sidebar',
@@ -17,12 +18,16 @@ export class SidebarComponent {
   userName: string;
   navbarFlags: navbarFlags;
 
+  showSidebar: boolean = false;
+
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
       map((result) => result.matches),
       shareReplay()
     );
+
+  @ViewChild('drawer', { static: true }) public drawer!: MatDrawer;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -56,6 +61,11 @@ export class SidebarComponent {
 
       // console.log(this.navbarFlags);
     }
+  }
+
+  openSidebar(open: boolean) {
+    this.showSidebar = open;
+    this.drawer.toggle();
   }
 
   onLogOut() {
