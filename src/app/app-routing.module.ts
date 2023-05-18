@@ -20,11 +20,11 @@ import { EncuestasAdminComponent } from './encuesta/encuestas-admin/encuestas-ad
 
 const routes: Routes = [
   {
-    path: 'login',
+    path: '',
     component: LoginComponent,
   },
   {
-    path: '',
+    path: 'home',
     component: HomeComponent,
     canActivate: [AuthGuard],
   },

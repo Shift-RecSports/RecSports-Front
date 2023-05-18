@@ -59,7 +59,7 @@ export class SidebarComponent {
   }
 
   onLogOut() {
-    this.router.navigate(['login']);
+    this.router.navigate(['']);
   }
 
   onMisReservaciones() {
