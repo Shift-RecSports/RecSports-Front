@@ -84,8 +84,10 @@ export class GimnasioComponent {
 
   exportExcel(data: any): void {
     const fileToExport = data.map((item: any) => {
+      const fecha = new Date(item.fecha);
+      fecha.setDate(fecha.getDate() + 1);
       return {
-        Fecha: new Date(item.fecha),
+        Fecha: fecha,
         Id: item.id,
         Matricula: item.matricula,
         Nombre: item.nombre,
@@ -93,6 +95,9 @@ export class GimnasioComponent {
         Salida: item.salida,
       };
     });
+
+    console.log(data);
+    console.log(fileToExport);
 
     let conteos: {
       [key: string]: number;

@@ -3,8 +3,9 @@ export interface userLogin {
   password: string;
 }
 
-export interface user {
+export interface User {
   matricula: string | undefined;
+  nombre: string | undefined;
   userRole: string | undefined;
 }
 

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { user, navbarFlags } from '../service/types';
+import { User, navbarFlags } from '../service/types';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 import { MatDrawer } from '@angular/material/sidenav';
@@ -14,7 +14,7 @@ import { MatDrawer } from '@angular/material/sidenav';
   styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent {
-  user: user;
+  user: User;
   userName: string;
   navbarFlags: navbarFlags;
 
@@ -34,7 +34,7 @@ export class SidebarComponent {
     private service: AuthService,
     private router: Router
   ) {
-    this.user = { matricula: '', userRole: '' };
+    this.user = { matricula: '', nombre: '', userRole: '' };
     this.navbarFlags = defaultNavbarFlags;
     this.userName = '';
 
@@ -42,16 +42,11 @@ export class SidebarComponent {
       this.user = {
         matricula: this.service.GetUserName() ? this.service.GetUserName() : '',
         userRole: this.service.GetUserRole(),
+        nombre: this.service.GetUserNameString(),
       };
 
+      // TODO: Change user name
       this.userName = this.user.matricula!;
-      // if (this.user.userRole == 'ALUMNO') {
-      //   this.userName = 'Sasha Morosov';
-      // } else if (this.user.userRole == 'ADMIN') {
-      //   this.userName = 'Admin';
-      // } else {
-      //   this.userName = 'Entrenador';
-      // }
 
       // Activate/Disactivate Navbar components
       this.navbarFlags = activateNavbarFlags(

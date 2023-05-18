@@ -5,9 +5,9 @@ const EXCEL_EXTENSION = '.xlsx';
 // const myHeader = ['Fecha', 'Id', 'Matricula', 'Nombre', 'Entrada', 'Salida'];
 var wscols = [
   { wch: 15 },
-  { wch: 5 },
   { wch: 15 },
-  { wch: 30 },
+  { wch: 15 },
+  { wch: 40 },
   { wch: 10 },
   { wch: 10 },
 ];

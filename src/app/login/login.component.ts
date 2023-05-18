@@ -3,7 +3,11 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 
-import { userLogin } from '../service/types';
+import { User, userLogin } from '../service/types';
+import { ApiService } from '../service/api.service';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+
+const userRoles = ['admin', 'entrenador', 'alumno'];
 
 @Component({
   selector: 'app-login',
@@ -16,10 +20,14 @@ export class LoginComponent {
   submitted = false;
   hide = true;
 
+  showError = false;
+
   constructor(
     private builder: FormBuilder,
     private service: AuthService,
-    private router: Router
+    private router: Router,
+    private _apiService: ApiService,
+    private notification: NzNotificationService
   ) {
     sessionStorage.clear();
   }
@@ -32,38 +40,59 @@ export class LoginComponent {
   async onLogin() {
     if (this.loginform.valid) {
       const user: userLogin = {
-        matricula: this.loginform.value.matricula!,
-        password: this.loginform.value.password!,
+        matricula: this.loginform.value.matricula!.toUpperCase(),
+        password: this.loginform.value.password!.toUpperCase(),
       };
 
-      await this.service.Login(user);
+      const url = `/acceso`;
 
-      if (this.loginform.value.matricula == 'entrenador') {
-        this.router.navigate(['/home-entrenador']);
-      } else {
-        this.router.navigate(['']);
-      }
-
-      // Add error handling
+      this._apiService
+        .post(url, { matricula: user.matricula, contrasena: user.password })
+        .subscribe((data) => {
+          if (data.length > 0) {
+            const url2 = `/usuario/${data[0].matricula}`;
+            this._apiService.get(url2).subscribe((data) => {
+              this.registerLogin({
+                matricula: data.matricula,
+                nombre: data.nombre,
+                userRole: userRoles[parseInt(data.tipo) - 1],
+              });
+            });
+          } else {
+            this.createBasicNotification();
+          }
+        });
     }
   }
 
-  onSubmit() {
-    // this.submitted = true;
-    // // stop here if form is invalid
-    // if (this.registerForm.invalid) {
-    //   return;
-    // }
-    // //True if all the fields are filled
-    // if (this.submitted) {
-    //   alert('Great!!');
-    // }
+  // onOpenAlert() {
+  //   this.showError = true;
+  // }
+
+  // onCloseAlert() {
+  //   this.showError = false;
+  // }
+
+  createBasicNotification(): void {
+    this.notification
+      .blank(
+        'Credenciales inválidas',
+        'La contraseña o usuario no son correctas, intente otra vez'
+      )
+      .onClick.subscribe(() => {
+        console.log('notification clicked!');
+      });
   }
-  ngOnInit() {
-    // //Add User form validations
-    // this.registerForm = this.formBuilder.group({
-    //   email: ['', [Validators.required, Validators.email]],
-    //   password: ['', [Validators.required]],
-    // });
+
+  async registerLogin(user: User) {
+    const registeredUser = await this.service.Login(user);
+    if (registeredUser.userRole == 'entrenador') {
+      this.router.navigate(['/home-entrenador']);
+    } else {
+      this.router.navigate(['']);
+    }
   }
+
+  onSubmit() {}
+  ngOnInit() {}
 }
