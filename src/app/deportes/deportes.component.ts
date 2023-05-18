@@ -35,9 +35,9 @@ export class DeportesComponent {
 
   searchTerm(term: string) {
     this.showedDeportes = this.listaDeportes.filter((deporte) => {
-      const name = deporte.nombre;
-      // .normalize('NFD')
-      // .replace(/[\u0300-\u036f]/g, '');
+      const name = deporte.nombre
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
       return name.includes(term.toUpperCase());
     });
   }
