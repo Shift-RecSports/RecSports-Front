@@ -41,7 +41,7 @@ export class LoginComponent {
       if (this.loginform.value.matricula == 'entrenador') {
         this.router.navigate(['/home-entrenador']);
       } else {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       }
 
       // Add error handling
