@@ -60,8 +60,7 @@ import { HomeEntrenadorComponent } from './home-entrenador/home-entrenador.compo
 
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { MatSliderModule } from '@angular/material/slider';
-
-
+import { AuthGuard } from './guard/auth.guard';
 
 registerLocaleData(en);
 
@@ -119,9 +118,9 @@ registerLocaleData(en);
     NzProgressModule,
     NzSelectModule,
     NzInputModule,
-    MatSliderModule
+    MatSliderModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }, ApiService],
+  providers: [{ provide: NZ_I18N, useValue: en_US }, ApiService, AuthGuard],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
