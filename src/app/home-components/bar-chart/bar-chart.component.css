@@ -7,6 +7,8 @@
 
     color: #000000;
     margin-right: auto;
+
+    padding-right: 15rem;
 }
 
 .realtime-minicard {
@@ -43,7 +45,6 @@
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
-
 }
   
 .upper-right-div > div {
@@ -150,4 +151,33 @@ nz-select {
     transform: rotate(-90deg);
 }
 
+.container {
+    height: 14.5rem; /* Set the desired height for the container */
+    display: flex;
+    justify-content: flex-start; /* Align items horizontally to the start */
+    align-items: flex-end; /* Align items vertically to the bottom */
+}
+  
+.vertical-text {
+    writing-mode: vertical-lr; /* Rotate the text vertically from left to right */
+    text-orientation: mixed; /* Allow mixed orientation for better browser support */
+    transform: rotate(180deg); /* Flip the text upside down */
+
+    font-family: 'Helvetica';
+    font-size: 15px;
+    font-weight: 550;
+
+    margin: 0;
+    padding: 0;
+}
+
+.horizontal-text {
+    font-family: 'Helvetica';
+    font-size: 15px;
+    font-weight: 550;
+    text-align: center;
+
+    margin: -4px;
+    padding: 0;
+}
 

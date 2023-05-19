@@ -62,17 +62,18 @@
   line-height: 23px;
 }
 
-.slider {
+.slider-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 mat-slider {
-  width: 900px;
+  width: calc(100% - 30%);
 }
 
 .slider-tick-container {
+  width: calc(100% - 30%);
   display: flex;
   justify-content: space-between;
 }
@@ -82,8 +83,6 @@ mat-slider {
   font-family: "Helvetica";
   font-style: normal;
   font-weight: 700;
-  margin-left: 40px;
-  margin-right: 40px;
 }
 
 .inputs {
@@ -93,7 +92,7 @@ mat-slider {
 }
 
 .text-field-tema {
-  width: 900px;
+  width: calc(100% - 35%);
   height: 50px;
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -108,7 +107,7 @@ textarea::placeholder {
 }
 
 .text-field-mensaje {
-  width: 900px;
+  width: calc(100% - 35%);
   height: 150px;
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -129,5 +128,20 @@ textarea::placeholder {
 @media (max-width: 960px) {
   .encuesta-container {
     padding: 6rem 1rem 1rem 1rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .titulo-encuesta {
+    font-size: 24px;
+    line-height: 24px;
+  }
+  .texto-evalua {
+    font-size: 20px;
+    line-height: 24px;
+  }
+  .texto-opinion {
+    font-size: 20px;
+    line-height: 24px;
   }
 }

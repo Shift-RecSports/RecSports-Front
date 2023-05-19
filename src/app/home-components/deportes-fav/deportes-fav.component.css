@@ -3,18 +3,16 @@
     background-position: center center;
     background-image: url("https://upload.wikimedia.org/wikipedia/commons/a/ad/Football_in_Bloomington%2C_Indiana%2C_1996.jpg");
     border-radius: 10px;
-    border: none;
-    min-height: 90px;
-    min-width: 110px;
-    width: 90%;
-    margin-top: 1rem;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+    width: 100%;
+    margin-top: 0.8rem;
     padding: 0;
     background-size: 100% 100%;
     align-items: center;
     justify-content: center;
     display: flex;
+
+    min-height: 90px;
+    border: none;
 }
 
 .tarjeta-deporte-fav-basquetbol {
@@ -22,18 +20,16 @@
     background-position: center center;
     background-image: url("https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1780&q=80");
     border-radius: 10px;
-    border: none;
-    min-height: 90px;
-    min-width: 110px;
-    width: 90%;
-    margin-top: 1rem;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+    width: 100%;
+    margin-top: 0.8rem;
     padding: 0;
     background-size: 100% 100%;
     align-items: center;
     justify-content: center;
     display: flex;
+
+    min-height: 90px;
+    border: none;
 }
 
 .tarjeta-deporte-fav-rapido {
@@ -41,18 +37,16 @@
     background-position: center center;
     background-image: url("https://daily.jstor.org/wp-content/uploads/2018/06/soccer_europe_1050x700.jpg");
     border-radius: 10px;
-    border: none;
-    min-height: 90px;
-    min-width: 110px;
-    width: 90%;
-    margin-top: 1rem;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+    width: 100%;
+    margin-top: 0.8rem;
     padding: 0;
     background-size: 100% 100%;
     align-items: center;
     justify-content: center;
     display: flex;
+
+    min-height: 90px;
+    border: none;
 }
 
 .tarjeta-deporte-fav-tennis {
@@ -60,18 +54,16 @@
     background-position: center center;
     background-image: url("https://static01.nyt.com/images/2022/09/12/business/10db-tennis-print/10db-tennis-01-videoSixteenByNineJumbo1600.jpg");
     border-radius: 10px;
-    border: none;
-    min-height: 90px;
-    min-width: 110px;
-    width: 90%;
-    margin-top: 1rem;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+    width: 100%;
+    margin-top: 0.8rem;
     padding: 0;
     background-size: 100% 100%;
     align-items: center;
     justify-content: center;
     display: flex;
+
+    min-height: 90px;
+    border: none;
 }
 
 .tarjeta-deporte-fav-yoga {
@@ -79,18 +71,16 @@
     background-position: center center;
     background-image: url("https://www.webconsultas.com/sites/default/files/styles/wch_image_schema/public/temas/yoga.jpg");
     border-radius: 10px;
-    border: none;
-    min-height: 90px;
-    min-width: 110px;
-    width: 90%;
-    margin-top: 1rem;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+    width: 100%;
+    margin-top: 0.8rem;
     padding: 0;
     background-size: 100% 100%;
     align-items: center;
     justify-content: center;
     display: flex;
+
+    min-height: 90px;
+    border: none;
 }
 
 .tarjeta-deporte-fav-spinning {
@@ -98,18 +88,16 @@
     background-position: center center;
     background-image: url("https://images.hola.com/imagenes/estar-bien/20190206136791/ventajas-inconvenientes-spinning-cs/0-643-792/proscontraspinning-t.jpg?tx=w_680");
     border-radius: 10px;
-    border: none;
-    min-height: 90px;
-    min-width: 110px;
-    width: 90%;
-    margin-top: 1rem;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+    width: 100%;
+    margin-top: 0.8rem;
     padding: 0;
     background-size: 100% 100%;
     align-items: center;
     justify-content: center;
     display: flex;
+
+    min-height: 90px;
+    border: none;
 }
 
 .tarjeta-deporte-fav-natacion {
@@ -117,18 +105,16 @@
     background-position: center center;
     background-image: url("https://images.unsplash.com/photo-1530549387789-4c1017266635?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80");
     border-radius: 10px;
-    border: none;
-    min-height: 90px;
-    min-width: 110px;
-    width: 90%;
-    margin-top: 1rem;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+    width: 100%;
+    margin-top: 0.8rem;
     padding: 0;
     background-size: 100% 100%;
     align-items: center;
     justify-content: center;
     display: flex;
+
+    min-height: 90px;
+    border: none;
 }
 
 .tarjeta-deporte-fav-futbol::before, .tarjeta-deporte-fav-basquetbol::before, .tarjeta-deporte-fav-natacion::before, .tarjeta-deporte-fav-rapido::before, .tarjeta-deporte-fav-yoga::before, .tarjeta-deporte-fav-spinning::before, .tarjeta-deporte-fav-tennis::before {
