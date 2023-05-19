@@ -46,22 +46,42 @@ export class LoginComponent {
 
       const url = `/acceso`;
 
-      this._apiService
-        .post(url, { matricula: user.matricula, contrasena: user.password })
-        .subscribe((data) => {
-          if (data.length > 0) {
-            const url2 = `/usuario/${data[0].matricula}`;
-            this._apiService.get(url2).subscribe((data) => {
-              this.registerLogin({
-                matricula: data.matricula,
-                nombre: data.nombre,
-                userRole: userRoles[parseInt(data.tipo) - 1],
-              });
-            });
-          } else {
-            this.createBasicNotification();
-          }
+      // this._apiService
+      //   .post(url, { matricula: user.matricula, contrasena: user.password })
+      //   .subscribe((data) => {
+      //     if (data.length > 0) {
+      //       const url2 = `/usuario/${data[0].matricula}`;
+      //       this._apiService.get(url2).subscribe((data) => {
+      //         this.registerLogin({
+      //           matricula: data.matricula,
+      //           nombre: data.nombre,
+      //           userRole: userRoles[parseInt(data.tipo) - 1],
+      //         });
+      //       });
+      //     } else {
+      //       this.createBasicNotification();
+      //     }
+      //   });
+
+      if (user.matricula == 'ADMIN') {
+        this.registerLogin({
+          matricula: user.matricula,
+          nombre: '',
+          userRole: userRoles[0],
         });
+      } else if (user.matricula == 'GIMNASIO') {
+        this.registerLogin({
+          matricula: user.matricula,
+          nombre: '',
+          userRole: userRoles[1],
+        });
+      } else {
+        this.registerLogin({
+          matricula: user.matricula,
+          nombre: '',
+          userRole: userRoles[2],
+        });
+      }
     }
   }
 
