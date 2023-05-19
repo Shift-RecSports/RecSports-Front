@@ -63,6 +63,7 @@ import { HomeEntrenadorComponent } from './home-entrenador/home-entrenador.compo
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { MatSliderModule } from '@angular/material/slider';
 import { ModalBorrarEspacioComponent } from './deportes/deporte-seleccionado/modal-borrar-espacio/modal-borrar-espacio.component';
+import { AuthGuard } from './guard/auth.guard';
 
 registerLocaleData(en);
 
@@ -125,7 +126,7 @@ registerLocaleData(en);
     NzAlertModule,
     NzNotificationModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }, ApiService],
+  providers: [{ provide: NZ_I18N, useValue: en_US }, ApiService, AuthGuard],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
