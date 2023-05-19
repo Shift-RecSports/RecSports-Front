@@ -1,0 +1,183 @@
+<div class="grid-container">
+    <div class="nueva-noticia-container">
+      <div class="nuevo-container">
+        <div class="nuevo-header">Agregar noticia</div>
+
+        <form class="nuevo-form" [formGroup]="formularioNoticia" (ngSubmit)="enviarDatos()">
+        <!-- <div class="nuevo-form" [formGroup]="formularioNoticia"> -->
+          <div nz-row>
+            <div
+              nz-col
+              nzXs="24"
+              nzSm="24"
+              nzMd="24"
+              nzLg="24"
+              nzXl="24"
+              class="nuevo-form-item"
+            >
+              <div class="nuevo-form-title">Título</div>
+              <mat-form-field appearance="outline" class="input-container">
+                <input matInput placeholder="Escribe..." formControlName="titulo" class="custom-input"/>
+                <div *ngIf="formularioNoticia.get('titulo')?.invalid && formularioNoticia.get('titulo')?.touched" class="error-text">
+                  Ingrese un título
+                </div>
+              </mat-form-field>
+            </div>
+  
+            <div
+              nz-col
+              nzXs="24"
+              nzSm="24"
+              nzMd="12"
+              nzLg="12"
+              nzXl="12"
+              class="nuevo-form-item"
+            >
+              <div class="nuevo-form-title">Fecha</div>
+              <nz-date-picker class="input-calendar" nzPlaceHolder="Seleccione una fecha" [(ngModel)]="UnformattedFecha" (ngModelChange)="onDateSelected($event)" nzRequired></nz-date-picker>
+              <div *ngIf="formularioNoticia.get('fecha')?.invalid && formularioNoticia.get('fecha')?.touched" class="error-text">
+                Seleccione una fecha
+              </div>
+              <!-- <div *ngIf="!isDateSelected" class="error-text">Seleccione una fecha</div> -->
+            </div>
+  
+    
+            <div
+              nz-col
+              nzXs="24"
+              nzSm="24"
+              nzMd="12"
+              nzLg="12"
+              nzXl="12"
+              class="nuevo-form-item"
+            >
+              <div class="nuevo-form-title">Hora</div>
+              <!-- <mat-form-field appearance="outline" class="input-container">
+                <input matInput placeholder="Escribe..." formControlName="hora"/>
+                <div *ngIf="formularioNoticia.get('hora')?.invalid && formularioNoticia.get('hora')?.touched" class="error-text">
+                  Ingrese una hora
+                </div>          
+              </mat-form-field> -->
+
+              <nz-time-picker class="input-calendar" nzPlaceHolder="Seleccione una hora" [(ngModel)]="UnformattedHora" nzFormat="HH:mm" (ngModelChange)="onHourSelected($event)" nzRequired></nz-time-picker>
+              <div *ngIf="formularioNoticia.get('hora')?.invalid && formularioNoticia.get('hora')?.touched" class="error-text">
+                Ingrese una hora
+              </div> 
+            </div>
+  
+            <div
+              nz-col
+              nzXs="24"
+              nzSm="24"
+              nzMd="12"
+              nzLg="12"
+              nzXl="12"
+              class="nuevo-form-item"
+            >
+              <div class="nuevo-form-title">Lugar</div>
+              <mat-form-field appearance="outline" class="input-container">
+                <input matInput placeholder="Escribe..." formControlName="lugar"/>
+                <div *ngIf="formularioNoticia.get('lugar')?.invalid && formularioNoticia.get('lugar')?.touched" class="error-text">
+                  Ingrese un lugar
+                </div>          
+              </mat-form-field>
+            </div>
+  
+            <div
+              nz-col
+              nzXs="24"
+              nzSm="24"
+              nzMd="12"
+              nzLg="12"
+              nzXl="12"
+              class="nuevo-form-item"
+            >
+              <div class="nuevo-form-title">URL</div>
+              <mat-form-field appearance="outline" class="input-container">
+                <input matInput placeholder="Escribe..." formControlName="url"/>
+              </mat-form-field>
+            </div>
+  
+            <div
+              nz-col
+              nzXs="24"
+              nzSm="24"
+              nzMd="12"
+              nzLg="12"
+              nzXl="12"
+              class="nuevo-form-item"
+            >
+              <div class="nuevo-form-title">Carga de archivos</div>
+  
+              <!-- CARGA DE IMAGEN -->
+              <mat-form-field appearance="outline" class="input-container">
+                <mat-toolbar>
+                  <div ondrag="uploadFiles()">
+                    <input hidden matInput />
+                    <input
+                      style="width: 100%; background-color: white"
+                      type="file"
+                      id="fileInput"
+                      name="fileInput"
+                      accept="image/*"
+                      (change)="selectFiles($event)"
+                    />
+                    <div class="image-text">
+                      <span class="drop-image-text">Arrastra y suelta o </span>
+                      <span class="navigate-image-text">Navega dispositivo</span>
+                    </div>
+                  </div>
+                </mat-toolbar>
+              </mat-form-field>
+              <div *ngIf="preview != ''" class="nuevo-form-archivo">
+                <b>Imagen:</b> {{ selectedFileNames[0] }}
+              </div>
+            </div>
+  
+            <div
+              nz-col
+              nzXs="24"
+              nzSm="24"
+              nzMd="12"
+              nzLg="12"
+              nzXl="12"
+              class="nuevo-form-item"
+            >
+              <div *ngIf="preview != ''" class="image-preview">
+                <div class="preview-container">
+                  <div class="preview-filter">
+                    <div class="capitals">BÁSQUETBOL</div>
+                    <div class="reserva_ahora capitals">RESERVA AHORA</div>
+                  </div>
+                  <img [src]="preview" class="preview" />
+                </div>
+              </div>
+            </div>
+            <div
+              nz-col
+              nzXs="24"
+              nzSm="24"
+              nzMd="24"
+              nzLg="24"
+              nzXl="24"
+              class="nuevo-form-item"
+            >
+              <div class="buttons-container">
+                <button
+                  mat-button
+                  color="button-cancelar"
+                  (click)="onCancelClick()"
+                >
+                  <div class="deportes-cancelar-text">Cancelar</div>
+                </button>
+                <button type="submit" mat-button color="button-guardar" (click)="enviarDatos()">
+                  <div class="deportes-guardar-text">Guardar</div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
