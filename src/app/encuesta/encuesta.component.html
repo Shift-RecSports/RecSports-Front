@@ -1,19 +1,21 @@
 <div class="grid-container">
   <div class="encuesta-container">
     <p class="titulo-encuesta">Encuesta de satisfacción</p>
-    <br>
+    <br />
     <p class="texto-evalua">Del 0 al 10 evalúa tu experiencia con RecSports</p>
     <div class="slider-container">
       <mat-slider [(ngModel)]="sliderValue" min="0" max="10" step="1" showTickMarks discrete [displayWith]="formatLabel">
         <input matSliderThumb>
       </mat-slider>
       <div class="slider-tick-container">
-        <div class="slider-tick" *ngFor="let tick of tickValues">{{tick}}</div>
+        <div class="slider-tick" *ngFor="let tick of tickValues">
+          {{ tick }}
+        </div>
       </div>
     </div>
-    <br>
-    <br>
-    <br>
+    <br />
+    <br />
+    <br />
     <p class="texto-opinion">Compártenos tu opinión</p>
     <div class="inputs">
       <input class="text-field-tema" [(ngModel)]="inputValue" (ngModelChange)="onInputChange($event)" nz-input placeholder="Tema..." maxlength="50"/>
@@ -24,4 +26,3 @@
     </div>
   </div>
 </div>
-

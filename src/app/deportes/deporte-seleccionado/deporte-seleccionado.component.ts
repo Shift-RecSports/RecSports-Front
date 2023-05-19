@@ -7,6 +7,10 @@ import { ModalReservacionComponent } from './modal-reservacion/modal-reservacion
 import { ApiService } from 'src/app/service/api.service';
 import { Deporte } from 'src/app/classes/deportes';
 import { Espacio } from 'src/app/classes/espacios';
+import { ModalBorrarEspacioComponent } from './modal-borrar-espacio/modal-borrar-espacio.component';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+import { distinctUntilChanged, map, shareReplay, tap } from 'rxjs/operators';
 
 interface newHorarioReservacion {
   id: string;
@@ -106,6 +110,7 @@ export class DeporteSeleccionadoComponent {
   showEditButton = false;
   showAddEspacio = false;
   showAllReservaciones = false;
+  showDeleteEspacio = false;
 
   selectedDay: number = 5;
   todayDay: number = 0;
@@ -122,7 +127,25 @@ export class DeporteSeleccionadoComponent {
     'Sab.',
   ];
 
+  currentBreakpoint: string = '';
+  breakpointLarge = Breakpoints.Large;
+  breakpointMedium = Breakpoints.Medium;
+  breakpointSmall = Breakpoints.Small;
+  breakpointXSmall = Breakpoints.XSmall;
+  readonly breakpoint$ = this.breakpointObserver
+    .observe([
+      Breakpoints.Large,
+      Breakpoints.Medium,
+      Breakpoints.Small,
+      '(min-width: 500px)',
+    ])
+    .pipe(
+      tap((value) => console.log(value)),
+      distinctUntilChanged()
+    );
+
   constructor(
+    private breakpointObserver: BreakpointObserver,
     private service: AuthService,
     private router: Router,
     public dialog: MatDialog,
@@ -133,6 +156,7 @@ export class DeporteSeleccionadoComponent {
       this.showEditButton = true;
       this.showAddEspacio = true;
       this.showAllReservaciones = true;
+      this.showDeleteEspacio = true;
     }
   }
 
@@ -178,6 +202,20 @@ export class DeporteSeleccionadoComponent {
         this.dataSource = Object.keys(this.arrayReservacion) as arrOfHorarios[];
       });
     });
+
+    this.breakpoint$.subscribe(() => this.breakpointChanged());
+  }
+
+  private breakpointChanged() {
+    if (this.breakpointObserver.isMatched(Breakpoints.Large)) {
+      this.currentBreakpoint = Breakpoints.Large;
+    } else if (this.breakpointObserver.isMatched(Breakpoints.Medium)) {
+      this.currentBreakpoint = Breakpoints.Medium;
+    } else if (this.breakpointObserver.isMatched(Breakpoints.Small)) {
+      this.currentBreakpoint = Breakpoints.Small;
+    } else if (this.breakpointObserver.isMatched('(min-width: 500px)')) {
+      this.currentBreakpoint = '(min-width: 500px)';
+    }
   }
 
   ngOnDestroy() {
@@ -260,6 +298,12 @@ export class DeporteSeleccionadoComponent {
   openDialog(reservacion: newHorarioReservacion): void {
     const dialogRef = this.dialog.open(ModalReservacionComponent, {
       data: { reservacion: reservacion, refreshDay: this.onSelectDay },
+    });
+  }
+
+  openDeleteEspacio(espacio: Espacio): void {
+    const dialogRef = this.dialog.open(ModalBorrarEspacioComponent, {
+      data: { espacio: espacio },
     });
   }
 

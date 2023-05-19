@@ -46,6 +46,19 @@
             >
               <div>{{ espacio.zona }}</div>
               <div>{{ espacio.nombre }}</div>
+              <button
+                *ngIf="showDeleteEspacio"
+                class="espacio-delete-button"
+                mat-mini-fab
+                (click)="openDeleteEspacio(espacio)"
+              >
+                <mat-icon
+                  [ngStyle]="{
+                    transform: 'scale(1)'
+                  }"
+                  >close</mat-icon
+                >
+              </button>
             </div>
           </div>
 
@@ -184,10 +197,13 @@
 
         <!-- TABLA RESERVACIONES -->
 
-        <div class="deporte-reservacion-table-container">
-          <div class="deporte-tiempo-linea">
+        <div
+          class="deporte-reservacion-table-container"
+          style="overflow-x: auto; white-space: nowrap"
+        >
+          <!-- <div class="deporte-tiempo-linea">
             <div class="deporte-tiempo-circulo"></div>
-          </div>
+          </div> -->
 
           <table mat-table [dataSource]="dataSource">
             <!-- HOUR Column -->
@@ -211,7 +227,18 @@
                 <mat-divider></mat-divider>
                 <div class="spacer"></div>
 
-                <!-- <div *ngIf="element.disabled === false; else disabled_button"> -->
+                <!-- <div
+                  style="overflow-x: auto; white-space: nowrap"
+                  [ngClass]="
+                    currentBreakpoint == breakpointLarge
+                      ? 'width-large'
+                      : currentBreakpoint == breakpointMedium
+                      ? 'width-medium'
+                      : currentBreakpoint == breakpointSmall
+                      ? 'width-small'
+                      : 'width-xsmall'
+                  "
+                > -->
                 <div>
                   <div
                     *ngFor="let reservacion of arrayReservacion[dataSource[i]]"

@@ -18,6 +18,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ApiService } from './service/api.service';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 
 import { GimnasioComponent } from './gimnasio/gimnasio.component';
 import { DeportesComponent } from './deportes/deportes.component';
@@ -60,8 +62,7 @@ import { HomeEntrenadorComponent } from './home-entrenador/home-entrenador.compo
 
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { MatSliderModule } from '@angular/material/slider';
-
-
+import { ModalBorrarEspacioComponent } from './deportes/deporte-seleccionado/modal-borrar-espacio/modal-borrar-espacio.component';
 
 registerLocaleData(en);
 
@@ -91,6 +92,7 @@ registerLocaleData(en);
     HomeEntrenadorComponent,
     ModalComponent,
     EncuestasAdminComponent,
+    ModalBorrarEspacioComponent,
   ],
   imports: [
     BrowserModule,
@@ -119,7 +121,9 @@ registerLocaleData(en);
     NzProgressModule,
     NzSelectModule,
     NzInputModule,
-    MatSliderModule
+    MatSliderModule,
+    NzAlertModule,
+    NzNotificationModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }, ApiService],
   bootstrap: [AppComponent],

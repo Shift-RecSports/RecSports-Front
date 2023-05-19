@@ -6,6 +6,7 @@ import { ApiService } from '../service/api.service';
 import { Registro } from '../classes/gimnasio';
 import { Subscription, switchMap, timer } from 'rxjs';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { ExcelServiceService } from '../service/excel-service.service';
 
 @Component({
   selector: 'app-gimnasio',
@@ -27,7 +28,10 @@ export class GimnasioComponent {
   page: number;
   timerSubscription: Subscription;
 
-  constructor(private _apiService: ApiService) {
+  constructor(
+    private _apiService: ApiService,
+    private excelService: ExcelServiceService
+  ) {
     // Set the minimum to January 1st and maximun to June 31st
     // const currentYear = new Date().getFullYear();
     // TODO: Change maxDate to current day
@@ -76,5 +80,56 @@ export class GimnasioComponent {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  exportExcel(data: any): void {
+    const fileToExport = data.map((item: any) => {
+      const fecha = new Date(item.fecha);
+      fecha.setDate(fecha.getDate() + 1);
+      return {
+        Fecha: fecha,
+        Id: item.id,
+        Matricula: item.matricula,
+        Nombre: item.nombre,
+        Entrada: item.entrada,
+        Salida: item.salida,
+      };
+    });
+
+    console.log(data);
+    console.log(fileToExport);
+
+    let conteos: {
+      [key: string]: number;
+    } = {};
+
+    const conteo = data.map((item: Registro) => {
+      if (item.fecha in conteos) {
+        conteos[`${item.fecha}`] = conteos[item.fecha] + 1;
+      } else {
+        conteos[`${item.fecha}`] = 1;
+      }
+    });
+
+    const fileToExportFreq = [];
+    for (const [key, value] of Object.entries(conteos)) {
+      fileToExportFreq.push({
+        Fecha: key,
+        Conteo: value,
+      });
+    }
+
+    this.excelService.exportToExcel(
+      fileToExport,
+      fileToExportFreq,
+      'RegistrosGimnasio-' + new Date().getTime() + '.xlsx'
+    );
+  }
+
+  onClickCSV() {
+    const url = `/registros-gimnasio`;
+    this._apiService.get(url).subscribe((data) => {
+      this.exportExcel(data);
+    });
   }
 }

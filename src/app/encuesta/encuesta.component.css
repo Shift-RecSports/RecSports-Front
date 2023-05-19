@@ -9,7 +9,7 @@
 }
 
 .titulo-encuesta {
-  font-family: 'Helvetica';
+  font-family: "Helvetica";
   font-style: normal;
   font-weight: 700;
   font-size: 30px;
@@ -19,7 +19,7 @@
 }
 
 .texto-evalua {
-  font-family: 'Helvetica';
+  font-family: "Helvetica";
   font-style: normal;
   font-weight: 700;
   font-size: 30px;
@@ -31,7 +31,7 @@
 }
 
 .texto-opinion {
-  font-family: 'Helvetica';
+  font-family: "Helvetica";
   font-style: normal;
   font-weight: 700;
   font-size: 30px;
@@ -49,13 +49,13 @@
   align-items: center;
   padding: 16px 24px;
   gap: 8px;
-  background: #0033A0;
+  background: #0033a0;
   /*box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);*/
   border-radius: 10px;
   border: none;
 
-  color: #FDFDFD;
-  font-family: 'Helvetica';
+  color: #fdfdfd;
+  font-family: "Helvetica";
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
@@ -80,7 +80,7 @@ mat-slider {
 
 .slider-tick {
   font-size: 18px;
-  font-family: 'Helvetica';
+  font-family: "Helvetica";
   font-style: normal;
   font-weight: 700;
 }
@@ -94,7 +94,7 @@ mat-slider {
 .text-field-tema {
   width: calc(100% - 35%);
   height: 50px;
-  background: #FFFFFF;
+  background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
   border-radius: 20px;
@@ -103,13 +103,13 @@ mat-slider {
 }
 
 textarea::placeholder {
-  color: #C1C1C1;
+  color: #c1c1c1;
 }
 
 .text-field-mensaje {
   width: calc(100% - 35%);
   height: 150px;
-  background: #FFFFFF;
+  background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
   border-radius: 20px;
@@ -145,4 +145,3 @@ textarea::placeholder {
     line-height: 24px;
   }
 }
-
