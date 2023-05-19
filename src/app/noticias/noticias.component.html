@@ -1,5 +1,20 @@
 <div class="grid-container">
   <div class="noticias-container">
-    <p>Noticas works!</p>
+    <nz-row [nzGutter]="[16, 16]">
+      <nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="6" nzXl="6" *ngFor="let noticia of listaNoticias">
+        <nz-card class="noticias-card" [style.background-image]="'linear-gradient(180deg, rgba(0, 0, 0, 0.29) 4%, #01329E 104%),url(' + noticia.imagen + ')'"  (click)="redirectToUrl(noticia.url)">
+          <p class="news-place">{{ noticia.lugar }}</p>
+          <h3>{{ noticia.titulo }}</h3>
+          <p class="news-date">{{ noticia.fecha }}</p>
+        </nz-card>
+      </nz-col>
+    </nz-row>
+
+    <div>
+      <button mat-button color="button-agregar" (click)="nuevaNoticia()">
+        <div class="noticia-agregar-text">Agregar noticia</div>
+      </button>
+    </div>
+
   </div>
 </div>

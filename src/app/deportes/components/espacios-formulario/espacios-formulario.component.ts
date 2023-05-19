@@ -12,26 +12,6 @@ import { Espacio } from 'src/app/classes/espacios';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ApiService } from 'src/app/service/api.service';
 
-export class RegistroEntradaComponent {
-  matricula: string;
-  message: string;
-
-  constructor(private _apiService: ApiService) {
-    this.matricula = '';
-    this.message = '';
-  }
-
-  onSubmitMatricula() {
-    const url = `/registros-gimnasio/matricula`;
-
-    this._apiService
-      .post(url, { matricula: this.matricula })
-      .subscribe((data) => {
-        this.message = `Matricula registrada con éxito: ${data.matricula}`;
-      });
-  }
-}
-
 @Component({
   selector: 'app-espacios-formulario',
   templateUrl: './espacios-formulario.component.html',

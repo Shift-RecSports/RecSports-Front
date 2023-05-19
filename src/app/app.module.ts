@@ -57,9 +57,14 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NuevoDeporteComponent } from './deportes/components/nuevo-deporte/nuevo-deporte.component';
 import { EspaciosFormularioComponent } from './deportes/components/espacios-formulario/espacios-formulario.component';
 import { HomeEntrenadorComponent } from './home-entrenador/home-entrenador.component';
+import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { MatSliderModule } from '@angular/material/slider';
+import { NuevaNoticiaComponent } from './noticias/nueva-noticia/nueva-noticia.component';
+
 
 
 
@@ -91,6 +96,7 @@ registerLocaleData(en);
     HomeEntrenadorComponent,
     ModalComponent,
     EncuestasAdminComponent,
+    NuevaNoticiaComponent,
   ],
   imports: [
     BrowserModule,
@@ -119,7 +125,10 @@ registerLocaleData(en);
     NzProgressModule,
     NzSelectModule,
     NzInputModule,
-    MatSliderModule
+    MatSliderModule,
+    NzTimePickerModule,
+    NzDatePickerModule,
+    MatDatepickerModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }, ApiService],
   bootstrap: [AppComponent],
