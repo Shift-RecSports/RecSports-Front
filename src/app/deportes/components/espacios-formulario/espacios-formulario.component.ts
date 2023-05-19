@@ -1,4 +1,10 @@
-import { HttpClient, HttpEvent, HttpEventType, HttpRequest, HttpResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpEvent,
+  HttpEventType,
+  HttpRequest,
+  HttpResponse,
+} from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
@@ -18,7 +24,6 @@ import { ApiService } from 'src/app/service/api.service';
   styleUrls: ['./espacios-formulario.component.css'],
 })
 export class EspaciosFormularioComponent {
-
   areas = new FormControl('');
   options: string[] = ['CBD1', 'CBD2', 'Wellness Center'];
 
@@ -57,14 +62,15 @@ export class EspaciosFormularioComponent {
     private service: AuthService,
     private router: Router,
     public formulario: FormBuilder,
-    private _apiService: ApiService,
+    private _apiService: ApiService
   ) {
     this.nombre = '';
     this.hora_inicio = '08:00:00';
     this.hora_fin = '19:00:00';
     this.aforo = '';
     this.zona = '';
-    this.imagen = 'https://javier.rodriguez.org.mx/itesm/borregos/borrego-blue.png';
+    this.imagen =
+      'https://javier.rodriguez.org.mx/itesm/borregos/borrego-blue.png';
     this.deporte = '';
   }
 
@@ -152,24 +158,24 @@ export class EspaciosFormularioComponent {
   }
 
   enviarDatos() {
+    console.log('Boton presionado');
 
-    console.log("Boton presionado");
-    
     const url = '/espacios';
 
     this._apiService
-    .post(url, {nombre: this.nombre, 
-                hora_inicio: this.hora_inicio, 
-                hora_fin: this.hora_fin,
-                aforo: this.aforo,
-                zona: this.zona,
-                imagen: this.imagen,
-                deporte: this.deporte})
-    .subscribe((data) => {
-      console.log(data);
-      this.message = `Deporte ${data.nombre} registrado con éxito}`;
-    });
-
+      .post(url, {
+        nombre: this.nombre,
+        hora_inicio: this.hora_inicio,
+        hora_fin: this.hora_fin,
+        aforo: this.aforo,
+        zona: this.zona,
+        imagen: this.imagen,
+        deporte: this.deporte,
+      })
+      .subscribe((data) => {
+        console.log(data);
+        this.message = `Deporte ${data.nombre} registrado con éxito}`;
+      });
   }
 
   onCancelClick() {

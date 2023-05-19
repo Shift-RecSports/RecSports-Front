@@ -8,16 +8,30 @@
     [opened]="(isHandset$ | async) === false"
   >
     <mat-toolbar>
-      <div class="header-image-container">
-        <img
-          class="header-image"
-          src="/assets/img/recsports_logo.png"
-          alt="recsports logo"
-        /></div
-    ></mat-toolbar>
+      <!-- <button
+        type="button"
+        color="primary"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async"
+      >
+        <mat-icon aria-label="Side nav toggle icon">arrow_back</mat-icon>
+      </button> -->
+      <img
+        class="header-image"
+        src="/assets/img/recsports_logo.png"
+        alt="recsports logo"
+      />
+    </mat-toolbar>
     <mat-nav-list style="padding-top: 2rem">
       <div *ngIf="navbarFlags.inicioFlag">
-        <a mat-list-item routerLink="" class="sidebar-list-item">
+        <a
+          mat-list-item
+          routerLink=""
+          class="sidebar-list-item"
+          (click)="showSidebar ? openSidebar(false) : null"
+        >
           <div class="sidebar-list-element">
             <mat-icon class="sidebar-icon" fontSet="material-icons-outlined"
               >home icon</mat-icon
@@ -28,7 +42,12 @@
       </div>
 
       <div *ngIf="navbarFlags.gimnasioFlag">
-        <a mat-list-item routerLink="gimnasio" class="sidebar-button">
+        <a
+          mat-list-item
+          routerLink="gimnasio"
+          class="sidebar-button"
+          (click)="showSidebar ? openSidebar(false) : null"
+        >
           <div class="sidebar-list-element">
             <mat-icon class="sidebar-icon" fontSet="material-icons-outlined"
               >fitness_center</mat-icon
@@ -38,7 +57,12 @@
       </div>
 
       <div *ngIf="navbarFlags.deportesFlag">
-        <a mat-list-item routerLink="deportes" class="sidebar-button">
+        <a
+          mat-list-item
+          routerLink="deportes"
+          class="sidebar-button"
+          (click)="showSidebar ? openSidebar(false) : null"
+        >
           <div class="sidebar-list-element">
             <mat-icon class="sidebar-icon" fontSet="material-icons-outlined"
               >pool icon</mat-icon
@@ -48,7 +72,11 @@
       </div>
 
       <div *ngIf="navbarFlags.calendarioFlag">
-        <a mat-list-item routerLink="calendario" class="sidebar-button"
+        <a
+          mat-list-item
+          routerLink="calendario"
+          class="sidebar-button"
+          (click)="showSidebar ? openSidebar(false) : null"
           ><div class="sidebar-list-element">
             <mat-icon class="sidebar-icon" fontSet="material-icons-outlined"
               >event note icon</mat-icon
@@ -58,7 +86,11 @@
       </div>
 
       <div *ngIf="navbarFlags.noticasFlag">
-        <a mat-list-item routerLink="noticias" class="sidebar-button"
+        <a
+          mat-list-item
+          routerLink="noticias"
+          class="sidebar-button"
+          (click)="showSidebar ? openSidebar(false) : null"
           ><div class="sidebar-list-element">
             <mat-icon class="sidebar-icon" fontSet="material-icons-outlined"
               >assignment icon</mat-icon
@@ -68,7 +100,12 @@
       </div>
 
       <div *ngIf="navbarFlags.mapaFlag">
-        <a mat-list-item routerLink="mapa" class="sidebar-button">
+        <a
+          mat-list-item
+          routerLink="mapa"
+          class="sidebar-button"
+          (click)="showSidebar ? openSidebar(false) : null"
+        >
           <div class="sidebar-list-element">
             <mat-icon class="sidebar-icon" fontSet="material-icons-outlined"
               >map icon</mat-icon
@@ -88,7 +125,12 @@
       </div>
 
       <div *ngIf="navbarFlags.encuestaFlag">
-        <a mat-list-item routerLink="encuesta" class="sidebar-button">
+        <a
+          mat-list-item
+          routerLink="encuesta"
+          class="sidebar-button"
+          (click)="showSidebar ? openSidebar(false) : null"
+        >
           <div class="sidebar-list-element">
             <mat-icon class="sidebar-icon" fontSet="material-icons-outlined"
               >chat icon</mat-icon
@@ -98,7 +140,12 @@
       </div>
 
       <div *ngIf="navbarFlags.entradaFlag">
-        <a mat-list-item routerLink="gimnasio/entrada" class="sidebar-button">
+        <a
+          mat-list-item
+          routerLink="gimnasio/entrada"
+          class="sidebar-button"
+          (click)="showSidebar ? openSidebar(false) : null"
+        >
           <div class="sidebar-list-element">
             <mat-icon class="sidebar-icon" fontSet="material-icons-outlined"
               >arrow_forward</mat-icon
@@ -109,7 +156,12 @@
       </div>
 
       <div *ngIf="navbarFlags.salidaFlag">
-        <a mat-list-item routerLink="gimnasio/salida" class="sidebar-button">
+        <a
+          mat-list-item
+          routerLink="gimnasio/salida"
+          class="sidebar-button"
+          (click)="showSidebar ? openSidebar(false) : null"
+        >
           <div class="sidebar-list-element">
             <mat-icon class="sidebar-icon" fontSet="material-icons-outlined"
               >arrow_back</mat-icon
@@ -121,13 +173,18 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
+    <div
+      class="background-blur"
+      [ngClass]="showSidebar ? '' : 'disactive-background'"
+      (click)="openSidebar(false)"
+    ></div>
     <mat-toolbar color="primary" class="header-toolbar">
       <button
         type="button"
         color="primary"
         aria-label="Toggle sidenav"
         mat-icon-button
-        (click)="drawer.toggle()"
+        (click)="openSidebar(true)"
         *ngIf="isHandset$ | async"
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
