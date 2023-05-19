@@ -10,8 +10,16 @@ nz-progress {
     font-weight: 700;
     font-size: 24px;
     line-height: 28px;
-
+    margin-top: 0.5rem;
     color: #000000;
+}
+
+/* Unused */
+.custom-progress-text {
+    font-family: 'Helvetica';
+    font-style: bold;
+    font-weight: 500;
+    font-size: 35px;
 }
 
 .outer-chart-div {
@@ -19,17 +27,17 @@ nz-progress {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 20px;
+    padding-top: 2rem;
 }
 
 .fraccion {
     font-family: 'Helvetica';
     font-style: normal;
     font-weight: 700;
-    font-size: 30px;
-
+    font-size: 35px;
     display: flex;
     align-items: center;
+    margin-top: 0.5rem;
 }
 
 .labels-outer-div {

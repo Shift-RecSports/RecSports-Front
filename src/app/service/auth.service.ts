@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { userLogin, user } from './types';
+import { User } from './types';
 
 @Injectable({
   providedIn: 'root',
@@ -12,43 +12,17 @@ export class AuthService {
   // TODO: Change API link for user
   // apiurl = 'https://api.namefake.com/';
 
-  async Login(userLogin: userLogin): Promise<user> {
+  async Login(user: User): Promise<User> {
     // TODO: Uncomment
     // const response = await this.http.post(this.apiurl, user);
 
     // TOOD: Comment
-    let userRole;
 
-    switch (userLogin.matricula.toLowerCase()) {
-      case 'entrenador': {
-        userRole = 'entrenador';
-        break;
-      }
-      case 'admin': {
-        userRole = 'admin';
-        break;
-      }
-      default: {
-        userRole = 'alumno';
-        break;
-      }
-    }
+    sessionStorage.setItem('user', user.matricula ? user.matricula : '');
+    sessionStorage.setItem('role', user.userRole ? user.userRole : '');
+    sessionStorage.setItem('nombre', user.nombre ? user.nombre : '');
 
-    const userData: user = {
-      matricula: userLogin.matricula,
-      userRole: userRole,
-    };
-
-    sessionStorage.setItem(
-      'user',
-      userData.matricula ? userData.matricula : ''
-    );
-    sessionStorage.setItem(
-      'userrole',
-      userData.userRole ? userData.userRole : ''
-    );
-
-    return userData;
+    return user;
   }
 
   isLoggedIn() {
@@ -60,8 +34,12 @@ export class AuthService {
   }
 
   GetUserRole() {
-    return sessionStorage.getItem('userrole') != null
-      ? sessionStorage.getItem('userrole')?.toString().toUpperCase()
+    return sessionStorage.getItem('role') != null
+      ? sessionStorage.getItem('role')?.toString().toUpperCase()
       : 'd';
+  }
+
+  GetUserNameString() {
+    return sessionStorage.getItem('nombre')?.toString();
   }
 }

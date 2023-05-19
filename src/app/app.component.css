@@ -1,3 +1,6 @@
 .content {
   position: relative;
+  width: 100%;
+  display: block;
+  z-index: 0;
 }

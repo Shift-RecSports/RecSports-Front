@@ -20,23 +20,6 @@
   padding: 1rem 0.5rem;
 }
 
-/* .deporte-header-content {
-  background-image: linear-gradient(
-      to right,
-      rgb(22, 38, 134, 0.8),
-      rgb(255, 255, 255, 0)
-    ),
-    url("https://conecta.tec.mx/sites/default/files/styles/header_full/public/2019-04/Estadio-borregos1920.jpg?h=920929c4&itok=qJq33r8o");
-  background-position: center center;
-  background-size: cover;
-  border-radius: 1rem;
-  box-shadow: 0.5rem 0.5rem 1rem 0.5rem rgba(0, 0, 0, 0.15);
-
-  min-height: 30vh;
-  margin-bottom: 2rem;
-  display: flex;
-} */
-
 .deporte-header-content {
   border-radius: 1rem;
   box-shadow: 0.5rem 0.5rem 1rem 0.5rem rgba(0, 0, 0, 0.15);
@@ -99,6 +82,14 @@
   padding-right: 1rem;
 }
 
+/* Mobile */
+@media (max-width: 600px) {
+  .deportes-edit-container {
+    position: absolute;
+    bottom: 0;
+  }
+}
+
 .mat-button-edit {
   border: 0.2rem solid #162686;
   background-color: #ffffff;
@@ -156,6 +147,14 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  position: relative;
+}
+
+.espacio-delete-button {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  background-color: #c22424;
 }
 
 .deporte-espacio-agregarContainer {
@@ -212,6 +211,18 @@
 
 .deporte-reservacion-button-past {
   padding-top: 1rem;
+}
+
+@media (max-width: 1200px) {
+  .deporte-reservacion-button-past {
+    display: none;
+  }
+}
+
+@media (max-width: 960px) {
+  .deporte-reservacion-button-list {
+    flex-wrap: wrap;
+  }
 }
 
 .deporte-reservacion-dia {
@@ -377,3 +388,67 @@
     margin-bottom: 1rem;
   }
 }
+
+@media (max-width: 600px) {
+  .mat-horario {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .mat-horario-activo {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .mat-horario-expirado {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .deporte-reservacion-container {
+    padding: 1.5rem 0 1rem 0;
+  }
+
+  .deporte-reservacion-hora {
+    font-size: 0.9rem;
+  }
+
+  .mat-horario {
+    padding: 1.3rem 2rem;
+    font-size: 1.1rem;
+    margin-right: 0;
+  }
+
+  .mat-horario-activo {
+    padding: 1.3rem 2rem;
+    font-size: 1.1rem;
+    margin-right: 0;
+  }
+
+  .mat-horario-expirado {
+    padding: 1.3rem 2rem;
+    font-size: 1.1rem;
+    margin-right: 0;
+  }
+}
+/* ::-webkit-scrollbar {
+  height: 1px;
+  width: 1px;
+  border: 1px solid transparent;
+}
+
+.width-large {
+  width: 100rem;
+}
+
+.width-medium {
+  width: 60rem;
+}
+
+.width-small {
+  width: 35rem;
+}
+
+.width-xsmall {
+  width: 10rem;
+} */
