@@ -22,10 +22,9 @@
   font-family: 'Helvetica';
   font-style: normal;
   font-weight: 700;
-  font-size: 30px;
+  font-size: 24px;
   line-height: 34px;
   color: #000000;
-  margin-top: 50px;
   align-items: center;
   text-align: center;
 }
@@ -34,55 +33,65 @@
   font-family: 'Helvetica';
   font-style: normal;
   font-weight: 700;
-  font-size: 30px;
-  line-height: 34px;
+  font-size: 24px;
+  line-height: 24px;
   color: #000000;
   margin-top: 10px;
-  align-items: center;
   text-align: center;
 }
 
-.boton-encuesta {
+.tarjeta-promedio-container {
   display: flex;
-  flex-direction: row;
   justify-content: center;
-  align-items: center;
-  padding: 16px 24px;
-  gap: 8px;
-  background: #0033A0;
-  /*box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);*/
-  border-radius: 10px;
-  border: none;
+  align-items: center; 
+  padding: 1rem 0rem;
+}
 
-  color: #FDFDFD;
-  font-family: 'Helvetica';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 23px;
+.tarjeta-promedio {
+  width: calc(100% - 30%);
+  box-sizing: border-box;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0rem;
 }
 
 .slider-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 mat-slider {
-  width: calc(100% - 30%);
+  width: calc(100% - 20%);
 }
 
 .slider-tick-container {
-  width: calc(100% - 30%);
+  width: calc(100% - 20%);
   display: flex;
   justify-content: space-between;
 }
 
 .slider-tick {
-  font-size: 18px;
+  font-size: 16px;
   font-family: 'Helvetica';
   font-style: normal;
   font-weight: 700;
+}
+
+.texto-pregunta {
+  font-family: 'Helvetica';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 34px;
+  color: #000000;
+  padding-left: 9%;
+  margin-bottom: -0.5rem;
 }
 
 .inputs {
@@ -91,8 +100,21 @@ mat-slider {
   align-items: center;
 }
 
+.tema {
+  width: calc(100% - 30%);
+  height: 50px;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  text-indent: 18px;
+  font-size: 18px;
+  padding-top: 10px;
+  color: #C1C1C1;
+}
+
 .text-field-tema {
-  width: calc(100% - 35%);
+  width: calc(100% - 30%);
   height: 50px;
   background: #FFFFFF;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -107,13 +129,12 @@ textarea::placeholder {
 }
 
 .text-field-mensaje {
-  width: calc(100% - 35%);
+  width: calc(100% - 30%);
   height: 150px;
   background: #FFFFFF;
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
   border-radius: 20px;
-  /*text-indent: 20px;*/
   vertical-align: top;
   line-height: 1em;
   display: inline-block;
@@ -123,6 +144,24 @@ textarea::placeholder {
   padding-right: 20px;
   line-height: 25px;
   resize: none;
+}
+
+.boton-encuesta {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 24px;
+  gap: 8px;
+  background: #0033A0;
+  border-radius: 10px;
+  border: none;
+  color: #FDFDFD;
+  font-family: 'Helvetica';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
 }
 
 @media (max-width: 960px) {
@@ -143,6 +182,25 @@ textarea::placeholder {
   .texto-opinion {
     font-size: 20px;
     line-height: 24px;
+  }
+  .texto-pregunta {
+    font-size: 16px;
+  }
+  .tarjeta-promedio {
+    width: calc(100% - 30px);
+  }
+}
+
+@media (max-width: 600px) {
+  .texto-pregunta {
+    font-size: 12px;
+  }
+  .tarjeta-promedio {
+    width: calc(100% - 10px);
+  }
+  .pregunta-container {
+    width: calc(100% - 3%);
+    /*display: inline;*/
   }
 }
 

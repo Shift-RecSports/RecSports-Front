@@ -60,6 +60,8 @@ import { HomeEntrenadorComponent } from './home-entrenador/home-entrenador.compo
 
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { MatSliderModule } from '@angular/material/slider';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+
 
 
 
@@ -119,7 +121,8 @@ registerLocaleData(en);
     NzProgressModule,
     NzSelectModule,
     NzInputModule,
-    MatSliderModule
+    MatSliderModule,
+    NzDropDownModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }, ApiService],
   bootstrap: [AppComponent],
