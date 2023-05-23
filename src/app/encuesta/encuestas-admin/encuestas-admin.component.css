@@ -16,7 +16,7 @@
   font-size: 30px;
   line-height: 34px;
   color: #000000;
-  margin-top: 10px;
+  margin-top: 0.625rem;
 }
 
 .subtitulo-encuesta {
@@ -28,7 +28,7 @@
 }
   
 .tarjeta-promedio {
-  height: 200px;
+  height: 10rem;
   width: calc(100% - 40px);
   display: flex;
   flex-wrap: wrap;
@@ -41,21 +41,32 @@
   flex-direction: column;
   align-items: center;
   
-  padding-top: 30px;
+  padding-top: 0.875rem;
+}
+
+.titulo-promedio {
+  font-family: 'Helvetica';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 34px;
+  padding-right: 75%;
 }
   
 .slider-promedio {
   width: calc(100% - 20%);
-  margin-top: 30px;
+  margin-top: 1.875rem;
   justify-content: center;
   align-items: center;
-  height: 50px;
+  height: 3.125rem;
+  margin-top: -0.2rem;
 }
 
 .slider-tick-container {
   display: flex;
   justify-content: space-between;
   width: calc(100% - 20%);
+  margin-top: -0.5rem;
 }
 
 .slider-tick {
@@ -65,27 +76,16 @@
   font-weight: 700;
 }
 
-/*sin usar: pronto borrar*/
-.respuetas-encuesta {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  justify-content: flex-start !important;
-  gap: 20px !important;
-  flex-direction: row !important;
-}
-
 .respuestas {
-  padding-right: 40px;
+  padding-right: 2.5rem;
 }
 
 .card {
   display: flex;
-  /*width: calc(25% - 2%);*/
   background-color: #FFFFFF;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   border-radius: 20px;
-  /*padding: 20px;*/
   flex-direction: column;
   align-items: center;
 }
@@ -99,14 +99,23 @@
   display: flex;
   text-align: center;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 1.25rem;
+}
+
+.fecha-respuesta {
+  font-family: 'Helvetica';
+  font-style: normal;
+  font-weight: 200;
+  font-size: 14px;
+  text-align: right;
+  color: #666666;
 }
 
 .slider-respuesta {
   width: calc(100% - 20%);
   justify-content: center;
   align-items: center;
-  height: 50px;
+  height: 3.125rem;
 }
 
 .mensaje-respuesta {
@@ -115,8 +124,8 @@
   font-weight: 300;
   font-size: 16px;
   line-height: 16px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 0.9375rem;
+  padding-right: 0.9375rem;
 }
 
 @media (max-width: 960px) {

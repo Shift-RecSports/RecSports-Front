@@ -3,17 +3,7 @@
       <p class="titulo-encuesta">Encuesta de los usuarios</p>
       <p class="subtitulo-encuesta">Promedio de las encuestas</p>
       <div class="tarjeta-promedio">
-        <!--
-          <mat-slider
-          class="slider-promedio"
-          [disabled]=true
-          [max]=10
-          [min]=0
-          [step]=1
-          [showTickMarks]=true>
-          <input matSliderThumb [(ngModel)]="value">
-        </mat-slider>
-        -->
+        <p class="titulo-promedio">Gimnasio</p> 
         <nz-progress class="slider-promedio" [nzPercent]="80" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="20"></nz-progress>
         <div class="slider-tick-container">
           <div class="slider-tick" *ngFor="let tick of tickValues">{{tick}}</div>
@@ -32,6 +22,7 @@
             <p class="titulo-respuesta">{{res.tema}}</p>
             <nz-progress class="slider-respuesta" [nzPercent]="res.calificacion*10" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="15"></nz-progress>
             <p class="mensaje-respuesta"> lorem ipsum dolor sit amet, consectetur adipiscing elit. donec aliquet luctus nulla, nec sagittisrotor aliquam eget.</p>
+            <p class="fecha-respuesta">{{res.fecha}}</p>
           </div>
         </div>
       </div>
