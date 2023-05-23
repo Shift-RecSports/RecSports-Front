@@ -8,7 +8,7 @@
         <p class="texto-pregunta">Gimnasio</p>
         <div class="slider-container">
           <mat-slider [(ngModel)]="sliderValue1" min="0" max="10" step="1" showTickMarks discrete [displayWith]="formatLabel">
-            <input matSliderThumb>
+            <input matSliderThumb value="5">
           </mat-slider>
           <div class="slider-tick-container">
             <div class="slider-tick" *ngFor="let tick of tickValues">{{tick}}</div>
@@ -22,7 +22,7 @@
         <p class="texto-pregunta">Wellness Center</p>
         <div class="slider-container">
           <mat-slider [(ngModel)]="sliderValue2" min="0" max="10" step="1" showTickMarks discrete [displayWith]="formatLabel">
-            <input matSliderThumb>
+            <input matSliderThumb value="5">
           </mat-slider>
           <div class="slider-tick-container">
             <div class="slider-tick" *ngFor="let tick of tickValues">{{tick}}</div>
@@ -36,7 +36,7 @@
         <p class="texto-pregunta">Athletics Web</p>
         <div class="slider-container">
           <mat-slider [(ngModel)]="sliderValue3" min="0" max="10" step="1" showTickMarks discrete [displayWith]="formatLabel">
-            <input matSliderThumb>
+            <input matSliderThumb value="5">
           </mat-slider>
           <div class="slider-tick-container">
             <div class="slider-tick" *ngFor="let tick of tickValues">{{tick}}</div>
@@ -48,7 +48,15 @@
     <br>
     <p class="texto-opinion">Compártenos tu opinión</p>
     <div class="inputs">
-      <a nz-dropdown [nzDropdownMenu]="menu" class="tema">
+      <div style="width: calc(100% - 30%);">
+        <nz-select [(ngModel)]="temaValue" class="tema" nzPlaceHolder="Tema">
+          <nz-option nzValue="gimnasio" nzLabel="Gimnasio"></nz-option>
+          <nz-option nzValue="wellness-center" nzLabel="Wellness-Center"></nz-option>
+          <nz-option nzValue="athletics web" nzLabel="Athletics Web"></nz-option>
+          <nz-option nzValue="otro" nzLabel="Otro"></nz-option>
+        </nz-select>
+      </div>
+      <!-- <a nz-dropdown [nzDropdownMenu]="menu" class="tema">
         Tema
         <span nz-icon nzType="down"></span>
       </a>
@@ -59,12 +67,12 @@
           <li nz-menu-item>Aplicacion</li>
           <li nz-menu-item>Otro</li>
         </ul>
-      </nz-dropdown-menu>
+      </nz-dropdown-menu> -->
       <!-- dfd 
         <input class="text-field-tema" [(ngModel)]="inputValue" (ngModelChange)="onInputChange($event)" nz-input placeholder="Tema..." maxlength="50"/>
       -->
       <br> 
-      <textarea class="text-field-mensaje" [(ngModel)]="textareaValue" (ngModelChange)="onTextareaChange($event)" placeholder="Escribe aqui..." [nzAutosize]="{ minRows: 1, maxRows: 3 }" maxlength="255"></textarea>
+      <textarea class="text-field-mensaje" [(ngModel)]="textareaValue" (ngModelChange)="onTextareaChange($event)" placeholder="Escribe aquí..." [nzAutosize]="{ minRows: 1, maxRows: 3 }" maxlength="255"></textarea>
       <br>
     <button class="boton-encuesta">Enviar</button>
     </div>
