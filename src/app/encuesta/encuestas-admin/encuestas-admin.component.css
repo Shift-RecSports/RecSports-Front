@@ -30,6 +30,10 @@
 ::ng-deep.ant-tabs-card > .ant-tabs-nav .ant-tabs-tab {
   border-radius: 15px !important;
   font-size: 20px;
+  font-family: 'Helvetica';
+  font-style: normal;
+  font-weight: 600;
+  color: #888888;
 }
 
 ::ng-deep.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
@@ -152,5 +156,11 @@
 @media (max-width: 960px) {
   .encuesta-container {
     padding: 6rem 1rem 1rem 1rem;
+  }
+  .titulo-promedio {
+    font-size: 16px;
+    line-height: 16px;
+    margin: 1rem 0rem;
+    padding-right: 0rem;
   }
 }
