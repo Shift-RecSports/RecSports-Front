@@ -1,30 +1,49 @@
 <div class="grid-container">
     <div class="encuesta-container">
-      <p class="titulo-encuesta">Encuesta de los usuarios</p>
-      <p class="subtitulo-encuesta">Promedio de las encuestas</p>
-      <div class="tarjeta-promedio">
-        <p class="titulo-promedio">Gimnasio</p> 
-        <nz-progress class="slider-promedio" [nzPercent]="80" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="20"></nz-progress>
-        <div class="slider-tick-container">
-          <div class="slider-tick" *ngFor="let tick of tickValues">{{tick}}</div>
-        </div>
-      </div>
-      <br>
-      <p class="subtitulo-encuesta">Respuetas de los usuarios</p>
-      <div class="respuestas" nz-row [nzGutter]="[16, 16]">
-        <div style="padding: 1rem;" nz-col nzXs="24"
-        nzSm="10"
-        nzMd="6"
-        nzLg="6"
-        nzXl="6"
-        *ngFor="let res of respuestas">
-        <div class="card">
-            <p class="titulo-respuesta">{{res.tema}}</p>
-            <nz-progress class="slider-respuesta" [nzPercent]="res.calificacion*10" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="15"></nz-progress>
-            <p class="mensaje-respuesta"> lorem ipsum dolor sit amet, consectetur adipiscing elit. donec aliquet luctus nulla, nec sagittisrotor aliquam eget.</p>
-            <p class="fecha-respuesta">{{res.fecha}}</p>
+      <!-- <p class="titulo-encuesta">Encuesta de los usuarios</p> -->
+      <nz-tabset nzType="card" nzCentered>
+        <nz-tab nzTitle="Promedios" class="promedios-container">
+          <p class="subtitulo-encuesta">Promedio de las encuestas</p>
+          <div class="tarjeta-promedio">
+            <p class="titulo-promedio">Gimnasio</p> 
+            <nz-progress class="slider-promedio" [nzPercent]="80" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="20"></nz-progress>
+            <div class="slider-tick-container">
+              <div class="slider-tick" *ngFor="let tick of tickValues">{{tick}}</div>
+            </div>
           </div>
-        </div>
-      </div>
+          <div class="tarjeta-promedio">
+            <p class="titulo-promedio">Wellness Center</p> 
+            <nz-progress class="slider-promedio" [nzPercent]="60" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="20"></nz-progress>
+            <div class="slider-tick-container">
+              <div class="slider-tick" *ngFor="let tick of tickValues">{{tick}}</div>
+            </div>
+          </div>
+          <div class="tarjeta-promedio">
+            <p class="titulo-promedio">Athletics Web</p> 
+            <nz-progress class="slider-promedio" [nzPercent]="90" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="20"></nz-progress>
+            <div class="slider-tick-container">
+              <div class="slider-tick" *ngFor="let tick of tickValues">{{tick}}</div>
+            </div>
+          </div>
+        </nz-tab>
+        <nz-tab nzTitle="Respuestas" class="promedios-container">
+          <p class="subtitulo-encuesta">Respuetas de los usuarios</p>
+          <div class="respuestas" nz-row [nzGutter]="[16, 16]">
+            <div style="padding: 1rem;" nz-col nzXs="24"
+            nzSm="10"
+            nzMd="6"
+            nzLg="6"
+            nzXl="6"
+            *ngFor="let res of respuestas">
+              <div class="card">
+                <p class="titulo-respuesta">{{res.tema}}</p>
+                <nz-progress class="slider-respuesta" [nzPercent]="res.calificacion*10" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="15"></nz-progress>
+                <p class="mensaje-respuesta"> lorem ipsum dolor sit amet, consectetur adipiscing elit. donec aliquet luctus nulla, nec sagittisrotor aliquam eget.</p>
+                <p class="fecha-respuesta">{{res.fecha}}</p>
+              </div>
+            </div>
+          </div>
+        </nz-tab>
+      </nz-tabset>
     </div>
   </div>
