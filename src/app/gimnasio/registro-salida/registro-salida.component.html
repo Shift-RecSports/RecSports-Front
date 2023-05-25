@@ -7,8 +7,24 @@
         <input matInput placeholder="Matricula..." [(ngModel)]="matricula" />
       </mat-form-field>
 
-      <button mat-button color="button-registro" (click)="onSubmitMatricula()">
-        <div class="button-registro-text">Registrar salida</div>
+      <button
+        *ngIf="loading == false"
+        mat-button
+        color="button-registro"
+        (click)="onSubmitMatricula()"
+      >
+        <div class="button-registro-text">Registrar entrada</div>
+      </button>
+
+      <button
+        *ngIf="loading"
+        mat-button
+        color="button-registro"
+        disabled="true"
+      >
+        <div class="custom-spinner">
+          <mat-spinner color="#ffffff" diameter="30"></mat-spinner>
+        </div>
       </button>
 
       <div>{{ message }}</div>

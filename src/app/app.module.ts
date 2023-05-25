@@ -20,6 +20,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ApiService } from './service/api.service';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { GimnasioComponent } from './gimnasio/gimnasio.component';
 import { DeportesComponent } from './deportes/deportes.component';
@@ -132,6 +133,7 @@ registerLocaleData(en);
     NzDatePickerModule,
     MatDatepickerModule,
     NzAlertModule,
+    MatProgressSpinnerModule,
     NzNotificationModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }, ApiService, AuthGuard],
