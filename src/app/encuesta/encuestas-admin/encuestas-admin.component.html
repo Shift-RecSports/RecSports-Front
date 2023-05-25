@@ -36,8 +36,13 @@
           *ngFor="let res of respuestas">
             <div class="card">
               <p class="titulo-respuesta">{{res.tema}}</p>
-              <nz-progress class="slider-respuesta" [nzPercent]="res.calificacion*10" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="15"></nz-progress>
               <p class="mensaje-respuesta"> lorem ipsum dolor sit amet, consectetur adipiscing elit. donec aliquet luctus nulla, nec sagittisrotor aliquam eget.</p>
+              <p class="subtitulo-respuesta">Gimnasio</p>
+              <nz-progress class="slider-respuesta" [nzPercent]="res.calificacion*10" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="15"></nz-progress>
+              <p class="subtitulo-respuesta">Athletics</p>
+              <nz-progress class="slider-respuesta" [nzPercent]="res.calificacion*10" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="15"></nz-progress>
+              <p class="subtitulo-respuesta">Athletics Web</p>
+              <nz-progress class="slider-respuesta" [nzPercent]="res.calificacion*10" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="15"></nz-progress>
               <p class="fecha-respuesta">{{res.fecha}}</p>
             </div>
           </div>

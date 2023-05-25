@@ -115,22 +115,7 @@
   text-align: center;
   justify-content: center;
   margin-top: 1.25rem;
-}
-
-.fecha-respuesta {
-  font-family: 'Helvetica';
-  font-style: normal;
-  font-weight: 200;
-  font-size: 14px;
-  text-align: right;
-  color: #666666;
-}
-
-.slider-respuesta {
-  width: calc(100% - 20%);
-  justify-content: center;
-  align-items: center;
-  height: 3.125rem;
+  margin-bottom: 1rem;
 }
 
 .mensaje-respuesta {
@@ -141,6 +126,33 @@
   line-height: 16px;
   padding-left: 0.9375rem;
   padding-right: 0.9375rem;
+  margin-bottom: 2rem;
+}
+
+.subtitulo-respuesta {
+  font-family: 'Helvetica';
+  font-style: normal;
+  font-weight: 500; /*300 se ve cool tmb*/
+  font-size: 16px;
+  margin-top: -1.3rem;
+  margin-bottom: -0.3rem;
+}
+
+.slider-respuesta {
+  width: calc(100% - 20%);
+  justify-content: center;
+  align-items: center;
+  height: 3.125rem;
+}
+
+.fecha-respuesta {
+  font-family: 'Helvetica';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  text-align: center;
+  color: #555555;
+  margin-top: -0.5rem;
 }
 
 @media (max-width: 960px) {
