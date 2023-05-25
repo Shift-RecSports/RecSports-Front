@@ -56,7 +56,7 @@ export class GimnasioComponent {
       day.getMonth() + 1
     }-${day.getDate()}`;
 
-    this.url = `/registros-gimnasio/fecha=${this.daySelected}&offset=${this.page}`;
+    this.url = `/registros-gimnasio/fecha=${this.daySelected}/offset=${this.page}`;
     this.timerSubscription = timer(0, 10000)
       .pipe(switchMap(() => this._apiService.get(this.url)))
       .subscribe((data) => {

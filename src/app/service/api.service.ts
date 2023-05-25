@@ -19,10 +19,7 @@ export class ApiService {
 
   // POST
   post(endpoint: string, body: {}): Observable<any> {
-    return this.httpClient.post(
-      apiURL + '/api' + endpoint,
-      JSON.stringify(body)
-    );
+    return this.httpClient.post(apiURL + '/api' + endpoint, body);
   }
 
   // POST with image
