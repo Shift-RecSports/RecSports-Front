@@ -60,13 +60,11 @@ import { HomeEntrenadorComponent } from './home-entrenador/home-entrenador.compo
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
+
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { MatSliderModule } from '@angular/material/slider';
 import { NuevaNoticiaComponent } from './noticias/nueva-noticia/nueva-noticia.component';
-
-
-
 
 registerLocaleData(en);
 
@@ -111,8 +109,8 @@ registerLocaleData(en);
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
-    ReactiveFormsModule,
     FormsModule,
+    ReactiveFormsModule,
     AngularMaterialModule,
     HttpClientModule,
     NzGridModule,

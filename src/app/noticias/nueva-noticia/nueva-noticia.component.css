@@ -52,6 +52,7 @@
 .nuevo-form-item {
     padding: 0 1rem 0 1rem;
     width: 100%;
+    margin-bottom: 10px;
 }
 
 .nuevo-form-title {
@@ -82,6 +83,16 @@
     font-style: normal;
     font-weight: 350;
     font-size: 1rem;
+}
+
+.mat-form-field-error {
+    position: relative;
+}
+
+.mat-form-field-error .error-text {
+    position: absolute;
+    top: 100%;
+    left: 0;
 }
 
 .input-calendar {
@@ -116,7 +127,21 @@
     font-family: 'Helvetica';
     color: red;
     font-size: 14px;
+    margin-top: -20px;
+}
+
+.zorro-error-text {
+    font-family: 'Helvetica';
+    color: red;
+    font-size: 14px;
     margin-top: -10px;
+}
+
+.zorro-error-text-hora {
+    font-family: 'Helvetica';
+    color: red;
+    font-size: 14px;
+    /* margin-top: -10px; */
 }
 
 
