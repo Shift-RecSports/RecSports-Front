@@ -15,7 +15,7 @@
           >
             <div class="nuevo-form-title">Nombre del deporte</div>
             <mat-form-field appearance="outline" class="input-container">
-              <input matInput placeholder="Escribe..." [(ngModel)]="nombre"/>
+              <input matInput placeholder="Escribe..." [(ngModel)]="nombre" />
             </mat-form-field>
           </div>
 
@@ -30,7 +30,7 @@
           >
             <div class="nuevo-form-title">Duracion</div>
             <mat-form-field appearance="outline" class="input-container">
-              <input matInput placeholder="Escribe..." [(ngModel)]="duracion"/>
+              <input matInput placeholder="Escribe..." [(ngModel)]="duracion" />
             </mat-form-field>
           </div>
 
@@ -105,7 +105,11 @@
           >
             <div class="nuevo-form-title">Materiales</div>
             <mat-form-field appearance="outline" class="input-container">
-              <input matInput placeholder="Escribe..." [(ngModel)]="materiales"/>
+              <input
+                matInput
+                placeholder="Escribe..."
+                [(ngModel)]="materiales"
+              />
             </mat-form-field>
           </div>
 
@@ -120,7 +124,11 @@
           >
             <div class="nuevo-form-title">Descripción</div>
             <mat-form-field appearance="outline" class="input-container">
-              <input matInput placeholder="Escribe..." [(ngModel)]="descripcion"/>
+              <input
+                matInput
+                placeholder="Escribe..."
+                [(ngModel)]="descripcion"
+              />
             </mat-form-field>
           </div>
 
@@ -138,7 +146,7 @@
             <!-- CARGA DE IMAGEN -->
             <mat-form-field appearance="outline" class="input-container">
               <mat-toolbar>
-                <div ondrag="uploadFiles()">
+                <div>
                   <input hidden matInput />
                   <input
                     style="width: 100%; background-color: white"
@@ -197,7 +205,11 @@
               >
                 <div class="deportes-cancelar-text">Cancelar</div>
               </button>
-              <button mat-button color="button-guardar" (click)="enviarDatos()">
+              <button
+                mat-button
+                color="button-guardar"
+                (click)="guardarDeporte()"
+              >
                 <div class="deportes-guardar-text">Guardar</div>
               </button>
             </div>

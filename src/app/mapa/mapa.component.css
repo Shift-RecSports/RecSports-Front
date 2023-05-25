@@ -8,8 +8,109 @@
   padding: 6rem 1rem 1rem 8rem;
 }
 
+.titulo-mapa {
+  font-family: 'Helvetica';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 34px;
+  color: #000000;
+  margin-top: 10px;
+}
+
+.images-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.foto {
+  width: 60%;
+  /*height: auto;*/
+  background: #FFFFFF;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  display: block;
+}
+
+.responsive-image {
+  width: 100%;
+  height: auto;
+  overflow: auto;
+}
+
+.input-container {
+  width: 22%;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  margin-left: 5%;
+  display: flex;
+  height: 400px;
+}
+
+.subir-texto {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 24px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.botones-container {
+  border: 2px dashed rgba(0, 51, 160, 0.2);
+  border-radius: 20px;
+  height: 200px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  padding-left: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-text {
+  font-size: 0.9rem;
+}
+
+.drop-image-text {
+  color: black;
+}
+
+.navigate-image-text {
+  color: black;
+}
+
+.nuevo-form-archivo {
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 1300px) {
+  .foto {
+    width: 100%;
+  }
+  .input-container {
+    width: 35%;
+    margin-left: 0;
+    margin-top: 20px;
+  }
+}
+
 @media (max-width: 960px) {
   .mapa-container {
     padding: 6rem 1rem 1rem 1rem;
+  }
+}
+
+@media (max-width: 750px) {
+  .input-container {
+    width: 60%;
+    height: 350px;
+  }
+  .botones-container {
+    padding-top: 30px;
+    padding-bottom: 40px;
+    height: 170px;
   }
 }

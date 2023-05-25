@@ -1,4 +1,10 @@
-import { HttpClient, HttpEvent, HttpEventType, HttpRequest, HttpResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpEvent,
+  HttpEventType,
+  HttpRequest,
+  HttpResponse,
+} from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
@@ -18,7 +24,6 @@ import { ApiService } from 'src/app/service/api.service';
   styleUrls: ['./espacios-formulario.component.css'],
 })
 export class EspaciosFormularioComponent {
-
   areas = new FormControl('');
   options: string[] = ['CBD1', 'CBD2', 'Wellness Center'];
 
@@ -53,18 +58,17 @@ export class EspaciosFormularioComponent {
   message: string = '';
 
   constructor(
-    private uploadService: FileUploadService,
     private service: AuthService,
     private router: Router,
     public formulario: FormBuilder,
-    private _apiService: ApiService,
+    private _apiService: ApiService
   ) {
     this.nombre = '';
     this.hora_inicio = '08:00:00';
     this.hora_fin = '19:00:00';
     this.aforo = '';
     this.zona = '';
-    this.imagen = 'https://javier.rodriguez.org.mx/itesm/borregos/borrego-blue.png';
+    this.imagen = '';
     this.deporte = '';
   }
 
@@ -76,6 +80,7 @@ export class EspaciosFormularioComponent {
       }
     });
   }
+
   changeSelectedEspacios(espacios: string[]) {
     this.horariosSelected = espacios;
   }
@@ -95,8 +100,6 @@ export class EspaciosFormularioComponent {
     );
   }
 
-  // CODE FOR UPLOADING IMAGES - Refactor
-  // REFERENCE: https://www.bezkoder.com/angular-material-15-image-upload-preview/
   selectedFiles?: FileList;
   selectedFileNames: string[] = [];
   preview: string = '';
@@ -104,102 +107,40 @@ export class EspaciosFormularioComponent {
   selectFiles(event: any): void {
     this.selectedFileNames = [];
     this.selectedFiles = event.target.files;
-
     this.preview = '';
 
     if (this.selectedFiles && this.selectedFiles[0]) {
-      const numberOfFiles = this.selectedFiles.length;
-      for (let i = 0; i < numberOfFiles; i++) {
-        const reader = new FileReader();
+      const reader = new FileReader();
 
-        reader.onload = (e: any) => {
-          this.preview = e.target.result;
-        };
+      reader.onload = (e: any) => {
+        this.preview = e.target.result;
+      };
 
-        reader.readAsDataURL(this.selectedFiles[i]);
-
-        this.selectedFileNames.push(this.selectedFiles[i].name);
-      }
+      reader.readAsDataURL(this.selectedFiles[0]);
+      this.selectedFileNames.push(this.selectedFiles[0].name);
     }
   }
 
-  uploadFiles(): void {
-    if (this.selectedFiles) {
-      for (let i = 0; i < this.selectedFiles.length; i++) {
-        this.upload(i, this.selectedFiles[i]);
-      }
-    }
-  }
+  guardarEspacio() {
+    const formData: FormData = new FormData();
+    formData.append(
+      'imagen',
+      this.selectedFiles![0],
+      this.selectedFileNames[0]
+    );
+    // formData.append('nombre', this.nombre);
+    // formData.append('descripcion', this.descripcion);
+    // formData.append('materiales', this.materiales);
+    // formData.append('duracion', this.duracion.toString());
 
-  upload(idx: number, file: File): void {
-    if (file) {
-      this.uploadService.upload(file).subscribe(
-        (event: any) => {
-          if (event.type === HttpEventType.UploadProgress) {
-          } else if (event instanceof HttpResponse) {
-            const msg = file.name + ': Successful!';
-          }
-        },
-        (err: any) => {
-          let msg = file.name + ': Failed!';
-
-          if (err.error && err.error.message) {
-            msg += ' ' + err.error.message;
-          }
-        }
-      );
-    }
-  }
-
-  enviarDatos() {
-
-    console.log("Boton presionado");
-    
-    const url = '/espacios';
-
-    this._apiService
-    .post(url, {nombre: this.nombre, 
-                hora_inicio: this.hora_inicio, 
-                hora_fin: this.hora_fin,
-                aforo: this.aforo,
-                zona: this.zona,
-                imagen: this.imagen,
-                deporte: this.deporte})
-    .subscribe((data) => {
-      console.log(data);
-      this.message = `Deporte ${data.nombre} registrado con éxito}`;
-    });
-
+    // const url = '/deportes';
+    // this._apiService.postWithImage(url, formData).subscribe((data) => {
+    //   console.log(data);
+    //   // this.message = `Imagen subida: ${data} registrado con éxito}`;
+    // });
   }
 
   onCancelClick() {
     this.router.navigate(['deportes/futbol']);
-  }
-}
-
-// SERVICE FOR IMAGES
-@Injectable({
-  providedIn: 'root',
-})
-class FileUploadService {
-  private baseUrl = 'http://localhost:8080';
-
-  constructor(private http: HttpClient) {}
-
-  upload(file: File): Observable<HttpEvent<any>> {
-    const formData: FormData = new FormData();
-
-    formData.append('file', file);
-
-    const req = new HttpRequest('POST', `${this.baseUrl}/upload`, formData, {
-      reportProgress: true,
-      responseType: 'json',
-    });
-
-    return this.http.request(req);
-  }
-
-  getFiles(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/files`);
   }
 }
