@@ -21,7 +21,7 @@ export class DonutChartComponent implements OnInit {
   timerSubscription: Subscription;
 
   ngOnInit(): void {
-    const url = '/aforo-actual';
+    const url = '/registros-gimnasio/aforo/actual';
 
     this.timerSubscription = timer(0, 10000)
       .pipe(switchMap(() => this._apiService.get(url)))

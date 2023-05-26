@@ -113,8 +113,8 @@
     font-family: 'Helvetica', sans-serif;
     color: rgba(0, 0, 0);
     font-size: 1rem;
-  }
-  
+}
+
 .input-calendar ::ng-deep .ant-picker-input input::placeholder {
     color: rgba(0, 0, 0, 0.5);
     font-family: 'Helvetica', sans-serif;
@@ -167,6 +167,9 @@ nz-date-picker {
     margin: 0 8px 12px 0;
 }
 
+.custom-time-picker .ant-picker-suffix {
+    display: none;
+}
 
 .mat-form-field {
     width: 100%;
@@ -181,6 +184,32 @@ nz-date-picker {
     font-size: 0.9rem;
 }
 
+.title {
+    color: #fff;
+    margin-bottom: 0;
+    font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 30px;
+}
+
+.news-date {
+    color: #fff;
+    font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.news-place {
+    color: #fff;
+    margin-bottom: 0;
+    font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+}
+
 .image-preview {
     width: 100%;
     padding: 1rem 0 1rem 0;
@@ -189,7 +218,6 @@ nz-date-picker {
 .preview-container {
     position: relative;
     border-radius: 2rem;
-    width: 50%;
 }
 
 @media (max-width: 768px) {
@@ -199,17 +227,16 @@ nz-date-picker {
 }
 
 .preview {
-    width: 100%;
     border-radius: 2rem;
-    height: 30vh;
+    max-height: 20rem;
+    height: auto;
+    width: 100%;
 }
 
 .preview-filter {
     position: absolute;
-    background: linear-gradient(to right,
-            rgb(22, 38, 134, 0.8),
-            rgb(255, 255, 255, 0));
     width: 100%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.29) 4%, #01329E 104%);
     height: 100%;
 
     z-index: 1;
@@ -218,10 +245,8 @@ nz-date-picker {
     padding: 4rem 2rem 2rem 2rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    text-align: left;
-    font-size: 1.8rem;
-    font-weight: 900;
+    justify-content: flex-end;
+    align-items: flex-start;
     color: white;
 }
 

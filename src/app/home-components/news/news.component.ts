@@ -20,12 +20,10 @@ export class NewsComponent implements OnInit{
   // Routing
   private sub: any;
   listaNoticias: Noticia[] = [];
-  url: string = ''
 
-  newsArray = [
-    { title: 'Borregos MTY vs. Borregos QTO', date: '03 - 10 - 2023   10:00', place: 'Estadio Banorte' },
-    { title: 'Dua Lipa: World Tour', date: '16 - 04 - 2024   20:00', place: 'Estadio Banorte' },
-  ];
+
+  // Ajustar a image para que pueda leer de render
+  // noticiaImage: string = getImage();
 
   constructor(
     private service: AuthService,
@@ -33,20 +31,22 @@ export class NewsComponent implements OnInit{
     public dialog: MatDialog,
     private route: ActivatedRoute,
     private _apiService: ApiService
-  ) {
-   
-  }
+  ) {}
+
 
   ngOnInit():void {
     this.sub = this.route.params.subscribe((params) => {
       const url = `/noticias`;
       this._apiService.get(url).subscribe((data) => {
         this.listaNoticias = data;
+        for (let i = 0; i < this.listaNoticias.length; i++) {
+          this.listaNoticias[i].imagen = this._apiService.getImage(
+            this.listaNoticias[i].imagen
+          );
+        }
         console.log(data)
       });
     });
-
-    
   }
 
   redirectToUrl(url: string) {

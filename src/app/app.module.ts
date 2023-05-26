@@ -69,6 +69,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { NuevaNoticiaComponent } from './noticias/nueva-noticia/nueva-noticia.component';
 import { ModalBorrarEspacioComponent } from './deportes/deporte-seleccionado/modal-borrar-espacio/modal-borrar-espacio.component';
 import { AuthGuard } from './guard/auth.guard';
+import { ModalBorrarNoticiaComponent } from './noticias/modal-borrar-noticia/modal-borrar-noticia.component';
 
 registerLocaleData(en);
 
@@ -100,6 +101,7 @@ registerLocaleData(en);
     EncuestasAdminComponent,
     NuevaNoticiaComponent,
     ModalBorrarEspacioComponent,
+    ModalBorrarNoticiaComponent,
   ],
   imports: [
     BrowserModule,

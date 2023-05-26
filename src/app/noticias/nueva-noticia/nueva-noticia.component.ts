@@ -24,6 +24,9 @@ export class NuevaNoticiaComponent {
   isDateSelected: boolean = true;
   isHourSelected: boolean = true;
 
+  selectedFiles?: FileList;
+  selectedFileNames: string[] = [];
+  preview: string = '';
 
   constructor(
     private service: AuthService,
@@ -38,7 +41,7 @@ export class NuevaNoticiaComponent {
       lugar: ['', Validators.required],
       fecha: [null, Validators.required],
       hora: [null, Validators.required],
-      imagen: [''],
+      imagen: ['', Validators.required],
       url: ['']
     });
   }
@@ -89,10 +92,69 @@ export class NuevaNoticiaComponent {
     return `${hours}:${minutes}`;
   }
 
+  selectFiles(event: any): void {
+    this.selectedFileNames = [];
+    this.selectedFiles = event.target.files;
+    this.preview = '';
+
+    if (this.selectedFiles && this.selectedFiles[0]) {
+      const reader = new FileReader();
+
+      reader.onload = (e: any) => {
+        this.preview = e.target.result;
+      };
+
+      reader.readAsDataURL(this.selectedFiles[0]);
+      this.selectedFileNames.push(this.selectedFiles[0].name);
+    }
+  }
+
+
+  // enviarDatos() {
+  //   console.log("Boton presionado");
+  
+  //   console.log(this.formularioNoticia.value);
+  
+  //   const url = '/noticias';
+  
+  //   if (this.formularioNoticia.valid) {
+  //     console.log("formulario valido");
+  //     // Form is valid, proceed with saving data
+  //     const formData = {
+  //       lugar: this.formularioNoticia.get('lugar')?.value ?? '',
+  //       fecha: this.formularioNoticia.get('fecha')?.value ?? '',
+  //       hora: this.formularioNoticia.get('hora')?.value ?? '',
+  //       titulo: this.formularioNoticia.get('titulo')?.value ?? '',
+  //       imagen: '',
+  //       url: "https://javier.rodriguez.org.mx/itesm/borregos/borrego-blue.png"
+  //     };
+
+  //     console.log("formulario validado = " + formData);
+  
+  //     this._apiService.post(url, formData).subscribe((data) => {
+  //       console.log(data);
+  //       alert(`Noticia ${data.titulo} registrada con éxito}`);
+
+  //     // Refresh the current page to reset input fields
+  //     location.reload();
+
+
+  //     });
+  //   } else {
+  //     console.log("formulario INvalido");
+  //     // Form is invalid, display error message
+  //     alert(`No se ha podido guardar la noticia. Verifique los campos solicitados.`);
+  //     Object.values(this.formularioNoticia.controls).forEach((control) => {
+  //       if (control.invalid) {
+  //         control.markAsDirty();
+  //         control.updateValueAndValidity({ onlySelf: true });
+  //       }
+  //     });
+  //   }
+  // }  
 
   enviarDatos() {
     console.log("Boton presionado");
-  
     console.log(this.formularioNoticia.value);
   
     const url = '/noticias';
@@ -100,25 +162,23 @@ export class NuevaNoticiaComponent {
     if (this.formularioNoticia.valid) {
       console.log("formulario valido");
       // Form is valid, proceed with saving data
-      const formData = {
-        lugar: this.formularioNoticia.get('lugar')?.value ?? '',
-        fecha: this.formularioNoticia.get('fecha')?.value ?? '',
-        hora: this.formularioNoticia.get('hora')?.value ?? '',
-        titulo: this.formularioNoticia.get('titulo')?.value ?? '',
-        imagen: "https://javier.rodriguez.org.mx/itesm/borregos/borrego-blue.png",
-        url: "https://javier.rodriguez.org.mx/itesm/borregos/borrego-blue.png"
-      };
-
-      console.log("formulario validado = " + formData);
+      const formData = new FormData();
   
-      this._apiService.post(url, formData).subscribe((data) => {
+      formData.append('lugar', this.formularioNoticia.get('lugar')?.value ?? '');
+      formData.append('fecha', this.formularioNoticia.get('fecha')?.value ?? '');
+      formData.append('hora', this.formularioNoticia.get('hora')?.value ?? '');
+      formData.append('titulo', this.formularioNoticia.get('titulo')?.value ?? '');
+      formData.append('imagen', this.selectedFiles![0], this.selectedFileNames[0]);
+      formData.append('url', this.formularioNoticia.get('url')?.value ?? '');
+  
+      console.log("formulario validado = ", formData);
+  
+      this._apiService.postWithImage(url, formData).subscribe((data) => {
         console.log(data);
         alert(`Noticia ${data.titulo} registrada con éxito}`);
-
-      // Refresh the current page to reset input fields
-      location.reload();
-
-
+  
+        // Refresh the current page to reset input fields
+        location.reload();
       });
     } else {
       console.log("formulario INvalido");
@@ -131,7 +191,8 @@ export class NuevaNoticiaComponent {
         }
       });
     }
-  }  
+  }
+  
 
   onCancelClick() {
     this.router.navigate(['noticias']);
