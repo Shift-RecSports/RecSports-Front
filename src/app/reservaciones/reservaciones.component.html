@@ -14,7 +14,10 @@
           nzLg="6"
           nzXl="6"
         >
-          <div class="reservaciones-image"></div>
+          <div class="reservaciones-image">
+            <div class="tarjeta-espacio"></div>
+            <img [src]="reservacion.imagen" alt="" class="preview" />
+          </div>
         </div>
         <div
           nz-col
@@ -91,7 +94,7 @@
         >
           <div class="reservaciones-item-title">Equipo</div>
           <div class="reservaciones-item-text">
-            Raqueta, Pelotas, Ropa Deportiva
+            {{ reservacion.materiales }}
           </div>
         </div>
         <div
