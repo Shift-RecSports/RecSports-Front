@@ -83,6 +83,7 @@ const defaultNavbarFlags = {
   entradaFlag: false,
   salidaFlag: false,
   encuestaAdminFlag: false,
+  inicioEntrenadorFlag: false,
 };
 
 function activateNavbarFlags(userRole: string, navbarFlags: navbarFlags) {
@@ -98,7 +99,8 @@ function activateNavbarFlags(userRole: string, navbarFlags: navbarFlags) {
     navbarFlags.entradaFlag = false;
     navbarFlags.salidaFlag = false;
   } else if (userRole == 'ENTRENADOR') {
-    navbarFlags.inicioFlag = true;
+    navbarFlags.inicioFlag = false;
+    navbarFlags.inicioEntrenadorFlag = true;
     navbarFlags.gimnasioFlag = true;
     navbarFlags.deportesFlag = false;
     navbarFlags.calendarioFlag = false;

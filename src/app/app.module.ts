@@ -62,12 +62,14 @@ import { HomeEntrenadorComponent } from './home-entrenador/home-entrenador.compo
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
+
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { MatSliderModule } from '@angular/material/slider';
 import { NuevaNoticiaComponent } from './noticias/nueva-noticia/nueva-noticia.component';
 import { ModalBorrarEspacioComponent } from './deportes/deporte-seleccionado/modal-borrar-espacio/modal-borrar-espacio.component';
 import { AuthGuard } from './guard/auth.guard';
+import { ModalBorrarNoticiaComponent } from './noticias/modal-borrar-noticia/modal-borrar-noticia.component';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
 
@@ -101,6 +103,7 @@ registerLocaleData(en);
     EncuestasAdminComponent,
     NuevaNoticiaComponent,
     ModalBorrarEspacioComponent,
+    ModalBorrarNoticiaComponent,
   ],
   imports: [
     BrowserModule,
@@ -115,8 +118,8 @@ registerLocaleData(en);
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
-    ReactiveFormsModule,
     FormsModule,
+    ReactiveFormsModule,
     AngularMaterialModule,
     HttpClientModule,
     NzGridModule,

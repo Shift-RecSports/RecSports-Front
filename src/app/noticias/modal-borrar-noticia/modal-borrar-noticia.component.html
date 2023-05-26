@@ -1,0 +1,32 @@
+<div mat-dialog-content class="modal-container">
+    <div class="modal-header">
+        <div class="modal-title title-info">¿Desea borrar la noticia seleccionada?</div>
+        <div>
+            <button mat-mini-fab color="cancel-button" [ngStyle]="{ color: '#E4E4E4', transform: 'scale(0.8)' }"
+                (click)="onNoClick()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div class="modal-info">
+        <span class="modal-title">Titulo: </span>
+        <span class="modal-text">{{ this.data.noticia.titulo }}</span>
+    </div>
+
+    <div>
+        <span class="modal-title">Fecha: </span>
+        <span class="modal-text">{{ this.data.noticia.fecha }}</span>
+    </div>
+
+    <div>
+        <span class="modal-title">Hora: </span>
+        <span class="modal-text">{{ this.data.noticia.hora }}</span>
+    </div>
+
+    <div class="modal-confirmar">
+        <button color="cancel-espacio-button" mat-button (click)="onBorrarNoticia()">
+            Borrar noticia
+        </button>
+    </div>
+</div>
