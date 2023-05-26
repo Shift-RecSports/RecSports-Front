@@ -76,3 +76,12 @@
   font-size: 1.2rem;
   border-radius: 0.7rem;
 }
+
+:host ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: #ffffff;
+}
+
+:host ::ng-deep .custom-spinner circle {
+  stroke: #ffffff;
+}

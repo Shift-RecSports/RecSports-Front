@@ -19,10 +19,7 @@ export class ApiService {
 
   // POST
   post(endpoint: string, body: {}): Observable<any> {
-    return this.httpClient.post(
-      apiURL + '/api' + endpoint,
-      JSON.stringify(body)
-    );
+    return this.httpClient.post(apiURL + '/api' + endpoint, body);
   }
 
   // POST with image
@@ -32,10 +29,7 @@ export class ApiService {
 
   // PUT
   put(endpoint: string, body: {}): Observable<any> {
-    return this.httpClient.put(
-      apiURL + '/api' + endpoint,
-      JSON.stringify(body)
-    );
+    return this.httpClient.put(apiURL + '/api' + endpoint, body);
   }
 
   // DELETE
