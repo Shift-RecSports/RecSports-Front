@@ -169,7 +169,10 @@ export class DeporteSeleccionadoComponent {
       const url = `/deportes/${params['id']}`;
       this._apiService.get(url).subscribe((data) => {
         this.deporte = data;
-        this.deporte.imagen = this._apiService.getImage(this.deporte.imagen);
+        this.deporte.imagen = this._apiService.getImage(
+          '/deportes',
+          this.deporte.imagen
+        );
 
         this.url = `/espacios/deporte/${params['id']}`;
         this._apiService.get(this.url).subscribe((data) => {
@@ -177,6 +180,7 @@ export class DeporteSeleccionadoComponent {
 
           for (let i = 0; i < this.listaEspacios.length; i++) {
             this.listaEspacios[i].imagen = this._apiService.getImage(
+              '/espacios',
               this.listaEspacios[i].imagen
             );
           }
