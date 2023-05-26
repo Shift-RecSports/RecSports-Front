@@ -62,6 +62,13 @@ h3 {
   font-size: 15px;
 }
 
+.espacio-delete-button {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  background-color: #c22424;
+}
+
 .mat-button-agregar {
   border: 0.2rem solid #162686;
   background-color: #ffffff;

@@ -340,7 +340,7 @@ export class BarChartComponent implements OnInit {
 
   changeDateSelected(numSemana: number, diaSemana: number) {
 
-    const url = '/concurrencias-aforo-gimnasio/' + numSemana + '/' + diaSemana;
+    const url = '/historial/concurrencias-aforo-gimnasio/' + numSemana + '/' + diaSemana;
 
     this._apiService.get(url).subscribe((data: ConcurrenciaGimnasio[]) => {
       this.data = data;
@@ -393,7 +393,7 @@ export class BarChartComponent implements OnInit {
 
     */
 
-    this.changeDateSelected(5, 1);
+    this.changeDateSelected(1, 1);
 
 
   }
