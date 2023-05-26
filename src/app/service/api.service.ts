@@ -13,8 +13,8 @@ export class ApiService {
   }
 
   // GET image URL
-  getImage(image: string = ''): string {
-    return `${apiURL}/${image}`;
+  getImage(type: string | null ='', image: string = ''): string {
+    return `${apiURL}${type}/${image}`;
   }
 
   // POST

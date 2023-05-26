@@ -41,6 +41,24 @@
         </a>
       </div>
 
+      <div *ngIf="navbarFlags.inicioEntrenadorFlag">
+        <a
+          mat-list-item
+          routerLink="home-entrenador"
+          class="sidebar-list-item"
+          (click)="showSidebar ? openSidebar(false) : null"
+        >
+          <div class="sidebar-list-element">
+            <mat-icon class="sidebar-icon" fontSet="material-icons-outlined"
+              >home icon</mat-icon
+            >
+            <span class="sidebar-element-text">Inicio</span>
+          </div>
+        </a>
+      </div>
+
+      
+
       <div *ngIf="navbarFlags.gimnasioFlag">
         <a
           mat-list-item

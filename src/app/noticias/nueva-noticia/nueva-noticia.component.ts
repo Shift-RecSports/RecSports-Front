@@ -1,9 +1,5 @@
-import { HttpClient, HttpEvent, HttpEventType, HttpRequest, HttpResponse } from '@angular/common/http';
-import { Component, ViewChild } from '@angular/core';
-import { Injectable } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/service/auth.service';
 
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -11,55 +7,42 @@ import { ApiService } from 'src/app/service/api.service';
 import { Validators } from '@angular/forms';
 
 
+
 @Component({
   selector: 'app-nueva-noticia',
   templateUrl: './nueva-noticia.component.html',
-  styleUrls: ['./nueva-noticia.component.css']
+  styleUrls: ['./nueva-noticia.component.css'],
 })
 
 
 export class NuevaNoticiaComponent {
 
-  lugar: string;
-  UnformattedFecha: Date;
-  UnformattedHora: Date;
-  fecha: string;
-  hora: string;
-  titulo: string;
-  imagen: string;
-  url: string;
-
-  formularioNoticia!: FormGroup;
+  formularioNoticia: FormGroup = new FormGroup({});
   message: string = '';
-
+  messageType: string = '';
+  formattedDate: string = '';
   isDateSelected: boolean = true;
   isHourSelected: boolean = true;
 
+  selectedFiles?: FileList;
+  selectedFileNames: string[] = [];
+  preview: string = '';
 
   constructor(
-    private uploadService: FileUploadService,
     private service: AuthService,
     private router: Router,
     public formulario: FormBuilder,
     private _apiService: ApiService,
-  ) {
-    this.lugar = '';
-    this.fecha = '';
-    this.hora = '';
-    this.titulo = '';
-    this.imagen = '';
-    this.url = '';
-    this.UnformattedFecha = new Date();
-    this.UnformattedHora = new Date();
-  }
+  ) {}
 
   ngOnInit() {
     this.formularioNoticia = this.formulario.group({
-      titulo: [null, Validators.required],
-      lugar: [null, Validators.required],
-      UnformattedFecha: [null, Validators.required],
+      titulo: ['', Validators.required],
+      lugar: ['', Validators.required],
+      fecha: [null, Validators.required],
       hora: [null, Validators.required],
-      url: [null]
+      imagen: ['', Validators.required],
+      url: ['']
     });
   }
 
@@ -67,8 +50,10 @@ export class NuevaNoticiaComponent {
     if (selectedDate) {
       // A date has been selected
       this.isDateSelected = true;
+      console.log(selectedDate);
       const formattedDate = this.formatDate(selectedDate);
-      this.fecha = formattedDate;
+      this.formularioNoticia.get('fecha')?.setValue(formattedDate);
+      console.log(this.formularioNoticia.get('fecha')?.value);
     } else {
       // No date has been selected
       this.isDateSelected = false;
@@ -76,13 +61,23 @@ export class NuevaNoticiaComponent {
     }
   }
 
+  formatDate(date: Date): string {
+    const year = String(date.getFullYear());
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const day = String(date.getDate()).padStart(2, '0');
+    
+    return `${year}-${month}-${day}`;
+  }
+
   onHourSelected(selectedHour: Date): void {
     if (selectedHour) {
       // A date has been selected
-      console.log(selectedHour);
       this.isHourSelected = true;
-      this.hora = this.formatHour(selectedHour);
-      console.log(this.hora);
+      console.log("selectedHour: ", selectedHour);
+      const formattedHour = this.formatHour(selectedHour);
+      this.formularioNoticia.get('hora')?.setValue(formattedHour);
+      console.log("Hora: ",this.formularioNoticia.get('hora')?.value);
+
     } else {
       // No date has been selected
       this.isHourSelected = false;
@@ -91,161 +86,117 @@ export class NuevaNoticiaComponent {
   }
 
   formatHour(date: Date): string {
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-    const seconds = date.getSeconds().toString().padStart(2, '0');
+    const hours = String(date.getHours().toString().padStart(2, '0'));
+    const minutes = String(date.getMinutes().toString().padStart(2, '0'));
 
-    return `${hours}:${minutes}:${seconds}`;
+    return `${hours}:${minutes}`;
   }
 
-  formatDate(date: Date): string {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
+  selectFiles(event: any): void {
+    this.selectedFileNames = [];
+    this.selectedFiles = event.target.files;
+    this.preview = '';
+
+    if (this.selectedFiles && this.selectedFiles[0]) {
+      const reader = new FileReader();
+
+      reader.onload = (e: any) => {
+        this.preview = e.target.result;
+      };
+
+      reader.readAsDataURL(this.selectedFiles[0]);
+      this.selectedFileNames.push(this.selectedFiles[0].name);
+    }
   }
+
+
+  // enviarDatos() {
+  //   console.log("Boton presionado");
+  
+  //   console.log(this.formularioNoticia.value);
+  
+  //   const url = '/noticias';
+  
+  //   if (this.formularioNoticia.valid) {
+  //     console.log("formulario valido");
+  //     // Form is valid, proceed with saving data
+  //     const formData = {
+  //       lugar: this.formularioNoticia.get('lugar')?.value ?? '',
+  //       fecha: this.formularioNoticia.get('fecha')?.value ?? '',
+  //       hora: this.formularioNoticia.get('hora')?.value ?? '',
+  //       titulo: this.formularioNoticia.get('titulo')?.value ?? '',
+  //       imagen: '',
+  //       url: "https://javier.rodriguez.org.mx/itesm/borregos/borrego-blue.png"
+  //     };
+
+  //     console.log("formulario validado = " + formData);
+  
+  //     this._apiService.post(url, formData).subscribe((data) => {
+  //       console.log(data);
+  //       alert(`Noticia ${data.titulo} registrada con éxito}`);
+
+  //     // Refresh the current page to reset input fields
+  //     location.reload();
+
+
+  //     });
+  //   } else {
+  //     console.log("formulario INvalido");
+  //     // Form is invalid, display error message
+  //     alert(`No se ha podido guardar la noticia. Verifique los campos solicitados.`);
+  //     Object.values(this.formularioNoticia.controls).forEach((control) => {
+  //       if (control.invalid) {
+  //         control.markAsDirty();
+  //         control.updateValueAndValidity({ onlySelf: true });
+  //       }
+  //     });
+  //   }
+  // }  
 
   enviarDatos() {
-
     console.log("Boton presionado");
-
+    console.log(this.formularioNoticia.value);
+  
     const url = '/noticias';
-
-
-
-
+  
     if (this.formularioNoticia.valid) {
-      this._apiService.post(url, {
-        lugar: this.lugar,
-        fecha: this.fecha,
-        hora: this.hora,
-        titulo: this.titulo,
-        imagen: 'https://javier.rodriguez.org.mx/itesm/borregos/borrego-blue.png',
-        url: 'https://javier.rodriguez.org.mx/itesm/borregos/borrego-blue.png'
-      })
-        .subscribe((data) => {
-          console.log(data);
-          this.message = `Noticia ${data.titulo} registrada con éxito}`;
-        });
+      console.log("formulario valido");
+      // Form is valid, proceed with saving data
+      const formData = new FormData();
+  
+      formData.append('lugar', this.formularioNoticia.get('lugar')?.value ?? '');
+      formData.append('fecha', this.formularioNoticia.get('fecha')?.value ?? '');
+      formData.append('hora', this.formularioNoticia.get('hora')?.value ?? '');
+      formData.append('titulo', this.formularioNoticia.get('titulo')?.value ?? '');
+      formData.append('imagen', this.selectedFiles![0], this.selectedFileNames[0]);
+      formData.append('url', this.formularioNoticia.get('url')?.value ?? '');
+  
+      console.log("formulario validado = ", formData);
+  
+      this._apiService.postWithImage(url, formData).subscribe((data) => {
+        console.log(data);
+        alert(`Noticia ${data.titulo} registrada con éxito}`);
+  
+        // Refresh the current page to reset input fields
+        location.reload();
+      });
     } else {
-      Object.values(this.formularioNoticia.controls).forEach(control => {
+      console.log("formulario INvalido");
+      // Form is invalid, display error message
+      alert(`No se ha podido guardar la noticia. Verifique los campos solicitados.`);
+      Object.values(this.formularioNoticia.controls).forEach((control) => {
         if (control.invalid) {
           control.markAsDirty();
           control.updateValueAndValidity({ onlySelf: true });
         }
       });
     }
-
   }
+  
 
   onCancelClick() {
     this.router.navigate(['noticias']);
   }
 
-
-
-
-
-
-
-
-
-
-
-  // CODE FOR UPLOADING IMAGES - Refactor
-  // REFERENCE: https://www.bezkoder.com/angular-material-15-image-upload-preview/
-  selectedFiles?: FileList;
-  selectedFileNames: string[] = [];
-  preview: string = '';
-
-  selectFiles(event: any): void {
-    this.selectedFileNames = [];
-    this.selectedFiles = event.target.files;
-
-    this.preview = '';
-
-    if (this.selectedFiles && this.selectedFiles[0]) {
-      const numberOfFiles = this.selectedFiles.length;
-      for (let i = 0; i < numberOfFiles; i++) {
-        const reader = new FileReader();
-
-        reader.onload = (e: any) => {
-          this.preview = e.target.result;
-        };
-
-        reader.readAsDataURL(this.selectedFiles[i]);
-
-        this.selectedFileNames.push(this.selectedFiles[i].name);
-      }
-    }
-  }
-
-  uploadFiles(): void {
-    if (this.selectedFiles) {
-      for (let i = 0; i < this.selectedFiles.length; i++) {
-        this.upload(i, this.selectedFiles[i]);
-      }
-    }
-  }
-
-  upload(idx: number, file: File): void {
-    if (file) {
-      this.uploadService.upload(file).subscribe(
-        (event: any) => {
-          if (event.type === HttpEventType.UploadProgress) {
-          } else if (event instanceof HttpResponse) {
-            const msg = file.name + ': Successful!';
-          }
-        },
-        (err: any) => {
-          let msg = file.name + ': Failed!';
-
-          if (err.error && err.error.message) {
-            msg += ' ' + err.error.message;
-          }
-        }
-      );
-    }
-  }
-
-  // onDateSelected(unformattedFecha: Date | null): void {
-  //   if (unformattedFecha) {
-  //     // A date has been selected
-  //     this.isDateSelected = true;
-  //     const formattedDate = this.formatDate(unformattedFecha);
-  //     this.fecha = formattedDate;
-  //   } else {
-  //     // No date has been selected
-  //     this.isDateSelected = false;
-  //     // You can handle this case, e.g., display an error message
-  //   }
-  // }
-}
-
-// SERVICE FOR IMAGES
-@Injectable({
-  providedIn: 'root',
-})
-class FileUploadService {
-  private baseUrl = 'http://localhost:8080';
-
-  constructor(private http: HttpClient) { }
-
-  upload(file: File): Observable<HttpEvent<any>> {
-    const formData: FormData = new FormData();
-
-    formData.append('file', file);
-
-    const req = new HttpRequest('POST', `${this.baseUrl}/upload`, formData, {
-      reportProgress: true,
-      responseType: 'json',
-    });
-
-    return this.http.request(req);
-  }
-
-  getFiles(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/files`);
-  }
 }
 
