@@ -1,183 +1,197 @@
 .title {
-    font-family: 'Helvetica';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 28px;
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
 
-    color: #000000;
-    margin-right: auto;
+  color: #000000;
+  margin-right: auto;
 
-    padding-right: 15rem;
+  padding-right: 15rem;
 }
 
 .realtime-minicard {
-    background: #0033A0    ;
-    background-size: cover;
-    border-radius: 2rem;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+  background: #0033a0;
+  background-size: cover;
+  border-radius: 2rem;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
 
-    width: 129px;
-    height: 33px;
+  width: 129px;
+  height: 33px;
 }
 
 .realtime-minicard-text {
-    font-family: 'Helvetica';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 15px;
-    line-height: 17px;
-    align-items: center;
-    text-align: center;
-    padding-top: 1vh;
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 17px;
+  align-items: center;
+  text-align: center;
+  padding-top: 1vh;
 
-
-    color: #FFFFFF;
+  color: #ffffff;
 }
 
 .upper-div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-  
+
 .upper-right-div {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
 }
-  
+
 .upper-right-div > div {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 nz-select {
-    margin: 0 8px 10px 0;
-    width: 120px;
+  margin: 0 8px 10px 0;
+  width: 120px;
 }
 
-:host ::ng-deep .ant-select:not(.ant-select-customize-input) .ant-select-selector {
-    border-radius: 10px;
+:host
+  ::ng-deep
+  .ant-select:not(.ant-select-customize-input)
+  .ant-select-selector {
+  border-radius: 10px;
 }
 
-:host ::ng-deep .ant-select:not(.ant-select-customize-input) .ant-select-selector,
-:host ::ng-deep .ant-select:not(.ant-select-customize-input) .ant-select-selection-placeholder,
-:host ::ng-deep .ant-select:not(.ant-select-customize-input) .ant-select-selection-item {
-  font-family: 'Helvetica'; /* Change the font family */
+:host
+  ::ng-deep
+  .ant-select:not(.ant-select-customize-input)
+  .ant-select-selector,
+:host
+  ::ng-deep
+  .ant-select:not(.ant-select-customize-input)
+  .ant-select-selection-placeholder,
+:host
+  ::ng-deep
+  .ant-select:not(.ant-select-customize-input)
+  .ant-select-selection-item {
+  font-family: "Helvetica"; /* Change the font family */
   font-size: 15px; /* Change the font size */
   font-weight: 700; /* Change the font weight */
 }
 :host ::ng-deep .ant-select-item-option-content {
-  font-family: 'Helvetica'; /* Change the font family */
+  font-family: "Helvetica"; /* Change the font family */
   font-size: 15px; /* Change the font size */
   font-weight: 500; /* Change the font weight */
 }
 
-.bar1 {
+/* .bar1 {
     fill: #E8E8E8;
     opacity: 1;
+} */
+
+.bar1 {
+  fill: #1c1c61;
+  opacity: 1;
 }
-  
+
 .bar2 {
-    fill: #0033A0;
-    opacity: 1;
+  fill: #0033a0;
+  opacity: 1;
 }
-  
+
 .bar1:hover {
-    fill: #ADADAD;
+  fill: #adadad;
 }
-  
+
 .axis {
-    font: 10px sans-serif;
+  font: 10px sans-serif;
 }
-  
+
 .axis path,
 .axis line {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
 }
-  
+
 .x.axis path {
-    display: none;
+  display: none;
 }
 
 .y.axis .tick line {
-    stroke: #000;
+  stroke: #000;
 }
 
 .y.axis text {
-    fill: black;
-    font-size: 14px;
-    font-weight: bold;
+  fill: black;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .x.axis text {
-    fill: black;
-    font-size: 14px;
-    font-weight: bold;
+  fill: black;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .y.axis path {
-    display: none;
+  display: none;
 }
 
 .y-axis .domain {
-    display: none;
+  display: none;
 }
 
 .outer-bar-chart-div {
-    flex: none;
-    order: 0;
-    align-self: stretch;
-    flex-grow: 0;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
 
-    display: flex;
+  display: flex;
 }
 
 .y-axis-title-text {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+  text-align: center;
 
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 19px;
-    display: flex;
-    align-items: center;
-    text-align: center;
+  color: #000000;
 
-    color: #000000;
-
-    transform: rotate(-90deg);
+  transform: rotate(-90deg);
 }
 
 .container {
-    height: 14.5rem; /* Set the desired height for the container */
-    display: flex;
-    justify-content: flex-start; /* Align items horizontally to the start */
-    align-items: flex-end; /* Align items vertically to the bottom */
+  height: 14.5rem; /* Set the desired height for the container */
+  display: flex;
+  justify-content: flex-start; /* Align items horizontally to the start */
+  align-items: flex-end; /* Align items vertically to the bottom */
 }
-  
+
 .vertical-text {
-    writing-mode: vertical-lr; /* Rotate the text vertically from left to right */
-    text-orientation: mixed; /* Allow mixed orientation for better browser support */
-    transform: rotate(180deg); /* Flip the text upside down */
+  writing-mode: vertical-lr; /* Rotate the text vertically from left to right */
+  text-orientation: mixed; /* Allow mixed orientation for better browser support */
+  transform: rotate(180deg); /* Flip the text upside down */
 
-    font-family: 'Helvetica';
-    font-size: 15px;
-    font-weight: 550;
+  font-family: "Helvetica";
+  font-size: 15px;
+  font-weight: 550;
 
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .horizontal-text {
-    font-family: 'Helvetica';
-    font-size: 15px;
-    font-weight: 550;
-    text-align: center;
+  font-family: "Helvetica";
+  font-size: 15px;
+  font-weight: 550;
+  text-align: center;
 
-    margin: -4px;
-    padding: 0;
+  margin: -4px;
+  padding: 0;
 }
-

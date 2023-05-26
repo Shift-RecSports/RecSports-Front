@@ -10,8 +10,10 @@ export interface reservacion {
   horario: string;
   zona: string;
   espacio: string;
+  espacioId: string;
   estatus: string;
   materiales: string;
+  imagen: string;
 }
 
 export interface dataReservacion {
@@ -20,10 +22,12 @@ export interface dataReservacion {
   fecha: string;
   hora_seleccionada: string;
   espacio: string;
+  espacio_nombre: string;
   matricula_alumno: string;
+  imagen: string;
 }
 
-const listaEstatus = ['Libre', 'Activa', 'Cancelada', 'Expirada'];
+const listaEstatus = ['Libre', 'Activa', 'Expirada', 'Cancelada'];
 
 @Component({
   selector: 'app-reservaciones',
@@ -53,7 +57,7 @@ export class ReservacionesComponent {
   }
 
   getListOfReservaciones() {
-    const url = `/reservaciones/matricula=${this.matricula}`;
+    const url = `/reservaciones/matricula/${this.matricula}`;
 
     let auxListaReservaciones: reservacion[] = [];
     this._apiService.get(url).subscribe((data) => {
@@ -67,9 +71,14 @@ export class ReservacionesComponent {
             parseInt(dataReservacion.hora_seleccionada.substring(0, 2)) + 1
           }:00`,
           zona: 'CBD1',
-          espacio: dataReservacion.espacio,
+          espacio: dataReservacion.espacio_nombre,
+          espacioId: dataReservacion.espacio,
           estatus: listaEstatus[dataReservacion.estatus - 1],
           materiales: 'Materiales',
+          imagen: this._apiService.getImage(
+            '/espacios',
+            dataReservacion.imagen
+          ),
         };
 
         auxListaReservaciones.push(auxReservacion);
