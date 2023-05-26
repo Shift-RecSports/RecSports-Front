@@ -41,6 +41,7 @@ export class NewsComponent implements OnInit{
         this.listaNoticias = data;
         for (let i = 0; i < this.listaNoticias.length; i++) {
           this.listaNoticias[i].imagen = this._apiService.getImage(
+            "/noticias",
             this.listaNoticias[i].imagen
           );
         }
