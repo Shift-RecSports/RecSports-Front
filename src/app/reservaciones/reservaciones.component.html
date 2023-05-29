@@ -1,5 +1,12 @@
 <div class="grid-container">
   <div class="reservaciones-container">
+    <div *ngIf="listaReservaciones.length == 0" class="reservaciones-empty">
+      <mat-icon class="reservaciones-empty-icon">info</mat-icon>
+      <div class="reservaciones-empty-text">
+        No se encontraron reservaciones
+      </div>
+    </div>
+
     <div
       class="reservaciones-lista"
       *ngFor="let reservacion of listaReservaciones"

@@ -6,17 +6,12 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { ApiService } from 'src/app/service/api.service';
 import { Validators } from '@angular/forms';
 
-
-
 @Component({
   selector: 'app-nueva-noticia',
   templateUrl: './nueva-noticia.component.html',
   styleUrls: ['./nueva-noticia.component.css'],
 })
-
-
 export class NuevaNoticiaComponent {
-
   formularioNoticia: FormGroup = new FormGroup({});
   message: string = '';
   messageType: string = '';
@@ -32,7 +27,7 @@ export class NuevaNoticiaComponent {
     private service: AuthService,
     private router: Router,
     public formulario: FormBuilder,
-    private _apiService: ApiService,
+    private _apiService: ApiService
   ) {}
 
   ngOnInit() {
@@ -42,7 +37,7 @@ export class NuevaNoticiaComponent {
       fecha: [null, Validators.required],
       hora: [null, Validators.required],
       imagen: ['', Validators.required],
-      url: ['']
+      url: [''],
     });
   }
 
@@ -65,7 +60,7 @@ export class NuevaNoticiaComponent {
     const year = String(date.getFullYear());
     const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
     const day = String(date.getDate()).padStart(2, '0');
-    
+
     return `${year}-${month}-${day}`;
   }
 
@@ -73,11 +68,10 @@ export class NuevaNoticiaComponent {
     if (selectedHour) {
       // A date has been selected
       this.isHourSelected = true;
-      console.log("selectedHour: ", selectedHour);
+      console.log('selectedHour: ', selectedHour);
       const formattedHour = this.formatHour(selectedHour);
       this.formularioNoticia.get('hora')?.setValue(formattedHour);
-      console.log("Hora: ",this.formularioNoticia.get('hora')?.value);
-
+      console.log('Hora: ', this.formularioNoticia.get('hora')?.value);
     } else {
       // No date has been selected
       this.isHourSelected = false;
@@ -109,14 +103,13 @@ export class NuevaNoticiaComponent {
     }
   }
 
-
   // enviarDatos() {
   //   console.log("Boton presionado");
-  
+
   //   console.log(this.formularioNoticia.value);
-  
+
   //   const url = '/noticias';
-  
+
   //   if (this.formularioNoticia.valid) {
   //     console.log("formulario valido");
   //     // Form is valid, proceed with saving data
@@ -130,14 +123,13 @@ export class NuevaNoticiaComponent {
   //     };
 
   //     console.log("formulario validado = " + formData);
-  
+
   //     this._apiService.post(url, formData).subscribe((data) => {
   //       console.log(data);
   //       alert(`Noticia ${data.titulo} registrada con éxito}`);
 
   //     // Refresh the current page to reset input fields
   //     location.reload();
-
 
   //     });
   //   } else {
@@ -151,39 +143,54 @@ export class NuevaNoticiaComponent {
   //       }
   //     });
   //   }
-  // }  
+  // }
 
   enviarDatos() {
-    console.log("Boton presionado");
+    console.log('Boton presionado');
     console.log(this.formularioNoticia.value);
-  
+
     const url = '/noticias';
-  
+
     if (this.formularioNoticia.valid) {
-      console.log("formulario valido");
+      console.log('formulario valido');
       // Form is valid, proceed with saving data
       const formData = new FormData();
-  
-      formData.append('lugar', this.formularioNoticia.get('lugar')?.value ?? '');
-      formData.append('fecha', this.formularioNoticia.get('fecha')?.value ?? '');
+
+      formData.append(
+        'lugar',
+        this.formularioNoticia.get('lugar')?.value ?? ''
+      );
+      formData.append(
+        'fecha',
+        this.formularioNoticia.get('fecha')?.value ?? ''
+      );
       formData.append('hora', this.formularioNoticia.get('hora')?.value ?? '');
-      formData.append('titulo', this.formularioNoticia.get('titulo')?.value ?? '');
-      formData.append('imagen', this.selectedFiles![0], this.selectedFileNames[0]);
+      formData.append(
+        'titulo',
+        this.formularioNoticia.get('titulo')?.value ?? ''
+      );
+      formData.append(
+        'imagen',
+        this.selectedFiles![0],
+        this.selectedFileNames[0]
+      );
       formData.append('url', this.formularioNoticia.get('url')?.value ?? '');
-  
-      console.log("formulario validado = ", formData);
-  
+
+      console.log('formulario validado = ', formData);
+
       this._apiService.postWithImage(url, formData).subscribe((data) => {
         console.log(data);
-        alert(`Noticia ${data.titulo} registrada con éxito}`);
-  
+        alert(`Noticia ${data.titulo} registrada con éxito`);
+
         // Refresh the current page to reset input fields
         location.reload();
       });
     } else {
-      console.log("formulario INvalido");
+      console.log('formulario INvalido');
       // Form is invalid, display error message
-      alert(`No se ha podido guardar la noticia. Verifique los campos solicitados.`);
+      alert(
+        `No se ha podido guardar la noticia. Verifique los campos solicitados.`
+      );
       Object.values(this.formularioNoticia.controls).forEach((control) => {
         if (control.invalid) {
           control.markAsDirty();
@@ -192,11 +199,8 @@ export class NuevaNoticiaComponent {
       });
     }
   }
-  
 
   onCancelClick() {
     this.router.navigate(['noticias']);
   }
-
 }
-

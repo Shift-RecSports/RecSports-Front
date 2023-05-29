@@ -25,6 +25,7 @@ export interface dataReservacion {
   espacio_nombre: string;
   matricula_alumno: string;
   imagen: string;
+  materiales: string;
 }
 
 const listaEstatus = ['Libre', 'Activa', 'Expirada', 'Cancelada'];
@@ -74,7 +75,7 @@ export class ReservacionesComponent {
           espacio: dataReservacion.espacio_nombre,
           espacioId: dataReservacion.espacio,
           estatus: listaEstatus[dataReservacion.estatus - 1],
-          materiales: 'Materiales',
+          materiales: dataReservacion.materiales,
           imagen: this._apiService.getImage(
             '/espacios',
             dataReservacion.imagen
