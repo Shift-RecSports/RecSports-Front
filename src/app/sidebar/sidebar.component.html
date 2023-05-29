@@ -235,12 +235,16 @@
           </button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="onMisReservaciones()">
+              <mat-icon>menu</mat-icon>
               Mis Reservaciones
             </button>
             <button mat-menu-item (click)="onCredencial()">
+              <mat-icon>credit_card</mat-icon>
               Mi Credencial
             </button>
-            <button mat-menu-item (click)="onLogOut()">Cerrar Sesión</button>
+            <button mat-menu-item (click)="onLogOut()">
+              <mat-icon aria-hidden="false">login</mat-icon>
+              Cerrar Sesión</button>
           </mat-menu>
         </div>
       </div>
