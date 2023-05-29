@@ -20,6 +20,10 @@ export class RegistroSalidaComponent {
     this.message = '';
   }
 
+  ngOnInit() {
+    this.onScannerFocusInput();
+  }
+
   createNotification(type: string, title: string, description: string): void {
     this.notification.create(type, title, description);
   }
@@ -33,22 +37,36 @@ export class RegistroSalidaComponent {
       .subscribe(
         (data) => {
           const type = 'success';
-          const title = 'Registro de Salida exitoso';
+          const title = `${this.matricula} - Registro de Salida exitoso`;
           const description = `El alumno ${this.matricula} ha registrado su salida con éxito`;
 
           this.createNotification(type, title, description);
           this.loading = false;
+          this.matricula = '';
         },
         (e) => {
           const type = 'error';
-          const title = 'Registro de Salida no exitoso';
+          const title = `El alumno ${this.matricula} no se registro su salida éxito`;
           const description = e.error.message;
 
           this.createNotification(type, title, description);
           this.loading = false;
+          this.matricula = '';
         }
       );
 
-    this.matricula = '';
+    const input = document.getElementById('salida-box');
+    input!.focus();
+  }
+
+  onScannerInput() {
+    if (this.matricula.length === 9) {
+      this.onSubmitMatricula();
+    }
+  }
+
+  onScannerFocusInput() {
+    const input = document.getElementById('salida-box');
+    input!.focus();
   }
 }

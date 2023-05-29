@@ -1,10 +1,12 @@
 <div class="grid-container">
   <div class="reservaciones-container">
     <div *ngIf="listaReservaciones.length == 0" class="reservaciones-empty">
-      <mat-icon class="reservaciones-empty-icon">info</mat-icon>
-      <div class="reservaciones-empty-text">
-        No se encontraron reservaciones
-      </div>
+      <img
+        class="reservaciones-empty-icon"
+        src="./assets/img/recsports_logo_icon.png"
+        alt=""
+      />
+      <div class="reservaciones-empty-text">No se encontraron resultados</div>
     </div>
 
     <div
