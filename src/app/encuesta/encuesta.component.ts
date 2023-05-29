@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../service/auth.service';
+import { ApiService } from '../service/api.service';
+import { User } from '../service/types';
 
 @Component({
   selector: 'app-encuesta',
@@ -8,40 +11,71 @@ import { Component } from '@angular/core';
 export class EncuestaComponent {
   //arreglo para numeros abajo de slider
   tickValues = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  // Variable para almacenar tema de encuesta
+  temaValue: string = '';
+  // variable para almacenar mensaje
+  textareaValue: string = '';
 
-  // variable para almacenar valor de slider 1
-  sliderValue1: number = 0;
+  // variable para almacenar valor de sliders
+  sliderValue1: number = 5;
+  sliderValue2: number = 5;
+  sliderValue3: number = 5;
+
+  // para guardar matricula
+  user: User;
+
+  // si ya subió una encuesta, ya no le aparece info
+  contestada: boolean = false;
+
+  constructor(private service: AuthService, private _apiService: ApiService){
+    this.user = { matricula: '', nombre: '', userRole: '' };
+
+    if (this.service.isLoggedIn()) {
+      this.user = {
+        matricula: this.service.GetUserName() ? this.service.GetUserName() : '',
+        userRole: this.service.GetUserRole(),
+        nombre: this.service.GetUserNameString(),
+      };
+    }
+  }
+
+  // metodo para convertir number a string e usarlo en html
   formatLabel(value: number) {
     return value.toString();
   }
-  onSliderChange1(event: any) {
-    this.sliderValue1 = event.value; // Assign the slider1 value to the sliderValue variable
+
+  onSlider1ValueChange(event: any) {
+    this.sliderValue1 = event.value;
   }
 
-  // variable para almacenar valor de slider 2
-  sliderValue2: number = 0;
-  onSliderChange2(event: any) {
-    this.sliderValue2 = event.value; // Assign the slider2 value to the sliderValue variable
+  onSlider2ValueChange(event: any) {
+    this.sliderValue2 = event.value;
   }
 
-  // variable para almacenar valor de slider 3
-  sliderValue3: number = 0;
-  onSliderChange3(event: any) {
-    this.sliderValue3 = event.value; // Assign the slider3 value to the sliderValue variable
+  onSlider3ValueChange(event: any) {
+    this.sliderValue3 = event.value;
   }
 
+  onEnviarButtonClick() {
+    const url = '/encuestas/';
+    const currentDate = new Date().toISOString(); // Get current date in ISO format
+    const body = {
+      matricula: this.user.matricula,
+      date: currentDate,
+      sliderValue1: this.sliderValue1,
+      sliderValue2: this.sliderValue2,
+      sliderValue3: this.sliderValue3,
+      tema: this.temaValue,
+      comentario: this.textareaValue
+    };
 
-  // Variable para almacenar tema de encuesta
-  temaValue: string = '';
-  onSelectionChange(): void {
-    console.log(this.temaValue); // Access the selected value here
+    this._apiService.post(url, body).subscribe((data) => {
+      console.log(data)
+      this.contestada = true;
+      console.log(this.contestada)
+    });
   }
 
-  // variable para almacenar mensaje
-  textareaValue: string = ''; // Variable to store the textarea value
-  onTextareaChange(value: string) {
-    this.textareaValue = value; // Assign the textarea value to the textareaValue variable
-  }
 }
 
 
