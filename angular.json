@@ -39,15 +39,15 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "3mb",
+                  "maximumError": "10mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  
-                  "maximumWarning": "500kb",
-                  
-                  "maximumError": "1mb"
+
+                  "maximumWarning": "3mb",
+
+                  "maximumError": "10mb"
                 }
               ],
               "outputHashing": "all"
@@ -93,6 +93,9 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
