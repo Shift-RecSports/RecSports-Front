@@ -14,6 +14,7 @@ export interface reservacion {
   estatus: string;
   materiales: string;
   imagen: string;
+  deporte_nombre: string;
 }
 
 export interface dataReservacion {
@@ -26,6 +27,7 @@ export interface dataReservacion {
   matricula_alumno: string;
   imagen: string;
   materiales: string;
+  deporte_nombre: string;
 }
 
 const listaEstatus = ['Libre', 'Activa', 'Expirada', 'Cancelada'];
@@ -36,6 +38,7 @@ const listaEstatus = ['Libre', 'Activa', 'Expirada', 'Cancelada'];
   styleUrls: ['./reservaciones.component.css'],
 })
 export class ReservacionesComponent {
+  listaDataReservaciones: dataReservacion[] = [];
   listaReservaciones: reservacion[] = [];
   matricula: string;
 
@@ -45,7 +48,6 @@ export class ReservacionesComponent {
     private service: AuthService
   ) {
     this.matricula = '';
-
     if (this.service.isLoggedIn()) {
       this.matricula = this.service.GetUserName()
         ? this.service.GetUserName()!
@@ -80,9 +82,11 @@ export class ReservacionesComponent {
             '/espacios',
             dataReservacion.imagen
           ),
+          deporte_nombre: dataReservacion.deporte_nombre,
         };
 
         auxListaReservaciones.push(auxReservacion);
+        this.listaDataReservaciones.push(dataReservacion);
       });
 
       this.listaReservaciones = auxListaReservaciones;
@@ -97,8 +101,14 @@ export class ReservacionesComponent {
   }
 
   openDialog(selectedReservacion: reservacion): void {
+    const dataReservacion = this.listaDataReservaciones.find(
+      (reservacion) => reservacion.id == selectedReservacion.id
+    );
     const dialogRef = this.dialog.open(ModalComponent, {
-      data: { selectedReservacion: selectedReservacion },
+      data: {
+        selectedReservacion: selectedReservacion,
+        dataReservacion: dataReservacion,
+      },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
