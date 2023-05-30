@@ -40,7 +40,7 @@
               appearance="outline"
               class="input-container"
             >
-              <mat-label>Área</mat-label>
+              <!-- <mat-label>Área</mat-label> -->
               <input
                 type="text"
                 placeholder="Selecciona"
@@ -101,19 +101,21 @@
               appearance="outline"
               class="input-container"
             >
-              <mat-label>Deporte</mat-label>
+              <!-- <mat-label>Deporte</mat-label> -->
               <input
                 type="text"
                 placeholder="Selecciona"
                 formControlName="deporte"
                 matInput
-                [matAutocomplete]="auto"
+                [matAutocomplete]="autoDeporte"
                 class="custom-input"
               />
-              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-autocomplete autoActiveFirstOption #autoDeporte="matAutocomplete">
                 <mat-option 
-                  *ngFor="let deporte of listaDeportes" [value]="deporte.id">
+                  *ngFor="let deporte of listaDeportes" [value]="deporte.nombre">
                   {{ deporte.nombre }}
+
+                  
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
@@ -122,27 +124,6 @@
               Seleccione un deporte
             </div>
           </div>
-
-
-          <div
-            nz-col
-            nzXs="24"
-            nzSm="24"
-            nzMd="12"
-            nzLg="12"
-            nzXl="12"
-            class="espacio-form-item"
-          >
-            <div class="espacio-form-title">Deporte</div>
-            <mat-form-field appearance="outline" class="input-container">
-              <input matInput placeholder="Escribe..." formControlName="deporte" class="custom-input"/>
-            </mat-form-field>
-            <div *ngIf="formularioEspacios.get('deporte')?.invalid && formularioEspacios.get('deporte')?.touched"
-              class="error-text">
-              Ingrese un deporte
-            </div>
-          </div>
-
 
           <!-- HORARIOS -->
           <div

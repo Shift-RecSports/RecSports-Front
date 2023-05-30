@@ -99,9 +99,9 @@ export class EspaciosFormularioComponent {
           this.listaDeportes[i].imagen
         );
       }
+
     });
 
-    console.log("ESTA ES LA LISTA DE DEPORTES" + this.listaDeportes);
 
     this.filteredOptions = this.horarios.valueChanges.pipe(
       startWith(''),
@@ -144,14 +144,27 @@ export class EspaciosFormularioComponent {
     }
   }
 
+  getIdOfSelectedDeporte(): string {
+    
+    const selectedDeporteNombre = this.formularioEspacios.get('deporte')?.value;
+    //console.log("VALUE EN FORM-DEPORTE-FIELD" + this.formularioEspacios.get('deporte')?.value);
+    
+    const selectedDeporte = this.listaDeportes.find(deporte => deporte.nombre === selectedDeporteNombre);
+    //console.log("selectedDeporte" + selectedDeporte);
+
+    //console.log(selectedDeporte!.id);
+    return selectedDeporte!.id.toString();
+
+  }
+
   enviarDatos() {
     console.log("Boton presionado");
     console.log(this.formularioEspacios.value);
 
 
-    const stringSet = `{"${Array.from(this.horariosSelected).join('", "')}"}`;
-    this.formularioEspacios.get('horarios')?.setValue(stringSet);
-    console.log("HORARIOS: " + this.formularioEspacios.get('horarios')?.value);
+    // const stringSet = `{"${Array.from(this.horariosSelected).join('", "')}"}`;
+    // this.formularioEspacios.get('horarios')?.setValue(stringSet);
+    // console.log("HORARIOS: " + this.formularioEspacios.get('horarios')?.value);
 
     const url = '/espacios';
 
@@ -161,20 +174,12 @@ export class EspaciosFormularioComponent {
       const formData = new FormData();
 
       formData.append('nombre', this.formularioEspacios.get('nombre')?.value ?? '');
-      formData.append('horarios', this.formularioEspacios.get('horarios')?.value ?? '');
-      // formData.append('horarios', "{'6:00', '8:00', '10:00'}");
+      // formData.append('horarios', this.formularioEspacios.get('horarios')?.value ?? '');
+      formData.append('horarios', "{'6:00', '8:00', '10:00'}");
       formData.append('aforo', this.formularioEspacios.get('aforo')?.value ?? '');
       formData.append('zona', this.formularioEspacios.get('zona')?.value ?? '');
       formData.append('imagen', this.selectedFiles![0], this.selectedFileNames[0]);
-      // formData.append('deporte', this.formularioEspacios.get('deporte')?.value ?? '');
-
-
-      // Get the selected sport object
-      const selectedDeporteID = this.formularioEspacios.get('deporte')?.value;
-      const selectedDeporte = this.listaDeportes.find(deporte => deporte.id === selectedDeporteID);
-      if (selectedDeporte) {
-        formData.append('deporte', selectedDeporte.id.toString());
-      }
+      formData.append('deporte', this.getIdOfSelectedDeporte());
 
       console.log("formulario validado = ", formData);
 
