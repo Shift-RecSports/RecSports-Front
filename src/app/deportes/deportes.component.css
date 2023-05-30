@@ -186,6 +186,7 @@
 .nombre_deporte {
   font-size: 1.8rem;
   color: white;
+  margin: 0; 
 }
 
 .reserva_ahora {

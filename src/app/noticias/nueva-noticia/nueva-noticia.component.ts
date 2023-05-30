@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/service/auth.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ApiService } from 'src/app/service/api.service';
 import { Validators } from '@angular/forms';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-nueva-noticia',
@@ -13,8 +14,6 @@ import { Validators } from '@angular/forms';
 })
 export class NuevaNoticiaComponent {
   formularioNoticia: FormGroup = new FormGroup({});
-  message: string = '';
-  messageType: string = '';
   formattedDate: string = '';
   isDateSelected: boolean = true;
   isHourSelected: boolean = true;
@@ -27,7 +26,8 @@ export class NuevaNoticiaComponent {
     private service: AuthService,
     private router: Router,
     public formulario: FormBuilder,
-    private _apiService: ApiService
+    private _apiService: ApiService,
+    private notification: NzNotificationService
   ) {}
 
   ngOnInit() {
@@ -103,48 +103,6 @@ export class NuevaNoticiaComponent {
     }
   }
 
-  // enviarDatos() {
-  //   console.log("Boton presionado");
-
-  //   console.log(this.formularioNoticia.value);
-
-  //   const url = '/noticias';
-
-  //   if (this.formularioNoticia.valid) {
-  //     console.log("formulario valido");
-  //     // Form is valid, proceed with saving data
-  //     const formData = {
-  //       lugar: this.formularioNoticia.get('lugar')?.value ?? '',
-  //       fecha: this.formularioNoticia.get('fecha')?.value ?? '',
-  //       hora: this.formularioNoticia.get('hora')?.value ?? '',
-  //       titulo: this.formularioNoticia.get('titulo')?.value ?? '',
-  //       imagen: '',
-  //       url: "https://javier.rodriguez.org.mx/itesm/borregos/borrego-blue.png"
-  //     };
-
-  //     console.log("formulario validado = " + formData);
-
-  //     this._apiService.post(url, formData).subscribe((data) => {
-  //       console.log(data);
-  //       alert(`Noticia ${data.titulo} registrada con éxito}`);
-
-  //     // Refresh the current page to reset input fields
-  //     location.reload();
-
-  //     });
-  //   } else {
-  //     console.log("formulario INvalido");
-  //     // Form is invalid, display error message
-  //     alert(`No se ha podido guardar la noticia. Verifique los campos solicitados.`);
-  //     Object.values(this.formularioNoticia.controls).forEach((control) => {
-  //       if (control.invalid) {
-  //         control.markAsDirty();
-  //         control.updateValueAndValidity({ onlySelf: true });
-  //       }
-  //     });
-  //   }
-  // }
-
   enviarDatos() {
     console.log('Boton presionado');
     console.log(this.formularioNoticia.value);
@@ -180,17 +138,27 @@ export class NuevaNoticiaComponent {
 
       this._apiService.postWithImage(url, formData).subscribe((data) => {
         console.log(data);
-        alert(`Noticia ${data.titulo} registrada con éxito`);
+        //alert(`Noticia ${data.titulo} registrada con éxito`);
 
-        // Refresh the current page to reset input fields
-        location.reload();
+        // NOTIFICACION
+        const type = 'success';
+        const title = 'Noticia creada con éxito';
+        const description = `Título: ${data.titulo}`;
+        this.createNotification(type, title, description);
+
+        // Send back to noticias
+        this.router.navigate(['noticias']);
       });
     } else {
       console.log('formulario INvalido');
       // Form is invalid, display error message
-      alert(
-        `No se ha podido guardar la noticia. Verifique los campos solicitados.`
-      );
+      //alert(`No se ha podido guardar la noticia. Verifique los campos solicitados.`);
+      // NOTIFICACION
+      const type = 'error';
+      const title = 'No se ha podido guardar la noticia.';
+      const description = `Verifique los campos solicitados.`;
+      this.createNotification(type, title, description);
+
       Object.values(this.formularioNoticia.controls).forEach((control) => {
         if (control.invalid) {
           control.markAsDirty();
@@ -198,6 +166,10 @@ export class NuevaNoticiaComponent {
         }
       });
     }
+  }
+
+  createNotification(type: string, title: string, description: string): void {
+    this.notification.create(type, title, description);
   }
 
   onCancelClick() {

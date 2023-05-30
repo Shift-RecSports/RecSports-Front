@@ -5,21 +5,21 @@
         <p class="subtitulo-encuesta">Promedio de las encuestas</p>
         <div class="tarjeta-promedio">
           <p class="titulo-promedio">Gimnasio</p> 
-          <nz-progress class="slider-promedio" [nzPercent]="80" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="20"></nz-progress>
+          <nz-progress class="slider-promedio" [nzPercent]="promediosEncuesta.promedio1*10" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="20"></nz-progress>
           <div class="slider-tick-container">
             <div class="slider-tick" *ngFor="let tick of tickValues">{{tick}}</div>
           </div>
         </div>
         <div class="tarjeta-promedio">
           <p class="titulo-promedio">Wellness Center</p> 
-          <nz-progress class="slider-promedio" [nzPercent]="60" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="20"></nz-progress>
+          <nz-progress class="slider-promedio" [nzPercent]="promediosEncuesta.promedio2*10" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="20"></nz-progress>
           <div class="slider-tick-container">
             <div class="slider-tick" *ngFor="let tick of tickValues">{{tick}}</div>
           </div>
         </div>
         <div class="tarjeta-promedio">
           <p class="titulo-promedio">Athletics Web</p> 
-          <nz-progress class="slider-promedio" [nzPercent]="90" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="20"></nz-progress>
+          <nz-progress class="slider-promedio" [nzPercent]="promediosEncuesta.promedio3*10" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="20"></nz-progress>
           <div class="slider-tick-container">
             <div class="slider-tick" *ngFor="let tick of tickValues">{{tick}}</div>
           </div>
@@ -33,16 +33,16 @@
           nzMd="6"
           nzLg="6"
           nzXl="6"
-          *ngFor="let res of respuestas">
+          *ngFor="let res of respuestasEncuesta">
             <div class="card">
               <p class="titulo-respuesta">{{res.tema}}</p>
-              <p class="mensaje-respuesta"> lorem ipsum dolor sit amet, consectetur adipiscing elit. donec aliquet luctus nulla, nec sagittisrotor aliquam eget.</p>
+              <p class="mensaje-respuesta"> {{res.comentario}}</p>
               <p class="subtitulo-respuesta">Gimnasio</p>
-              <nz-progress class="slider-respuesta" [nzPercent]="res.calificacion*10" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="15"></nz-progress>
+              <nz-progress class="slider-respuesta" [nzPercent]="res.calificacion1*10" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="15"></nz-progress>
               <p class="subtitulo-respuesta">Athletics</p>
-              <nz-progress class="slider-respuesta" [nzPercent]="res.calificacion*10" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="15"></nz-progress>
+              <nz-progress class="slider-respuesta" [nzPercent]="res.calificacion2*10" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="15"></nz-progress>
               <p class="subtitulo-respuesta">Athletics Web</p>
-              <nz-progress class="slider-respuesta" [nzPercent]="res.calificacion*10" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="15"></nz-progress>
+              <nz-progress class="slider-respuesta" [nzPercent]="res.calificacion3*10" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="15"></nz-progress>
               <p class="fecha-respuesta">{{res.fecha}}</p>
             </div>
           </div>

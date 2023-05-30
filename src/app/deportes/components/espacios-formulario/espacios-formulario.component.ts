@@ -1,22 +1,18 @@
-import {
-  HttpClient,
-  HttpEvent,
-  HttpEventType,
-  HttpRequest,
-  HttpResponse,
-} from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
-import { Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Observable, map, startWith } from 'rxjs';
 import { AuthService } from 'src/app/service/auth.service';
-import { Espacio } from 'src/app/classes/espacios';
+import { Deporte } from 'src/app/classes/deportes';
 
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ApiService } from 'src/app/service/api.service';
+import { Validators } from '@angular/forms';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+
+
 
 @Component({
   selector: 'app-espacios-formulario',
@@ -24,20 +20,25 @@ import { ApiService } from 'src/app/service/api.service';
   styleUrls: ['./espacios-formulario.component.css'],
 })
 export class EspaciosFormularioComponent {
+
+  formularioEspacios: FormGroup = new FormGroup({});
   areas = new FormControl('');
   options: string[] = ['CBD1', 'CBD2', 'Wellness Center'];
 
-  nombre: string;
-  hora_inicio: string;
-  hora_fin: string;
-  aforo: string;
-  zona: string;
-  imagen: string;
-  deporte: string;
+  selectedFiles?: FileList;
+  selectedFileNames: string[] = [];
+  preview: string = '';
+
+  deportesControl = new FormControl();
+  listaDeportes: Deporte[] = [];
+
 
   horarios = new FormControl('');
   horariosSelected: string[] = [];
+  horariosSet = new Set();
   listaHorarios: string[] = [
+    '6:00',
+    '7:00',
     '8:00',
     '9:00',
     '10:00',
@@ -50,27 +51,22 @@ export class EspaciosFormularioComponent {
     '17:00',
     '18:00',
     '19:00',
+    '20:00',
+    '21:00',
+    '22:00',
   ];
 
-  filteredOptions: Observable<string[]>;
+  deportesOptions: string[] = []
 
-  formularioEspacios!: FormGroup;
-  message: string = '';
+  filteredOptions: Observable<string[]>;
 
   constructor(
     private service: AuthService,
     private router: Router,
     public formulario: FormBuilder,
-    private _apiService: ApiService
-  ) {
-    this.nombre = '';
-    this.hora_inicio = '08:00:00';
-    this.hora_fin = '19:00:00';
-    this.aforo = '';
-    this.zona = '';
-    this.imagen = '';
-    this.deporte = '';
-  }
+    private _apiService: ApiService,
+    private notification: NzNotificationService
+  ) { }
 
   @ViewChild('matRef') matRef: MatSelect;
   removeSelectedHorario(horariosSelected: string) {
@@ -83,13 +79,43 @@ export class EspaciosFormularioComponent {
 
   changeSelectedEspacios(espacios: string[]) {
     this.horariosSelected = espacios;
+    //console.log("ARRAY DE HORARIOS", this.horariosSelected);
+  }
+
+  horariosToString(): string {
+    // Reformats array ["7:00", "8:00", "9:00"] to string "{"7:00", "8:00", "9:00"}"
+    const horarioString = `{${this.horariosSelected.join(", ")}}`;
+    return horarioString;
   }
 
   ngOnInit() {
+
+    const urlDeportes = '/deportes';
+    this._apiService.get(urlDeportes).subscribe((data) => {
+      this.listaDeportes = data;
+      for (let i = 0; i < this.listaDeportes.length; i++) {
+        this.listaDeportes[i].imagen = this._apiService.getImage(
+          this.listaDeportes[i].imagen
+        );
+      }
+
+    });
+
+
     this.filteredOptions = this.horarios.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || ''))
     );
+
+    this.formularioEspacios = this.formulario.group({
+      nombre: ['', Validators.required],
+      horarios: ['', Validators.required],
+      aforo: [null, Validators.required],
+      zona: ['', Validators.required],
+      imagen: ['', Validators.required],
+      deporte: ['', Validators.required]
+    });
+
   }
 
   private _filter(value: string): string[] {
@@ -99,10 +125,6 @@ export class EspaciosFormularioComponent {
       option.toLowerCase().includes(filterValue)
     );
   }
-
-  selectedFiles?: FileList;
-  selectedFileNames: string[] = [];
-  preview: string = '';
 
   selectFiles(event: any): void {
     this.selectedFileNames = [];
@@ -121,23 +143,66 @@ export class EspaciosFormularioComponent {
     }
   }
 
-  guardarEspacio() {
-    const formData: FormData = new FormData();
-    formData.append(
-      'imagen',
-      this.selectedFiles![0],
-      this.selectedFileNames[0]
-    );
-    // formData.append('nombre', this.nombre);
-    // formData.append('descripcion', this.descripcion);
-    // formData.append('materiales', this.materiales);
-    // formData.append('duracion', this.duracion.toString());
+  getIdOfSelectedDeporte(): string {
+    
+    const selectedDeporteNombre = this.formularioEspacios.get('deporte')?.value;
+    //console.log("VALUE EN FORM-DEPORTE-FIELD" + this.formularioEspacios.get('deporte')?.value);
+    
+    const selectedDeporte = this.listaDeportes.find(deporte => deporte.nombre === selectedDeporteNombre);
+    //console.log("selectedDeporte" + selectedDeporte);
 
-    // const url = '/deportes';
-    // this._apiService.postWithImage(url, formData).subscribe((data) => {
-    //   console.log(data);
-    //   // this.message = `Imagen subida: ${data} registrado con éxito}`;
-    // });
+    //console.log(selectedDeporte!.id);
+    return selectedDeporte!.id.toString();
+
+  }
+
+  enviarDatos() {
+    console.log("Boton presionado");
+    console.log(this.formularioEspacios.value);
+
+    const url = '/espacios';
+
+    if (this.formularioEspacios.valid) {
+      console.log("formulario valido");
+      // Form is valid, proceed with saving data
+      const formData = new FormData();
+
+      formData.append('nombre', this.formularioEspacios.get('nombre')?.value ?? '');
+      formData.append('horarios', this.horariosToString());
+      formData.append('aforo', this.formularioEspacios.get('aforo')?.value ?? '');
+      formData.append('zona', this.formularioEspacios.get('zona')?.value ?? '');
+      formData.append('imagen', this.selectedFiles![0], this.selectedFileNames[0]);
+      formData.append('deporte', this.getIdOfSelectedDeporte());
+
+      this._apiService.postWithImage(url, formData).subscribe((data) => {
+        // Notificacion de exito
+        const type = 'success';
+        const title = 'Espacio creado con éxito.';
+        const description = `Título: ${data.nombre}`;
+        this.createNotification(type, title, description);
+
+        //Redirecciona a deportes
+        this.router.navigate([`/deportes/ ${this.getIdOfSelectedDeporte()}`]);
+      });
+    } else {
+      console.log("formulario INVALIDO");
+      // Notificacion de error
+      const type = 'error';
+      const title = 'No se ha podido guardar el espacio. ';
+      const description = `Verifique los campos solicitados.`;
+      this.createNotification(type, title, description);
+
+      Object.values(this.formularioEspacios.controls).forEach((control) => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+    }
+  }
+
+  createNotification(type: string, title: string, description: string): void {
+    this.notification.create(type, title, description);
   }
 
   onCancelClick() {
