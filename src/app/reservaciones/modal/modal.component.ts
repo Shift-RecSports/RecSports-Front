@@ -5,6 +5,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { ApiService } from 'src/app/service/api.service';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 interface dataReservacion {
   selectedReservacion: {
@@ -15,6 +16,17 @@ interface dataReservacion {
     espacio: string;
     espacioId: string;
     estatus: string;
+    materiales: string;
+  };
+  dataReservacion: {
+    id: string;
+    estatus: number;
+    fecha: string;
+    hora_seleccionada: string;
+    espacio: string;
+    espacio_nombre: string;
+    matricula_alumno: string;
+    imagen: string;
     materiales: string;
   };
 }
@@ -28,6 +40,7 @@ export class ModalComponent {
   constructor(
     private _apiService: ApiService,
     public dialogRef: MatDialogRef<ModalComponent>,
+    private notification: NzNotificationService,
     @Inject(MAT_DIALOG_DATA) public data: dataReservacion
   ) {}
 
@@ -66,20 +79,29 @@ export class ModalComponent {
   }
 
   onConfirmClick() {
-    const url = `/reservaciones/${this.data.selectedReservacion.id}`;
+    const url = `/reservaciones/${this.data.dataReservacion.id}`;
 
-    const body = {
-      hora_seleccionada: this.stringToHour(
-        this.data.selectedReservacion.horario
-      ),
-      matricula_alumno: null,
-      fecha: this.stringToDate(this.data.selectedReservacion.dia),
-      espacio: this.data.selectedReservacion.espacio,
-      estatus: 1,
-    };
+    this._apiService.delete(url).subscribe(
+      (data) => {
+        const type = 'success';
+        const title = `Se cancelo la reservacion con exito`;
+        const description = `Se ha cancelado con exito`;
 
-    this._apiService.put(url, body).subscribe((data) => {
-      this.onNoClick();
-    });
+        this.createNotification(type, title, description);
+        this.onNoClick();
+      },
+      (e) => {
+        const type = 'error';
+        const title = `No se ha logrado canelcar la reservacion`;
+        const description = e.error.message;
+
+        this.createNotification(type, title, description);
+        this.onNoClick();
+      }
+    );
+  }
+
+  createNotification(type: string, title: string, description: string): void {
+    this.notification.create(type, title, description);
   }
 }

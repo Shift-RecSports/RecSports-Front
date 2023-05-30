@@ -59,24 +59,18 @@ export class ModalReservacionComponent {
     this.showLoading = true;
 
     if (this.service.isLoggedIn()) {
-      const url = `/reservaciones/${this.data.reservacion.id}`;
-      this._apiService
-        .put(url, {
-          hora_seleccionada: this.data.reservacion.hora_seleccionada,
-          matricula_alumno: this.service.GetUserName(),
-          fecha: this.data.reservacion.fecha,
-          espacio: this.data.reservacion.espacio,
-          estatus: 2,
-        })
-        .subscribe((data) => {
-          console.log(data);
-          this.showLoading = false;
-          this.showSucces = true;
+      const url = `/reservaciones`;
 
-          // if(someError) {
-          //   this.showFailed = true
-          // }
-        });
+      this.data.reservacion.matricula_alumno = this.service.GetUserName()!;
+      this._apiService.post(url, this.data.reservacion).subscribe((data) => {
+        console.log(data);
+        this.showLoading = false;
+        this.showSucces = true;
+
+        //  if(someError) {
+        //    this.showFailed = true
+        //  }
+      });
     }
   }
 

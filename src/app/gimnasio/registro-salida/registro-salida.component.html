@@ -1,10 +1,17 @@
 <div class="grid-container">
-  <div class="registro-container">
+  <div class="registro-container" (click)="onScannerFocusInput()">
     <div class="gimnasio-registro-box">
       <div class="gimnasio-registro-title">Registro: Salida</div>
 
       <mat-form-field appearance="outline" class="registro-matricula-container">
-        <input matInput placeholder="Matricula..." [(ngModel)]="matricula" />
+        <input
+          id="salida-box"
+          matInput
+          placeholder="Matricula..."
+          [(ngModel)]="matricula"
+          autofocus
+          (change)="onScannerInput()"
+        />
       </mat-form-field>
 
       <button

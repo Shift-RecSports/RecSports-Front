@@ -299,10 +299,10 @@ export class BarChartComponent implements OnInit {
 
         const hour = d.hora_inicio.split(':')[0];
         console.log(x(Number(hour)));
-        return Number(hour) * 57.3 - 341;
+        return Number(hour) * 56.3 - 340;
       })
       .attr('width', function (d: any, i: number) {
-        return 54;
+        return 49;
       })
       .attr('y', function (d: any) {
         return yScale(d.historico);
