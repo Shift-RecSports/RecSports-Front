@@ -13,6 +13,7 @@ interface dataReservacion {
     horario: string;
     zona: string;
     espacio: string;
+    espacioId: string;
     estatus: string;
     materiales: string;
   };

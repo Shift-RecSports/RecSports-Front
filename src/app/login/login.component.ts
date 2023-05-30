@@ -7,7 +7,7 @@ import { User, userLogin } from '../service/types';
 import { ApiService } from '../service/api.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
-const userRoles = ['admin', 'entrenador', 'alumno'];
+const userRoles = ['admin', 'gimnasio', 'alumno'];
 
 @Component({
   selector: 'app-login',
@@ -21,6 +21,8 @@ export class LoginComponent {
   hide = true;
 
   showError = false;
+
+  loading = false;
 
   constructor(
     private builder: FormBuilder,
@@ -39,78 +41,57 @@ export class LoginComponent {
 
   async onLogin() {
     if (this.loginform.valid) {
+      this.loading = true;
+
       const user: userLogin = {
         matricula: this.loginform.value.matricula!.toUpperCase(),
-        password: this.loginform.value.password!.toUpperCase(),
+        password: this.loginform.value.password!,
       };
-      
-      const url = `/acceso`;
 
-      // this._apiService
-      //   .post(url, { matricula: user.matricula, contrasena: user.password })
-      //   .subscribe((data) => {
-      //     if (data.length > 0) {
-      //       const url2 = `/usuario/${data[0].matricula}`;
-      //       this._apiService.get(url2).subscribe((data) => {
-      //         this.registerLogin({
-      //           matricula: data.matricula,
-      //           nombre: data.nombre,
-      //           userRole: userRoles[parseInt(data.tipo) - 1],
-      //         });
-      //       });
-      //     } else {
-      //       this.createBasicNotification();
-      //     }
-      //   });
+      const url = `/usuarios/login`;
 
-      if (user.matricula == 'ADMIN') {
-        this.registerLogin({
-          matricula: user.matricula,
-          nombre: '',
-          userRole: userRoles[0],
-        });
-      } else if (user.matricula == 'GIMNASIO') {
-        this.registerLogin({
-          matricula: user.matricula,
-          nombre: '',
-          userRole: userRoles[1],
-        });
-      } else {
-        this.registerLogin({
-          matricula: user.matricula,
-          nombre: '',
-          userRole: userRoles[2],
-        });
-      }
+      this._apiService
+        .post(url, { matricula: user.matricula, contrasena: user.password })
+        .subscribe(
+          (data) => {
+            if (data.matricula) {
+              const type = 'success';
+              const title = 'Inicio de Sesion exitoso';
+              const description = `Usuario valido: ${data.matricula}`;
+              this.createNotification(type, title, description);
+
+              this.registerLogin({
+                matricula: data.matricula,
+                nombre: data.nombre,
+                // userRole: userRoles[parseInt(data.tipo) - 1],
+                // userRole: userRoles[1],
+                userRole: data.tipo,
+              });
+            }
+          },
+          (e) => {
+            const type = 'error';
+            const title = 'Inicio de Sesion no exitoso';
+            const description = e.error.message;
+            this.createNotification(type, title, description);
+
+            this.loading = false;
+          }
+        );
     }
-  }
-
-  // onOpenAlert() {
-  //   this.showError = true;
-  // }
-
-  // onCloseAlert() {
-  //   this.showError = false;
-  // }
-
-  createBasicNotification(): void {
-    this.notification
-      .blank(
-        'Credenciales inválidas',
-        'La contraseña o usuario no son correctas, intente otra vez'
-      )
-      .onClick.subscribe(() => {
-        console.log('notification clicked!');
-      });
   }
 
   async registerLogin(user: User) {
     const registeredUser = await this.service.Login(user);
-    if (registeredUser.userRole == 'entrenador') {
+    if (registeredUser.userRole == 'gimnasio') {
       this.router.navigate(['/home-entrenador']);
     } else {
       this.router.navigate(['']);
     }
+  }
+
+  createNotification(type: string, title: string, description: string): void {
+    this.notification.create(type, title, description);
   }
 
   onSubmit() {}

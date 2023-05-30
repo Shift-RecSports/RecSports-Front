@@ -199,6 +199,6 @@ export class EspaciosFormularioComponent {
   }
 
   onCancelClick() {
-    this.router.navigate(['deportes/futbol']);
+    this.router.navigate([`deportes`]);
   }
 }

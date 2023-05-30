@@ -57,8 +57,6 @@
         </a>
       </div>
 
-      
-
       <div *ngIf="navbarFlags.gimnasioFlag">
         <a
           mat-list-item
@@ -208,7 +206,7 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <div class="header-container">
-        <span class="header-title">Athletic</span>
+        <span class="header-title">Athletics</span>
         <div class="header-user">
           <!-- <div class="header-user-info">
             <span class="header-user-matricula">{{ user.matricula }}</span>
@@ -237,9 +235,16 @@
           </button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="onMisReservaciones()">
+              <mat-icon>menu</mat-icon>
               Mis Reservaciones
             </button>
-            <button mat-menu-item (click)="onLogOut()">Cerrar Sesión</button>
+            <button mat-menu-item (click)="onCredencial()">
+              <mat-icon>credit_card</mat-icon>
+              Mi Credencial
+            </button>
+            <button mat-menu-item (click)="onLogOut()">
+              <mat-icon aria-hidden="false">login</mat-icon>
+              Cerrar Sesión</button>
           </mat-menu>
         </div>
       </div>

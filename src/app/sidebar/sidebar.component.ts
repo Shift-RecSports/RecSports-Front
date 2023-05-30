@@ -46,7 +46,7 @@ export class SidebarComponent {
       };
 
       // TODO: Change user name
-      this.userName = this.user.matricula!;
+      this.userName = this.user.nombre!;
 
       // Activate/Disactivate Navbar components
       this.navbarFlags = activateNavbarFlags(
@@ -66,6 +66,11 @@ export class SidebarComponent {
   onLogOut() {
     this.router.navigate(['login']);
   }
+
+  onCredencial() {
+    this.router.navigate(['credencial']);
+  }
+
 
   onMisReservaciones() {
     this.router.navigate(['reservaciones']);
@@ -98,8 +103,8 @@ function activateNavbarFlags(userRole: string, navbarFlags: navbarFlags) {
     navbarFlags.encuestaAdminFlag = true;
     navbarFlags.entradaFlag = false;
     navbarFlags.salidaFlag = false;
-  } else if (userRole == 'ENTRENADOR') {
-    navbarFlags.inicioFlag = false;
+  } else if (userRole == 'GIMNASIO') {
+    navbarFlags.inicioFlag = true;
     navbarFlags.inicioEntrenadorFlag = true;
     navbarFlags.gimnasioFlag = true;
     navbarFlags.deportesFlag = false;

@@ -30,6 +30,7 @@ export class DeportesComponent {
       this.listaDeportes = data;
       for (let i = 0; i < this.listaDeportes.length; i++) {
         this.listaDeportes[i].imagen = this._apiService.getImage(
+          '/deportes',
           this.listaDeportes[i].imagen
         );
       }

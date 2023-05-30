@@ -20,6 +20,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ApiService } from './service/api.service';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { GimnasioComponent } from './gimnasio/gimnasio.component';
 import { DeportesComponent } from './deportes/deportes.component';
@@ -71,6 +72,7 @@ import { ModalBorrarEspacioComponent } from './deportes/deporte-seleccionado/mod
 import { AuthGuard } from './guard/auth.guard';
 import { ModalBorrarNoticiaComponent } from './noticias/modal-borrar-noticia/modal-borrar-noticia.component';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { CredencialComponent } from './credencial/credencial.component';
 
 
 registerLocaleData(en);
@@ -104,6 +106,7 @@ registerLocaleData(en);
     NuevaNoticiaComponent,
     ModalBorrarEspacioComponent,
     ModalBorrarNoticiaComponent,
+    CredencialComponent,
   ],
   imports: [
     BrowserModule,
@@ -137,6 +140,7 @@ registerLocaleData(en);
     NzDatePickerModule,
     MatDatepickerModule,
     NzAlertModule,
+    MatProgressSpinnerModule,
     NzNotificationModule,
     NzTabsModule,
   ],
