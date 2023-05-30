@@ -1,62 +1,43 @@
 <div class="grid-container">
   <div class="mapa-container">
     <p class="titulo-mapa">Mapa</p>
-    <div class="images-container"> 
+    <div class="images-container">
       <div class="foto">
-        <img src="{{mapaActual.imagen}}" alt="Acude a miTec para revisar mapa" class="responsive-image">
+        <img
+          src="{{ mapaActual.imagen }}"
+          alt="Acude a miTec para revisar mapa"
+          class="responsive-image"
+        />
       </div>
-      
-      <mat-form-field appearance="outline" class="input-container" *ngIf="showAgregarButton">
-        <mat-toolbar>
-          <div>
-            <input hidden matInput />
-            <input
-              style="width: 100%; background-color: white"
-              type="file"
-              id="fileInput"
-              name="fileInput"
-              accept="image/*"
-              (change)="selectFiles($event)"
-            />
-            <div class="image-text">
-              <span class="drop-image-text">Arrastra y suelta o </span>
-              <span class="navigate-image-text">Navega dispositivo</span>
-            </div>
-          </div>
-        </mat-toolbar>
-      </mat-form-field>
-  
-      <!--
-      <mat-form-field appearance="outline" class="input-container" *ngIf="showAgregarButton">
-        <p class="subir-texto">Subir Imagen</p>
-        <br>
-        <br>
-        <div class="botones-container">
-          <mat-toolbar>
-            <div ondrag="uploadFiles()">
-              <div class="image-text">
-                <span class="drop-image-text">Arrastra y suelta o </span>
-                <span class="navigate-image-text">Navega dispositivo</span>
+      <!--Solo para admins-->
+      <div class="input-container" *ngIf="showAgregarButton">
+        <mat-form-field appearance="outline" class="forma">
+          <p class="subir-texto">Subir Imagen</p>
+          <div class="botones-container">
+            <mat-toolbar style="background-color: white;">
+              <div>
+                <input hidden matInput />
+                <input
+                  style="width: 100%; background-color: white"
+                  type="file"
+                  id="fileInput"
+                  name="fileInput"
+                  accept="image/*"
+                  (change)="selectFiles($event)"
+                />
+                <div class="image-text">
+                  <span class="drop-image-text">Arrastra y suelta o </span>
+                  <span class="navigate-image-text">Navega dispositivo</span>
+                </div>
               </div>
-              <br>
-              <input
-                style="width: 100%; background-color: white"
-                type="file"
-                id="fileInput"
-                name="fileInput"
-                accept="image/*"
-                (change)="selectFiles($event)"
-              />
-            </div>
-          </mat-toolbar>
+            </mat-toolbar>
+          </div>
+        </mat-form-field>
+        <div *ngIf="preview != ''" class="nuevo-form-archivo">
+          <b>Imagen:</b> {{ selectedFileNames[0] }}
         </div>
-      </mat-form-field>
-        -->
-      <div *ngIf="preview != ''" class="nuevo-form-archivo">
-        <b>Imagen:</b> {{ selectedFileNames[0] }}
+        <p class="exito" *ngIf="subida">Mapa actualizado exitosamente.</p>
       </div>
-      <p *ngIf="subida">Mapa actualizado exitosamente.</p>
-
     </div>
   </div>
 </div>

@@ -37,34 +37,24 @@ export class MapaComponent {
   selectFiles(event: any): void {
     this.selectedFileNames = [];
     this.selectedFiles = event.target.files;
-
     this.preview = '';
 
     if (this.selectedFiles && this.selectedFiles[0]) {
       const numberOfFiles = this.selectedFiles.length;
       for (let i = 0; i < numberOfFiles; i++) {
         const reader = new FileReader();
-
         reader.onload = (e: any) => {
           this.preview = e.target.result;
         };
-
         reader.readAsDataURL(this.selectedFiles[i]);
-
         this.selectedFileNames.push(this.selectedFiles[i].name);
         this.uploadFile(this.selectedFiles[0]);
-
-
       }
     }
   }
 
   uploadFile(file: File): void {
     const url = '/mapa/';
-    // const body = {
-    //   id: this.mapaActual.id,
-    //   imagen: file
-    // };
     const formData = new FormData();
     formData.append('id', this.mapaActual.id.toString());
     formData.append('imagen', file);
