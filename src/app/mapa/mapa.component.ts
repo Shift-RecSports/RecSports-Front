@@ -3,6 +3,11 @@ import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 import { ApiService } from '../service/api.service';
 
+interface mapa {
+  id: string;
+  imagen: string;
+}
+
 @Component({
   selector: 'app-mapa',
   templateUrl: './mapa.component.html',
@@ -10,6 +15,14 @@ import { ApiService } from '../service/api.service';
 })
 export class MapaComponent {
   showAgregarButton = false;
+  selectedFiles?: FileList;
+  selectedFileNames: string[] = [];
+  preview: string = '';
+  subida: boolean = false;
+  mapaActual: mapa = {
+    id: '',
+    imagen: '',
+  };
 
   constructor(
     private service: AuthService,
@@ -20,12 +33,6 @@ export class MapaComponent {
       this.showAgregarButton = true;
     }
   }
-
-  // CODE FOR UPLOADING IMAGES - Refactor
-  // REFERENCE: https://www.bezkoder.com/angular-material-15-image-upload-preview/
-  selectedFiles?: FileList;
-  selectedFileNames: string[] = [];
-  preview: string = '';
 
   selectFiles(event: any): void {
     this.selectedFileNames = [];
@@ -45,7 +52,38 @@ export class MapaComponent {
         reader.readAsDataURL(this.selectedFiles[i]);
 
         this.selectedFileNames.push(this.selectedFiles[i].name);
+        this.uploadFile(this.selectedFiles[0]);
+
+
       }
     }
+  }
+
+  uploadFile(file: File): void {
+    const url = '/mapa/';
+    // const body = {
+    //   id: this.mapaActual.id,
+    //   imagen: file
+    // };
+    const formData = new FormData();
+    formData.append('id', this.mapaActual.id.toString());
+    formData.append('imagen', file);
+    this._apiService.put(url, formData).subscribe((data) => {
+      console.log(data);
+      this.subida = true;
+    });
+  }
+
+  ngOnInit() {
+    const url = '/mapa';
+    this._apiService.get(url).subscribe((data) => {
+      this.mapaActual = data;
+      console.log(this.mapaActual);
+
+      this.mapaActual.imagen = this._apiService.getImage(
+        '/mapas',
+        this.mapaActual.imagen
+      )
+    });
   }
 }

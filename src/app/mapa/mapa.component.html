@@ -3,10 +3,30 @@
     <p class="titulo-mapa">Mapa</p>
     <div class="images-container"> 
       <div class="foto">
-        <img src="/assets/img/mapa.png" alt="Acude a miTec para revisar mapa" class="responsive-image">
+        <img src="{{mapaActual.imagen}}" alt="Acude a miTec para revisar mapa" class="responsive-image">
       </div>
+      
+      <mat-form-field appearance="outline" class="input-container" *ngIf="showAgregarButton">
+        <mat-toolbar>
+          <div>
+            <input hidden matInput />
+            <input
+              style="width: 100%; background-color: white"
+              type="file"
+              id="fileInput"
+              name="fileInput"
+              accept="image/*"
+              (change)="selectFiles($event)"
+            />
+            <div class="image-text">
+              <span class="drop-image-text">Arrastra y suelta o </span>
+              <span class="navigate-image-text">Navega dispositivo</span>
+            </div>
+          </div>
+        </mat-toolbar>
+      </mat-form-field>
   
-      <!-- CARGA DE IMAGEN -->
+      <!--
       <mat-form-field appearance="outline" class="input-container" *ngIf="showAgregarButton">
         <p class="subir-texto">Subir Imagen</p>
         <br>
@@ -14,7 +34,6 @@
         <div class="botones-container">
           <mat-toolbar>
             <div ondrag="uploadFiles()">
-              <!--<input hidden matInput />-->
               <div class="image-text">
                 <span class="drop-image-text">Arrastra y suelta o </span>
                 <span class="navigate-image-text">Navega dispositivo</span>
@@ -32,9 +51,11 @@
           </mat-toolbar>
         </div>
       </mat-form-field>
+        -->
       <div *ngIf="preview != ''" class="nuevo-form-archivo">
         <b>Imagen:</b> {{ selectedFileNames[0] }}
       </div>
+      <p *ngIf="subida">Mapa actualizado exitosamente.</p>
 
     </div>
   </div>
