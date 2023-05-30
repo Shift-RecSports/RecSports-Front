@@ -28,87 +28,71 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    canActivate: [AuthGuard],
   },
   {
     path: 'gimnasio',
     component: GimnasioComponent,
-    canActivate: [AuthGuard],
   },
   {
     path: 'gimnasio/entrada',
     component: RegistroEntradaComponent,
-    canActivate: [AuthGuard],
   },
   {
     path: 'gimnasio/salida',
     component: RegistroSalidaComponent,
-    canActivate: [AuthGuard],
   },
   {
     path: 'deportes',
     component: DeportesComponent,
-    canActivate: [AuthGuard],
   },
   {
     path: 'deportes/:id',
     component: DeporteSeleccionadoComponent,
-    canActivate: [AuthGuard],
   },
   {
     path: 'deporte/nuevo',
     component: NuevoDeporteComponent,
-    canActivate: [AuthGuard],
   },
   {
     path: 'espacios/nuevo',
     component: EspaciosFormularioComponent,
-    canActivate: [AuthGuard],
   },
   {
     path: 'reservaciones',
     component: ReservacionesComponent,
-    canActivate: [AuthGuard],
   },
   {
     path: 'credencial',
     component: CredencialComponent,
-    canActivate: [AuthGuard],
   },
   // {
   //   path: 'calendario',
   //   component: CalendarioComponent,
-  //   canActivate: [AuthGuard],
+  //
   // },
   {
     path: 'noticias',
     component: NoticiasComponent,
-    canActivate: [AuthGuard],
   },
   {
     path: 'mapa',
     component: MapaComponent,
-    canActivate: [AuthGuard],
   },
   {
     path: 'encuesta',
     component: EncuestaComponent,
-    canActivate: [AuthGuard],
   },
   {
     path: 'encuesta-admin',
     component: EncuestasAdminComponent,
-    canActivate: [AuthGuard],
   },
   {
     path: 'home-entrenador',
     component: HomeEntrenadorComponent,
-    canActivate: [AuthGuard],
   },
   {
     path: 'formulario-noticia',
     component: NuevaNoticiaComponent,
-    canActivate: [AuthGuard],
   },
 ];
 
