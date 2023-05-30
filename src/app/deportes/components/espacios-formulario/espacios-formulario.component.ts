@@ -77,17 +77,14 @@ export class EspaciosFormularioComponent {
 
   changeSelectedEspacios(espacios: string[]) {
     this.horariosSelected = espacios;
-    this.horariosSet = new Set(espacios);
-    // const stringSet = `{"${Array.from(this.horariosSelected).join('", "')}"}`;
-
-
-    console.log("ARRAY DE HORARIOS", this.horariosSelected);
-    console.log("SET OF HORARIOS", this.horariosSet);
-
-    // this.formularioEspacios.get('horarios')?.setValue(stringSet);
+    //console.log("ARRAY DE HORARIOS", this.horariosSelected);
   }
 
-
+  horariosToString(): string {
+    // Reformats array ["7:00", "8:00", "9:00"] to string "{"7:00", "8:00", "9:00"}"
+    const horarioString = `{${this.horariosSelected.join(", ")}}`;
+    return horarioString;
+  }
 
   ngOnInit() {
 
@@ -161,11 +158,6 @@ export class EspaciosFormularioComponent {
     console.log("Boton presionado");
     console.log(this.formularioEspacios.value);
 
-
-    // const stringSet = `{"${Array.from(this.horariosSelected).join('", "')}"}`;
-    // this.formularioEspacios.get('horarios')?.setValue(stringSet);
-    // console.log("HORARIOS: " + this.formularioEspacios.get('horarios')?.value);
-
     const url = '/espacios';
 
     if (this.formularioEspacios.valid) {
@@ -174,18 +166,14 @@ export class EspaciosFormularioComponent {
       const formData = new FormData();
 
       formData.append('nombre', this.formularioEspacios.get('nombre')?.value ?? '');
-      // formData.append('horarios', this.formularioEspacios.get('horarios')?.value ?? '');
-      formData.append('horarios', "{'6:00', '8:00', '10:00'}");
+      formData.append('horarios', this.horariosToString());
       formData.append('aforo', this.formularioEspacios.get('aforo')?.value ?? '');
       formData.append('zona', this.formularioEspacios.get('zona')?.value ?? '');
       formData.append('imagen', this.selectedFiles![0], this.selectedFileNames[0]);
       formData.append('deporte', this.getIdOfSelectedDeporte());
 
-      console.log("formulario validado = ", formData);
-
       this._apiService.postWithImage(url, formData).subscribe((data) => {
-        console.log("API SERVICE:" + data);
-        alert(`Espacio ${data.nombre} registrado con éxito}`);
+        alert(`Espacio registrado con éxito`);
 
         // Refresh the current page to reset input fields
         location.reload();
