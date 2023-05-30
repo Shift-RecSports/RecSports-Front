@@ -17,6 +17,8 @@ import { RegistroEntradaComponent } from './gimnasio/registro-entrada/registro-e
 import { RegistroSalidaComponent } from './gimnasio/registro-salida/registro-salida.component';
 import { HomeEntrenadorComponent } from './home-entrenador/home-entrenador.component';
 import { EncuestasAdminComponent } from './encuesta/encuestas-admin/encuestas-admin.component';
+import { NuevaNoticiaComponent } from './noticias/nueva-noticia/nueva-noticia.component';
+import { CredencialComponent } from './credencial/credencial.component';
 
 const routes: Routes = [
   {
@@ -68,6 +70,11 @@ const routes: Routes = [
     component: ReservacionesComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'credencial',
+    component: CredencialComponent,
+    canActivate: [AuthGuard],
+  },
   // {
   //   path: 'calendario',
   //   component: CalendarioComponent,
@@ -96,6 +103,11 @@ const routes: Routes = [
   {
     path: 'home-entrenador',
     component: HomeEntrenadorComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'formulario-noticia',
+    component: NuevaNoticiaComponent,
     canActivate: [AuthGuard],
   },
 ];

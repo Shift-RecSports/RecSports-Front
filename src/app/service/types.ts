@@ -20,4 +20,5 @@ export interface navbarFlags {
   entradaFlag: boolean;
   salidaFlag: boolean;
   encuestaAdminFlag: boolean;
+  inicioEntrenadorFlag: boolean;
 }

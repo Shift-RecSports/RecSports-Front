@@ -54,20 +54,25 @@
             mat-raised-button
             type="submit"
             style="background-color: #00035e; color: white"
+            *ngIf="loading === false"
           >
-            Iniciar Sesión
+            Iniciar Sesion
+          </button>
+
+          <button
+            class="login-button"
+            mat-raised-button
+            type="submit"
+            *ngIf="loading"
+            disabled="true"
+            style="background-color: #00035e; color: white"
+          >
+            <div class="custom-spinner">
+              <mat-spinner color="#ffffff" diameter="30"></mat-spinner>
+            </div>
           </button>
         </div>
       </form>
     </div>
   </div>
-
-  <!-- <nz-alert
-    *ngIf="showError"
-    nzType="error"
-    nzMessage="El usuario o contraseña es inválido"
-    nzDescription="Intenta de nuevo"
-    style="position: fixed; bottom: 1rem; left: 1rem"
-    (nzOnClose)="onCloseAlert()"
-  ></nz-alert> -->
 </mat-sidenav-container>

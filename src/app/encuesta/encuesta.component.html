@@ -1,28 +1,112 @@
 <div class="grid-container">
   <div class="encuesta-container">
     <p class="titulo-encuesta">Encuesta de satisfacción</p>
-    <br />
-    <p class="texto-evalua">Del 0 al 10 evalúa tu experiencia con RecSports</p>
-    <div class="slider-container">
-      <mat-slider [(ngModel)]="sliderValue" min="0" max="10" step="1" showTickMarks discrete [displayWith]="formatLabel">
-        <input matSliderThumb>
-      </mat-slider>
-      <div class="slider-tick-container">
-        <div class="slider-tick" *ngFor="let tick of tickValues">
-          {{ tick }}
+    <div *ngIf="contestada; else elseBlock">
+      <!-- Encuesta contestada -->
+      <p class="texto-evalua">Encuesta contestada exitosamente.</p>
+    </div>
+    <ng-template #elseBlock>
+      <!-- Encuesta sin contestar -->
+      <p class="texto-evalua">Del 0 al 10 evalúa tu experiencia en:</p>
+      <div class="tarjeta-promedio-container">
+        <div class="tarjeta-promedio">
+          <p class="texto-pregunta">Gimnasio</p>
+          <div class="slider-container">
+            <mat-slider
+              [(ngModel)]="sliderValue1"
+              min="0"
+              max="10"
+              step="1"
+              showTickMarks
+              discrete
+              [displayWith]="formatLabel"
+            >
+              <input matSliderThumb value="5" />
+            </mat-slider>
+            <div class="slider-tick-container">
+              <div class="slider-tick" *ngFor="let tick of tickValues">
+                {{ tick }}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <br />
-    <br />
-    <br />
-    <p class="texto-opinion">Compártenos tu opinión</p>
-    <div class="inputs">
-      <input class="text-field-tema" [(ngModel)]="inputValue" (ngModelChange)="onInputChange($event)" nz-input placeholder="Tema..." maxlength="50"/>
-      <br> 
-      <textarea class="text-field-mensaje" [(ngModel)]="textareaValue" (ngModelChange)="onTextareaChange($event)" placeholder="Escribe aqui..." [nzAutosize]="{ minRows: 1, maxRows: 3 }" maxlength="255"></textarea>
-      <br>
-    <button class="boton-encuesta">Enviar</button>
-    </div>
+      <div class="tarjeta-promedio-container">
+        <div class="tarjeta-promedio">
+          <p class="texto-pregunta">Wellness Center</p>
+          <div class="slider-container">
+            <mat-slider
+              [(ngModel)]="sliderValue2"
+              min="0"
+              max="10"
+              step="1"
+              showTickMarks
+              discrete
+              [displayWith]="formatLabel"
+            >
+              <input matSliderThumb value="5" />
+            </mat-slider>
+            <div class="slider-tick-container">
+              <div class="slider-tick" *ngFor="let tick of tickValues">
+                {{ tick }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tarjeta-promedio-container">
+        <div class="tarjeta-promedio">
+          <p class="texto-pregunta">Athletics Web</p>
+          <div class="slider-container">
+            <mat-slider
+              [(ngModel)]="sliderValue3"
+              min="0"
+              max="10"
+              step="1"
+              showTickMarks
+              discrete
+              [displayWith]="formatLabel"
+            >
+              <input matSliderThumb value="5" />
+            </mat-slider>
+            <div class="slider-tick-container">
+              <div class="slider-tick" *ngFor="let tick of tickValues">
+                {{ tick }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+      <p class="texto-opinion">Compártenos tu opinión</p>
+      <div class="inputs">
+        <div style="width: calc(100% - 30%)">
+          <nz-select [(ngModel)]="temaValue" class="tema" nzPlaceHolder="Tema">
+            <nz-option nzValue="gimnasio" nzLabel="Gimnasio"></nz-option>
+            <nz-option
+              nzValue="wellness-center"
+              nzLabel="Wellness-Center"
+            ></nz-option>
+            <nz-option
+              nzValue="athletics web"
+              nzLabel="Athletics Web"
+            ></nz-option>
+            <nz-option nzValue="otro" nzLabel="Otro"></nz-option>
+          </nz-select>
+        </div>
+        <br />
+        <textarea
+          class="text-field-mensaje"
+          [(ngModel)]="textareaValue"
+          placeholder="Escribe aquí..."
+          [nzAutosize]="{ minRows: 1, maxRows: 3 }"
+          maxlength="255"
+        ></textarea>
+        <br />
+        <button class="boton-encuesta" (click)="onEnviarButtonClick()">
+          Enviar
+        </button>
+      </div>
+    </ng-template>
   </div>
 </div>

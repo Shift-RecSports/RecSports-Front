@@ -26,9 +26,14 @@ export class DeportesComponent {
 
   ngOnInit() {
     const url = '/deportes';
-
     this._apiService.get(url).subscribe((data) => {
       this.listaDeportes = data;
+      for (let i = 0; i < this.listaDeportes.length; i++) {
+        this.listaDeportes[i].imagen = this._apiService.getImage(
+          '/deportes',
+          this.listaDeportes[i].imagen
+        );
+      }
       this.showedDeportes = this.listaDeportes;
     });
   }
