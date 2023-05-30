@@ -1,5 +1,5 @@
 .background-image {
-  position: fixed;
+  position: -webkit-fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -16,7 +16,7 @@
 }
 
 .login-container {
-  position: absolute;
+  position: -webkit-absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -40,7 +40,7 @@
 }
 
 .header-image-container {
-  position: relative;
+  position: -webkit-relative;
   display: flex;
   justify-content: center;
 }
