@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy": "ng deploy --base-href=https://shift-recsports.github.io/RecSports-Front/ --repo=https://shift-recsports.github.io/RecSports-Front/ --no-silent"
   },
   "private": true,
   "dependencies": {
