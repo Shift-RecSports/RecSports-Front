@@ -173,7 +173,7 @@ export class NuevaNoticiaComponent {
   
       this._apiService.postWithImage(url, formData).subscribe((data) => {
         console.log(data);
-        alert(`Noticia ${data.titulo} registrada con éxito}`);
+        alert(`Noticia ${data.titulo} registrada con éxito`);
   
         // Refresh the current page to reset input fields
         location.reload();

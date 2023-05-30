@@ -1,17 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
-import { Injectable } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { HttpClient, HttpRequest, HttpEvent } from '@angular/common/http';
-import { HttpEventType, HttpResponse } from '@angular/common/http';
-
-import { MatOption } from '@angular/material/core';
-import { MatSelect } from '@angular/material/select';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/service/auth.service';
-import { Data, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
-import { newDeporte } from 'src/app/classes/deportes';
-import { Deporte } from 'src/app/classes/deportes';
 
 @Component({
   selector: 'app-nuevo-deporte',
@@ -19,22 +10,7 @@ import { Deporte } from 'src/app/classes/deportes';
   styleUrls: ['./nuevo-deporte.component.css'],
 })
 export class NuevoDeporteComponent {
-  espacios = new FormControl('');
-  espaciosSelected: string[] = [];
-  listaEspacios: string[] = [
-    'CBD1 - Cancha1',
-    'CBD2 - Cancha1',
-    'CBD1 - Cancha2',
-    'CBD2 - Cancha2',
-  ];
-
-  message: string = '';
-
-  nombre: string;
-  descripcion: string;
-  materiales: string;
-  imagen: string;
-  duracion: number;
+  formularioDeporte: FormGroup = new FormGroup({});
 
   selectedFiles?: FileList;
   selectedFileNames: string[] = [];
@@ -43,30 +19,18 @@ export class NuevoDeporteComponent {
   constructor(
     private service: AuthService,
     private router: Router,
-    private _apiService: ApiService
-  ) {
-    this.nombre = '';
-    this.descripcion = '';
-    this.materiales = '';
-    this.imagen = '';
-    this.duracion = 0;
-  }
+    private _apiService: ApiService,
+    public formulario: FormBuilder,
+  ) {}
 
-  changeSelectedEspacios(espacios: string[]) {
-    this.espaciosSelected = espacios;
-  }
-
-  @ViewChild('matRef') matRef: MatSelect;
-  removeSelectedEspacio(espaciosSelected: string) {
-    this.matRef.options.forEach((data: MatOption) => {
-      if (data._text?.nativeElement.innerHTML == espaciosSelected) {
-        data.deselect();
-      }
+  ngOnInit() {
+    this.formularioDeporte = this.formulario.group({
+      nombre: ['', Validators.required],
+      descripcion: ['', Validators.required],
+      materiales: [null, Validators.required],
+      imagen: ['', Validators.required],
+      duracion: [null, Validators.required]
     });
-  }
-
-  compareEspacios(object1: any, object2: any) {
-    return object1 && object2 && object1.id == object2.id;
   }
 
   selectFiles(event: any): void {
@@ -86,23 +50,43 @@ export class NuevoDeporteComponent {
     }
   }
 
-  guardarDeporte() {
-    const formData: FormData = new FormData();
-    formData.append(
-      'imagen',
-      this.selectedFiles![0],
-      this.selectedFileNames[0]
-    );
-    formData.append('nombre', this.nombre);
-    formData.append('descripcion', this.descripcion);
-    formData.append('materiales', this.materiales);
-    formData.append('duracion', this.duracion.toString());
-
+  enviarDatos() {
+    console.log("Boton presionado");
+    console.log(this.formularioDeporte.value);
+  
     const url = '/deportes';
-    this._apiService.postWithImage(url, formData).subscribe((data) => {
-      console.log(data);
-      // this.message = `Imagen subida: ${data} registrado con éxito}`;
-    });
+  
+    if (this.formularioDeporte.valid) {
+      console.log("formulario valido");
+
+      // Form is valid, proceed with saving data
+      const formData = new FormData();
+      formData.append('nombre', this.formularioDeporte.get('nombre')?.value ?? '');
+      formData.append('descripcion', this.formularioDeporte.get('descripcion')?.value ?? '');
+      formData.append('materiales', this.formularioDeporte.get('materiales')?.value ?? '');
+      formData.append('duracion', this.formularioDeporte.get('duracion')?.value ?? '');
+      formData.append('imagen', this.selectedFiles![0], this.selectedFileNames[0]);
+  
+      console.log("formulario validado = ", formData);
+  
+      this._apiService.postWithImage(url, formData).subscribe((data) => {
+        console.log(data);
+        alert(`Deporte registrado con éxito`);
+  
+        // Refresh the current page to reset input fields
+        location.reload();
+      });
+    } else {
+      console.log("Formulario Invalido");
+      // Form is invalid, display error message
+      alert(`No se ha podido guardar la noticia. Verifique los campos solicitados.`);
+      Object.values(this.formularioDeporte.controls).forEach((control) => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+    }
   }
 
   onCancelClick() {

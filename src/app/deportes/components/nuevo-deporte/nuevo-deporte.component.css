@@ -70,6 +70,12 @@
   width: 100%;
 }
 
+.custom-input {
+  font-family: 'Helvetica', sans-serif;
+  color: rgba(0, 0, 0);
+  font-size: 1rem;
+}
+
 /* CARGA DE IMAGEN */
 .mat-input-element {
   font-size: medium;
@@ -152,6 +158,22 @@
 
 .drop-image-text {
   color: #888888;
+}
+
+.nombre_canchas {
+  font-size: 0.8rem;
+  color: var(--gray);
+  padding-top: -1rem;
+}
+
+.nombre_deporte {
+  font-size: 1.8rem;
+  color: white;
+  position: absolute;
+}
+
+.title_container {
+  position: relative;
 }
 
 .navigate-image-text {
