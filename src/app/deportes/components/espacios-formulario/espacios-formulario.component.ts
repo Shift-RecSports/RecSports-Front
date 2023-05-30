@@ -5,12 +5,13 @@ import { MatSelect } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { Observable, map, startWith } from 'rxjs';
 import { AuthService } from 'src/app/service/auth.service';
-import { Espacio } from 'src/app/classes/espacios';
 import { Deporte } from 'src/app/classes/deportes';
 
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ApiService } from 'src/app/service/api.service';
 import { Validators } from '@angular/forms';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+
 
 
 @Component({
@@ -64,6 +65,7 @@ export class EspaciosFormularioComponent {
     private router: Router,
     public formulario: FormBuilder,
     private _apiService: ApiService,
+    private notification: NzNotificationService
   ) { }
 
   @ViewChild('matRef') matRef: MatSelect;
@@ -173,15 +175,23 @@ export class EspaciosFormularioComponent {
       formData.append('deporte', this.getIdOfSelectedDeporte());
 
       this._apiService.postWithImage(url, formData).subscribe((data) => {
-        alert(`Espacio registrado con éxito`);
+        // Notificacion de exito
+        const type = 'success';
+        const title = 'Espacio creado con éxito.';
+        const description = `Título: ${data.nombre}`;
+        this.createNotification(type, title, description);
 
-        // Refresh the current page to reset input fields
-        location.reload();
+        //Redirecciona a deportes
+        this.router.navigate([`/deportes/ ${this.getIdOfSelectedDeporte()}`]);
       });
     } else {
       console.log("formulario INVALIDO");
-      // Form is invalid, display error message
-      alert(`No se ha podido guardar el espacio. Verifique los campos solicitados.`);
+      // Notificacion de error
+      const type = 'error';
+      const title = 'No se ha podido guardar el espacio. ';
+      const description = `Verifique los campos solicitados.`;
+      this.createNotification(type, title, description);
+
       Object.values(this.formularioEspacios.controls).forEach((control) => {
         if (control.invalid) {
           control.markAsDirty();
@@ -189,6 +199,10 @@ export class EspaciosFormularioComponent {
         }
       });
     }
+  }
+
+  createNotification(type: string, title: string, description: string): void {
+    this.notification.create(type, title, description);
   }
 
   onCancelClick() {
