@@ -5,13 +5,17 @@
 
       <form class="nuevo-form" [formGroup]="formularioNoticia" (ngSubmit)="enviarDatos()">
         <div nz-row>
-          <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="24" class="nuevo-form-item">
+          <div 
+            nz-col 
+            nzXs="24" 
+            nzSm="24" 
+            nzMd="24" 
+            nzLg="24" 
+            nzXl="24" 
+            class="nuevo-form-item">
             <div class="nuevo-form-title">Título</div>
             <mat-form-field appearance="outline" class="input-container">
               <input matInput placeholder="Escribe..." formControlName="titulo" class="custom-input" />
-              <div class="mat-mdc-form-field-subscript-wrapper">
-                <!-- Other elements within the mat-form-field -->
-              </div>
             </mat-form-field>
             <div *ngIf="formularioNoticia.get('titulo')?.invalid && formularioNoticia.get('titulo')?.touched"
               class="error-text">

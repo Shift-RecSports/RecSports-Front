@@ -18,8 +18,6 @@ import { Validators } from '@angular/forms';
 export class NuevaNoticiaComponent {
 
   formularioNoticia: FormGroup = new FormGroup({});
-  message: string = '';
-  messageType: string = '';
   formattedDate: string = '';
   isDateSelected: boolean = true;
   isHourSelected: boolean = true;
