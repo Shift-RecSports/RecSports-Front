@@ -10,8 +10,11 @@ export interface reservacion {
   horario: string;
   zona: string;
   espacio: string;
+  espacioId: string;
   estatus: string;
   materiales: string;
+  imagen: string;
+  deporte_nombre: string;
 }
 
 export interface dataReservacion {
@@ -20,10 +23,14 @@ export interface dataReservacion {
   fecha: string;
   hora_seleccionada: string;
   espacio: string;
+  espacio_nombre: string;
   matricula_alumno: string;
+  imagen: string;
+  materiales: string;
+  deporte_nombre: string;
 }
 
-const listaEstatus = ['Libre', 'Activa', 'Cancelada', 'Expirada'];
+const listaEstatus = ['Libre', 'Activa', 'Expirada', 'Cancelada'];
 
 @Component({
   selector: 'app-reservaciones',
@@ -31,6 +38,7 @@ const listaEstatus = ['Libre', 'Activa', 'Cancelada', 'Expirada'];
   styleUrls: ['./reservaciones.component.css'],
 })
 export class ReservacionesComponent {
+  listaDataReservaciones: dataReservacion[] = [];
   listaReservaciones: reservacion[] = [];
   matricula: string;
 
@@ -40,7 +48,6 @@ export class ReservacionesComponent {
     private service: AuthService
   ) {
     this.matricula = '';
-
     if (this.service.isLoggedIn()) {
       this.matricula = this.service.GetUserName()
         ? this.service.GetUserName()!
@@ -53,7 +60,7 @@ export class ReservacionesComponent {
   }
 
   getListOfReservaciones() {
-    const url = `/reservaciones/matricula=${this.matricula}`;
+    const url = `/reservaciones/matricula/${this.matricula}`;
 
     let auxListaReservaciones: reservacion[] = [];
     this._apiService.get(url).subscribe((data) => {
@@ -67,12 +74,19 @@ export class ReservacionesComponent {
             parseInt(dataReservacion.hora_seleccionada.substring(0, 2)) + 1
           }:00`,
           zona: 'CBD1',
-          espacio: dataReservacion.espacio,
+          espacio: dataReservacion.espacio_nombre,
+          espacioId: dataReservacion.espacio,
           estatus: listaEstatus[dataReservacion.estatus - 1],
-          materiales: 'Materiales',
+          materiales: dataReservacion.materiales,
+          imagen: this._apiService.getImage(
+            '/espacios',
+            dataReservacion.imagen
+          ),
+          deporte_nombre: dataReservacion.deporte_nombre,
         };
 
         auxListaReservaciones.push(auxReservacion);
+        this.listaDataReservaciones.push(dataReservacion);
       });
 
       this.listaReservaciones = auxListaReservaciones;
@@ -87,8 +101,14 @@ export class ReservacionesComponent {
   }
 
   openDialog(selectedReservacion: reservacion): void {
+    const dataReservacion = this.listaDataReservaciones.find(
+      (reservacion) => reservacion.id == selectedReservacion.id
+    );
     const dialogRef = this.dialog.open(ModalComponent, {
-      data: { selectedReservacion: selectedReservacion },
+      data: {
+        selectedReservacion: selectedReservacion,
+        dataReservacion: dataReservacion,
+      },
     });
 
     dialogRef.afterClosed().subscribe((result) => {

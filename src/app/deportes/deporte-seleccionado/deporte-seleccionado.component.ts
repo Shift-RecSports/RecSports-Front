@@ -13,8 +13,18 @@ import { Observable } from 'rxjs';
 import { distinctUntilChanged, map, shareReplay, tap } from 'rxjs/operators';
 
 interface newHorarioReservacion {
+  disabled: boolean;
   id: string;
+  matricula_alumno: string | null;
+  zona: string;
+  deporte_nombre: string;
+  espacio: string;
+  espacio_nombre: string;
+  estatus: number;
+  fecha: string;
   hora_seleccionada:
+    | '06:00:00'
+    | '07:00:00'
     | '08:00:00'
     | '09:00:00'
     | '10:00:00'
@@ -28,17 +38,13 @@ interface newHorarioReservacion {
     | '18:00:00'
     | '19:00:00'
     | '20:00:00'
-    | '21:00:00';
-  matricula_alumno: string | null;
-  fecha: string;
-  espacio: string;
-  estatus: string;
-  zona: string;
-  espacio_nombre: string;
-  disabled: boolean;
+    | '21:00:00'
+    | '22:00:00';
 }
 
 type MyType = {
+  '06:00:00': newHorarioReservacion[];
+  '07:00:00': newHorarioReservacion[];
   '08:00:00': newHorarioReservacion[];
   '09:00:00': newHorarioReservacion[];
   '10:00:00': newHorarioReservacion[];
@@ -53,9 +59,12 @@ type MyType = {
   '19:00:00': newHorarioReservacion[];
   '20:00:00': newHorarioReservacion[];
   '21:00:00': newHorarioReservacion[];
+  '22:00:00': newHorarioReservacion[];
 };
 
 type arrOfHorarios =
+  | '06:00:00'
+  | '07:00:00'
   | '08:00:00'
   | '09:00:00'
   | '10:00:00'
@@ -69,7 +78,8 @@ type arrOfHorarios =
   | '18:00:00'
   | '19:00:00'
   | '20:00:00'
-  | '21:00:00';
+  | '21:00:00'
+  | '22:00:00';
 
 @Component({
   selector: 'app-deporte-seleccionado',
@@ -89,6 +99,8 @@ export class DeporteSeleccionadoComponent {
 
   horariosDisponibles: newHorarioReservacion[] = [];
   arrayReservacion: MyType = {
+    '06:00:00': [],
+    '07:00:00': [],
     '08:00:00': [],
     '09:00:00': [],
     '10:00:00': [],
@@ -103,6 +115,7 @@ export class DeporteSeleccionadoComponent {
     '19:00:00': [],
     '20:00:00': [],
     '21:00:00': [],
+    '22:00:00': [],
   };
 
   dataSource: arrOfHorarios[] = [];
@@ -169,35 +182,51 @@ export class DeporteSeleccionadoComponent {
       const url = `/deportes/${params['id']}`;
       this._apiService.get(url).subscribe((data) => {
         this.deporte = data;
+        this.deporte.imagen = this._apiService.getImage(
+          '/deportes',
+          this.deporte.imagen
+        );
 
-        this.url = `/espacios/deporte=${params['id']}`;
+        this.url = `/espacios/deporte/${params['id']}`;
         this._apiService.get(this.url).subscribe((data) => {
           this.listaEspacios = data;
+
+          for (let i = 0; i < this.listaEspacios.length; i++) {
+            this.listaEspacios[i].imagen = this._apiService.getImage(
+              '/espacios',
+              this.listaEspacios[i].imagen
+            );
+          }
+          console.log(this.listaEspacios);
         });
       });
     });
 
     this.sub2 = this.route.params.subscribe((params) => {
-      const url = `/reservaciones/deporte=${params['id']}&fecha=${this.daySelected}`;
+      const url = `/reservaciones/deporte=${params['id']}/fecha=${this.daySelected}`;
 
       this._apiService.get(url).subscribe((data) => {
         this.horariosDisponibles = data;
 
         if (this.showAllReservaciones) {
           this.horariosDisponibles.forEach((reservacion) => {
+            console.log(reservacion);
             this.arrayReservacion[reservacion.hora_seleccionada].push(
               reservacion
             );
           });
         } else {
           this.horariosDisponibles.forEach((reservacion) => {
-            if (reservacion.estatus == '1') {
+            if (reservacion.estatus == 1) {
               this.arrayReservacion[reservacion.hora_seleccionada].push(
                 reservacion
               );
             }
           });
         }
+
+        console.log('aquii');
+        console.log(this.arrayReservacion);
 
         this.dataSource = Object.keys(this.arrayReservacion) as arrOfHorarios[];
       });
@@ -253,6 +282,8 @@ export class DeporteSeleccionadoComponent {
     this.sub2.unsubscribe();
 
     this.arrayReservacion = {
+      '06:00:00': [],
+      '07:00:00': [],
       '08:00:00': [],
       '09:00:00': [],
       '10:00:00': [],
@@ -267,10 +298,11 @@ export class DeporteSeleccionadoComponent {
       '19:00:00': [],
       '20:00:00': [],
       '21:00:00': [],
+      '22:00:00': [],
     };
 
     this.sub2 = this.route.params.subscribe((params) => {
-      const url = `/reservaciones/deporte=${params['id']}&fecha=${this.daySelected}`;
+      const url = `/reservaciones/deporte=${params['id']}/fecha=${this.daySelected}`;
       this._apiService.get(url).subscribe((data) => {
         this.horariosDisponibles = data;
 
@@ -282,7 +314,7 @@ export class DeporteSeleccionadoComponent {
           });
         } else {
           this.horariosDisponibles.forEach((reservacion) => {
-            if (reservacion.estatus == '1') {
+            if (reservacion.estatus == 1) {
               this.arrayReservacion[reservacion.hora_seleccionada].push(
                 reservacion
               );

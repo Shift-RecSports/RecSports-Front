@@ -1,4 +1,4 @@
-<div class="grid-container">
+<!-- <div class="grid-container">
     <div class="home-container">
       <nz-content>
         <div nz-col>
@@ -42,5 +42,74 @@
       </nz-content>
   
     </div>
+</div> -->
+
+
+<div class="grid-container">
+  <div class="home-container">
+    <div nz-row [nzGutter]="[20, 40]">
+      <div
+        nz-col
+        nzXs="24"
+        nzSm="24"
+        nzMd="16"
+        nzLg="16"
+        nzXl="16"
+      >
+        <div id="bar-card" class="cards-dashboard" style="height:26rem">
+          <div class="scrolling-wrapper">
+              <app-bar-chart></app-bar-chart>
+          </div>
+        </div>
+      </div>
+    
+      <div
+        nz-col
+        nzXs="24"
+        nzSm="24"
+        nzMd="8"
+        nzLg="8"
+        nzXl="8"
+      >
+        <div id="donut-card" class="cards-dashboard" style="height:26rem">
+          <div>
+            <app-donut-chart></app-donut-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div nz-row [nzGutter]="[20, 40]">
+      <div
+        nz-col
+        nzXs="24"
+        nzSm="24"
+        nzMd="12"
+        nzLg="12"
+        nzXl="12"
+      >
+        <div class="button-cards-dashboard" style="height:18rem">
+          <div class="outer-button-div">
+              <button type="button" class="button" routerLink="/gimnasio/entrada">Registrar entrada</button>
+          </div>
+        </div>
+      </div>
+    
+      <div
+        nz-col
+        nzXs="24"
+        nzSm="24"
+        nzMd="12"
+        nzLg="12"
+        nzXl="12"
+      >
+        <div class="button-cards-dashboard" style="height:18rem">
+          <div class="outer-button-div">
+            <button type="button" class="button" routerLink="/gimnasio/salida">Registrar salidas</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
   

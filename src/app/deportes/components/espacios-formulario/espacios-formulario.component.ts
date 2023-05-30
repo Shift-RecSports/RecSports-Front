@@ -1,42 +1,18 @@
-import {
-  HttpClient,
-  HttpEvent,
-  HttpEventType,
-  HttpRequest,
-  HttpResponse,
-} from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
-import { Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Observable, map, startWith } from 'rxjs';
 import { AuthService } from 'src/app/service/auth.service';
-import { Espacio } from 'src/app/classes/espacios';
+import { Deporte } from 'src/app/classes/deportes';
 
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ApiService } from 'src/app/service/api.service';
+import { Validators } from '@angular/forms';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
-export class RegistroEntradaComponent {
-  matricula: string;
-  message: string;
 
-  constructor(private _apiService: ApiService) {
-    this.matricula = '';
-    this.message = '';
-  }
-
-  onSubmitMatricula() {
-    const url = `/registros-gimnasio/matricula`;
-
-    this._apiService
-      .post(url, { matricula: this.matricula })
-      .subscribe((data) => {
-        this.message = `Matricula registrada con éxito: ${data.matricula}`;
-      });
-  }
-}
 
 @Component({
   selector: 'app-espacios-formulario',
@@ -44,20 +20,25 @@ export class RegistroEntradaComponent {
   styleUrls: ['./espacios-formulario.component.css'],
 })
 export class EspaciosFormularioComponent {
+
+  formularioEspacios: FormGroup = new FormGroup({});
   areas = new FormControl('');
   options: string[] = ['CBD1', 'CBD2', 'Wellness Center'];
 
-  nombre: string;
-  hora_inicio: string;
-  hora_fin: string;
-  aforo: string;
-  zona: string;
-  imagen: string;
-  deporte: string;
+  selectedFiles?: FileList;
+  selectedFileNames: string[] = [];
+  preview: string = '';
+
+  deportesControl = new FormControl();
+  listaDeportes: Deporte[] = [];
+
 
   horarios = new FormControl('');
   horariosSelected: string[] = [];
+  horariosSet = new Set();
   listaHorarios: string[] = [
+    '6:00',
+    '7:00',
     '8:00',
     '9:00',
     '10:00',
@@ -70,29 +51,22 @@ export class EspaciosFormularioComponent {
     '17:00',
     '18:00',
     '19:00',
+    '20:00',
+    '21:00',
+    '22:00',
   ];
+
+  deportesOptions: string[] = []
 
   filteredOptions: Observable<string[]>;
 
-  formularioEspacios!: FormGroup;
-  message: string = '';
-
   constructor(
-    private uploadService: FileUploadService,
     private service: AuthService,
     private router: Router,
     public formulario: FormBuilder,
-    private _apiService: ApiService
-  ) {
-    this.nombre = '';
-    this.hora_inicio = '08:00:00';
-    this.hora_fin = '19:00:00';
-    this.aforo = '';
-    this.zona = '';
-    this.imagen =
-      'https://javier.rodriguez.org.mx/itesm/borregos/borrego-blue.png';
-    this.deporte = '';
-  }
+    private _apiService: ApiService,
+    private notification: NzNotificationService
+  ) { }
 
   @ViewChild('matRef') matRef: MatSelect;
   removeSelectedHorario(horariosSelected: string) {
@@ -102,15 +76,46 @@ export class EspaciosFormularioComponent {
       }
     });
   }
+
   changeSelectedEspacios(espacios: string[]) {
     this.horariosSelected = espacios;
+    //console.log("ARRAY DE HORARIOS", this.horariosSelected);
+  }
+
+  horariosToString(): string {
+    // Reformats array ["7:00", "8:00", "9:00"] to string "{"7:00", "8:00", "9:00"}"
+    const horarioString = `{${this.horariosSelected.join(", ")}}`;
+    return horarioString;
   }
 
   ngOnInit() {
+
+    const urlDeportes = '/deportes';
+    this._apiService.get(urlDeportes).subscribe((data) => {
+      this.listaDeportes = data;
+      for (let i = 0; i < this.listaDeportes.length; i++) {
+        this.listaDeportes[i].imagen = this._apiService.getImage(
+          this.listaDeportes[i].imagen
+        );
+      }
+
+    });
+
+
     this.filteredOptions = this.horarios.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || ''))
     );
+
+    this.formularioEspacios = this.formulario.group({
+      nombre: ['', Validators.required],
+      horarios: ['', Validators.required],
+      aforo: [null, Validators.required],
+      zona: ['', Validators.required],
+      imagen: ['', Validators.required],
+      deporte: ['', Validators.required]
+    });
+
   }
 
   private _filter(value: string): string[] {
@@ -121,111 +126,86 @@ export class EspaciosFormularioComponent {
     );
   }
 
-  // CODE FOR UPLOADING IMAGES - Refactor
-  // REFERENCE: https://www.bezkoder.com/angular-material-15-image-upload-preview/
-  selectedFiles?: FileList;
-  selectedFileNames: string[] = [];
-  preview: string = '';
-
   selectFiles(event: any): void {
     this.selectedFileNames = [];
     this.selectedFiles = event.target.files;
-
     this.preview = '';
 
     if (this.selectedFiles && this.selectedFiles[0]) {
-      const numberOfFiles = this.selectedFiles.length;
-      for (let i = 0; i < numberOfFiles; i++) {
-        const reader = new FileReader();
+      const reader = new FileReader();
 
-        reader.onload = (e: any) => {
-          this.preview = e.target.result;
-        };
+      reader.onload = (e: any) => {
+        this.preview = e.target.result;
+      };
 
-        reader.readAsDataURL(this.selectedFiles[i]);
-
-        this.selectedFileNames.push(this.selectedFiles[i].name);
-      }
+      reader.readAsDataURL(this.selectedFiles[0]);
+      this.selectedFileNames.push(this.selectedFiles[0].name);
     }
   }
 
-  uploadFiles(): void {
-    if (this.selectedFiles) {
-      for (let i = 0; i < this.selectedFiles.length; i++) {
-        this.upload(i, this.selectedFiles[i]);
-      }
-    }
-  }
+  getIdOfSelectedDeporte(): string {
+    
+    const selectedDeporteNombre = this.formularioEspacios.get('deporte')?.value;
+    //console.log("VALUE EN FORM-DEPORTE-FIELD" + this.formularioEspacios.get('deporte')?.value);
+    
+    const selectedDeporte = this.listaDeportes.find(deporte => deporte.nombre === selectedDeporteNombre);
+    //console.log("selectedDeporte" + selectedDeporte);
 
-  upload(idx: number, file: File): void {
-    if (file) {
-      this.uploadService.upload(file).subscribe(
-        (event: any) => {
-          if (event.type === HttpEventType.UploadProgress) {
-          } else if (event instanceof HttpResponse) {
-            const msg = file.name + ': Successful!';
-          }
-        },
-        (err: any) => {
-          let msg = file.name + ': Failed!';
+    //console.log(selectedDeporte!.id);
+    return selectedDeporte!.id.toString();
 
-          if (err.error && err.error.message) {
-            msg += ' ' + err.error.message;
-          }
-        }
-      );
-    }
   }
 
   enviarDatos() {
-    console.log('Boton presionado');
+    console.log("Boton presionado");
+    console.log(this.formularioEspacios.value);
 
     const url = '/espacios';
 
-    this._apiService
-      .post(url, {
-        nombre: this.nombre,
-        hora_inicio: this.hora_inicio,
-        hora_fin: this.hora_fin,
-        aforo: this.aforo,
-        zona: this.zona,
-        imagen: this.imagen,
-        deporte: this.deporte,
-      })
-      .subscribe((data) => {
-        console.log(data);
-        this.message = `Deporte ${data.nombre} registrado con éxito}`;
+    if (this.formularioEspacios.valid) {
+      console.log("formulario valido");
+      // Form is valid, proceed with saving data
+      const formData = new FormData();
+
+      formData.append('nombre', this.formularioEspacios.get('nombre')?.value ?? '');
+      formData.append('horarios', this.horariosToString());
+      formData.append('aforo', this.formularioEspacios.get('aforo')?.value ?? '');
+      formData.append('zona', this.formularioEspacios.get('zona')?.value ?? '');
+      formData.append('imagen', this.selectedFiles![0], this.selectedFileNames[0]);
+      formData.append('deporte', this.getIdOfSelectedDeporte());
+
+      this._apiService.postWithImage(url, formData).subscribe((data) => {
+        // Notificacion de exito
+        const type = 'success';
+        const title = 'Espacio creado con éxito.';
+        const description = `Título: ${data.nombre}`;
+        this.createNotification(type, title, description);
+
+        //Redirecciona a deportes
+        this.router.navigate([`/deportes/ ${this.getIdOfSelectedDeporte()}`]);
       });
+    } else {
+      console.log("formulario INVALIDO");
+      // Notificacion de error
+      const type = 'error';
+      const title = 'No se ha podido guardar el espacio. ';
+      const description = `Verifique los campos solicitados.`;
+      this.createNotification(type, title, description);
+
+      Object.values(this.formularioEspacios.controls).forEach((control) => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+    }
+  }
+
+  createNotification(type: string, title: string, description: string): void {
+    this.notification.create(type, title, description);
   }
 
   onCancelClick() {
-    this.router.navigate(['deportes/futbol']);
-  }
-}
-
-// SERVICE FOR IMAGES
-@Injectable({
-  providedIn: 'root',
-})
-class FileUploadService {
-  private baseUrl = 'http://localhost:8080';
-
-  constructor(private http: HttpClient) {}
-
-  upload(file: File): Observable<HttpEvent<any>> {
-    const formData: FormData = new FormData();
-
-    formData.append('file', file);
-
-    const req = new HttpRequest('POST', `${this.baseUrl}/upload`, formData, {
-      reportProgress: true,
-      responseType: 'json',
-    });
-
-    return this.http.request(req);
-  }
-
-  getFiles(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/files`);
+    this.router.navigate([`deportes`]);
   }
 }

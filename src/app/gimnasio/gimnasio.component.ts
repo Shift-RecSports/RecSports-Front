@@ -56,11 +56,12 @@ export class GimnasioComponent {
       day.getMonth() + 1
     }-${day.getDate()}`;
 
-    this.url = `/registros-gimnasio/fecha=${this.daySelected}&offset=${this.page}`;
-    this.timerSubscription = timer(0, 10000)
+    this.url = `/registros-gimnasio/fecha=${this.daySelected}/offset=${this.page}`;
+    this.timerSubscription = timer(0, 300000)
       .pipe(switchMap(() => this._apiService.get(this.url)))
       .subscribe((data) => {
         // MARK: this loop converts 09:00:00 into 09:00
+        // console.log(data);
         // for (let i = 0; i < data.length; i++) {
         //   data[i].entrada = data[i].entrada.substring(
         //     0,
@@ -88,16 +89,13 @@ export class GimnasioComponent {
       fecha.setDate(fecha.getDate() + 1);
       return {
         Fecha: fecha,
-        Id: item.id,
+        // Id: item.id,
         Matricula: item.matricula,
         Nombre: item.nombre,
         Entrada: item.entrada,
         Salida: item.salida,
       };
     });
-
-    console.log(data);
-    console.log(fileToExport);
 
     let conteos: {
       [key: string]: number;
