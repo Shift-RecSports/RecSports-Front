@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/service/auth.service';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+
 
 @Component({
   selector: 'app-nuevo-deporte',
@@ -21,6 +23,7 @@ export class NuevoDeporteComponent {
     private router: Router,
     private _apiService: ApiService,
     public formulario: FormBuilder,
+    private notification: NzNotificationService
   ) {}
 
   ngOnInit() {
@@ -71,15 +74,25 @@ export class NuevoDeporteComponent {
   
       this._apiService.postWithImage(url, formData).subscribe((data) => {
         console.log(data);
-        alert(`Deporte registrado con éxito`);
-  
-        // Refresh the current page to reset input fields
-        location.reload();
+        
+        // Notificacion de exito
+        const type = 'success';
+        const title = 'Deporte creado con éxito.';
+        const description = `Título: ${data.nombre}`;
+        this.createNotification(type, title, description);
+
+        //Redirecciona a deportes
+        this.router.navigate(['/deportes']);
+
       });
     } else {
       console.log("Formulario Invalido");
-      // Form is invalid, display error message
-      alert(`No se ha podido guardar la noticia. Verifique los campos solicitados.`);
+      // Notificacion de error
+      const type = 'error';
+      const title = 'No se ha podido guardar el deporte. ';
+      const description = `Verifique los campos solicitados.`;
+      this.createNotification(type, title, description);
+
       Object.values(this.formularioDeporte.controls).forEach((control) => {
         if (control.invalid) {
           control.markAsDirty();
@@ -87,6 +100,10 @@ export class NuevoDeporteComponent {
         }
       });
     }
+  }
+
+  createNotification(type: string, title: string, description: string): void {
+    this.notification.create(type, title, description);
   }
 
   onCancelClick() {
