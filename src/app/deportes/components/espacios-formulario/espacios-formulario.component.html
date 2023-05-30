@@ -2,227 +2,275 @@
   <div class="espacios-formulario-container">
     <div class="espacios-container">
       <div class="espacio-header">Crear nuevo Espacio</div>
-      <div nz-row>
-        <div
-          nz-col
-          nzXs="24"
-          nzSm="24"
-          nzMd="12"
-          nzLg="12"
-          nzXl="12"
-          class="espacio-form-item"
-        >
-          <div class="espacio-form-title">Nombre del Espacio</div>
-          <mat-form-field appearance="outline" class="input-container">
-            <input matInput placeholder="Escribe..." [(ngModel)]="nombre" />
-          </mat-form-field>
-        </div>
-
-        <div
-          nz-col
-          nzXs="24"
-          nzSm="24"
-          nzMd="12"
-          nzLg="12"
-          nzXl="12"
-          class="espacio-form-item"
-        >
-          <div class="espacio-form-title">Edificio / Área</div>
-          <mat-form-field
-            class="example-full-width"
-            appearance="outline"
-            class="input-container"
+      <form class="nuevo-form" [formGroup]="formularioEspacios" (ngSubmit)="enviarDatos()">
+        <div nz-row>
+          <!-- NOMBRE -->
+          <div
+            nz-col
+            nzXs="24"
+            nzSm="24"
+            nzMd="24"
+            nzLg="24"
+            nzXl="24"
+            class="espacio-form-item"
           >
-            <mat-label>Área</mat-label>
-            <input
-              type="text"
-              placeholder="Selecciona"
-              aria-label="Area"
-              matInput
-              [formControl]="areas"
-              [matAutocomplete]="auto"
-              [(ngModel)]="zona"
-            />
-            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-              <mat-option
-                *ngFor="let option of filteredOptions | async"
-                [value]="option"
-              >
-                {{ option }}
-              </mat-option>
-            </mat-autocomplete>
-          </mat-form-field>
-        </div>
-
-        <div
-          nz-col
-          nzXs="24"
-          nzSm="24"
-          nzMd="12"
-          nzLg="12"
-          nzXl="12"
-          class="espacio-form-item"
-        >
-          <div class="espacio-form-title">Aforo</div>
-          <mat-form-field appearance="outline" class="input-container">
-            <input matInput placeholder="Escribe..." [(ngModel)]="aforo" />
-          </mat-form-field>
-        </div>
-
-        <div
-          nz-col
-          nzXs="24"
-          nzSm="24"
-          nzMd="12"
-          nzLg="12"
-          nzXl="12"
-          class="espacio-form-item"
-        >
-          <div class="espacio-form-title">Deporte</div>
-          <mat-form-field appearance="outline" class="input-container">
-            <input matInput placeholder="Escribe..." [(ngModel)]="deporte" />
-          </mat-form-field>
-        </div>
-
-        <div
-          nz-col
-          nzXs="24"
-          nzSm="24"
-          nzMd="12"
-          nzLg="12"
-          nzXl="12"
-          class="espacio-form-item"
-        >
-          <div class="espacio-form-title">Carga de archivos</div>
-
-          <!-- CARGA DE IMAGEN -->
-          <mat-form-field appearance="outline" class="input-container">
-            <mat-toolbar>
-              <div ondrag="uploadFiles()">
-                <input hidden matInput />
-                <input
-                  style="width: 100%; background-color: white"
-                  type="file"
-                  id="fileInput"
-                  name="fileInput"
-                  accept="image/*"
-                  (change)="selectFiles($event)"
-                />
-                <div class="image-text">
-                  <span class="drop-image-text">Arrastra y suelta</span>
-                  <span class="navigate-image-text">Navega dispositivo</span>
-                </div>
-              </div>
-            </mat-toolbar>
-          </mat-form-field>
-          <div *ngIf="preview != ''" class="espacio-form-archivo">
-            <b>Imagen:</b> {{ selectedFileNames[0] }}
-          </div>
-        </div>
-
-        <div
-          nz-col
-          nzXs="24"
-          nzSm="24"
-          nzMd="12"
-          nzLg="12"
-          nzXl="12"
-          class="espacio-form-item"
-        >
-          <div *ngIf="preview != ''" class="image-preview">
-            <div class="preview-container">
-              <div class="preview-filter">
-                <div class="capitals">CDB1</div>
-                <div class="capitals">Cancha 3</div>
-              </div>
-              <img [src]="preview" class="preview" />
+            <div class="espacio-form-title">Nombre del Espacio</div>
+            <mat-form-field appearance="outline" class="input-container">
+              <input matInput placeholder="Escribe..." formControlName="nombre" class="custom-input" />
+            </mat-form-field>
+            <div *ngIf="formularioEspacios.get('nombre')?.invalid && formularioEspacios.get('nombre')?.touched"
+              class="error-text">
+              Ingrese un nombre
             </div>
           </div>
-        </div>
+  
+          <!-- ZONA -->
+          <div
+            nz-col
+            nzXs="24"
+            nzSm="24"
+            nzMd="12"
+            nzLg="12"
+            nzXl="12"
+            class="espacio-form-item"
+          >
+            <div class="espacio-form-title">Edificio / Área</div>
+            <mat-form-field
+              class="example-full-width"
+              appearance="outline"
+              class="input-container"
+            >
+              <mat-label>Área</mat-label>
+              <input
+                type="text"
+                placeholder="Selecciona"
+                formControlName="zona"
+                aria-label="Area"
+                matInput
+                [matAutocomplete]="auto"
+                class="custom-input"
+              />
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option
+                  *ngFor="let option of filteredOptions | async"
+                  [value]="option"
+                >
+                  {{ option }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <div *ngIf="formularioEspacios.get('zona')?.invalid && formularioEspacios.get('zona')?.touched"
+              class="error-text">
+              Seleccione un área
+            </div>
+          </div>
+  
+          <!-- AFORO -->
+          <div
+            nz-col
+            nzXs="24"
+            nzSm="24"
+            nzMd="12"
+            nzLg="12"
+            nzXl="12"
+            class="espacio-form-item"
+          >
+            <div class="espacio-form-title">Aforo</div>
+            <mat-form-field appearance="outline" class="input-container">
+              <input matInput placeholder="Escribe..." formControlName="aforo" class="custom-input" />
+            </mat-form-field>
+            <div *ngIf="formularioEspacios.get('aforo')?.invalid && formularioEspacios.get('aforo')?.touched"
+              class="error-text">
+              Ingrese el aforo máximo
+            </div>
+          </div>
+  
+          <!-- DEPORTE -->
+          <div
+            nz-col
+            nzXs="24"
+            nzSm="24"
+            nzMd="12"
+            nzLg="12"
+            nzXl="12"
+            class="espacio-form-item"
+          >
+            <div class="espacio-form-title">Deporte</div>
+            <mat-form-field
+              class="example-full-width"
+              appearance="outline"
+              class="input-container"
+            >
+              <mat-label>Deporte</mat-label>
+              <input
+                type="text"
+                placeholder="Selecciona"
+                formControlName="deporte"
+                matInput
+                [matAutocomplete]="auto"
+                class="custom-input"
+              />
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option 
+                  *ngFor="let deporte of listaDeportes" [value]="deporte.id">
+                  {{ deporte.nombre }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <div *ngIf="formularioEspacios.get('deporte')?.invalid && formularioEspacios.get('deporte')?.touched"
+              class="error-text">
+              Seleccione un deporte
+            </div>
+          </div>
 
-        <div
-          nz-col
-          nzXs="24"
-          nzSm="24"
-          nzMd="12"
-          nzLg="12"
-          nzXl="12"
-          class="espacio-form-item"
-        >
-          <div class="espacio-form-title">Horarios</div>
 
-          <div *ngIf="horariosSelected.length != 0">
-            <div class="form-horarios-selected">
+          <div
+            nz-col
+            nzXs="24"
+            nzSm="24"
+            nzMd="12"
+            nzLg="12"
+            nzXl="12"
+            class="espacio-form-item"
+          >
+            <div class="espacio-form-title">Deporte</div>
+            <mat-form-field appearance="outline" class="input-container">
+              <input matInput placeholder="Escribe..." formControlName="deporte" class="custom-input"/>
+            </mat-form-field>
+            <div *ngIf="formularioEspacios.get('deporte')?.invalid && formularioEspacios.get('deporte')?.touched"
+              class="error-text">
+              Ingrese un deporte
+            </div>
+          </div>
+
+
+          <!-- HORARIOS -->
+          <div
+            nz-col
+            nzXs="24"
+            nzSm="24"
+            nzMd="12"
+            nzLg="12"
+            nzXl="12"
+            class="espacio-form-item"
+          >
+            <div class="espacio-form-title">Horarios</div>
+  
+            <div *ngIf="horariosSelected.length != 0">
+              <div class="form-horarios-selected">
+                <button
+                  mat-button
+                  *ngFor="let horario of horariosSelected"
+                  color="button-horario"
+                  (click)="removeSelectedHorario(horario)"
+                >
+                  <div class="form-button-horario">
+                    <div class="form-horario-text">{{ horario }}</div>
+  
+                    <mat-icon [ngStyle]="{ color: 'white' }">clear</mat-icon>
+                  </div>
+                </button>
+              </div>
+            </div>
+  
+            <mat-form-field appearance="outline" class="input-container">
+              <mat-label>Selecciona</mat-label>
+              <mat-select
+                #matRef
+                formControlName="horarios"
+                class="custom-input"
+                multiple
+                (selectionChange)="changeSelectedEspacios($event.value)"
+              >
+                <mat-select-trigger>
+                  {{horarios.value?.[0] || ''}}
+                  <span
+                    *ngIf="(horarios.value?.length || 0) > 1"
+                    class="example-additional-selection"
+                  >
+                    (+{{ (horarios.value?.length || 0) - 1 }})
+                  </span>
+                </mat-select-trigger>
+  
+                <mat-option
+                  *ngFor="let horario of listaHorarios"
+                  [value]="horario"
+                  >{{ horario }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- CARGA DE IMAGENES -->
+          <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12" class="nuevo-form-item">
+            <div class="nuevo-form-title">Carga de archivos</div>
+
+            <!-- CARGA DE IMAGEN -->
+            <mat-form-field appearance="outline" class="input-container">
+              <mat-toolbar>
+                <div>
+                  <input hidden matInput />
+                  <input style="width: 100%; background-color: white" type="file" id="fileInput" name="fileInput"
+                    accept="image/*" (change)="selectFiles($event)" formControlName="imagen" required />
+                  <div class="image-text">
+                    <span class="drop-image-text">Arrastra y suelta o </span>
+                    <span class="navigate-image-text">Navega dispositivo</span>
+                  </div>
+                </div>
+              </mat-toolbar>
+            </mat-form-field>
+            <div *ngIf="formularioEspacios.get('imagen')?.invalid && formularioEspacios.get('imagen')?.touched"
+              class="error-text">
+              Seleccione una imagen
+            </div>
+            <div *ngIf="preview != ''" class="nuevo-form-archivo">
+              <b>Imagen:</b> {{ selectedFileNames[0] }}
+            </div>
+          </div>
+
+          <!-- PREVIEW -->
+          <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12" class="nuevo-form-item">
+            <div *ngIf="preview != ''" class="image-preview">
+              <div class="preview-container">
+                <div class="preview-filter">
+                  <div class="preview-text-class" style="padding-bottom: 0.1rem;">Nombre</div>
+                  <div class="preview-text-class" style="padding-top: 0.1rem;">Zona</div>
+                </div>
+                <img [src]="preview" class="preview" />
+              </div>
+            </div>
+          </div>
+  
+          <div
+            nz-col
+            nzXs="24"
+            nzSm="24"
+            nzMd="24"
+            nzLg="24"
+            nzXl="24"
+            class="espacio-form-item"
+          >
+            <div class="buttons-container">
               <button
                 mat-button
-                *ngFor="let horario of horariosSelected"
-                color="button-horario"
-                (click)="removeSelectedHorario(horario)"
+                color="button-cancelar"
+                (click)="onCancelClick()"
               >
-                <div class="form-button-horario">
-                  <div class="form-horario-text">{{ horario }}</div>
-
-                  <mat-icon [ngStyle]="{ color: 'white' }">clear</mat-icon>
-                </div>
+                <div class="espacio-cancelar-text">Cancelar</div>
+              </button>
+  
+              <button
+                type="submit"
+                mat-button
+                color="button-guardar"
+              >
+                <div class="espacio-guardar-text">Guardar</div>
               </button>
             </div>
           </div>
-
-          <mat-form-field appearance="outline" class="input-container">
-            <mat-label>Selecciona</mat-label>
-            <mat-select
-              #matRef
-              [formControl]="horarios"
-              multiple
-              (selectionChange)="changeSelectedEspacios($event.value)"
-            >
-              <mat-select-trigger>
-                {{horarios.value?.[0] || ''}}
-                <span
-                  *ngIf="(horarios.value?.length || 0) > 1"
-                  class="example-additional-selection"
-                >
-                  (+{{ (horarios.value?.length || 0) - 1 }})
-                </span>
-              </mat-select-trigger>
-
-              <mat-option
-                *ngFor="let horario of listaHorarios"
-                [value]="horario"
-                >{{ horario }}</mat-option
-              >
-            </mat-select>
-          </mat-form-field>
         </div>
+      </form>
 
-        <div
-          nz-col
-          nzXs="24"
-          nzSm="24"
-          nzMd="24"
-          nzLg="24"
-          nzXl="24"
-          class="espacio-form-item"
-        >
-          <div class="buttons-container">
-            <button
-              mat-button
-              color="button-cancelar"
-              (click)="onCancelClick()"
-            >
-              <div class="espacio-cancelar-text">Cancelar</div>
-            </button>
-
-            <button
-              mat-button
-              color="button-guardar"
-              (click)="guardarEspacio()"
-            >
-              <div class="espacio-guardar-text">Guardar</div>
-            </button>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </div>
