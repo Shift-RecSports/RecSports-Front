@@ -1,6 +1,6 @@
 .sidenav-container {
   height: 100%;
-  -webkit-overflow-scrolling: touch;
+  position: fixed;
 }
 
 .sidenav {
@@ -28,8 +28,8 @@
 }
 
 .header-toolbar {
-  padding: 2.5rem 6.3rem 2.5rem 2rem;
   position: fixed;
+  padding: 2.5rem 6.3rem 2.5rem 2rem;
 }
 
 .header-title {
@@ -121,7 +121,7 @@
 .background-blur {
   background-color: rgba(0, 0, 0, 0.3);
   width: 100%;
-  height: 50rem;
+  height: 100vh;
   position: fixed;
   z-index: 10;
 }
