@@ -1,9 +1,5 @@
 .sidenav-container {
   height: 100%;
-  position: fixed;
-  /* height: 100%;
-  display: flex;
-  flex-direction: column; */
 }
 
 .sidenav {
@@ -14,16 +10,6 @@
 .sidenav .mat-toolbar {
   background: white;
   padding: 2rem 0 0 1rem;
-}
-
-/* .mat-toolbar {
-  flex-shrink: 0; 
-} */
-
-.mat-sidenav {
-  width: 6.3rem;
-  border-color: transparent;
-  flex-shrink: 0; /* This prevents the sidenav from shrinking when there's not enough space */
 }
 
 .mat-toolbar.mat-primary {
@@ -39,14 +25,8 @@
 .mat-sidenav-content.mat-toolbar.span {
   font-size: 10rem;
 }
-/* 
-.mat-sidenav-content {
-  overflow: auto; 
-  flex-grow: 1; 
-} */
 
 .header-toolbar {
-  position: fixed;
   padding: 2.5rem 6.3rem 2.5rem 2rem;
 }
 
@@ -140,8 +120,7 @@
   background-color: rgba(0, 0, 0, 0.3);
   width: 100%;
   height: 100vh;
-  position: fixed;
-  /* position: absolute; */
+
   z-index: 10;
 }
 
