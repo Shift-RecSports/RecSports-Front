@@ -1,7 +1,4 @@
-<mat-sidenav-container
-  class="sidenav-container"
-  style="position: fixed !important"
->
+<mat-sidenav-container class="sidenav-container">
   <mat-sidenav
     #drawer
     class="sidenav"
@@ -196,13 +193,8 @@
       class="background-blur"
       [ngClass]="showSidebar ? '' : 'disactive-background'"
       (click)="openSidebar(false)"
-      style="position: fixed !important"
     ></div>
-    <mat-toolbar
-      color="primary"
-      class="header-toolbar"
-      style="position: fixed !important"
-    >
+    <mat-toolbar color="primary" class="header-toolbar">
       <button
         type="button"
         color="primary"
