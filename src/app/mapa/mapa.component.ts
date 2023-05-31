@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 import { ApiService } from '../service/api.service';
 
+
 interface mapa {
   id: string;
   imagen: string;

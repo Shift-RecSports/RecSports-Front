@@ -33,10 +33,11 @@
             </mat-toolbar>
           </div>
         </mat-form-field>
-        <div *ngIf="preview != ''" class="nuevo-form-archivo">
+        <!-- <div *ngIf="preview != ''" class="nuevo-form-archivo">
           <b>Imagen:</b> {{ selectedFileNames[0] }}
-        </div>
+        </div> -->
         <p class="exito" *ngIf="subida">Mapa actualizado exitosamente.</p>
+        <p class="exito" *ngIf="subida">Refresca la página para cargar la nueva.</p>
       </div>
     </div>
   </div>
