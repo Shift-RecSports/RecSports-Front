@@ -73,6 +73,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { ModalBorrarNoticiaComponent } from './noticias/modal-borrar-noticia/modal-borrar-noticia.component';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { CredencialComponent } from './credencial/credencial.component';
+import { EditarNoticiaComponent } from './noticias/editar-noticia/editar-noticia.component';
 
 
 registerLocaleData(en);
@@ -107,6 +108,7 @@ registerLocaleData(en);
     ModalBorrarEspacioComponent,
     ModalBorrarNoticiaComponent,
     CredencialComponent,
+    EditarNoticiaComponent,
   ],
   imports: [
     BrowserModule,

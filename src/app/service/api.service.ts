@@ -27,6 +27,11 @@ export class ApiService {
     return this.httpClient.post(apiURL + '/api' + endpoint, formData);
   }
 
+  // PUT with image
+  putWithImage(endpoint: string, formData: FormData): Observable<any> {
+    return this.httpClient.put(apiURL + '/api' + endpoint, formData);
+  }
+
   // PUT
   put(endpoint: string, body: {}): Observable<any> {
     return this.httpClient.put(apiURL + '/api' + endpoint, body);
