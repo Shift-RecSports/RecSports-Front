@@ -71,7 +71,6 @@ export class SidebarComponent {
     this.router.navigate(['credencial']);
   }
 
-
   onMisReservaciones() {
     this.router.navigate(['reservaciones']);
   }

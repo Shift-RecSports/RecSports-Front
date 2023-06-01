@@ -15,7 +15,7 @@
 }
 
 .reservaciones-lista {
-  padding: 2rem 5% 2rem 5%;
+  padding: 1rem 5% 1rem 5%;
 }
 
 .reservaciones-content {
@@ -57,15 +57,6 @@
     height: 100%;
     padding: 1rem 0 2rem 0;
   }
-}
-
-.reservaciones-image {
-  background-position: center center;
-  background-size: cover;
-  min-height: 12vh;
-  height: 100%;
-
-  border-radius: 1rem;
 }
 
 .reservaciones-item {
@@ -142,4 +133,60 @@
   font-size: 1rem;
   color: #c22424;
   font-weight: 900;
+}
+
+.reservaciones-image {
+  background-position: center center;
+  background-size: cover;
+  min-height: 12vh;
+  height: 100%;
+
+  border-radius: 1rem;
+}
+
+.tarjeta-espacio {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: inherit;
+
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  overflow: hidden;
+  position: relative;
+}
+
+.preview {
+  width: 100%;
+  height: 14vh;
+  border-radius: 2rem;
+  object-fit: cover;
+}
+
+.reservaciones-empty {
+  width: 100%;
+  height: 80vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.reservaciones-empty-icon {
+  color: rgba(0, 0, 0, 0.3);
+  width: 10rem;
+  font-size: 5rem;
+}
+
+.reservaciones-empty-text {
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
 }

@@ -89,7 +89,7 @@ export class GimnasioComponent {
       fecha.setDate(fecha.getDate() + 1);
       return {
         Fecha: fecha,
-        Id: item.id,
+        // Id: item.id,
         Matricula: item.matricula,
         Nombre: item.nombre,
         Entrada: item.entrada,

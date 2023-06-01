@@ -17,6 +17,15 @@
       </div>
     </div>
 
+    <div *ngIf="showedDeportes.length == 0" class="reservaciones-empty">
+      <img
+        class="reservaciones-empty-icon"
+        src="./assets/img/recsports_logo_icon.png"
+        alt=""
+      />
+      <div class="reservaciones-empty-text">No se encontraron resultados</div>
+    </div>
+
     <div nz-row>
       <div
         nz-col

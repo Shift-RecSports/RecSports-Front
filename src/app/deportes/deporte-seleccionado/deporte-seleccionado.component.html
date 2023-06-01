@@ -248,7 +248,7 @@
                       mat-button
                       color="horario"
                       (click)="openDialog(reservacion)"
-                      *ngIf="reservacion.estatus == '1'"
+                      *ngIf="reservacion.estatus == 1"
                     >
                       <div class="deporte-reservacion-horario">
                         {{ reservacion.espacio_nombre }}
@@ -258,7 +258,7 @@
                     <button
                       mat-button
                       color="horario-activo"
-                      *ngIf="reservacion.estatus == '2'"
+                      *ngIf="reservacion.estatus == 2"
                       (click)="openDialog(reservacion)"
                     >
                       <div class="deporte-reservacion-horario">
@@ -269,7 +269,7 @@
                     <button
                       mat-button
                       color="horario-expirado"
-                      *ngIf="reservacion.estatus == '3'"
+                      *ngIf="reservacion.estatus == 3"
                       (click)="openDialog(reservacion)"
                       disabled
                     >
@@ -278,12 +278,6 @@
                       </div>
                     </button>
                   </div>
-                </div>
-
-                <div *ngIf="i == 14">
-                  <div class="spacer"></div>
-                  <mat-divider></mat-divider>
-                  <div class="spacer"></div>
                 </div>
               </td>
             </ng-container>

@@ -78,7 +78,7 @@ const routes: Routes = [
   // {
   //   path: 'calendario',
   //   component: CalendarioComponent,
-  //   canActivate: [AuthGuard],
+  //
   // },
   {
     path: 'noticias',
