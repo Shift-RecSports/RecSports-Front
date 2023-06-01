@@ -93,6 +93,7 @@ const defaultNavbarFlags = {
 function activateNavbarFlags(userRole: string, navbarFlags: navbarFlags) {
   if (userRole == 'ADMIN') {
     navbarFlags.inicioFlag = true;
+    navbarFlags.inicioEntrenadorFlag = false;
     navbarFlags.gimnasioFlag = true;
     navbarFlags.deportesFlag = true;
     navbarFlags.calendarioFlag = false;
@@ -103,7 +104,7 @@ function activateNavbarFlags(userRole: string, navbarFlags: navbarFlags) {
     navbarFlags.entradaFlag = false;
     navbarFlags.salidaFlag = false;
   } else if (userRole == 'GIMNASIO') {
-    navbarFlags.inicioFlag = true;
+    navbarFlags.inicioFlag = false;
     navbarFlags.inicioEntrenadorFlag = true;
     navbarFlags.gimnasioFlag = true;
     navbarFlags.deportesFlag = false;
