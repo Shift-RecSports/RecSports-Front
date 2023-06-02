@@ -1,25 +1,21 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/service/auth.service';
-
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/service/api.service';
-import { Validators } from '@angular/forms';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-
-
+import { Noticia } from 'src/app/classes/noticias';
 
 
 @Component({
-  selector: 'app-nueva-noticia',
-  templateUrl: './nueva-noticia.component.html',
-  styleUrls: ['./nueva-noticia.component.css'],
+  selector: 'app-editar-noticia',
+  templateUrl: './editar-noticia.component.html',
+  styleUrls: ['./editar-noticia.component.css']
 })
+export class EditarNoticiaComponent implements OnInit {
+  formularioNoticia: FormGroup;
+  noticia: Noticia;
+  noticiaId: String = '';
 
-
-export class NuevaNoticiaComponent {
-
-  formularioNoticia: FormGroup = new FormGroup({});
   formattedDate: string = '';
   isDateSelected: boolean = true;
   isHourSelected: boolean = true;
@@ -28,13 +24,14 @@ export class NuevaNoticiaComponent {
   selectedFileNames: string[] = [];
   preview: string = '';
 
+
   constructor(
-    private service: AuthService,
+    private route: ActivatedRoute,
     private router: Router,
-    public formulario: FormBuilder,
-    private _apiService: ApiService,
+    private formulario: FormBuilder,
+    private apiService: ApiService,
     private notification: NzNotificationService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.formularioNoticia = this.formulario.group({
@@ -43,8 +40,35 @@ export class NuevaNoticiaComponent {
       fecha: [null, Validators.required],
       hora: [null, Validators.required],
       imagen: ['', Validators.required],
-      url: [''],
+      url: ['']
     });
+
+    this.route.params.subscribe((params) => {
+      this.noticiaId = params['id'];
+      const url = `/noticias/${this.noticiaId}`;
+
+      console.log(url);
+
+      this.apiService.get(url).subscribe((data) => {
+        this.noticia = data;
+        this.noticia.imagen = this.apiService.getImage(
+          '/noticias',
+          this.noticia.imagen
+        );
+
+        this.formularioNoticia!.patchValue({
+          titulo: this.noticia.titulo,
+          lugar: this.noticia.lugar,
+          fecha: this.noticia.fecha,
+          hora: this.noticia.hora,
+          imagen: this.noticia.imagen,
+          url: this.noticia.url
+        });
+
+      });
+    });
+
+
   }
 
   onDateSelected(selectedDate: Date): void {
@@ -110,30 +134,28 @@ export class NuevaNoticiaComponent {
     }
   }
 
-
   enviarDatos() {
     console.log("Boton presionado");
-    console.log(this.formularioNoticia.value);
+    console.log(this.formularioNoticia!.value);
   
-    const url = '/noticias';
-  
-    if (this.formularioNoticia.valid) {
+    const url = `/noticias/${this.noticiaId}`;
+
+    if (this.formularioNoticia!.valid) {
       console.log("formulario valido");
       // Form is valid, proceed with saving data
       const formData = new FormData();
   
-      formData.append('lugar', this.formularioNoticia.get('lugar')?.value ?? '');
-      formData.append('fecha', this.formularioNoticia.get('fecha')?.value ?? '');
-      formData.append('hora', this.formularioNoticia.get('hora')?.value ?? '');
-      formData.append('titulo', this.formularioNoticia.get('titulo')?.value ?? '');
+      formData.append('lugar', this.formularioNoticia!.get('lugar')?.value ?? '');
+      formData.append('fecha', this.formularioNoticia!.get('fecha')?.value ?? '');
+      formData.append('hora', this.formularioNoticia!.get('hora')?.value ?? '');
+      formData.append('titulo', this.formularioNoticia!.get('titulo')?.value ?? '');
       formData.append('imagen', this.selectedFiles![0], this.selectedFileNames[0]);
-      formData.append('url', this.formularioNoticia.get('url')?.value ?? '');
+      formData.append('url', this.formularioNoticia!.get('url')?.value ?? '');
   
       console.log("formulario validado = ", formData);
   
-      this._apiService.postWithImage(url, formData).subscribe((data) => {
+      this.apiService.putWithImage(url, formData).subscribe((data) => {
         console.log(data);
-        //alert(`Noticia ${data.titulo} registrada con éxito`);
 
         // NOTIFICACION
         const type = 'success';
@@ -147,15 +169,14 @@ export class NuevaNoticiaComponent {
       });
     } else {
       console.log("formulario INvalido");
-      // Form is invalid, display error message
-      //alert(`No se ha podido guardar la noticia. Verifique los campos solicitados.`);
+
       // NOTIFICACION
       const type = 'error';
       const title = 'No se ha podido guardar la noticia.';
       const description = `Verifique los campos solicitados.`;
       this.createNotification(type, title, description);
 
-      Object.values(this.formularioNoticia.controls).forEach((control) => {
+      Object.values(this.formularioNoticia!.controls).forEach((control) => {
         if (control.invalid) {
           control.markAsDirty();
           control.updateValueAndValidity({ onlySelf: true });
@@ -164,14 +185,13 @@ export class NuevaNoticiaComponent {
     }
   }
 
-  createNotification(type: string, title: string, description: string): void {
-    this.notification.create(type, title, description);
-  }
-  
 
   onCancelClick() {
     this.router.navigate(['noticias']);
   }
 
+  createNotification(type: string, title: string, description: string): void {
+    this.notification.create(type, title, description);
+  }
 }
 

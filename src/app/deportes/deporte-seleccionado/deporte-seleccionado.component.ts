@@ -339,8 +339,8 @@ export class DeporteSeleccionadoComponent {
     });
   }
 
-  onEditDeporte() {
-    this.router.navigate(['/deportes/nuevo']);
+  onEditDeporte(deportedId: Deporte) {
+    this.router.navigate([`/editar-deporte/${deportedId.id}`]);
   }
 
   onCrearEspacio() {
