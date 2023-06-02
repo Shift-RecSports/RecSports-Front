@@ -70,9 +70,8 @@ export class EncuestaComponent {
     };
 
     this._apiService.post(url, body).subscribe((data) => {
-      console.log(data)
+      //console.log(data)
       this.contestada = true;
-      console.log(this.contestada)
     });
   }
 
