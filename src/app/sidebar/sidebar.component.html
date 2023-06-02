@@ -191,7 +191,7 @@
   <mat-sidenav-content>
     <div
       class="background-blur"
-      [ngClass]="showSidebar ? '' : 'disactive-background'"
+      [ngClass]="drawer.opened && showSidebar ? '' : 'disactive-background'"
       (click)="openSidebar(false)"
     ></div>
     <mat-toolbar color="primary" class="header-toolbar">

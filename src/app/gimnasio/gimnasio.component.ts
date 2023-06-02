@@ -52,6 +52,8 @@ export class GimnasioComponent {
   }
 
   changeDateSelected(day: Date = new Date()) {
+    this.dataSource.data = [];
+
     this.daySelected = `${day.getFullYear()}-${
       day.getMonth() + 1
     }-${day.getDate()}`;
