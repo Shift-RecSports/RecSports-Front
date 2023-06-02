@@ -189,12 +189,11 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <!-- <div
+    <div
       class="background-blur"
-      [ngClass]="showSidebar ? '' : 'disactive-background'"
+      [ngClass]="drawer.opened && showSidebar ? '' : 'disactive-background'"
       (click)="openSidebar(false)"
     ></div>
-  -->
     <mat-toolbar color="primary" class="header-toolbar">
       <button
         type="button"

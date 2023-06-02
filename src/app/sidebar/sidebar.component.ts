@@ -60,7 +60,8 @@ export class SidebarComponent {
 
   openSidebar(open: boolean) {
     this.showSidebar = open;
-    this.drawer.toggle();
+    this.drawer.toggle(this.showSidebar);
+    this.showSidebar = this.drawer.opened;
   }
 
   onLogOut() {
