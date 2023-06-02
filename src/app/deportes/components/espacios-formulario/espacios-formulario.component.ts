@@ -29,9 +29,7 @@ export class EspaciosFormularioComponent {
   selectedFileNames: string[] = [];
   preview: string = '';
 
-  deportesControl = new FormControl();
   listaDeportes: Deporte[] = [];
-
 
   horarios = new FormControl('');
   horariosSelected: string[] = [];
@@ -56,7 +54,6 @@ export class EspaciosFormularioComponent {
     '22:00',
   ];
 
-  deportesOptions: string[] = []
 
   filteredOptions: Observable<string[]>;
 

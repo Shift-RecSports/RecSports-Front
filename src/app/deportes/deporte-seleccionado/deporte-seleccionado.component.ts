@@ -343,6 +343,10 @@ export class DeporteSeleccionadoComponent {
     this.router.navigate([`/editar-deporte/${deportedId.id}`]);
   }
 
+  onEditEspacio(espacioId: Espacio) {
+    this.router.navigate([`/editar-espacio/${espacioId.id}`]);
+  }
+
   onCrearEspacio() {
     this.router.navigate(['/espacios/nuevo']);
   }
