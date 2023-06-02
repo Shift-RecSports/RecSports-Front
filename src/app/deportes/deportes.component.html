@@ -1,6 +1,12 @@
 <div class="grid-container">
   <div class="deportes-container">
     <div class="deportes-title-header">
+      <div *ngIf="showAgregarButton" class="deportes-agregar-container">
+        <button mat-button color="button-agregar" (click)="onAgregarDeporte()">
+          <div class="deportes-agregar-text">Agregar Deporte</div>
+        </button>
+      </div>
+
       <div class="deportes-title">Busca tu deporte</div>
       <div class="deportes-searchbox">
         <input
@@ -57,14 +63,6 @@
             <img [src]="deporte.imagen" class="preview" />
           </button>
         </div>
-      </div>
-    </div>
-
-    <div *ngIf="showAgregarButton">
-      <div class="deportes-agregar-container">
-        <button mat-button color="button-agregar" (click)="onAgregarDeporte()">
-          <div class="deportes-agregar-text">Agregar Deporte</div>
-        </button>
       </div>
     </div>
   </div>

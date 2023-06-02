@@ -12,10 +12,10 @@
   font-family: 'Helvetica';
   font-style: normal;
   font-weight: 700;
-  font-size: 30px;
-  line-height: 34px;
+  font-size: 1.875rem;
+  line-height: 2rem;
   color: #000000;
-  margin-top: 10px;
+  margin-top: 0.625rem;
 }
 
 .images-container {
@@ -24,11 +24,9 @@
 }
 
 .foto {
-  width: 60%;
-  /*height: auto;*/
   background: #FFFFFF;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
+  border-radius: 1.25rem;
   display: block;
 }
 
@@ -36,35 +34,52 @@
   width: 100%;
   height: auto;
   overflow: auto;
+  padding: 2rem;
+}
+
+.acomodo-input {
+  align-items: center;
+  justify-content: center;
+  margin-left:5rem;
 }
 
 .input-container {
-  width: 22%;
+  width: 20rem;
   background: #FFFFFF;
   box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
-  margin-left: 5%;
+  /* margin-left: 5%; */
   display: flex;
-  height: 400px;
+  flex-direction: column;
+  height: 25rem;
+}
+
+.forma {
+  border: none !important; /*esta no funcionan*/
+}
+
+::ng-deep.mat-mdc-text-field-wrapper {
+  border: none !important; /*esta no funcionan*/
+  height: 25rem !important;
+  border-radius: 1rem !important; /*esta no funcionan*/
 }
 
 .subir-texto {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
-  font-size: 26px;
-  line-height: 24px;
+  font-size: 1.625rem;
+  line-height: 1.5rem;
   text-align: center;
   margin-top: 20px;
 }
 
 .botones-container {
   border: 2px dashed rgba(0, 51, 160, 0.2);
-  border-radius: 20px;
-  height: 200px;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  padding-left: 10px;
+  border-radius: 1.25rem;
+  height: 12.5rem;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  padding-left: 0.625rem;
   justify-content: center;
   align-items: center;
 }
@@ -86,31 +101,88 @@
   margin-bottom: 1rem;
 }
 
-@media (max-width: 1300px) {
+.exito {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1rem;
+  text-align: center;
+}
+
+.custom-spinner {
+  margin-left: 8.5rem;
+  margin-top: -6rem;
+}
+
+:host ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: #0033A0;
+}
+
+:host ::ng-deep .custom-spinner circle {
+  stroke: #0033A0;
+}
+
+@media (max-width: 93.75rem) {
   .foto {
     width: 100%;
   }
   .input-container {
-    width: 35%;
-    margin-left: 0;
-    margin-top: 20px;
+    width: 20rem;
   }
 }
 
-@media (max-width: 960px) {
+@media (max-width: 93.75rem) {
+  .acomodo-input {
+    align-items: center;
+    justify-content: center;
+  } 
+  .input-container {
+    width: 20rem;
+  }
+}
+
+@media (max-width: 81.25rem) {
+  .input-container {
+    width: 20rem;
+  }
+  .acomodo-input {
+    margin-top: 3rem;
+  }  
+}
+
+@media (max-width: 75rem) {
+  .foto {
+    width: 100%;
+  }
+}
+
+@media (max-width: 60rem) {
   .mapa-container {
     padding: 6rem 1rem 1rem 1rem;
   }
+  .responsive-image {
+    padding: 1rem;
+  }
 }
 
-@media (max-width: 750px) {
+@media (max-width: 27.812rem) {
   .input-container {
-    width: 60%;
-    height: 350px;
+    height: 25rem;
+    margin-left: -3rem;
   }
-  .botones-container {
-    padding-top: 30px;
-    padding-bottom: 40px;
-    height: 170px;
+  .responsive-image {
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 24.375rem) {
+  .input-container {
+    height: 25rem;
+    margin-left: -4rem;
+  }
+  .responsive-image {
+    padding: 0.25rem;
   }
 }

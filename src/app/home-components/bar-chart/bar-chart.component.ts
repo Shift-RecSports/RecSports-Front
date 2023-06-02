@@ -11,15 +11,41 @@ import { Subscription, switchMap, timer } from 'rxjs';
   templateUrl: './bar-chart.component.html',
   styleUrls: ['./bar-chart.component.css'],
 })
+
 export class BarChartComponent implements OnInit {
   timerSubscription: Subscription;
 
-  constructor(private _apiService: ApiService) {}
+  constructor(private _apiService: ApiService) { }
 
   data: ConcurrenciaGimnasio[] = [];
   //num_semana!: number;
-  selectedOption = null;
-  dia_semana: number = 1;
+
+  private convertNumDayToWeekDay(numDay: number) {
+    if (numDay === 1) {
+      return 'lunes';
+    } else if (numDay === 2) {
+      return 'martes';
+    } else if (numDay === 3) {
+      return 'miercoles';
+    } else if (numDay === 4) {
+      return 'jueves';
+    } else if (numDay === 5) {
+      return 'viernes';
+    } else if (numDay === 6) {
+      return 'sabado';
+    } else if (numDay === 7) {
+      return 'domingo';
+    }
+    // Add a default return statement here
+    return ''; // Or any other default value or error handling
+  }
+  
+//  selectedOption : String = this.convertNumDayToWeekDay(this.currentDayOfWeek);
+  currentDate: Date = new Date();
+  currentDayOfWeek = this.currentDate.getDay();
+  selectedOption :String = this.convertNumDayToWeekDay(this.currentDayOfWeek);
+
+  dia_semana: number = this.currentDayOfWeek;
 
   url: string = '';
   percent: any;
@@ -232,9 +258,6 @@ export class BarChartComponent implements OnInit {
       .range([0, this.width])
       .domain([this.hourParser('06:00:00')!, this.hourParser('22:00:00')!])
       .nice();
-    console.log(this.hourParser('06:00:00'));
-    console.log(this.hourParser('22:00:00'));
-    console.log('X-AXIS RANGE' + x.range());
 
     // Draw the X-axis on the DOM
     this.svg
@@ -285,7 +308,7 @@ export class BarChartComponent implements OnInit {
       .style('stroke', '#ccc')
       .style('stroke-dasharray', '2,2');
 
-    // Create and fill bars
+    // This is the Historial Bar
     const bars2 = this.svg
       .selectAll('.bar2')
       .data(this.data)
@@ -293,29 +316,25 @@ export class BarChartComponent implements OnInit {
       .append('rect')
       .attr('class', 'bar2')
       .attr('x', function (d: any, i: number) {
-        console.log('LOOK HERE');
-        console.log(d.hora_inicio);
-        console.log(x(d.hora_inicio));
-
         const hour = d.hora_inicio.split(':')[0];
         console.log(x(Number(hour)));
-        return Number(hour) * 56.3 - 340;
+        return Number(hour) * 48 - 285;
       })
       .attr('width', function (d: any, i: number) {
-        return 49;
+        return 45;
       })
       .attr('y', function (d: any) {
         return yScale(d.historico);
       })
       .attr('height', function (d: any, i: number) {
-        console.log(yScale(d.historico));
         return yScale(0) - yScale(d.historico);
       })
       .attr('rx', 5) // add rounded edges
       .attr('ry', 5)
-      .attr('fill', '#0033A0');
-    // .attr('fill', '#e8e8e8');
+      .attr('fill', '#e8e8e8');
 
+
+    //This is Real Time Data bar
     const bars1 = this.svg
       .selectAll('.bar1')
       .data(this.data)
@@ -323,18 +342,18 @@ export class BarChartComponent implements OnInit {
       .append('rect')
       .attr('class', 'bar1')
       .attr('x', function (d: any, i: number) {
-        return x(d.hora_inicio);
+        const hour = d.hora_inicio.split(':')[0];
+        console.log(x(Number(hour)));
+        return Number(hour) * 48 - 285;
       })
       .attr('width', function (d: any, i: number) {
-        const barWidth = 0.8 * (x(d.hora_fin) - x(d.hora_inicio));
         return 45;
       })
       .attr('y', function (d: any) {
         return yScale(d.actual);
       })
       .attr('height', function (d: any, i: number) {
-        console.log(d.actual);
-        //return d.actual;
+        return yScale(0) - yScale(d.actual);
       })
       .attr('rx', 5) // add rounded edges
       .attr('ry', 5)
@@ -363,8 +382,6 @@ export class BarChartComponent implements OnInit {
 
     this._apiService.get(url).subscribe((data: ConcurrenciaGimnasio[]) => {
       this.data = data;
-      console.log(data);
-
       this.createSvg();
       this.drawBars(this.data);
     });
@@ -411,7 +428,10 @@ export class BarChartComponent implements OnInit {
 
     */
 
-    this.changeDateSelected(2, 5);
+
+    //Pass current date and corresponding week 
+    this.changeDateSelected(this.num_semana, this.dia_semana);
+    console.log("DEBUG: Get day/week of the week: ", this.num_semana, this.dia_semana);
   }
 
   onOptionChange() {
@@ -433,12 +453,10 @@ export class BarChartComponent implements OnInit {
     }
 
     d3.selectAll('svg:not(.ant-progress-circle)').remove();
-    console.log(d3.selectAll('svg'));
-    this.changeDateSelected(5, this.dia_semana);
 
-    console.log(this.dia_semana);
-    console.log(this.num_semana);
-    console.log(this.fechaInicio);
-    console.log(this.fechaFin);
+    //Pass current date and corresponding week based on ribbon date change
+    this.changeDateSelected(this.num_semana, this.dia_semana);
+
+    console.log("DEBUG: Get day/week of the week: ", this.num_semana, this.dia_semana)
   }
 }
