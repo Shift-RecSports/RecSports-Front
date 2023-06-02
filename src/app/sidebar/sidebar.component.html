@@ -189,11 +189,12 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div
+    <!-- <div
       class="background-blur"
       [ngClass]="showSidebar ? '' : 'disactive-background'"
       (click)="openSidebar(false)"
     ></div>
+  -->
     <mat-toolbar color="primary" class="header-toolbar">
       <button
         type="button"
@@ -244,7 +245,8 @@
             </button>
             <button mat-menu-item (click)="onLogOut()">
               <mat-icon aria-hidden="false">login</mat-icon>
-              Cerrar Sesión</button>
+              Cerrar Sesión
+            </button>
           </mat-menu>
         </div>
       </div>
