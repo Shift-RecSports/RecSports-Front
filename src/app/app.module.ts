@@ -76,6 +76,7 @@ import { CredencialComponent } from './credencial/credencial.component';
 import { EditarNoticiaComponent } from './noticias/editar-noticia/editar-noticia.component';
 import { EditarDeporteComponent } from './deportes/components/editar-deporte/editar-deporte.component';
 import { EditarEspacioComponent } from './deportes/components/editar-espacio/editar-espacio.component';
+import { ModalBorrarDeporteComponent } from './deportes/deporte-seleccionado/modal-borrar-deporte/modal-borrar-deporte.component';
 
 
 registerLocaleData(en);
@@ -113,6 +114,7 @@ registerLocaleData(en);
     EditarNoticiaComponent,
     EditarDeporteComponent,
     EditarEspacioComponent,
+    ModalBorrarDeporteComponent,
   ],
   imports: [
     BrowserModule,
