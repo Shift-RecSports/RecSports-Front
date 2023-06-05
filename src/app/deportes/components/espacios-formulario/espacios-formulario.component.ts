@@ -179,7 +179,7 @@ export class EspaciosFormularioComponent {
         this.createNotification(type, title, description);
 
         //Redirecciona a deportes
-        this.router.navigate([`/deportes/ ${this.getIdOfSelectedDeporte()}`]);
+        this.router.navigate([`/deportes/${this.getIdOfSelectedDeporte()}`]);
       });
     } else {
       console.log("formulario INVALIDO");
