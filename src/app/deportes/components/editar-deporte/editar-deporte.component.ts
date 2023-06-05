@@ -4,6 +4,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/service/api.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Deporte } from 'src/app/classes/deportes';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalBorrarDeporteComponent } from '../../deporte-seleccionado/modal-borrar-deporte/modal-borrar-deporte.component';
 
 @Component({
   selector: 'app-editar-deporte',
@@ -25,7 +27,8 @@ export class EditarDeporteComponent implements OnInit {
     private router: Router,
     private formulario: FormBuilder,
     private apiService: ApiService,
-    private notification: NzNotificationService
+    private notification: NzNotificationService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -142,6 +145,12 @@ export class EditarDeporteComponent implements OnInit {
         }
       });
     }
+  }
+
+  openDeleteDeporte(deporte: Deporte): void {
+    const dialogRef = this.dialog.open(ModalBorrarDeporteComponent, {
+      data: { deporte: deporte },
+    });
   }
 
 
