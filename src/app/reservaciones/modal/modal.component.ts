@@ -92,7 +92,7 @@ export class ModalComponent {
       },
       (e) => {
         const type = 'error';
-        const title = `No se ha logrado canelcar la reservacion`;
+        const title = `No se ha logrado cancelar la reservacion`;
         const description = e.error.message;
 
         this.createNotification(type, title, description);
