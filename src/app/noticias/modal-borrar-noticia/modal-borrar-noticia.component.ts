@@ -4,6 +4,7 @@ import { ApiService } from 'src/app/service/api.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { Noticia } from 'src/app/classes/noticias';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 interface noticiaType {
   noticia: Noticia;
@@ -24,7 +25,9 @@ export class ModalBorrarNoticiaComponent {
     private _apiService: ApiService,
     private service: AuthService,
     private router: Router,
-    @Inject(MAT_DIALOG_DATA) public data: noticiaType
+    @Inject(MAT_DIALOG_DATA) public data: noticiaType,
+    private notification: NzNotificationService
+
   ) {}
 
   onNoClick(): void {
@@ -40,7 +43,19 @@ export class ModalBorrarNoticiaComponent {
         window.location.reload();
       });
     }
+
+    // NOTIFICACION
+    const type = 'success';
+    const title = 'Se ha eliminado la noticia.';
+    const description = `Operación exitosa`;
+    this.deleteNotification(type, title, description);
+
   }
+
+  deleteNotification(type: string, title: string, description: string): void {
+    this.notification.create(type, title, description);
+  }
+  
 }
 
 
