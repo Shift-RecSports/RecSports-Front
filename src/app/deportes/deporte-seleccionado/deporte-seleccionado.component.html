@@ -19,8 +19,7 @@
             </button>
           </div>
         </div>
-
-        <img [src]="deporte.imagen" class="deporte-header-image" />
+        <img [src]="deporte.imagen" onerror="this.onerror=null;this.src='./assets/img/recsports_logo_icon.png';" class="deporte-header-image" />
       </div>
 
       <div class="deporte-espacio-container">
