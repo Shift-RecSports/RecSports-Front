@@ -19,6 +19,7 @@ export class MapaComponent {
   selectedFiles?: FileList;
   selectedFileNames: string[] = [];
   preview: string = '';
+  loading: boolean = false;
   subida: boolean = false;
   mapaActual: mapa = {
     id: '',
@@ -55,13 +56,16 @@ export class MapaComponent {
   }
 
   uploadFile(file: File): void {
+    this.loading = true
     const url = '/mapa/';
     const formData = new FormData();
     formData.append('id', this.mapaActual.id.toString());
     formData.append('imagen', file);
     this._apiService.put(url, formData).subscribe((data) => {
-      console.log(data);
+      //console.log(data);
       this.subida = true;
+      this.loading = false
+      location.reload()
     });
   }
 
@@ -69,7 +73,7 @@ export class MapaComponent {
     const url = '/mapa';
     this._apiService.get(url).subscribe((data) => {
       this.mapaActual = data;
-      console.log(this.mapaActual);
+      //console.log(this.mapaActual);
 
       this.mapaActual.imagen = this._apiService.getImage(
         '/mapas',

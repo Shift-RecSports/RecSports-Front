@@ -21,7 +21,7 @@ export class SidebarComponent {
   showSidebar: boolean = false;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
+    .observe(Breakpoints.XSmall)
     .pipe(
       map((result) => result.matches),
       shareReplay()
@@ -60,7 +60,8 @@ export class SidebarComponent {
 
   openSidebar(open: boolean) {
     this.showSidebar = open;
-    this.drawer.toggle();
+    this.drawer.toggle(this.showSidebar);
+    this.showSidebar = this.drawer.opened;
   }
 
   onLogOut() {
