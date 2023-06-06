@@ -9,14 +9,10 @@
   padding: 6rem 1rem 1rem 8rem;
 }
 
-@media (max-width: 960px) {
-  .home-container {
-    padding: 6rem 1rem 1rem 1rem;
-  }
-}
+
 
 .custom-row {
-  height: 400px; /* Set your desired height here */
+  height: 400px; 
 }
 
 .cards-dashboard {
@@ -79,4 +75,13 @@
   line-height: 28px;
 
   color: #000000;
+}
+
+@media (max-width: 960px) {
+  .home-container {
+    padding: 6rem 1rem 1rem 1rem;
+  }
+  .cards-dashboard{
+    height: auto;
+  }
 }

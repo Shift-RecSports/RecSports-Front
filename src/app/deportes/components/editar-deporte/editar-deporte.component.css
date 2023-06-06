@@ -301,6 +301,14 @@ nz-date-picker {
     box-shadow: 0.2rem 0.2rem 0.5rem 0.1rem rgba(0, 0, 0, 0.15);
 }
 
+.mat-button-borrar {
+    border: 0.2rem solid transparent;
+    background-color: #C22424;
+    border-radius: 1rem;
+    padding: 1.2rem;
+    box-shadow: 0.2rem 0.2rem 0.5rem 0.1rem rgba(0, 0, 0, 0.15);
+}
+
 .deportes-guardar-text {
     color: #ffffff;
     font-size: 1.2rem;

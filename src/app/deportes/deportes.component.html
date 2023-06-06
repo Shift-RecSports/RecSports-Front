@@ -60,7 +60,11 @@
               <div class="reserva_ahora capitals">RESERVA AHORA</div>
             </div>
 
-            <img [src]="deporte.imagen" class="preview" />
+            <img
+              [src]="deporte.imagen"
+              onerror="this.onerror=null;this.src='./assets/img/recsports_logo_icon.png';"
+              class="preview"
+            />
           </button>
         </div>
       </div>

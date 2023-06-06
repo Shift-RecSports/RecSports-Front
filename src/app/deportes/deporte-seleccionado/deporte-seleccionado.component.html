@@ -14,16 +14,105 @@
           </div>
 
           <div *ngIf="showEditButton" class="deportes-edit-container">
-            <button mat-button color="button-edit" (click)="onEditDeporte(deporte)">
+            <button
+              mat-button
+              color="button-edit"
+              (click)="onEditDeporte(deporte)"
+            >
               <div class="deportes-edit-text">Editar</div>
             </button>
           </div>
         </div>
-
-        <img [src]="deporte.imagen" class="deporte-header-image" />
+        <img
+          [src]="deporte.imagen"
+          onerror="this.onerror=null;this.src='./assets/img/recsports_logo_icon.png';"
+          class="deporte-header-image"
+        />
       </div>
 
-      <div class="deporte-espacio-container">
+      <mat-accordion
+        *ngIf="isHandset$ | async"
+        class="deporte-espacio-expansion-container"
+      >
+        <mat-expansion-panel
+          (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false"
+          class="deporte-espacio-expansion-panel"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <div class="deporte-espacio-title">Espacios</div>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div nz-row class="deporte-espacio-list">
+            <div
+              nz-col
+              nzXs="24"
+              nzSm="24"
+              nzMd="12"
+              nzLg="5"
+              nzXl="5"
+              *ngFor="let espacio of listaEspacios"
+            >
+              <div class="deporte-espacio-fondo">
+                <div class="deporte-espacio-content">
+                  <div>{{ espacio.zona }}</div>
+                  <div>{{ espacio.nombre }}</div>
+                  <button
+                    *ngIf="showDeleteEspacio"
+                    class="espacio-delete-button"
+                    mat-mini-fab
+                    (click)="openDeleteEspacio(espacio)"
+                  >
+                    <mat-icon
+                      [ngStyle]="{
+                        transform: 'scale(1)'
+                      }"
+                      >close</mat-icon
+                    >
+                  </button>
+                </div>
+
+                <img
+                  [src]="espacio.imagen"
+                  onerror="this.onerror=null;this.src='./assets/img/recsports_logo_icon.png';"
+                  class="preview"
+                />
+              </div>
+            </div>
+
+            <div
+              nz-col
+              nzXs="24"
+              nzSm="24"
+              nzMd="12"
+              nzLg="5"
+              nzXl="5"
+              class="deporte-espacio-agregarContainer"
+              *ngIf="showAddEspacio"
+            >
+              <button
+                mat-button
+                class="deporte-espacio-agregar"
+                (click)="onCrearEspacio()"
+              >
+                <mat-icon
+                  [ngStyle]="{ color: '#E4E4E4', transform: 'scale(2)' }"
+                  >add</mat-icon
+                >
+              </button>
+            </div>
+            <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="5" nzXl="5"></div>
+            <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="4" nzXl="5"></div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <div
+        class="deporte-espacio-container"
+        *ngIf="(isHandset$ | async) == false"
+      >
         <div class="deporte-espacio-title">Espacios</div>
 
         <div nz-row class="deporte-espacio-list">
@@ -36,29 +125,30 @@
             nzXl="5"
             *ngFor="let espacio of listaEspacios"
           >
-            <div
-              class="deporte-espacio-fondo"
-              [style.background-image]="
-                'linear-gradient(180deg, rgba(0, 0, 0, 0.29) 4%, #01329E 104%),url(' +
-                espacio.imagen +
-                ')'
-              "
-            >
-              <div>{{ espacio.zona }}</div>
-              <div>{{ espacio.nombre }}</div>
-              <button
-                *ngIf="showDeleteEspacio"
-                class="espacio-delete-button"
-                mat-mini-fab
-                (click)="openDeleteEspacio(espacio)"
-              >
-                <mat-icon
-                  [ngStyle]="{
-                    transform: 'scale(1)'
-                  }"
-                  >close</mat-icon
+            <div class="deporte-espacio-fondo">
+              <div class="deporte-espacio-content">
+                <div>{{ espacio.zona }}</div>
+                <div>{{ espacio.nombre }}</div>
+                <button
+                  *ngIf="showDeleteEspacio"
+                  class="espacio-delete-button"
+                  mat-mini-fab
+                  (click)="openDeleteEspacio(espacio)"
                 >
-              </button>
+                  <mat-icon
+                    [ngStyle]="{
+                      transform: 'scale(1)'
+                    }"
+                    >close</mat-icon
+                  >
+                </button>
+              </div>
+
+              <img
+                [src]="espacio.imagen"
+                onerror="this.onerror=null;this.src='./assets/img/recsports_logo_icon.png';"
+                class="preview"
+              />
             </div>
           </div>
 
@@ -121,11 +211,17 @@
           </div>
 
           <!-- DAYS OF THE WEEK -->
-          <div *ngFor="let item of daysOfTheWeek; index as i">
+          <div
+            *ngFor="let item of daysOfTheWeek; index as i"
+            [ngStyle]="(isHandset$ | async) ? { width: '25%' } : {}"
+          >
             <div *ngIf="i >= todayDay; else disabledDay">
               <div
                 *ngIf="selectedDay == i"
                 class="deporte-reservacion-button-container"
+                [ngStyle]="
+                  (isHandset$ | async) ? { transform: 'scale(0.8)' } : {}
+                "
               >
                 <button mat-fab color="button-selected" aria-label="date">
                   {{ item.getDate() }}
@@ -146,6 +242,9 @@
                   color="unselected"
                   aria-label="date"
                   (click)="onSelectDay(i)"
+                  [ngStyle]="
+                    (isHandset$ | async) ? { transform: 'scale(0.8)' } : {}
+                  "
                 >
                   {{ item.getDate() }}
                 </button>
@@ -162,6 +261,9 @@
                   color="button-disabled"
                   disabled
                   aria-label="date"
+                  [ngStyle]="
+                    (isHandset$ | async) ? { transform: 'scale(0.8)' } : {}
+                  "
                 >
                   {{ item.getDate() }}
                 </button>
@@ -197,10 +299,7 @@
 
         <!-- TABLA RESERVACIONES -->
 
-        <div
-          class="deporte-reservacion-table-container"
-          style="overflow-x: auto; white-space: nowrap"
-        >
+        <div class="deporte-reservacion-table-container">
           <!-- <div class="deporte-tiempo-linea">
             <div class="deporte-tiempo-circulo"></div>
           </div> -->
@@ -227,19 +326,7 @@
                 <mat-divider></mat-divider>
                 <div class="spacer"></div>
 
-                <!-- <div
-                  style="overflow-x: auto; white-space: nowrap"
-                  [ngClass]="
-                    currentBreakpoint == breakpointLarge
-                      ? 'width-large'
-                      : currentBreakpoint == breakpointMedium
-                      ? 'width-medium'
-                      : currentBreakpoint == breakpointSmall
-                      ? 'width-small'
-                      : 'width-xsmall'
-                  "
-                > -->
-                <div>
+                <div class="deporte-reservacion-cell-table">
                   <div
                     *ngFor="let reservacion of arrayReservacion[dataSource[i]]"
                     style="display: inline-block"
@@ -286,6 +373,7 @@
               mat-header-row
               *matHeaderRowDef="displayedColumns"
               [style.border-bottom]="'3px solid rgba(0,0,0,0)'"
+              style="width: 1rem"
             ></tr>
             <tr
               mat-row
