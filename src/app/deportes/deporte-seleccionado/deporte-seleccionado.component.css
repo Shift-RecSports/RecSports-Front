@@ -88,6 +88,13 @@
     position: absolute;
     bottom: 0;
   }
+
+  .deporte-header-descripcion {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 70vw;
+  }
 }
 
 .mat-button-edit {
@@ -111,6 +118,20 @@
   padding: 1rem 2rem 1rem 2rem;
   display: flex;
   flex-direction: column;
+}
+
+.deporte-espacio-expansion-panel {
+  background-color: white;
+  border-radius: 2rem;
+  box-shadow: 0.5rem 0.5rem 1rem 0.5rem rgba(0, 0, 0, 0.15);
+
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.deporte-espacio-expansion-container {
+  margin-bottom: 2rem;
 }
 
 .deporte-espacio-title {
@@ -269,7 +290,10 @@
 .deporte-reservacion-table-container {
   padding: 0 1rem 0 1rem;
   position: relative;
-  overflow: hidden;
+
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
 }
 
 .deporte-tiempo-linea {
@@ -406,29 +430,44 @@
   }
 
   .deporte-reservacion-container {
-    padding: 1.5rem 0 1rem 0;
+    padding: 1rem 0.5rem 1rem 0.5rem;
   }
 
   .deporte-reservacion-hora {
     font-size: 0.9rem;
+    color: rgb(56, 56, 56);
   }
 
   .mat-horario {
     padding: 1.3rem 2rem;
     font-size: 1.1rem;
-    margin-right: 0;
   }
 
   .mat-horario-activo {
     padding: 1.3rem 2rem;
     font-size: 1.1rem;
-    margin-right: 0;
   }
 
   .mat-horario-expirado {
     padding: 1.3rem 2rem;
     font-size: 1.1rem;
-    margin-right: 0;
+  }
+  .deporte-reservacion-button-container {
+    padding: 0.5rem 1rem 0 1rem;
+    font-size: 1.5rem;
+  }
+
+  .deporte-reservacion-title {
+    margin-bottom: 0.5rem;
+  }
+
+  .deporte-reservacion-cell-table {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  .deporte-reservacion-table-container {
+    padding: 0;
   }
 }
 /* ::-webkit-scrollbar {
