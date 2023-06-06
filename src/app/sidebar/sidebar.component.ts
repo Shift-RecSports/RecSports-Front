@@ -19,6 +19,7 @@ export class SidebarComponent {
   navbarFlags: navbarFlags;
 
   showSidebar: boolean = false;
+  manualInfoURL: string = '';
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.XSmall)
@@ -54,6 +55,13 @@ export class SidebarComponent {
         defaultNavbarFlags
       );
 
+      if (this.user.userRole == 'ADMIN') {
+        this.manualInfoURL = 'https://www.youtube.com/watch?v=v5_SYkFpFiY';
+      } else if (this.user.userRole == 'GIMNASIO') {
+        this.manualInfoURL = 'https://www.youtube.com/watch?v=b2wQtu9YnWk';
+      } else {
+        this.manualInfoURL = 'https://www.youtube.com/watch?v=_6HpI5i84w8';
+      }
       // console.log(this.navbarFlags);
     }
   }

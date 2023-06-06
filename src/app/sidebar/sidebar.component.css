@@ -85,6 +85,11 @@
   line-height: 1.1rem;
 }
 
+.header-user-container {
+  display: flex;
+  flex-direction: row;
+}
+
 .mat-perfil {
   background-color: #f5f8ff;
   border-radius: 1rem;
@@ -131,6 +136,16 @@
 
 .disactive-background {
   display: none;
+}
+
+.info-color {
+  background: none;
+  border: none;
+
+  background-color: #152586;
+  margin-right: 0.5rem;
+  align-self: center;
+  box-shadow: none;
 }
 
 @media (max-width: 960px) {
