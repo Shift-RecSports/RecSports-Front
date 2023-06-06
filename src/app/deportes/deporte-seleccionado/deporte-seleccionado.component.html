@@ -59,20 +59,21 @@
                 <div class="deporte-espacio-content">
                   <div>{{ espacio.zona }}</div>
                   <div>{{ espacio.nombre }}</div>
-                  <button
-                    *ngIf="showDeleteEspacio"
-                    class="espacio-delete-button"
-                    mat-mini-fab
-                    (click)="openDeleteEspacio(espacio)"
-                  >
-                    <mat-icon
-                      [ngStyle]="{
-                        transform: 'scale(1)'
-                      }"
-                      >close</mat-icon
-                    >
-                  </button>
                 </div>
+
+                <button
+                  *ngIf="showDeleteEspacio"
+                  class="espacio-delete-button"
+                  mat-mini-fab
+                  (click)="openDeleteEspacio(espacio)"
+                >
+                  <mat-icon
+                    [ngStyle]="{
+                      transform: 'scale(1)'
+                    }"
+                    >close</mat-icon
+                  >
+                </button>
 
                 <img
                   [src]="espacio.imagen"
@@ -129,20 +130,21 @@
               <div class="deporte-espacio-content">
                 <div>{{ espacio.zona }}</div>
                 <div>{{ espacio.nombre }}</div>
-                <button
-                  *ngIf="showDeleteEspacio"
-                  class="espacio-delete-button"
-                  mat-mini-fab
-                  (click)="openDeleteEspacio(espacio)"
-                >
-                  <mat-icon
-                    [ngStyle]="{
-                      transform: 'scale(1)'
-                    }"
-                    >close</mat-icon
-                  >
-                </button>
               </div>
+
+              <button
+                *ngIf="showDeleteEspacio"
+                class="espacio-delete-button"
+                mat-mini-fab
+                (click)="openDeleteEspacio(espacio)"
+              >
+                <mat-icon
+                  [ngStyle]="{
+                    transform: 'scale(1)'
+                  }"
+                  >close</mat-icon
+                >
+              </button>
 
               <img
                 [src]="espacio.imagen"
