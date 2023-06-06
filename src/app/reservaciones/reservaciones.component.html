@@ -25,7 +25,12 @@
         >
           <div class="reservaciones-image">
             <div class="tarjeta-espacio"></div>
-            <img [src]="reservacion.imagen" alt="" class="preview" />
+            <img
+              [src]="reservacion.imagen"
+              alt=""
+              class="preview"
+              onerror="this.onerror=null;this.src='./assets/img/recsports_logo_icon.png';"
+            />
           </div>
         </div>
         <div
