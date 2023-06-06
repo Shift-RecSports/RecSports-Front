@@ -55,29 +55,30 @@
               nzXl="5"
               *ngFor="let espacio of listaEspacios"
             >
-              <div
-                class="deporte-espacio-fondo"
-                [style.background-image]="
-                  'linear-gradient(180deg, rgba(0, 0, 0, 0.29) 4%, #01329E 104%),url(' +
-                  espacio.imagen +
-                  ')'
-                "
-              >
-                <div>{{ espacio.zona }}</div>
-                <div>{{ espacio.nombre }}</div>
-                <button
-                  *ngIf="showDeleteEspacio"
-                  class="espacio-delete-button"
-                  mat-mini-fab
-                  (click)="openDeleteEspacio(espacio)"
-                >
-                  <mat-icon
-                    [ngStyle]="{
-                      transform: 'scale(1)'
-                    }"
-                    >close</mat-icon
+              <div class="deporte-espacio-fondo">
+                <div class="deporte-espacio-content">
+                  <div>{{ espacio.zona }}</div>
+                  <div>{{ espacio.nombre }}</div>
+                  <button
+                    *ngIf="showDeleteEspacio"
+                    class="espacio-delete-button"
+                    mat-mini-fab
+                    (click)="openDeleteEspacio(espacio)"
                   >
-                </button>
+                    <mat-icon
+                      [ngStyle]="{
+                        transform: 'scale(1)'
+                      }"
+                      >close</mat-icon
+                    >
+                  </button>
+                </div>
+
+                <img
+                  [src]="espacio.imagen"
+                  onerror="this.onerror=null;this.src='./assets/img/recsports_logo_icon.png';"
+                  class="preview"
+                />
               </div>
             </div>
 
@@ -124,29 +125,30 @@
             nzXl="5"
             *ngFor="let espacio of listaEspacios"
           >
-            <div
-              class="deporte-espacio-fondo"
-              [style.background-image]="
-                'linear-gradient(180deg, rgba(0, 0, 0, 0.29) 4%, #01329E 104%),url(' +
-                espacio.imagen +
-                ')'
-              "
-            >
-              <div>{{ espacio.zona }}</div>
-              <div>{{ espacio.nombre }}</div>
-              <button
-                *ngIf="showDeleteEspacio"
-                class="espacio-delete-button"
-                mat-mini-fab
-                (click)="openDeleteEspacio(espacio)"
-              >
-                <mat-icon
-                  [ngStyle]="{
-                    transform: 'scale(1)'
-                  }"
-                  >close</mat-icon
+            <div class="deporte-espacio-fondo">
+              <div class="deporte-espacio-content">
+                <div>{{ espacio.zona }}</div>
+                <div>{{ espacio.nombre }}</div>
+                <button
+                  *ngIf="showDeleteEspacio"
+                  class="espacio-delete-button"
+                  mat-mini-fab
+                  (click)="openDeleteEspacio(espacio)"
                 >
-              </button>
+                  <mat-icon
+                    [ngStyle]="{
+                      transform: 'scale(1)'
+                    }"
+                    >close</mat-icon
+                  >
+                </button>
+              </div>
+
+              <img
+                [src]="espacio.imagen"
+                onerror="this.onerror=null;this.src='./assets/img/recsports_logo_icon.png';"
+                class="preview"
+              />
             </div>
           </div>
 
