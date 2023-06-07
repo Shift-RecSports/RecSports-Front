@@ -43,6 +43,7 @@ export class ModalReservacionComponent {
   showLoading: boolean = false;
   showSucces: boolean = false;
   showFailed: boolean = false;
+  errorMessage: string = '';
 
   constructor(
     public dialogRef: MatDialogRef<ModalReservacionComponent>,
@@ -64,15 +65,17 @@ export class ModalReservacionComponent {
       const url = `/reservaciones`;
 
       this.data.reservacion.matricula_alumno = this.service.GetUserName()!;
-      this._apiService.post(url, this.data.reservacion).subscribe((data) => {
-        console.log(data);
-        this.showLoading = false;
-        this.showSucces = true;
-
-        //  if(someError) {
-        //    this.showFailed = true
-        //  }
-      });
+      this._apiService.post(url, this.data.reservacion).subscribe(
+        (data) => {
+          this.showLoading = false;
+          this.showSucces = true;
+        },
+        (e) => {
+          this.showLoading = false;
+          this.showFailed = true;
+          this.errorMessage = e.error.message;
+        }
+      );
     }
   }
 

@@ -62,7 +62,6 @@ export class SidebarComponent {
       } else {
         this.manualInfoURL = 'https://www.youtube.com/watch?v=_6HpI5i84w8';
       }
-      // console.log(this.navbarFlags);
     }
   }
 
