@@ -172,6 +172,17 @@ textarea::placeholder {
   line-height: 1.4375rem;
 }
 
+.exito {
+  font-family: 'Helvetica';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 2.125rem;
+  color: #000000;
+  align-items: center;
+  text-align: center;
+}
+
 @media (max-width: 960px) {
   .encuesta-container {
     padding: 6rem 1rem 1rem 1rem;
