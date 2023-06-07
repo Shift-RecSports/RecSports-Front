@@ -57,20 +57,19 @@ export class EncuestaComponent {
   }
 
   onEnviarButtonClick() {
-    const url = '/encuestas/';
-    const currentDate = new Date().toISOString(); // Get current date in ISO format
+    const url = '/encuestas';
+    const currentDate = new Date().toISOString().split('T')[0]; // Get current date in ISO format
     const body = {
       matricula: this.user.matricula,
-      date: currentDate,
-      sliderValue1: this.sliderValue1,
-      sliderValue2: this.sliderValue2,
-      sliderValue3: this.sliderValue3,
+      fecha: currentDate,
+      calificacion1: this.sliderValue1,
+      calificacion2: this.sliderValue2,
+      calificacion3: this.sliderValue3,
       tema: this.temaValue,
       comentario: this.textareaValue
     };
 
     this._apiService.post(url, body).subscribe((data) => {
-      //console.log(data)
       this.contestada = true;
     });
   }
