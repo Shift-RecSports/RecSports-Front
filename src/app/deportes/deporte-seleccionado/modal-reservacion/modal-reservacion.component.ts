@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
 import { AuthService } from 'src/app/service/auth.service';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 interface reservacionType {
   reservacion: {
@@ -42,12 +43,14 @@ export class ModalReservacionComponent {
   showLoading: boolean = false;
   showSucces: boolean = false;
   showFailed: boolean = false;
+  errorMessage: string = '';
 
   constructor(
     public dialogRef: MatDialogRef<ModalReservacionComponent>,
     private _apiService: ApiService,
     private service: AuthService,
     private router: Router,
+    private notification: NzNotificationService,
     @Inject(MAT_DIALOG_DATA) public data: reservacionType
   ) {}
 
@@ -62,15 +65,17 @@ export class ModalReservacionComponent {
       const url = `/reservaciones`;
 
       this.data.reservacion.matricula_alumno = this.service.GetUserName()!;
-      this._apiService.post(url, this.data.reservacion).subscribe((data) => {
-        console.log(data);
-        this.showLoading = false;
-        this.showSucces = true;
-
-        //  if(someError) {
-        //    this.showFailed = true
-        //  }
-      });
+      this._apiService.post(url, this.data.reservacion).subscribe(
+        (data) => {
+          this.showLoading = false;
+          this.showSucces = true;
+        },
+        (e) => {
+          this.showLoading = false;
+          this.showFailed = true;
+          this.errorMessage = e.error.message;
+        }
+      );
     }
   }
 
@@ -78,23 +83,33 @@ export class ModalReservacionComponent {
     if (this.service.isLoggedIn() && this.service.GetUserRole() == 'ADMIN') {
       const url = `/reservaciones/${this.data.reservacion.id}`;
 
-      const body = {
-        hora_seleccionada: this.data.reservacion.hora_seleccionada,
-        matricula_alumno: null,
-        fecha: this.data.reservacion.fecha,
-        espacio: this.data.reservacion.espacio,
-        estatus: 1,
-      };
+      this._apiService.delete(url).subscribe(
+        (data) => {
+          const type = 'success';
+          const title = `Se cancelo la reservacion con exito`;
+          const description = `Se ha cancelado con exito`;
 
-      this._apiService.put(url, body).subscribe((data) => {
-        this.onNoClick();
-        window.location.reload();
-      });
+          this.createNotification(type, title, description);
+          this.onNoClick();
+        },
+        (e) => {
+          const type = 'error';
+          const title = `No se ha logrado cancelar la reservacion`;
+          const description = e.error.message;
+
+          this.createNotification(type, title, description);
+          this.onNoClick();
+        }
+      );
     }
   }
 
   onMisReservacionesClick() {
     this.router.navigate(['/reservaciones']);
     this.dialogRef.close();
+  }
+
+  createNotification(type: string, title: string, description: string): void {
+    this.notification.create(type, title, description);
   }
 }

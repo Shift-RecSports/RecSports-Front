@@ -1,10 +1,12 @@
 .sidenav-container {
-  height: 100%;
+  min-height: 5rem;
+  width: 100%;
+  background-color: transparent;
   position: fixed;
 }
 
 .sidenav {
-  width: 6.3rem;
+  width: 6.5rem;
   border-color: transparent;
 }
 
@@ -83,6 +85,11 @@
   line-height: 1.1rem;
 }
 
+.header-user-container {
+  display: flex;
+  flex-direction: row;
+}
+
 .mat-perfil {
   background-color: #f5f8ff;
   border-radius: 1rem;
@@ -119,15 +126,26 @@
 }
 
 .background-blur {
-  background-color: rgba(0, 0, 0, 0.3);
+  margin-top: 5rem;
+  background-color: rgba(0, 0, 0, 0.6);
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 5rem);
   position: fixed;
   z-index: 10;
 }
 
 .disactive-background {
   display: none;
+}
+
+.info-color {
+  background: none;
+  border: none;
+
+  background-color: #152586;
+  margin-right: 0.5rem;
+  align-self: center;
+  box-shadow: none;
 }
 
 @media (max-width: 960px) {
@@ -140,7 +158,7 @@
   }
 
   .header-user-name {
-    width: 5rem;
+    width: 3rem;
 
     overflow: hidden;
     text-overflow: ellipsis;
@@ -154,5 +172,9 @@
 
   .sidebar-element-text {
     font-size: 1.2rem;
+  }
+
+  .info-color {
+    margin-right: 0.2rem;
   }
 }

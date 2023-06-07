@@ -44,6 +44,7 @@ export class NoticiasComponent implements OnInit {
     const dialogRef = this.dialog.open(ModalBorrarNoticiaComponent, {
       data: { noticia: noticia },
     });
+
   }
 
   redirectToUrl(url: string) {

@@ -8,7 +8,7 @@
   color: #000000;
   margin-right: auto;
 
-  padding-right: 15rem;
+  padding-right: 10rem;
 }
 
 .realtime-minicard {
@@ -194,4 +194,15 @@ nz-select {
 
   margin: -4px;
   padding: 0;
+}
+
+.sashaCenteredBarchart {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 88rem) {
+  .sashaCenteredBarchart {
+      justify-content: initial;
+  }
 }

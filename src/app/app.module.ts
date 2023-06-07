@@ -62,7 +62,7 @@ import { EspaciosFormularioComponent } from './deportes/components/espacios-form
 import { HomeEntrenadorComponent } from './home-entrenador/home-entrenador.component';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -73,7 +73,10 @@ import { AuthGuard } from './guard/auth.guard';
 import { ModalBorrarNoticiaComponent } from './noticias/modal-borrar-noticia/modal-borrar-noticia.component';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { CredencialComponent } from './credencial/credencial.component';
-
+import { EditarNoticiaComponent } from './noticias/editar-noticia/editar-noticia.component';
+import { EditarDeporteComponent } from './deportes/components/editar-deporte/editar-deporte.component';
+import { EditarEspacioComponent } from './deportes/components/editar-espacio/editar-espacio.component';
+import { ModalBorrarDeporteComponent } from './deportes/deporte-seleccionado/modal-borrar-deporte/modal-borrar-deporte.component';
 
 registerLocaleData(en);
 
@@ -107,6 +110,10 @@ registerLocaleData(en);
     ModalBorrarEspacioComponent,
     ModalBorrarNoticiaComponent,
     CredencialComponent,
+    EditarNoticiaComponent,
+    EditarDeporteComponent,
+    EditarEspacioComponent,
+    ModalBorrarDeporteComponent,
   ],
   imports: [
     BrowserModule,
@@ -143,6 +150,7 @@ registerLocaleData(en);
     MatProgressSpinnerModule,
     NzNotificationModule,
     NzTabsModule,
+    MatExpansionModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }, ApiService, AuthGuard],
   bootstrap: [AppComponent],

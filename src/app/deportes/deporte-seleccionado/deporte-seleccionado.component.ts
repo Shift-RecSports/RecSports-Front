@@ -141,20 +141,12 @@ export class DeporteSeleccionadoComponent {
   ];
 
   currentBreakpoint: string = '';
-  breakpointLarge = Breakpoints.Large;
-  breakpointMedium = Breakpoints.Medium;
-  breakpointSmall = Breakpoints.Small;
-  breakpointXSmall = Breakpoints.XSmall;
-  readonly breakpoint$ = this.breakpointObserver
-    .observe([
-      Breakpoints.Large,
-      Breakpoints.Medium,
-      Breakpoints.Small,
-      '(min-width: 500px)',
-    ])
+  panelOpenState = false;
+  isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.XSmall)
     .pipe(
-      tap((value) => console.log(value)),
-      distinctUntilChanged()
+      map((result) => result.matches),
+      shareReplay()
     );
 
   constructor(
@@ -225,26 +217,9 @@ export class DeporteSeleccionadoComponent {
           });
         }
 
-        console.log('aquii');
-        console.log(this.arrayReservacion);
-
         this.dataSource = Object.keys(this.arrayReservacion) as arrOfHorarios[];
       });
     });
-
-    this.breakpoint$.subscribe(() => this.breakpointChanged());
-  }
-
-  private breakpointChanged() {
-    if (this.breakpointObserver.isMatched(Breakpoints.Large)) {
-      this.currentBreakpoint = Breakpoints.Large;
-    } else if (this.breakpointObserver.isMatched(Breakpoints.Medium)) {
-      this.currentBreakpoint = Breakpoints.Medium;
-    } else if (this.breakpointObserver.isMatched(Breakpoints.Small)) {
-      this.currentBreakpoint = Breakpoints.Small;
-    } else if (this.breakpointObserver.isMatched('(min-width: 500px)')) {
-      this.currentBreakpoint = '(min-width: 500px)';
-    }
   }
 
   ngOnDestroy() {
@@ -339,8 +314,12 @@ export class DeporteSeleccionadoComponent {
     });
   }
 
-  onEditDeporte() {
-    this.router.navigate(['/deportes/nuevo']);
+  onEditDeporte(deportedId: Deporte) {
+    this.router.navigate([`/editar-deporte/${deportedId.id}`]);
+  }
+
+  onEditEspacio(espacioId: Espacio) {
+    this.router.navigate([`/editar-espacio/${espacioId.id}`]);
   }
 
   onCrearEspacio() {

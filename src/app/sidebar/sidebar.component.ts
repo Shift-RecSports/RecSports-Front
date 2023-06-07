@@ -19,9 +19,10 @@ export class SidebarComponent {
   navbarFlags: navbarFlags;
 
   showSidebar: boolean = false;
+  manualInfoURL: string = '';
 
   isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
+    .observe(Breakpoints.XSmall)
     .pipe(
       map((result) => result.matches),
       shareReplay()
@@ -54,13 +55,20 @@ export class SidebarComponent {
         defaultNavbarFlags
       );
 
-      // console.log(this.navbarFlags);
+      if (this.user.userRole == 'ADMIN') {
+        this.manualInfoURL = 'https://www.youtube.com/watch?v=v5_SYkFpFiY';
+      } else if (this.user.userRole == 'GIMNASIO') {
+        this.manualInfoURL = 'https://www.youtube.com/watch?v=b2wQtu9YnWk';
+      } else {
+        this.manualInfoURL = 'https://www.youtube.com/watch?v=_6HpI5i84w8';
+      }
     }
   }
 
   openSidebar(open: boolean) {
     this.showSidebar = open;
-    this.drawer.toggle();
+    this.drawer.toggle(this.showSidebar);
+    this.showSidebar = this.drawer.opened;
   }
 
   onLogOut() {
@@ -70,7 +78,6 @@ export class SidebarComponent {
   onCredencial() {
     this.router.navigate(['credencial']);
   }
-
 
   onMisReservaciones() {
     this.router.navigate(['reservaciones']);
@@ -94,6 +101,7 @@ const defaultNavbarFlags = {
 function activateNavbarFlags(userRole: string, navbarFlags: navbarFlags) {
   if (userRole == 'ADMIN') {
     navbarFlags.inicioFlag = true;
+    navbarFlags.inicioEntrenadorFlag = false;
     navbarFlags.gimnasioFlag = true;
     navbarFlags.deportesFlag = true;
     navbarFlags.calendarioFlag = false;
@@ -104,7 +112,7 @@ function activateNavbarFlags(userRole: string, navbarFlags: navbarFlags) {
     navbarFlags.entradaFlag = false;
     navbarFlags.salidaFlag = false;
   } else if (userRole == 'GIMNASIO') {
-    navbarFlags.inicioFlag = true;
+    navbarFlags.inicioFlag = false;
     navbarFlags.inicioEntrenadorFlag = true;
     navbarFlags.gimnasioFlag = true;
     navbarFlags.deportesFlag = false;

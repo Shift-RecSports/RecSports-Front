@@ -43,7 +43,7 @@ export class DeportesComponent {
       const name = deporte.nombre
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '');
-      return name.includes(term.toUpperCase());
+      return name.toUpperCase().includes(term.toUpperCase());
     });
   }
 

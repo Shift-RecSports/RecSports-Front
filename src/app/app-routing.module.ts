@@ -19,6 +19,8 @@ import { HomeEntrenadorComponent } from './home-entrenador/home-entrenador.compo
 import { EncuestasAdminComponent } from './encuesta/encuestas-admin/encuestas-admin.component';
 import { NuevaNoticiaComponent } from './noticias/nueva-noticia/nueva-noticia.component';
 import { CredencialComponent } from './credencial/credencial.component';
+import { EditarDeporteComponent } from './deportes/components/editar-deporte/editar-deporte.component';
+import { EditarEspacioComponent } from './deportes/components/editar-espacio/editar-espacio.component';
 
 const routes: Routes = [
   {
@@ -61,6 +63,16 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'editar-deporte/:id',
+    component: EditarDeporteComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'editar-espacio/:id',
+    component: EditarEspacioComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'espacios/nuevo',
     component: EspaciosFormularioComponent,
     canActivate: [AuthGuard],
@@ -78,7 +90,7 @@ const routes: Routes = [
   // {
   //   path: 'calendario',
   //   component: CalendarioComponent,
-  //   canActivate: [AuthGuard],
+  //
   // },
   {
     path: 'noticias',

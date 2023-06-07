@@ -191,7 +191,7 @@
   <mat-sidenav-content>
     <div
       class="background-blur"
-      [ngClass]="showSidebar ? '' : 'disactive-background'"
+      [ngClass]="drawer.opened && showSidebar ? '' : 'disactive-background'"
       (click)="openSidebar(false)"
     ></div>
     <mat-toolbar color="primary" class="header-toolbar">
@@ -207,45 +207,65 @@
       </button>
       <div class="header-container">
         <span class="header-title">Athletics</span>
-        <div class="header-user">
-          <!-- <div class="header-user-info">
-            <span class="header-user-matricula">{{ user.matricula }}</span>
-            <span class="header-user-role">{{ user.userRole }}</span>
-          </div> -->
-          <button
-            mat-button
-            color="perfil"
-            class="header-user-menu"
-            [matMenuTriggerFor]="menu"
-            [ngStyle]="{ padding: '1.5rem 0.5rem 1.5rem 0.5rem' }"
-          >
-            <div class="header-user-info">
-              <button
-                mat-mini-fab
-                color="primary"
-                class="header-user-icon"
-                aria-label="Example icon button with a menu icon"
-                [ngStyle]="{ transform: 'scale(0.8)', boxShadow: 'none' }"
+        <div class="header-user-container">
+          <div class="example-button-container" style="align-self: center">
+            <a
+              class="info-color"
+              mat-mini-fab
+              aria-label="Example icon button with a plus one icon"
+              [ngStyle]="{ transform: 'scale(0.8)' }"
+              [href]="manualInfoURL"
+            >
+              <mat-icon
+                [ngStyle]="{
+                  transform: 'scale(1.6)',
+                  color: '#ffffff'
+                }"
+                >help</mat-icon
               >
-                {{ userName[0] }}
+            </a>
+          </div>
+          <div class="header-user">
+            <!-- <div class="header-user-info">
+              <span class="header-user-matricula">{{ user.matricula }}</span>
+              <span class="header-user-role">{{ user.userRole }}</span>
+            </div> -->
+            <button
+              mat-button
+              color="perfil"
+              class="header-user-menu"
+              [matMenuTriggerFor]="menu"
+              [ngStyle]="{ padding: '1.5rem 0.5rem 1.5rem 0.5rem' }"
+            >
+              <div class="header-user-info">
+                <button
+                  mat-mini-fab
+                  color="primary"
+                  class="header-user-icon"
+                  aria-label="Example icon button with a menu icon"
+                  [ngStyle]="{ transform: 'scale(0.8)', boxShadow: 'none' }"
+                >
+                  {{ userName[0] }}
+                </button>
+                <div class="header-user-name">{{ userName }}</div>
+                <mat-icon>keyboard_arrow_down</mat-icon>
+              </div>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="onMisReservaciones()">
+                <mat-icon>menu</mat-icon>
+                Mis Reservaciones
               </button>
-              <div class="header-user-name">{{ userName }}</div>
-              <mat-icon>keyboard_arrow_down</mat-icon>
-            </div>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="onMisReservaciones()">
-              <mat-icon>menu</mat-icon>
-              Mis Reservaciones
-            </button>
-            <button mat-menu-item (click)="onCredencial()">
-              <mat-icon>credit_card</mat-icon>
-              Mi Credencial
-            </button>
-            <button mat-menu-item (click)="onLogOut()">
-              <mat-icon aria-hidden="false">login</mat-icon>
-              Cerrar Sesión</button>
-          </mat-menu>
+              <button mat-menu-item (click)="onCredencial()">
+                <mat-icon>credit_card</mat-icon>
+                Mi Credencial
+              </button>
+              <button mat-menu-item (click)="onLogOut()">
+                <mat-icon aria-hidden="false">login</mat-icon>
+                Cerrar Sesión
+              </button>
+            </mat-menu>
+          </div>
         </div>
       </div>
     </mat-toolbar>

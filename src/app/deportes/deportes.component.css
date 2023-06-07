@@ -16,6 +16,8 @@
   flex-direction: column;
   align-items: center;
   padding: 2rem;
+
+  position: relative;
 }
 
 .deportes-title {
@@ -186,7 +188,7 @@
 .nombre_deporte {
   font-size: 1.8rem;
   color: white;
-  margin: 0; 
+  margin: 0;
 }
 
 .reserva_ahora {
@@ -195,9 +197,7 @@
 }
 
 .deportes-agregar-container {
-  position: fixed;
-  bottom: 2rem;
-  right: 3rem;
+  align-self: flex-end;
 }
 
 .mat-button-agregar {

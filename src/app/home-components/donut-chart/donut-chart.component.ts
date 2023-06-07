@@ -16,14 +16,14 @@ export class DonutChartComponent implements OnInit {
   actual: number = 0;
   percent: number = 0;
 
-  constructor(private _apiService: ApiService) {}
+  constructor(private _apiService: ApiService) { }
 
   timerSubscription: Subscription;
 
   ngOnInit(): void {
     const url = '/registros-gimnasio/aforo/actual';
 
-    this.timerSubscription = timer(0, 10000)
+    this.timerSubscription = timer(0, 900000)
       .pipe(switchMap(() => this._apiService.get(url)))
       .subscribe((data) => {
         console.log('reload de data concurrenciaGimnasio');
@@ -32,18 +32,5 @@ export class DonutChartComponent implements OnInit {
         this.actual = data.actual;
         this.aforo = data.aforo;
       });
-
-    /*
-
-    this._apiService.get(url).subscribe((data) => {
-      this.aforo = new Aforo(data.actual, data.aforo);
-      this.percent = Math.round(data.actual / data.aforo)
-      this.actual = data.actual;
-      this.aforo = data.aforo;
-
-      console.log(data);
-    });
-
-    */
   }
 }
