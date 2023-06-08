@@ -10,7 +10,7 @@ import { ModalBorrarDeporteComponent } from '../../deporte-seleccionado/modal-bo
 @Component({
   selector: 'app-editar-deporte',
   templateUrl: './editar-deporte.component.html',
-  styleUrls: ['./editar-deporte.component.css']
+  styleUrls: ['./editar-deporte.component.css'],
 })
 export class EditarDeporteComponent implements OnInit {
   formularioDeporte: FormGroup;
@@ -21,7 +21,6 @@ export class EditarDeporteComponent implements OnInit {
   selectedFileNames: string[] = [];
   preview: string = '';
 
-
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -29,7 +28,7 @@ export class EditarDeporteComponent implements OnInit {
     private apiService: ApiService,
     private notification: NzNotificationService,
     public dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.formularioDeporte = this.formulario.group({
@@ -38,7 +37,7 @@ export class EditarDeporteComponent implements OnInit {
       descripcion: ['', Validators.required],
       materiales: [null, Validators.required],
       imagen: '',
-      duracion: [null, Validators.required]
+      duracion: [null, Validators.required],
     });
 
     this.route.params.subscribe((params) => {
@@ -62,11 +61,8 @@ export class EditarDeporteComponent implements OnInit {
           duracion: this.deporte.duracion,
           imagen: this.deporte.imagen,
         });
-
       });
     });
-
-
   }
 
   selectFiles(event: any): void {
@@ -87,33 +83,49 @@ export class EditarDeporteComponent implements OnInit {
   }
 
   enviarDatos() {
-    console.log("Boton presionado");
+    console.log('Boton presionado');
     console.log(this.formularioDeporte.value);
 
     const url = `/deportes`;
 
-    if (this.formularioDeporte.valid) {
-      console.log("formulario valido");
+    if (this.formularioDeporte.valid && this.selectedFiles![0].size < 2000000) {
+      console.log('formulario valido');
 
       // Form is valid, proceed with saving data
       const formData = new FormData();
       formData.append('id', this.formularioDeporte.get('id')?.value ?? '');
-      formData.append('nombre', this.formularioDeporte.get('nombre')?.value ?? '');
-      formData.append('descripcion', this.formularioDeporte.get('descripcion')?.value ?? null);
-      formData.append('materiales', this.formularioDeporte.get('materiales')?.value ?? '');
-      formData.append('duracion', this.formularioDeporte.get('duracion')?.value ?? '');
+      formData.append(
+        'nombre',
+        this.formularioDeporte.get('nombre')?.value ?? ''
+      );
+      formData.append(
+        'descripcion',
+        this.formularioDeporte.get('descripcion')?.value ?? null
+      );
+      formData.append(
+        'materiales',
+        this.formularioDeporte.get('materiales')?.value ?? ''
+      );
+      formData.append(
+        'duracion',
+        this.formularioDeporte.get('duracion')?.value ?? ''
+      );
       //formData.append('imagen', this.selectedFiles![0], this.selectedFileNames[0]);
 
       // Check if a new file is selected
       if (this.selectedFiles && this.selectedFiles[0]) {
         // A new file is selected, add it to the formData
-        formData.append('imagen', this.selectedFiles![0], this.selectedFileNames[0]);
+        formData.append(
+          'imagen',
+          this.selectedFiles![0],
+          this.selectedFileNames[0]
+        );
       } else {
         // No new file selected, keep the previous image
         formData.append('imagen', this.formularioDeporte.get('imagen')?.value);
       }
 
-      console.log("formulario validado = ", formData);
+      console.log('formulario validado = ', formData);
 
       this.apiService.putWithImage(url, formData).subscribe((data) => {
         console.log(data);
@@ -126,20 +138,26 @@ export class EditarDeporteComponent implements OnInit {
 
         // Send back to deportes
         this.router.navigate(['deportes']);
-
       });
     } else {
-      console.log("formulario Invalido");
+      console.log('formulario Invalido');
 
       // NOTIFICACION
       const type = 'error';
       const title = 'No se ha podido actualizar el deporte.';
-      const description = `Verifique los campos solicitados.`;
+
+      let description = '';
+      if (this.selectedFiles && this.selectedFiles![0].size >= 2000000) {
+        description = `La imagen no debe exceder las 2MB`;
+      } else {
+        description = `Verifique los campos solicitados.`;
+      }
+
       this.createNotification(type, title, description);
 
       Object.values(this.formularioDeporte.controls).forEach((control) => {
         if (control.invalid) {
-          console.log(`Invalid field: ${control.value}`); 
+          console.log(`Invalid field: ${control.value}`);
           control.markAsDirty();
           control.updateValueAndValidity({ onlySelf: true });
         }
@@ -153,7 +171,6 @@ export class EditarDeporteComponent implements OnInit {
     });
   }
 
-
   onCancelClick() {
     this.router.navigate(['deportes']);
   }
@@ -162,5 +179,3 @@ export class EditarDeporteComponent implements OnInit {
     this.notification.create(type, title, description);
   }
 }
-
-
