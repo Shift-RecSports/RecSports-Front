@@ -21,6 +21,9 @@ export class SidebarComponent {
   showSidebar: boolean = false;
   manualInfoURL: string = '';
 
+  showCredencial: boolean = false;
+  showMisReservaciones: boolean = false;
+
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.XSmall)
     .pipe(
@@ -56,11 +59,20 @@ export class SidebarComponent {
       );
 
       if (this.user.userRole == 'ADMIN') {
-        this.manualInfoURL = 'https://www.youtube.com/watch?v=v5_SYkFpFiY';
+        this.manualInfoURL =
+          'https://docs.google.com/document/d/1kBH0USzhfthzlSacMdIBvl-7OVCL28aXdgmgxf4lQVY/edit?usp=sharing';
+        this.showCredencial = false;
+        this.showMisReservaciones = true;
       } else if (this.user.userRole == 'GIMNASIO') {
-        this.manualInfoURL = 'https://www.youtube.com/watch?v=b2wQtu9YnWk';
+        this.manualInfoURL =
+          'https://docs.google.com/document/d/1XfS2-LAmMJ6BqnLK2dtnMyVs0krIORFDsRVfl9iQY_s/edit?usp=sharing';
+        this.showCredencial = false;
+        this.showMisReservaciones = false;
       } else {
-        this.manualInfoURL = 'https://www.youtube.com/watch?v=_6HpI5i84w8';
+        this.manualInfoURL =
+          'https://docs.google.com/document/d/1xbz5Gd9mTTa__G4--KzUw4lnxZk6pYBXsm2OfbY1JOk/edit?usp=sharing';
+        this.showCredencial = true;
+        this.showMisReservaciones = true;
       }
     }
   }
