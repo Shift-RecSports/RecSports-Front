@@ -252,11 +252,19 @@
               </div>
             </button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="onMisReservaciones()">
+              <button
+                mat-menu-item
+                (click)="onMisReservaciones()"
+                *ngIf="showMisReservaciones"
+              >
                 <mat-icon>menu</mat-icon>
                 Mis Reservaciones
               </button>
-              <button mat-menu-item (click)="onCredencial()">
+              <button
+                mat-menu-item
+                (click)="onCredencial()"
+                *ngIf="showCredencial"
+              >
                 <mat-icon>credit_card</mat-icon>
                 Mi Credencial
               </button>
