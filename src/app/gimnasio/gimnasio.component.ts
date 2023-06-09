@@ -59,7 +59,7 @@ export class GimnasioComponent {
     }-${day.getDate()}`;
 
     this.url = `/registros-gimnasio/fecha=${this.daySelected}/offset=${this.page}`;
-    this.timerSubscription = timer(0, 300000)
+    this.timerSubscription = timer(0, 120000)
       .pipe(switchMap(() => this._apiService.get(this.url)))
       .subscribe((data) => {
         // MARK: this loop converts 09:00:00 into 09:00
@@ -91,7 +91,6 @@ export class GimnasioComponent {
       fecha.setDate(fecha.getDate() + 1);
       return {
         Fecha: fecha,
-        // Id: item.id,
         Matricula: item.matricula,
         Nombre: item.nombre,
         Entrada: item.entrada,

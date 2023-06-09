@@ -46,7 +46,7 @@ export class RegistroEntradaComponent {
         },
         (e) => {
           const type = 'error';
-          const title = `El alumno ${this.matricula} no se registro éxito`;
+          const title = `El alumno ${this.matricula} no se registró éxito`;
           const description = e.error.message;
 
           this.createNotification(type, title, description);

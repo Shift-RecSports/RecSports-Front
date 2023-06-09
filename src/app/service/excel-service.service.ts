@@ -2,16 +2,7 @@ import { Injectable } from '@angular/core';
 import * as XLSX from 'xlsx';
 
 const EXCEL_EXTENSION = '.xlsx';
-// const myHeader = ['Fecha', 'Id', 'Matricula', 'Nombre', 'Entrada', 'Salida'];
-var wscols = [
-  { wch: 15 },
-  { wch: 15 },
-  { wch: 15 },
-  { wch: 40 },
-  { wch: 10 },
-  { wch: 10 },
-];
-
+var wscols = [{ wch: 11 }, { wch: 11 }, { wch: 40 }, { wch: 10 }, { wch: 10 }];
 var fwscols = [{ wch: 20 }, { wch: 15 }];
 
 @Injectable({ providedIn: 'root' })
@@ -24,7 +15,7 @@ export class ExcelServiceService {
     ws['!cols'] = wscols;
 
     const frequencyWS: XLSX.WorkSheet = XLSX.utils.json_to_sheet(freq);
-    ws['!cols'] = fwscols;
+    frequencyWS['!cols'] = fwscols;
 
     const workbook: XLSX.WorkBook = XLSX.utils.book_new(); // save to file
 
