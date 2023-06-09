@@ -20,6 +20,8 @@ export class EditarEspacioComponent implements OnInit {
   formularioEspacio: FormGroup = new FormGroup({});
   espacio: Espacio;
   espacioId: String = '';
+  deporteId: String = '';
+
 
   //ZONA
   areas = new FormControl('');
@@ -129,8 +131,9 @@ export class EditarEspacioComponent implements OnInit {
     );
 
     this.route.params.subscribe((params) => {
-      this.espacioId = params['id'];
+      this.deporteId = params['id'];
       const url = `/espacios/${this.espacioId}`;
+      `/espacios/deporte/${this.deporteId}`;
 
       console.log(url);
 
@@ -274,7 +277,7 @@ export class EditarEspacioComponent implements OnInit {
   }
 
   onCancelClick() {
-    this.router.navigate(['deportes']);
+    this.router.navigate(['deportes/'+this.deporteId]);
   }
 
   createNotification(type: string, title: string, description: string): void {

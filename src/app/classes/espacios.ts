@@ -2,12 +2,12 @@ export class Espacio {
     id: string;
     nombre: string;
     horarios: string;
-    aforo: string;
+    aforo: number;
     zona: string;
     imagen: string;
     deporte: string;
 
-    constructor(id: string, nombre: string, horarios: string, aforo: string, zona: string, imagen: string, deporte: string) {
+    constructor(id: string, nombre: string, horarios: string, aforo: number, zona: string, imagen: string, deporte: string) {
         this.id = id;
         this.nombre = nombre;
         this.horarios = horarios;
