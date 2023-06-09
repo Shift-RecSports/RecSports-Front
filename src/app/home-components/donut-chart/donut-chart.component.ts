@@ -10,8 +10,9 @@ import { Subscription, switchMap, timer } from 'rxjs';
   styleUrls: ['./donut-chart.component.css'],
 })
 export class DonutChartComponent implements OnInit {
-  aforo: Aforo = new Aforo(0, 1);
+  //aforo: Aforo = new Aforo(0, 1);
 
+  aforo: number = 0;
   total: number = 0;
   actual: number = 0;
   percent: number = 0;
