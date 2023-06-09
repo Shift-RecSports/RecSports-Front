@@ -20,6 +20,7 @@ export class SidebarComponent {
 
   showSidebar: boolean = false;
   manualInfoURL: string = '';
+  videoInfoURL: string = '';
 
   showCredencial: boolean = false;
   showMisReservaciones: boolean = false;
@@ -61,16 +62,22 @@ export class SidebarComponent {
       if (this.user.userRole == 'ADMIN') {
         this.manualInfoURL =
           'https://docs.google.com/document/d/1kBH0USzhfthzlSacMdIBvl-7OVCL28aXdgmgxf4lQVY/edit?usp=sharing';
+        this.videoInfoURL = '#';
+
         this.showCredencial = false;
         this.showMisReservaciones = true;
       } else if (this.user.userRole == 'GIMNASIO') {
         this.manualInfoURL =
           'https://docs.google.com/document/d/1XfS2-LAmMJ6BqnLK2dtnMyVs0krIORFDsRVfl9iQY_s/edit?usp=sharing';
+        this.videoInfoURL = 'https://youtu.be/NnPm2KZJ1_o';
+
         this.showCredencial = false;
         this.showMisReservaciones = false;
       } else {
         this.manualInfoURL =
           'https://docs.google.com/document/d/1xbz5Gd9mTTa__G4--KzUw4lnxZk6pYBXsm2OfbY1JOk/edit?usp=sharing';
+        this.videoInfoURL = '#';
+
         this.showCredencial = true;
         this.showMisReservaciones = true;
       }
