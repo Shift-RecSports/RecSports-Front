@@ -178,3 +178,28 @@
     margin-right: 0.2rem;
   }
 }
+
+.open-help-button {
+  transform: scale(0.8);
+  align-self: center;
+  margin-right: 0.5rem;
+}
+
+.open-help-icon {
+  transform: scale(1.6);
+  color: "#ffffff";
+}
+
+.help-button-item {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #000000;
+}
+
+.help-button-item {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #000000;
+}

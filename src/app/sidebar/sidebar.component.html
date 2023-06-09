@@ -205,25 +205,45 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
+
       <div class="header-container">
         <span class="header-title">Athletics</span>
         <div class="header-user-container">
+          <button
+            mat-mini-fab
+            color="primary"
+            [matMenuTriggerFor]="menuHelp"
+            class="open-help-button"
+          >
+            <mat-icon class="open-help-icon">help</mat-icon>
+          </button>
+
           <div class="example-button-container" style="align-self: center">
-            <a
-              class="info-color"
-              mat-mini-fab
-              aria-label="Example icon button with a plus one icon"
-              [ngStyle]="{ transform: 'scale(0.8)' }"
-              [href]="manualInfoURL"
-            >
-              <mat-icon
-                [ngStyle]="{
-                  transform: 'scale(1.6)',
-                  color: '#ffffff'
-                }"
-                >help</mat-icon
-              >
-            </a>
+            <mat-menu #menuHelp="matMenu">
+              <button mat-menu-item>
+                <a
+                  class="help-button-item"
+                  aria-label="Example icon button with a plus one icon"
+                  [href]="manualInfoURL"
+                  target="_blank"
+                >
+                  <mat-icon>assignment</mat-icon>
+                  Manual de Usuario
+                </a>
+              </button>
+
+              <button mat-menu-item>
+                <a
+                  class="help-button-item"
+                  aria-label="Example icon button with a plus one icon"
+                  [href]="videoInfoURL"
+                  target="_blank"
+                >
+                  <mat-icon>video_library</mat-icon>
+                  Video explicativo
+                </a>
+              </button>
+            </mat-menu>
           </div>
           <div class="header-user">
             <!-- <div class="header-user-info">
