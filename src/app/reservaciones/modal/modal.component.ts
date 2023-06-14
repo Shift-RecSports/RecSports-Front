@@ -84,15 +84,15 @@ export class ModalComponent {
     this._apiService.delete(url).subscribe(
       (data) => {
         const type = 'success';
-        const title = `Se cancelo la reservacion con exito`;
-        const description = `Se ha cancelado con exito`;
+        const title = `Se canceló la reservación con éxito`;
+        const description = `Se ha cancelado con éxito`;
 
         this.createNotification(type, title, description);
         this.onNoClick();
       },
       (e) => {
         const type = 'error';
-        const title = `No se ha logrado cancelar la reservacion`;
+        const title = `No se ha logrado cancelar la reservación`;
         const description = e.error.message;
 
         this.createNotification(type, title, description);

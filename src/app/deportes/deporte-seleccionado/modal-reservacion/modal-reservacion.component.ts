@@ -81,12 +81,12 @@ export class ModalReservacionComponent {
 
   async onCancelReservacion() {
     if (this.service.isLoggedIn() && this.service.GetUserRole() == 'ADMIN') {
-      const url = `/reservaciones/${this.data.reservacion.id}`;
+      const url = `/reservaciones/cancelar/${this.data.reservacion.id}`;
 
-      this._apiService.delete(url).subscribe(
+      this._apiService.put(url, {}).subscribe(
         (data) => {
           const type = 'success';
-          const title = `Se cancelo la reservacion con exito`;
+          const title = `Se canceló la reservación con exito`;
           const description = `Se ha cancelado con exito`;
 
           this.createNotification(type, title, description);
@@ -94,7 +94,7 @@ export class ModalReservacionComponent {
         },
         (e) => {
           const type = 'error';
-          const title = `No se ha logrado cancelar la reservacion`;
+          const title = `No se ha logrado cancelar la reservación`;
           const description = e.error.message;
 
           this.createNotification(type, title, description);

@@ -1,6 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
 import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
@@ -9,11 +14,10 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Deporte } from 'src/app/classes/deportes';
 import { Espacio } from 'src/app/classes/espacios';
 
-
 @Component({
   selector: 'app-editar-espacio',
   templateUrl: './editar-espacio.component.html',
-  styleUrls: ['./editar-espacio.component.css']
+  styleUrls: ['./editar-espacio.component.css'],
 })
 export class EditarEspacioComponent implements OnInit {
   // formularioEspacio: FormGroup;
@@ -71,7 +75,7 @@ export class EditarEspacioComponent implements OnInit {
     private formulario: FormBuilder,
     private apiService: ApiService,
     private notification: NzNotificationService
-  ) { }
+  ) {}
 
   @ViewChild('matRef') matRef: MatSelect;
   removeSelectedHorario(horariosSelected: string) {
@@ -89,7 +93,7 @@ export class EditarEspacioComponent implements OnInit {
 
   horariosToString(): string {
     // Reformats array ["7:00", "8:00", "9:00"] to string "{"7:00", "8:00", "9:00"}"
-    const horarioString = `{${this.horariosSelected.join(", ")}}`;
+    const horarioString = `{${this.horariosSelected.join(', ')}}`;
     return horarioString;
   }
 
@@ -111,7 +115,7 @@ export class EditarEspacioComponent implements OnInit {
       aforo: [null, Validators.required],
       zona: ['', Validators.required],
       imagen: '',
-      deporte: ['', Validators.required]
+      deporte: ['', Validators.required],
     });
 
     const urlDeportes = '/deportes';
@@ -122,7 +126,6 @@ export class EditarEspacioComponent implements OnInit {
           this.listaDeportes[i].imagen
         );
       }
-
     });
 
     this.filteredOptions = this.horarios.valueChanges.pipe(
@@ -151,8 +154,6 @@ export class EditarEspacioComponent implements OnInit {
         });
       });
     });
-
-
   }
 
   private _filter(value: string): string[] {
@@ -181,20 +182,20 @@ export class EditarEspacioComponent implements OnInit {
   }
 
   getIdOfSelectedDeporte(): string {
-
     const selectedDeporteNombre = this.formularioEspacio.get('deporte')?.value;
     //console.log("VALUE EN FORM-DEPORTE-FIELD" + this.formularioEspacios.get('deporte')?.value);
 
-    const selectedDeporte = this.listaDeportes.find(deporte => deporte.nombre === selectedDeporteNombre);
-    console.log("selectedDeporte" + selectedDeporte);
+    const selectedDeporte = this.listaDeportes.find(
+      (deporte) => deporte.nombre === selectedDeporteNombre
+    );
+    console.log('selectedDeporte' + selectedDeporte);
 
     //console.log(selectedDeporte!.id);
     return selectedDeporte!.id.toString();
-
   }
 
   enviarDatos() {
-    console.log("Boton presionado");
+    console.log('Boton presionado');
     console.log(this.formularioEspacio.value);
 
     const url = `/deportes`;
@@ -207,42 +208,57 @@ export class EditarEspacioComponent implements OnInit {
       this.deporteChanged = true;
     });
 
-    if (this.formularioEspacio.valid) {
-      console.log("formulario valido");
+    if (this.formularioEspacio.valid && this.selectedFiles![0].size < 2000000) {
+      console.log('formulario valido');
 
       // Form is valid, proceed with saving data
       const formData = new FormData();
       formData.append('id', this.formularioEspacio.get('id')?.value ?? '');
-      formData.append('nombre', this.formularioEspacio.get('nombre')?.value ?? '');
+      formData.append(
+        'nombre',
+        this.formularioEspacio.get('nombre')?.value ?? ''
+      );
       // formData.append('horarios', this.horariosToString());
 
       if (this.horariosChanged) {
         formData.append('horarios', this.horariosToString());
       } else {
-        formData.append('horarios', this.formularioEspacio.get('horarios')?.value ?? '');
+        formData.append(
+          'horarios',
+          this.formularioEspacio.get('horarios')?.value ?? ''
+        );
       }
 
-
-      formData.append('aforo', this.formularioEspacio.get('aforo')?.value ?? '');
+      formData.append(
+        'aforo',
+        this.formularioEspacio.get('aforo')?.value ?? ''
+      );
       formData.append('zona', this.formularioEspacio.get('zona')?.value ?? '');
       // formData.append('deporte', this.getIdOfSelectedDeporte());
 
       if (this.deporteChanged) {
         formData.append('deporte', this.getIdOfSelectedDeporte());
       } else {
-        formData.append('deporte', this.formularioEspacio.get('deporte')?.value ?? '');
+        formData.append(
+          'deporte',
+          this.formularioEspacio.get('deporte')?.value ?? ''
+        );
       }
 
       // Check if a new file is selected
       if (this.selectedFiles && this.selectedFiles[0]) {
         // A new file is selected, add it to the formData
-        formData.append('imagen', this.selectedFiles![0], this.selectedFileNames[0]);
+        formData.append(
+          'imagen',
+          this.selectedFiles![0],
+          this.selectedFileNames[0]
+        );
       } else {
         // No new file selected, keep the previous image
         formData.append('imagen', this.formularioEspacio.get('imagen')?.value);
       }
 
-      console.log("formulario validado = ", formData.getAll);
+      console.log('formulario validado = ', formData.getAll);
 
       this.apiService.putWithImage(url, formData).subscribe((data) => {
         console.log(data);
@@ -255,15 +271,21 @@ export class EditarEspacioComponent implements OnInit {
 
         // Send back to deportes
         this.router.navigate(['deportes']);
-
       });
     } else {
-      console.log("formulario Invalido");
+      console.log('formulario Invalido');
 
       // NOTIFICACION
       const type = 'error';
       const title = 'No se ha podido actualizar el deporte.';
-      const description = 'Verifique los campos solicitados.';
+
+      let description = '';
+      if (this.selectedFiles && this.selectedFiles![0].size >= 2000000) {
+        description = `La imagen no debe exceder las 2MB`;
+      } else {
+        description = `Verifique los campos solicitados.`;
+      }
+
       this.createNotification(type, title, description);
 
       Object.values(this.formularioEspacio.controls).forEach((control) => {
@@ -284,6 +306,3 @@ export class EditarEspacioComponent implements OnInit {
     this.notification.create(type, title, description);
   }
 }
-
-
-

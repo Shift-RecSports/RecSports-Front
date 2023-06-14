@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
-
 @Component({
   selector: 'app-nuevo-deporte',
   templateUrl: './nuevo-deporte.component.html',
@@ -32,7 +31,7 @@ export class NuevoDeporteComponent {
       descripcion: ['', Validators.required],
       materiales: [null, Validators.required],
       imagen: ['', Validators.required],
-      duracion: [null, Validators.required]
+      duracion: [null, Validators.required],
     });
   }
 
@@ -54,27 +53,43 @@ export class NuevoDeporteComponent {
   }
 
   enviarDatos() {
-    console.log("Boton presionado");
+    console.log('Boton presionado');
     console.log(this.formularioDeporte.value);
-  
+
     const url = '/deportes';
-  
-    if (this.formularioDeporte.valid) {
-      console.log("formulario valido");
+
+    if (this.formularioDeporte.valid && this.selectedFiles![0].size < 2000000) {
+      console.log('formulario valido');
 
       // Form is valid, proceed with saving data
       const formData = new FormData();
-      formData.append('nombre', this.formularioDeporte.get('nombre')?.value ?? '');
-      formData.append('descripcion', this.formularioDeporte.get('descripcion')?.value ?? '');
-      formData.append('materiales', this.formularioDeporte.get('materiales')?.value ?? '');
-      formData.append('duracion', this.formularioDeporte.get('duracion')?.value ?? '');
-      formData.append('imagen', this.selectedFiles![0], this.selectedFileNames[0]);
-  
-      console.log("formulario validado = ", formData);
-  
+      formData.append(
+        'nombre',
+        this.formularioDeporte.get('nombre')?.value ?? ''
+      );
+      formData.append(
+        'descripcion',
+        this.formularioDeporte.get('descripcion')?.value ?? ''
+      );
+      formData.append(
+        'materiales',
+        this.formularioDeporte.get('materiales')?.value ?? ''
+      );
+      formData.append(
+        'duracion',
+        this.formularioDeporte.get('duracion')?.value ?? ''
+      );
+      formData.append(
+        'imagen',
+        this.selectedFiles![0],
+        this.selectedFileNames[0]
+      );
+
+      console.log('formulario validado = ', formData);
+
       this._apiService.postWithImage(url, formData).subscribe((data) => {
         console.log(data);
-        
+
         // Notificacion de exito
         const type = 'success';
         const title = 'Deporte creado con éxito.';
@@ -83,14 +98,20 @@ export class NuevoDeporteComponent {
 
         //Redirecciona a deportes
         this.router.navigate(['/deportes']);
-
       });
     } else {
-      console.log("Formulario Invalido");
+      console.log('Formulario Invalido');
       // Notificacion de error
       const type = 'error';
       const title = 'No se ha podido guardar el deporte. ';
-      const description = `Verifique los campos solicitados.`;
+
+      let description = '';
+      if (this.selectedFiles && this.selectedFiles![0].size >= 2000000) {
+        description = `La imagen no debe exceder las 2MB`;
+      } else {
+        description = `Verifique los campos solicitados.`;
+      }
+
       this.createNotification(type, title, description);
 
       Object.values(this.formularioDeporte.controls).forEach((control) => {
