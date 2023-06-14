@@ -123,13 +123,9 @@
           nzLg="6"
           nzXl="6"
         >
-          <button
-            mat-button
-            color="button-cancelar"
-            *ngIf="reservacion.estatus == 'Activa'"
-          >
+          <button mat-button color="button-cancelar">
             <div class="white-text" (click)="openDialog(reservacion)">
-              Cancelar Reservación
+              Eliminar reservación
             </div>
           </button>
         </div>
