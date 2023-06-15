@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import * as XLSX from 'xlsx';
 
-const EXCEL_EXTENSION = '.xlsx';
-var wscols = [{ wch: 11 }, { wch: 11 }, { wch: 40 }, { wch: 10 }, { wch: 10 }];
-var fwscols = [{ wch: 20 }, { wch: 15 }];
+const EXCEL_EXTENSION = '.xlsx'; // Extension del archivo a descargar
+var wscols = [{ wch: 11 }, { wch: 11 }, { wch: 40 }, { wch: 10 }, { wch: 10 }]; // Tamano de las columnas
+var fwscols = [{ wch: 20 }, { wch: 15 }]; // Tamano de las columnas
 
+// Servicio para descarga de registros a Excel
 @Injectable({ providedIn: 'root' })
 export class ExcelServiceService {
   constructor() {}
 
+  // Exporta los registros a un archivo de Excel
   public exportToExcel(element: any, freq: any, fileName: string): void {
-    // generate workbook and add the worksheet
     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(element);
     ws['!cols'] = wscols;
 

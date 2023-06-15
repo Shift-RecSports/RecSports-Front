@@ -1,6 +1,8 @@
+<!-- Contenedor de la pagina de Inicio de Sesion -->
 <mat-sidenav-container>
   <div class="background-image">
     <div class="login-container">
+      <!-- Imagen de Athletics -->
       <div>
         <h1 class="login-heading">Athletic</h1>
         <div class="header-image-container">
@@ -12,12 +14,13 @@
         </div>
       </div>
 
-      <!-- Sign In Form -->
+      <!-- Formulario de Inicio de Sesion -->
       <form
         class="login-form-container"
         [formGroup]="loginform"
         (ngSubmit)="onLogin()"
       >
+        <!-- MATRICULA -->
         <div class="login-input-container">
           <label class="login-input-label" for="floatingInput">Matrícula</label>
           <mat-form-field appearance="fill">
@@ -25,6 +28,7 @@
             <input matInput formControlName="matricula" />
           </mat-form-field>
         </div>
+        <!-- CONTRASENA -->
         <div class="login-input-container">
           <label class="login-input-label" for="floatingInput"
             >Contraseña</label
@@ -48,6 +52,7 @@
           </mat-form-field>
         </div>
 
+        <!-- BOTON para niciar sesion -->
         <div class="login-button-container">
           <button
             class="login-button"
@@ -59,6 +64,7 @@
             Iniciar Sesion
           </button>
 
+          <!--BOTON de Cargando -->
           <button
             class="login-button"
             mat-raised-button

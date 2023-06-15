@@ -1,8 +1,11 @@
+<!-- Contenedor de la Pagina Deporte Seleccionado -->
 <div class="grid-container">
   <div class="deporte-container">
     <div class="deporte-content">
       <div class="deporte-header-content">
         <div></div>
+
+        <!-- Detalles del deporte: Nombre y Descripcion -->
         <div class="deporte-header-text-container">
           <div class="deporte-header-text">
             <div class="deporte-header-title">
@@ -13,6 +16,7 @@
             </div>
           </div>
 
+          <!-- Se muestra el boton para editar deporte solo para el usuario ADMIN -->
           <div *ngIf="showEditButton" class="deportes-edit-container">
             <button
               mat-button
@@ -23,6 +27,8 @@
             </button>
           </div>
         </div>
+
+        <!-- Imagen del deporte -->
         <img
           [src]="deporte.imagen"
           onerror="this.onerror=null;this.src='./assets/img/recsports_logo_icon.png';"
@@ -30,6 +36,7 @@
         />
       </div>
 
+      <!-- Se muestra la Lista de Espacios como un acordeon en vista Movil -->
       <mat-accordion
         *ngIf="isHandset$ | async"
         class="deporte-espacio-expansion-container"
@@ -39,12 +46,14 @@
           (closed)="panelOpenState = false"
           class="deporte-espacio-expansion-panel"
         >
+          <!-- Acordeon para la vista movil -->
           <mat-expansion-panel-header>
             <mat-panel-title>
               <div class="deporte-espacio-title">Espacios</div>
             </mat-panel-title>
           </mat-expansion-panel-header>
 
+          <!-- Para cada espacio se muestra la informacion detallada del mismo -->
           <div nz-row class="deporte-espacio-list">
             <div
               nz-col
@@ -61,6 +70,7 @@
                   <div>{{ espacio.nombre }}</div>
                 </div>
 
+                <!-- El administrador cuenta con la opcion de borrar el espacio -->
                 <button
                   *ngIf="showDeleteEspacio"
                   class="espacio-delete-button"
@@ -75,6 +85,7 @@
                   >
                 </button>
 
+                <!-- Imagen del espacio -->
                 <img
                   [src]="espacio.imagen"
                   onerror="this.onerror=null;this.src='./assets/img/recsports_logo_icon.png';"
@@ -83,6 +94,7 @@
               </div>
             </div>
 
+            <!-- Boton para crear un Nuevo Espacio -->
             <div
               nz-col
               nzXs="24"
@@ -110,12 +122,14 @@
         </mat-expansion-panel>
       </mat-accordion>
 
+      <!-- Lista de Espacios para Vista de Ordenador -->
       <div
         class="deporte-espacio-container"
         *ngIf="(isHandset$ | async) == false"
       >
         <div class="deporte-espacio-title">Espacios</div>
 
+        <!-- Detalles sobre la Lista de Espacios -->
         <div nz-row class="deporte-espacio-list">
           <div
             nz-col
@@ -132,6 +146,7 @@
                 <div>{{ espacio.nombre }}</div>
               </div>
 
+              <!-- Boton para borrar un espacio solo disponible para ADMIN -->
               <button
                 *ngIf="showDeleteEspacio"
                 class="espacio-delete-button"
@@ -154,6 +169,7 @@
             </div>
           </div>
 
+          <!-- Boton para crear un nuevo espacio -->
           <div
             nz-col
             nzXs="24"
@@ -179,6 +195,7 @@
         </div>
       </div>
 
+      <!-- Contentedor para tabla de Reservaciones -->
       <div class="deporte-reservacion-container">
         <div class="deporte-reservacion-title">
           {{
@@ -189,6 +206,10 @@
               .toUpperCase()
           }}
         </div>
+
+        <!-- BOTONES para seleccionar el dia para visualizar reserrvaciones -->
+
+        <!-- Boton inhabilitado previo -->
         <div class="deporte-reservacion-button-list">
           <div
             class="deporte-reservacion-button-container deporte-reservacion-button-past"
@@ -201,6 +222,7 @@
             ></button>
           </div>
 
+          <!-- Boton inhabilitado previo -->
           <div
             class="deporte-reservacion-button-container deporte-reservacion-button-past"
           >
@@ -212,11 +234,12 @@
             ></button>
           </div>
 
-          <!-- DAYS OF THE WEEK -->
+          <!-- Botones para dias de la semana -->
           <div
             *ngFor="let item of daysOfTheWeek; index as i"
             [ngStyle]="(isHandset$ | async) ? { width: '25%' } : {}"
           >
+            <!-- Opcion de boton deshabilitada -->
             <div *ngIf="i >= todayDay; else disabledDay">
               <div
                 *ngIf="selectedDay == i"
@@ -235,10 +258,12 @@
                 </div>
               </div>
 
+              <!-- Boton que se puede seleccionar y deseleccionar  -->
               <div
                 *ngIf="selectedDay != i"
                 class="deporte-reservacion-button-container"
               >
+                <!-- Al hacer c,ick en el boton, se selecciona este dia -->
                 <button
                   mat-fab
                   color="unselected"
@@ -256,6 +281,7 @@
               </div>
             </div>
 
+            <!-- Boton no Disponible para seleccionar -->
             <ng-template #disabledDay>
               <div class="deporte-reservacion-button-container">
                 <button
@@ -276,6 +302,7 @@
             </ng-template>
           </div>
 
+          <!-- Boton inhabilitado posterior -->
           <div
             class="deporte-reservacion-button-container deporte-reservacion-button-past"
           >
@@ -287,6 +314,7 @@
             ></button>
           </div>
 
+          <!-- Boton inhabilitado posterior -->
           <div
             class="deporte-reservacion-button-container deporte-reservacion-button-past"
           >
@@ -302,12 +330,8 @@
         <!-- TABLA RESERVACIONES -->
 
         <div class="deporte-reservacion-table-container">
-          <!-- <div class="deporte-tiempo-linea">
-            <div class="deporte-tiempo-circulo"></div>
-          </div> -->
-
           <table mat-table [dataSource]="dataSource">
-            <!-- HOUR Column -->
+            <!-- HORA Column -->
             <ng-container matColumnDef="demo-position">
               <th mat-header-cell *matHeaderCellDef></th>
               <td mat-cell *matCellDef="let element">
@@ -317,22 +341,26 @@
               </td>
             </ng-container>
 
-            <!-- Button -->
+            <!-- Tabla de Reservaciones-->
             <ng-container matColumnDef="demo-name">
               <th mat-header-cell *matHeaderCellDef></th>
               <td
                 mat-cell
                 *matCellDef="let element of dataSource; let i = index"
               >
+                <!-- Divider entre columnas -->
                 <div class="spacer"></div>
                 <mat-divider></mat-divider>
                 <div class="spacer"></div>
 
+                <!-- Tabla -->
                 <div class="deporte-reservacion-cell-table">
+                  <!-- Para cada Horario se incluyen los botones de Reservacion -->
                   <div
                     *ngFor="let reservacion of arrayReservacion[dataSource[i]]"
                     style="display: inline-block"
                   >
+                    <!-- Boton de Reservacion disponible, al hacer click se abre el modal -->
                     <button
                       mat-button
                       color="horario"
@@ -344,6 +372,7 @@
                       </div>
                     </button>
 
+                    <!-- Boton de Reservacion con estatus Activo, al hacer click se abre el modal -->
                     <button
                       mat-button
                       color="horario-activo"
@@ -355,6 +384,7 @@
                       </div>
                     </button>
 
+                    <!-- Boton de Reservacion Expirado, al hacer click se abre el modal -->
                     <button
                       mat-button
                       color="horario-expirado"

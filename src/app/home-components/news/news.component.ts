@@ -10,20 +10,11 @@ import { Noticia } from 'src/app/classes/noticias';
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
-  styleUrls: ['./news.component.css']
+  styleUrls: ['./news.component.css'],
 })
-
-
-
-export class NewsComponent implements OnInit{
-
-  // Routing
+export class NewsComponent implements OnInit {
   private sub: any;
-  listaNoticias: Noticia[] = [];
-
-
-  // Ajustar a image para que pueda leer de render
-  // noticiaImage: string = getImage();
+  listaNoticias: Noticia[] = []; // Lista de noticias para mostrar
 
   constructor(
     private service: AuthService,
@@ -33,27 +24,25 @@ export class NewsComponent implements OnInit{
     private _apiService: ApiService
   ) {}
 
-
-  ngOnInit():void {
+  // Al iniciar la pagina se hace la peticion para obtener las noticias
+  ngOnInit(): void {
     this.sub = this.route.params.subscribe((params) => {
       const url = `/noticias`;
       this._apiService.get(url).subscribe((data) => {
         this.listaNoticias = data;
         for (let i = 0; i < this.listaNoticias.length; i++) {
           this.listaNoticias[i].imagen = this._apiService.getImage(
-            "/noticias",
+            '/noticias',
             this.listaNoticias[i].imagen
           );
         }
-        console.log(data)
+        console.log(data);
       });
     });
   }
 
+  // Funcion para redirigiar al usuario al URL de la noticia
   redirectToUrl(url: string) {
     window.open(url, '_blank');
   }
-
-  
 }
-

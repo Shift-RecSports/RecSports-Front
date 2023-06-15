@@ -15,12 +15,12 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 export class NuevaNoticiaComponent {
   formularioNoticia: FormGroup = new FormGroup({});
   formattedDate: string = '';
-  isDateSelected: boolean = true;
-  isHourSelected: boolean = true;
+  isDateSelected: boolean = true; // Bandera para saber si la fecha es seleccionada
+  isHourSelected: boolean = true; // Bandera para saber si la hora es seleccionada
 
-  selectedFiles?: FileList;
-  selectedFileNames: string[] = [];
-  preview: string = '';
+  selectedFiles?: FileList; // Lista para imagen de la noticia
+  selectedFileNames: string[] = []; // Nombre del archivo de imagenes
+  preview: string = ''; // Imagen de Previsualizacion
 
   constructor(
     private service: AuthService,
@@ -30,6 +30,7 @@ export class NuevaNoticiaComponent {
     private notification: NzNotificationService
   ) {}
 
+  // Al iniciar la aplicacion, se inizializa el formulario vacio
   ngOnInit() {
     this.formularioNoticia = this.formulario.group({
       titulo: ['', Validators.required],
@@ -41,6 +42,7 @@ export class NuevaNoticiaComponent {
     });
   }
 
+  // Funcion para seleccionara una fecha y agregarla al formulario
   onDateSelected(selectedDate: Date): void {
     if (selectedDate) {
       // A date has been selected
@@ -56,6 +58,7 @@ export class NuevaNoticiaComponent {
     }
   }
 
+  // Funcion para cambiar el formato de la fecha para ser recibido por la API
   formatDate(date: Date): string {
     const year = String(date.getFullYear());
     const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
@@ -64,6 +67,7 @@ export class NuevaNoticiaComponent {
     return `${year}-${month}-${day}`;
   }
 
+  // Funcion para guardar en el formulario la hora seleccionada
   onHourSelected(selectedHour: Date): void {
     if (selectedHour) {
       // A date has been selected
@@ -79,6 +83,7 @@ export class NuevaNoticiaComponent {
     }
   }
 
+  // Funcion para cambiar el formato de una Hora para ser recibido por la API
   formatHour(date: Date): string {
     const hours = String(date.getHours().toString().padStart(2, '0'));
     const minutes = String(date.getMinutes().toString().padStart(2, '0'));
@@ -86,10 +91,11 @@ export class NuevaNoticiaComponent {
     return `${hours}:${minutes}`;
   }
 
+  // Al seleccionar una imagen se agrega a selectedFiles
   selectFiles(event: any): void {
     this.selectedFileNames = [];
-    this.selectedFiles = event.target.files;
-    this.preview = '';
+    this.selectedFiles = event.target.files; // Se almacena la imagen
+    this.preview = ''; // Para previsualizacion de la imagen
 
     if (this.selectedFiles && this.selectedFiles[0]) {
       const reader = new FileReader();
@@ -103,6 +109,7 @@ export class NuevaNoticiaComponent {
     }
   }
 
+  // Funcion que llama a la API para crear una nueva ntoicia con el formulario creado
   enviarDatos() {
     console.log('Boton presionado');
     console.log(this.formularioNoticia.value);
@@ -138,9 +145,8 @@ export class NuevaNoticiaComponent {
 
       this._apiService.postWithImage(url, formData).subscribe((data) => {
         console.log(data);
-        //alert(`Noticia ${data.titulo} registrada con éxito`);
 
-        // NOTIFICACION
+        // NOTIFICACION de exito
         const type = 'success';
         const title = 'Noticia creada con éxito';
         const description = `Título: ${data.titulo}`;
@@ -152,8 +158,7 @@ export class NuevaNoticiaComponent {
     } else {
       console.log('formulario INvalido');
       // Form is invalid, display error message
-      //alert(`No se ha podido guardar la noticia. Verifique los campos solicitados.`);
-      // NOTIFICACION
+      // NOTIFICACION de error
       const type = 'error';
       const title = 'No se ha podido guardar la noticia.';
 
@@ -164,6 +169,7 @@ export class NuevaNoticiaComponent {
         description = `Verifique los campos solicitados.`;
       }
 
+      // Se crea la notificacion
       this.createNotification(type, title, description);
 
       Object.values(this.formularioNoticia.controls).forEach((control) => {
@@ -175,10 +181,12 @@ export class NuevaNoticiaComponent {
     }
   }
 
+  // Funcion para crear una notificacion
   createNotification(type: string, title: string, description: string): void {
     this.notification.create(type, title, description);
   }
 
+  // Al cancelar, se redirgie a la pagina de noticias
   onCancelClick() {
     this.router.navigate(['noticias']);
   }

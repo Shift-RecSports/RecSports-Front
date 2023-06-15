@@ -3,21 +3,15 @@ import { Injectable } from '@angular/core';
 
 import { User } from './types';
 
+// Servicio de autenticacion y AuthGuard
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  // TODO: Change API link for user
-  // apiurl = 'https://api.namefake.com/';
-
+  // Se almancenan las credenciales del usuario en sessionStorage
   async Login(user: User): Promise<User> {
-    // TODO: Uncomment
-    // const response = await this.http.post(this.apiurl, user);
-
-    // TOOD: Comment
-
     sessionStorage.setItem('user', user.matricula ? user.matricula : '');
     sessionStorage.setItem('role', user.userRole ? user.userRole : '');
     sessionStorage.setItem('nombre', user.nombre ? user.nombre : '');
@@ -25,20 +19,24 @@ export class AuthService {
     return user;
   }
 
+  // Valida si el usuario ha iniciado sesion
   isLoggedIn() {
     return sessionStorage.getItem('user') != null;
   }
 
+  // Retorna el identificacdor/Matricula del usuario
   GetUserName() {
     return sessionStorage.getItem('user')?.toString();
   }
 
+  // Retorna el tipo de usuario
   GetUserRole() {
     return sessionStorage.getItem('role') != null
       ? sessionStorage.getItem('role')?.toString().toUpperCase()
       : 'd';
   }
 
+  // Retorna el nombre del usuario
   GetUserNameString() {
     return sessionStorage.getItem('nombre')?.toString();
   }

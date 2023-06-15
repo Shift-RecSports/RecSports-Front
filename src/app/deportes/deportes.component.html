@@ -1,12 +1,15 @@
+<!-- Contenedor de la Pagina Deportes -->
 <div class="grid-container">
   <div class="deportes-container">
     <div class="deportes-title-header">
+      <!-- Bogton para redirigr al formulario de Deporte -->
       <div *ngIf="showAgregarButton" class="deportes-agregar-container">
         <button mat-button color="button-agregar" (click)="onAgregarDeporte()">
           <div class="deportes-agregar-text">Agregar Deporte</div>
         </button>
       </div>
 
+      <!-- Filtrar los deportes mediante un termino de Busqueda -->
       <div class="deportes-title">Busca tu deporte</div>
       <div class="deportes-searchbox">
         <input
@@ -23,6 +26,7 @@
       </div>
     </div>
 
+    <!-- En caso de que no existan deportes, se muestra por defecto un mensaje e icono correspondiente a "No se encontraron resultados" -->
     <div *ngIf="showedDeportes.length == 0" class="reservaciones-empty">
       <img
         class="reservaciones-empty-icon"
@@ -32,6 +36,7 @@
       <div class="reservaciones-empty-text">No se encontraron resultados</div>
     </div>
 
+    <!-- Para cada deporte de la lista, se muestra una tarjeta correspondiente -->
     <div nz-row>
       <div
         nz-col
@@ -43,6 +48,7 @@
         *ngFor="let deporte of showedDeportes"
       >
         <div class="tarjeta-deporte-10">
+          <!-- Al seleccionar un deporte se redirige a la pantalla de deporte especifico -->
           <button
             class="tarjeta-deporte-button-1"
             (click)="onSelectDeporte(deporte)"
@@ -60,6 +66,7 @@
               <div class="reserva_ahora capitals">RESERVA AHORA</div>
             </div>
 
+            <!-- En caso de que el deporte no cargue una imagen valida, entonces se cargara un por defecto -->
             <img
               [src]="deporte.imagen"
               onerror="this.onerror=null;this.src='./assets/img/recsports_logo_icon.png';"

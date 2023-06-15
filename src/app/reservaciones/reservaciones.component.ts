@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from './modal/modal.component';
 import { AuthService } from '../service/auth.service';
 
+// Interfaz de la reservacion utilizada en frontend
 export interface reservacion {
   id: string;
   dia: string;
@@ -17,6 +18,7 @@ export interface reservacion {
   deporte_nombre: string;
 }
 
+// Interfaz de la respuesta de la API a la peticion de las reservaciuones
 export interface dataReservacion {
   id: string;
   estatus: number;
@@ -30,6 +32,7 @@ export interface dataReservacion {
   deporte_nombre: string;
 }
 
+// Lista de diferentes estatus posibles
 const listaEstatus = ['Libre', 'Activa', 'Expirada', 'Cancelada'];
 
 @Component({
@@ -38,15 +41,16 @@ const listaEstatus = ['Libre', 'Activa', 'Expirada', 'Cancelada'];
   styleUrls: ['./reservaciones.component.css'],
 })
 export class ReservacionesComponent {
-  listaDataReservaciones: dataReservacion[] = [];
-  listaReservaciones: reservacion[] = [];
-  matricula: string;
+  listaDataReservaciones: dataReservacion[] = []; // Respuesta de la API de reservaciones propias del usuario
+  listaReservaciones: reservacion[] = []; // Reservas utilizadas para despliegue en el front
+  matricula: string; // Identificador del usuario
 
   constructor(
     private _apiService: ApiService,
     public dialog: MatDialog,
     private service: AuthService
   ) {
+    // Se obitnenen los datos del usuario que ha inciciado sesion
     this.matricula = '';
     if (this.service.isLoggedIn()) {
       this.matricula = this.service.GetUserName()
@@ -55,13 +59,16 @@ export class ReservacionesComponent {
     }
   }
 
+  // Al inicial el componnte se manda la peticion para obtener la lsita de reservacviones
   ngOnInit() {
     this.getListOfReservaciones();
   }
 
+  // Obtiene la lista de reservaciones
   getListOfReservaciones() {
-    const url = `/reservaciones/matricula/${this.matricula}`;
+    const url = `/reservaciones/matricula/${this.matricula}`; // URL
 
+    // Lista de reservaciones. Se obtiene de la API y se transforman al formato a desplegar en la pagina de reservaciones
     let auxListaReservaciones: reservacion[] = [];
     this._apiService.get(url).subscribe((data) => {
       data.forEach((dataReservacion: dataReservacion) => {
@@ -93,6 +100,7 @@ export class ReservacionesComponent {
     });
   }
 
+  // Funcion para transformar el mes en formato numerico a un string local en español
   getMonthName(monthNumber: number) {
     const date = new Date();
     date.setMonth(monthNumber - 1);
@@ -100,6 +108,7 @@ export class ReservacionesComponent {
     return date.toLocaleString('es-MX', { month: 'long' });
   }
 
+  // Abre el modal y pasa la referencia de la reservacion seleccionada
   openDialog(selectedReservacion: reservacion): void {
     const dataReservacion = this.listaDataReservaciones.find(
       (reservacion) => reservacion.id == selectedReservacion.id

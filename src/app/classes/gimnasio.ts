@@ -1,3 +1,4 @@
+// REGISTRO DE GIMNASIO
 export interface Registro {
   id: string;
   matricula: string;

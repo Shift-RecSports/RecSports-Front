@@ -1,26 +1,31 @@
+<!-- Contenedor de la pagina del MAPA -->
 <div class="grid-container">
   <div class="mapa-container">
     <p class="titulo-mapa">Mapa</p>
     <div class="images-container" nz-row [nzGutter]="[14, 14]">
-      <div class="foto" nz-col 
+      <!-- Se muestra el mapa actual -->
+      <div
+        class="foto"
+        nz-col
         nzXs="24"
         nzSm="24"
         nzMd="24"
         nzLg="24"
-        nzXl="16">
+        nzXl="16"
+      >
         <img
           src="{{ mapaActual.imagen }}"
           alt="Acude a miTec para revisar mapa"
           class="responsive-image"
         />
       </div>
-      <!--Solo para admins-->
+      <!--Solo para admins, Input para actualizar a un nuevo mapa-->
       <div class="acomodo-input">
         <div class="input-container" *ngIf="showAgregarButton">
           <mat-form-field appearance="outline" class="forma">
             <p class="subir-texto">Subir Imagen</p>
             <div class="botones-container">
-              <mat-toolbar style="background-color: white;">
+              <mat-toolbar style="background-color: white">
                 <div>
                   <input hidden matInput />
                   <input
@@ -39,7 +44,7 @@
               </mat-toolbar>
             </div>
           </mat-form-field>
-          <div class="custom-spinner"  *ngIf="loading">
+          <div class="custom-spinner" *ngIf="loading">
             <mat-spinner color="#ffffff" diameter="60"></mat-spinner>
           </div>
           <p class="exito" *ngIf="subida">Mapa actualizado exitosamente.</p>

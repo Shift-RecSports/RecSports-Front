@@ -1,49 +1,103 @@
+<!-- Contenedor de la Encuesta para ADMIN -->
 <div class="grid-container">
   <div class="encuesta-container">
     <nz-tabset nzType="card" nzCentered>
+      <!-- Promedios de Encuestas -->
       <nz-tab nzTitle="Promedios" class="promedios-container">
         <p class="subtitulo-encuesta">Promedio de las encuestas</p>
+        <!-- Promedio de gimnasio -->
         <div class="tarjeta-promedio">
-          <p class="titulo-promedio">Gimnasio</p> 
-          <nz-progress class="slider-promedio" [nzPercent]="promediosEncuesta.promedio1*10" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="20"></nz-progress>
+          <p class="titulo-promedio">Gimnasio</p>
+          <nz-progress
+            class="slider-promedio"
+            [nzPercent]="promediosEncuesta.promedio1 * 10"
+            [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }"
+            [nzShowInfo]="false"
+            [nzStrokeWidth]="20"
+          ></nz-progress>
           <div class="slider-tick-container">
-            <div class="slider-tick" *ngFor="let tick of tickValues">{{tick}}</div>
+            <div class="slider-tick" *ngFor="let tick of tickValues">
+              {{ tick }}
+            </div>
           </div>
         </div>
+        <!-- Promedio del Wellness Center -->
         <div class="tarjeta-promedio">
-          <p class="titulo-promedio">Wellness Center</p> 
-          <nz-progress class="slider-promedio" [nzPercent]="promediosEncuesta.promedio2*10" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="20"></nz-progress>
+          <p class="titulo-promedio">Wellness Center</p>
+          <nz-progress
+            class="slider-promedio"
+            [nzPercent]="promediosEncuesta.promedio2 * 10"
+            [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }"
+            [nzShowInfo]="false"
+            [nzStrokeWidth]="20"
+          ></nz-progress>
           <div class="slider-tick-container">
-            <div class="slider-tick" *ngFor="let tick of tickValues">{{tick}}</div>
+            <div class="slider-tick" *ngFor="let tick of tickValues">
+              {{ tick }}
+            </div>
           </div>
         </div>
+        <!-- Promedio de Ahtletics Web -->
         <div class="tarjeta-promedio">
-          <p class="titulo-promedio">Athletics Web</p> 
-          <nz-progress class="slider-promedio" [nzPercent]="promediosEncuesta.promedio3*10" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="20"></nz-progress>
+          <p class="titulo-promedio">Athletics Web</p>
+          <nz-progress
+            class="slider-promedio"
+            [nzPercent]="promediosEncuesta.promedio3 * 10"
+            [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }"
+            [nzShowInfo]="false"
+            [nzStrokeWidth]="20"
+          ></nz-progress>
           <div class="slider-tick-container">
-            <div class="slider-tick" *ngFor="let tick of tickValues">{{tick}}</div>
+            <div class="slider-tick" *ngFor="let tick of tickValues">
+              {{ tick }}
+            </div>
           </div>
         </div>
       </nz-tab>
+
+      <!-- Lista de Respuestas de Usuarios -->
       <nz-tab nzTitle="Respuestas" class="promedios-container">
         <p class="subtitulo-encuesta">Respuetas de los usuarios</p>
         <div class="respuestas" nz-row [nzGutter]="[16, 16]">
-          <div style="padding: 1rem;" nz-col nzXs="24"
-          nzSm="10"
-          nzMd="6"
-          nzLg="6"
-          nzXl="6"
-          *ngFor="let res of respuestasEncuesta">
+          <!-- Se genera una tarjeta para una de las respuestas de Alumnos -->
+          <div
+            style="padding: 1rem"
+            nz-col
+            nzXs="24"
+            nzSm="10"
+            nzMd="6"
+            nzLg="6"
+            nzXl="6"
+            *ngFor="let res of respuestasEncuesta"
+          >
             <div class="card">
-              <p class="titulo-respuesta">{{res.tema}}</p>
-              <p class="mensaje-respuesta"> {{res.comentario}}</p>
+              <p class="titulo-respuesta">{{ res.tema }}</p>
+              <p class="mensaje-respuesta">{{ res.comentario }}</p>
               <p class="subtitulo-respuesta">Gimnasio</p>
-              <nz-progress class="slider-respuesta" [nzPercent]="res.calificacion1*10" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="15"></nz-progress>
+              <nz-progress
+                class="slider-respuesta"
+                [nzPercent]="res.calificacion1 * 10"
+                [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }"
+                [nzShowInfo]="false"
+                [nzStrokeWidth]="15"
+              ></nz-progress>
               <p class="subtitulo-respuesta">Athletics</p>
-              <nz-progress class="slider-respuesta" [nzPercent]="res.calificacion2*10" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="15"></nz-progress>
+              <nz-progress
+                class="slider-respuesta"
+                [nzPercent]="res.calificacion2 * 10"
+                [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }"
+                [nzShowInfo]="false"
+                [nzStrokeWidth]="15"
+              ></nz-progress>
               <p class="subtitulo-respuesta">Athletics Web</p>
-              <nz-progress class="slider-respuesta" [nzPercent]="res.calificacion3*10" [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }" [nzShowInfo]="false" [nzStrokeWidth]="15"></nz-progress>
-              <p class="fecha-respuesta">{{res.fecha}}</p>
+              <nz-progress
+                class="slider-respuesta"
+                [nzPercent]="res.calificacion3 * 10"
+                [nzStrokeColor]="{ '0%': '#0033A0', '100%': '#0033A0' }"
+                [nzShowInfo]="false"
+                [nzStrokeWidth]="15"
+              ></nz-progress>
+              <p class="fecha-respuesta">{{ res.fecha }}</p>
             </div>
           </div>
         </div>

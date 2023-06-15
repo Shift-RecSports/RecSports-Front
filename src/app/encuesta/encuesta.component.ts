@@ -6,7 +6,7 @@ import { User } from '../service/types';
 @Component({
   selector: 'app-encuesta',
   templateUrl: './encuesta.component.html',
-  styleUrls: ['./encuesta.component.css']
+  styleUrls: ['./encuesta.component.css'],
 })
 export class EncuestaComponent {
   //arreglo para numeros abajo de slider
@@ -27,7 +27,7 @@ export class EncuestaComponent {
   // si ya subió una encuesta, ya no le aparece info
   contestada: boolean = false;
 
-  constructor(private service: AuthService, private _apiService: ApiService){
+  constructor(private service: AuthService, private _apiService: ApiService) {
     this.user = { matricula: '', nombre: '', userRole: '' };
 
     if (this.service.isLoggedIn()) {
@@ -44,18 +44,22 @@ export class EncuestaComponent {
     return value.toString();
   }
 
+  // Slider 1 change
   onSlider1ValueChange(event: any) {
     this.sliderValue1 = event.value;
   }
 
+  // Slider 2 change
   onSlider2ValueChange(event: any) {
     this.sliderValue2 = event.value;
   }
 
+  // Slider 3 change
   onSlider3ValueChange(event: any) {
     this.sliderValue3 = event.value;
   }
 
+  // Enviar el resultado de la encuesta
   onEnviarButtonClick() {
     const url = '/encuestas';
     const currentDate = new Date().toISOString().split('T')[0]; // Get current date in ISO format
@@ -66,14 +70,11 @@ export class EncuestaComponent {
       calificacion2: this.sliderValue2,
       calificacion3: this.sliderValue3,
       tema: this.temaValue,
-      comentario: this.textareaValue
+      comentario: this.textareaValue,
     };
 
     this._apiService.post(url, body).subscribe((data) => {
       this.contestada = true;
     });
   }
-
 }
-
-

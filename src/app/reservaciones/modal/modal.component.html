@@ -1,7 +1,9 @@
 <div mat-dialog-content class="modal-container">
   <div class="modal-header">
+    <!-- Modal para eliminar una reservacion -->
     <div class="modal-title title-info">¿Desea eliminar la Reservacion?</div>
 
+    <!-- Boton para cerrar el modal -->
     <div>
       <button
         mat-mini-fab
@@ -14,6 +16,7 @@
     </div>
   </div>
 
+  <!-- Detalles de la Reservacion que va a ser eliminada -->
   <div style="padding-top: 1rem">
     <div>
       <span class="modal-title">Fecha: </span>
@@ -35,6 +38,7 @@
       <span class="modal-text">{{ data.selectedReservacion.espacio }}</span>
     </div>
 
+    <!-- Boton para eliminar la reservacion -->
     <div class="modal-confirmar">
       <button color="confirm-button" mat-button (click)="onConfirmClick()">
         Eliminar Reservación
