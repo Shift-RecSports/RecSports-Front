@@ -1,5 +1,7 @@
+<!-- Contenedor de la pagina Reservaciones -->
 <div class="grid-container">
   <div class="reservaciones-container">
+    <!-- Si no existen reservaciones, entonces muestra una imagen y el texto "No se encontraron resultados" -->
     <div *ngIf="listaReservaciones.length == 0" class="reservaciones-empty">
       <img
         class="reservaciones-empty-icon"
@@ -9,10 +11,12 @@
       <div class="reservaciones-empty-text">No se encontraron resultados</div>
     </div>
 
+    <!-- Para cada reservacion se muestra el siguiente contenido -->
     <div
       class="reservaciones-lista"
       *ngFor="let reservacion of listaReservaciones"
     >
+      <!-- Imagen del espacio de la reservacion -->
       <div nz-row class="reservaciones-content">
         <div
           nz-col
@@ -33,6 +37,7 @@
             />
           </div>
         </div>
+        <!-- Detalles de la reservacion -->
         <div
           nz-col
           class="reservaciones-item"
@@ -75,6 +80,7 @@
           nzLg="3"
           nzXl="3"
         >
+          <!-- Estatus de la Reservacion -->
           <div class="reservaciones-item-title">Estatus</div>
           <button
             mat-button
@@ -123,13 +129,10 @@
           nzLg="6"
           nzXl="6"
         >
-          <button
-            mat-button
-            color="button-cancelar"
-            *ngIf="reservacion.estatus == 'Activa'"
-          >
+          <!-- Boton para eliminar una reservacion -->
+          <button mat-button color="button-cancelar">
             <div class="white-text" (click)="openDialog(reservacion)">
-              Cancelar Reservación
+              Eliminar reservación
             </div>
           </button>
         </div>

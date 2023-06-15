@@ -1,4 +1,8 @@
+<!-- Contenedor principal de la barra lateral -->
 <mat-sidenav-container class="sidenav-container">
+  <!-- Barra lateral (sidenav), que se comportará de manera diferente dependiendo del dispositivo que se esté utilizando -->
+  <!-- Si es un dispositivo móvil, la barra lateral se superpone al contenido; de lo contrario, se coloca al lado -->
+  <!-- La barra lateral se abre de forma predeterminada solo si no es un dispositivo móvil -->
   <mat-sidenav
     #drawer
     class="sidenav"
@@ -7,24 +11,18 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
   >
+    <!-- La barra de herramientas en la parte superior de la barra lateral, que contiene un logotipo -->
     <mat-toolbar>
-      <!-- <button
-        type="button"
-        color="primary"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async"
-      >
-        <mat-icon aria-label="Side nav toggle icon">arrow_back</mat-icon>
-      </button> -->
       <img
         class="header-image"
         src="/assets/img/recsports_logo.png"
         alt="recsports logo"
       />
     </mat-toolbar>
+
+    <!-- Lista de navegación en la barra lateral, con cada elemento de la lista condicionalmente mostrado basado en los valores de navbarFlags -->
     <mat-nav-list style="padding-top: 2rem">
+      <!-- Elemento de la lista de inicio, visible solo si navbarFlags.inicioFlag es verdadero -->
       <div *ngIf="navbarFlags.inicioFlag">
         <a
           mat-list-item
@@ -41,6 +39,7 @@
         </a>
       </div>
 
+      <!-- Elemento de la lista de inicio, visible solo si navbarFlags.inicioEntrenadorFlag es verdadero -->
       <div *ngIf="navbarFlags.inicioEntrenadorFlag">
         <a
           mat-list-item
@@ -57,6 +56,7 @@
         </a>
       </div>
 
+      <!-- Elemento de la lista de inicio, visible solo si navbarFlags.gimnasioFlag es verdadero -->
       <div *ngIf="navbarFlags.gimnasioFlag">
         <a
           mat-list-item
@@ -72,6 +72,7 @@
         </a>
       </div>
 
+      <!-- Elemento de la lista de inicio, visible solo si navbarFlags.gimnasioFlag es verdadero -->
       <div *ngIf="navbarFlags.deportesFlag">
         <a
           mat-list-item
@@ -87,6 +88,7 @@
         >
       </div>
 
+      <!-- Elemento de la lista de inicio, visible solo si navbarFlags.calendarioFlag es verdadero -->
       <div *ngIf="navbarFlags.calendarioFlag">
         <a
           mat-list-item
@@ -101,6 +103,7 @@
         </a>
       </div>
 
+      <!-- Elemento de la lista de inicio, visible solo si navbarFlags.noticasFlag es verdadero -->
       <div *ngIf="navbarFlags.noticasFlag">
         <a
           mat-list-item
@@ -115,6 +118,7 @@
         >
       </div>
 
+      <!-- Elemento de la lista de inicio, visible solo si navbarFlags.mapaFlag es verdadero -->
       <div *ngIf="navbarFlags.mapaFlag">
         <a
           mat-list-item
@@ -130,6 +134,7 @@
         >
       </div>
 
+      <!-- Elemento de la lista de inicio, visible solo si navbarFlags.encuestaAdminFlag es verdadero -->
       <div *ngIf="navbarFlags.encuestaAdminFlag">
         <a mat-list-item routerLink="encuesta-admin" class="sidebar-button">
           <div class="sidebar-list-element">
@@ -140,6 +145,7 @@
         >
       </div>
 
+      <!-- Elemento de la lista de inicio, visible solo si navbarFlags.encuestaFlag es verdadero -->
       <div *ngIf="navbarFlags.encuestaFlag">
         <a
           mat-list-item
@@ -155,6 +161,7 @@
         >
       </div>
 
+      <!-- Elemento de la lista de inicio, visible solo si navbarFlags.entradaFlag es verdadero -->
       <div *ngIf="navbarFlags.entradaFlag">
         <a
           mat-list-item
@@ -171,6 +178,7 @@
         >
       </div>
 
+      <!-- Elemento de la lista de inicio, visible solo si navbarFlags.salidaFlag es verdadero -->
       <div *ngIf="navbarFlags.salidaFlag">
         <a
           mat-list-item
@@ -188,13 +196,17 @@
       </div>
     </mat-nav-list>
   </mat-sidenav>
+
+  <!-- Contenedor del encabezado de la pagina -->
   <mat-sidenav-content>
+    <!-- Blur para cerrar la barra de navegacion en dispositivo movil -->
     <div
       class="background-blur"
       [ngClass]="drawer.opened && showSidebar ? '' : 'disactive-background'"
       (click)="openSidebar(false)"
     ></div>
     <mat-toolbar color="primary" class="header-toolbar">
+      <!-- Boton para abrir la navegacion vertical en dispositivo movil -->
       <button
         type="button"
         color="primary"
@@ -206,6 +218,7 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
 
+      <!-- Titulo -->
       <div class="header-container">
         <span class="header-title">Athletics</span>
         <div class="header-user-container">
@@ -218,6 +231,7 @@
             <mat-icon class="open-help-icon">help</mat-icon>
           </button>
 
+          <!-- Botones para accesar a los manuales de usuario -->
           <div class="example-button-container" style="align-self: center">
             <mat-menu #menuHelp="matMenu">
               <button mat-menu-item>
@@ -245,11 +259,9 @@
               </button>
             </mat-menu>
           </div>
+
+          <!-- Botones para accesar a las opciones del Perfil-->
           <div class="header-user">
-            <!-- <div class="header-user-info">
-              <span class="header-user-matricula">{{ user.matricula }}</span>
-              <span class="header-user-role">{{ user.userRole }}</span>
-            </div> -->
             <button
               mat-button
               color="perfil"
@@ -271,6 +283,8 @@
                 <mat-icon>keyboard_arrow_down</mat-icon>
               </div>
             </button>
+
+            <!-- enu para accesar a las opciones dependiendo del perfil-->
             <mat-menu #menu="matMenu">
               <button
                 mat-menu-item

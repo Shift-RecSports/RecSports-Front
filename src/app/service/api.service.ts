@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
+// Liga de la API del sistema
 const apiURL = 'https://athletic-recsports.onrender.com';
+
+// Servicio para realizar llamadar a la API con httpClient
 @Injectable()
 export class ApiService {
   constructor(private httpClient: HttpClient) {}
@@ -13,7 +16,7 @@ export class ApiService {
   }
 
   // GET image URL
-  getImage(type: string | null ='', image: string = ''): string {
+  getImage(type: string | null = '', image: string = ''): string {
     return `${apiURL}${type}/${image}`;
   }
 

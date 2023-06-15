@@ -3,22 +3,21 @@ import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private router: Router) {}
+    private router: Router
+  ) {}
 
+  // Al seleccionar un deporte, se redirige al usuario hacia ese deporte
   onSelectDeportes() {
     this.router.navigate(['/deportes']);
   }
-
 
   /** Based on the screen size, switch from standard to one column per row */
   cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(

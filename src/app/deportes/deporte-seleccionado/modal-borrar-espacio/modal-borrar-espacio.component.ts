@@ -6,7 +6,6 @@ import { ApiService } from 'src/app/service/api.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
-
 interface espacioType {
   espacio: Espacio;
 }
@@ -28,12 +27,13 @@ export class ModalBorrarEspacioComponent {
     private router: Router,
     private notification: NzNotificationService,
     @Inject(MAT_DIALOG_DATA) public data: espacioType
-  ) { }
+  ) {}
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
+  // Funcion para borrar un Espacio
   async onCancelReservacion() {
     if (this.service.isLoggedIn() && this.service.GetUserRole() == 'ADMIN') {
       const url = `/espacios/${this.data.espacio.id}`;
@@ -49,9 +49,9 @@ export class ModalBorrarEspacioComponent {
       const description = `Operación exitosa`;
       this.deleteNotification(type, title, description);
     }
-
   }
 
+  // Notificacion
   deleteNotification(type: string, title: string, description: string): void {
     this.notification.create(type, title, description);
   }

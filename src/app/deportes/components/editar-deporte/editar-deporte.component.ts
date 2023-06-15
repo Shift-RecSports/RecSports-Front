@@ -13,13 +13,13 @@ import { ModalBorrarDeporteComponent } from '../../deporte-seleccionado/modal-bo
   styleUrls: ['./editar-deporte.component.css'],
 })
 export class EditarDeporteComponent implements OnInit {
-  formularioDeporte: FormGroup;
-  deporte: Deporte;
-  deporteId: String = '';
+  formularioDeporte: FormGroup; // Fromualrio del deporte
+  deporte: Deporte; // Deporte
+  deporteId: String = ''; // ID
 
-  selectedFiles?: FileList;
-  selectedFileNames: string[] = [];
-  preview: string = '';
+  selectedFiles?: FileList; // IMAGEN
+  selectedFileNames: string[] = []; // Nombre de la iamgen
+  preview: string = ''; // Previsualizacion
 
   constructor(
     private route: ActivatedRoute,
@@ -30,6 +30,7 @@ export class EditarDeporteComponent implements OnInit {
     public dialog: MatDialog
   ) {}
 
+  // Al iniciar la pagina, se hace un GET para obtener la informacion del Deporte
   ngOnInit() {
     this.formularioDeporte = this.formulario.group({
       id: [''],
@@ -65,6 +66,7 @@ export class EditarDeporteComponent implements OnInit {
     });
   }
 
+  // Selecciona la Imagen una vez que se sube
   selectFiles(event: any): void {
     this.selectedFileNames = [];
     this.selectedFiles = event.target.files;
@@ -82,6 +84,7 @@ export class EditarDeporteComponent implements OnInit {
     }
   }
 
+  // Se obtiene la informacion en FORM DATA y se realiza el PUT para actualizar el deporte
   enviarDatos() {
     console.log('Boton presionado');
     console.log(this.formularioDeporte.value);

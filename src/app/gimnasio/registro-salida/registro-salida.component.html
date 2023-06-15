@@ -1,9 +1,14 @@
+<!-- Contenedor de la pagina Registro de Salida -->
 <div class="grid-container">
+  <!-- Al hacer click en cualquier parte la pagina, se selecciona por defecto el Input de Registro -->
   <div class="registro-container" (click)="onScannerFocusInput()">
+    <!-- Tarjeta de Registro -->
     <div class="gimnasio-registro-box">
       <div class="gimnasio-registro-title">Registro: Salida</div>
 
+      <!-- Input de Registro de Salida -->
       <mat-form-field appearance="outline" class="registro-matricula-container">
+        <!-- Cuando se detecta el lector de codigo de barras, se ejecuta en automatico la funcion onScannerInput -->
         <input
           id="salida-box"
           matInput
@@ -14,6 +19,7 @@
         />
       </mat-form-field>
 
+      <!-- Boton para registrar Entrada -->
       <button
         *ngIf="loading == false"
         mat-button
@@ -23,6 +29,7 @@
         <div class="button-registro-text">Registrar entrada</div>
       </button>
 
+      <!-- Boton de carga -->
       <button
         *ngIf="loading"
         mat-button

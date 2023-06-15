@@ -1,21 +1,27 @@
 <div style="padding-right: 1rem; padding-left: 1rem">
-<div class="title">
-    Aforo actual del gimnasio
-</div>
-<div class="outer-chart-div">
-    <nz-progress [nzStrokeColor]="{ '100%': '#0033A0' }" [nzPercent]="percent" nzType="circle" [nzWidth]="190" [nzStrokeWidth]="13"></nz-progress>
-    <div class="fraccion">
-        {{actual}} / {{aforo}}
-    </div>
+  <!-- Titulo de la grafica -->
+  <div class="title">Aforo actual del gimnasio</div>
+  <!-- GRAFICA DE PASTEL -->
+  <div class="outer-chart-div">
+    <!-- Grafica -->
+    <nz-progress
+      [nzStrokeColor]="{ '100%': '#0033A0' }"
+      [nzPercent]="percent"
+      nzType="circle"
+      [nzWidth]="190"
+      [nzStrokeWidth]="13"
+    ></nz-progress>
+    <!-- Informacion del aforo -->
+    <div class="fraccion">{{ actual }} / {{ aforo }}</div>
     <div class="labels-outer-div">
-        <div class="labels-text">
-            <mat-icon class="blue-label">stop</mat-icon>
-            Aforo actual
-        </div>
-        <div class="labels-text">
-            <mat-icon class="white-label">stop</mat-icon>
-            Aforo máximo
-        </div>
+      <div class="labels-text">
+        <mat-icon class="blue-label">stop</mat-icon>
+        Aforo actual
+      </div>
+      <div class="labels-text">
+        <mat-icon class="white-label">stop</mat-icon>
+        Aforo máximo
+      </div>
     </div>
-</div>
+  </div>
 </div>

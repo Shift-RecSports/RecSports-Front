@@ -1,18 +1,23 @@
+<!-- Contenedor de la Pagina Crendencial -->
 <div class="grid-container">
-    <div class="padding">
-        <p class="titulo-credencial">Credencial</p>
-        <div class="center">
-    
-            <div class="credencial">
-                <img class="logo" src="/assets/img/logo_tec_blanco.png" alt="TEC logo" />
-                <div class="barcode-container">
-                    <img id="barcode" class="barcode">
-                </div>
-                <div class="user-name">{{ user.nombre }}</div>
-            <div class="user-role">{{ user.userRole }}</div>
-    
-            </div>
-
+  <div class="padding">
+    <p class="titulo-credencial">Credencial</p>
+    <div class="center">
+      <!-- Logo Institucional -->
+      <div class="credencial">
+        <img
+          class="logo"
+          src="/assets/img/logo_tec_blanco.png"
+          alt="TEC logo"
+        />
+        <!-- Imagen del Codigo de Barras -->
+        <div class="barcode-container">
+          <img id="barcode" class="barcode" />
+        </div>
+        <!-- Detalles del usuario -->
+        <div class="user-name">{{ user.nombre }}</div>
+        <div class="user-role">{{ user.userRole }}</div>
+      </div>
     </div>
-   
-    </div>
+  </div>
+</div>

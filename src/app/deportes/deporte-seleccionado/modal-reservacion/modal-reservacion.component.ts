@@ -5,6 +5,7 @@ import { ApiService } from 'src/app/service/api.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
+// Tipo para una Reservacion
 interface reservacionType {
   reservacion: {
     id: string;
@@ -40,10 +41,10 @@ interface reservacionType {
   styleUrls: ['./modal-reservacion.component.css'],
 })
 export class ModalReservacionComponent {
-  showLoading: boolean = false;
-  showSucces: boolean = false;
-  showFailed: boolean = false;
-  errorMessage: string = '';
+  showLoading: boolean = false; // Bandera para mostrar caargando la peticion
+  showSucces: boolean = false; // Bandera para mostrar si es exitosa la peticion
+  showFailed: boolean = false; // Bandera para mostrar si fue fallida la peticion
+  errorMessage: string = ''; // Mensaje de Error
 
   constructor(
     public dialogRef: MatDialogRef<ModalReservacionComponent>,
@@ -54,10 +55,12 @@ export class ModalReservacionComponent {
     @Inject(MAT_DIALOG_DATA) public data: reservacionType
   ) {}
 
+  // Funcion para cerrar el modal
   onNoClick(): void {
     this.dialogRef.close();
   }
 
+  // Al confirmar la reservacion se ejecuta el POST para crear la reservacion
   onConfirmClick() {
     this.showLoading = true;
 
@@ -79,14 +82,15 @@ export class ModalReservacionComponent {
     }
   }
 
+  // Boton para cancelar la Reservacion, unicamente el ADMIN puede eliminar reservaciones de alumnos
   async onCancelReservacion() {
     if (this.service.isLoggedIn() && this.service.GetUserRole() == 'ADMIN') {
-      const url = `/reservaciones/${this.data.reservacion.id}`;
+      const url = `/reservaciones/cancelar/${this.data.reservacion.id}`;
 
-      this._apiService.delete(url).subscribe(
+      this._apiService.put(url, {}).subscribe(
         (data) => {
           const type = 'success';
-          const title = `Se cancelo la reservacion con exito`;
+          const title = `Se canceló la reservación con exito`;
           const description = `Se ha cancelado con exito`;
 
           this.createNotification(type, title, description);
@@ -94,7 +98,7 @@ export class ModalReservacionComponent {
         },
         (e) => {
           const type = 'error';
-          const title = `No se ha logrado cancelar la reservacion`;
+          const title = `No se ha logrado cancelar la reservación`;
           const description = e.error.message;
 
           this.createNotification(type, title, description);
@@ -104,11 +108,13 @@ export class ModalReservacionComponent {
     }
   }
 
+  // Funcion para redirigir al usuario a Reservaciones
   onMisReservacionesClick() {
     this.router.navigate(['/reservaciones']);
     this.dialogRef.close();
   }
 
+  // Funcion crear una notificacion
   createNotification(type: string, title: string, description: string): void {
     this.notification.create(type, title, description);
   }

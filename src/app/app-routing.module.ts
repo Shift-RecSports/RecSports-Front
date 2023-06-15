@@ -22,6 +22,7 @@ import { CredencialComponent } from './credencial/credencial.component';
 import { EditarDeporteComponent } from './deportes/components/editar-deporte/editar-deporte.component';
 import { EditarEspacioComponent } from './deportes/components/editar-espacio/editar-espacio.component';
 
+// Definicion de rutas de la pagina
 const routes: Routes = [
   {
     path: 'login',
@@ -30,97 +31,92 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard], // Incluye authguard: es necesario iniciar sesion previamente para accesar a esta ruta
   },
   {
     path: 'gimnasio',
     component: GimnasioComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard], // Incluye authguard: es necesario iniciar sesion previamente para accesar a esta ruta
   },
   {
     path: 'gimnasio/entrada',
     component: RegistroEntradaComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard], // Incluye authguard: es necesario iniciar sesion previamente para accesar a esta ruta
   },
   {
     path: 'gimnasio/salida',
     component: RegistroSalidaComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard], // Incluye authguard: es necesario iniciar sesion previamente para accesar a esta ruta
   },
   {
     path: 'deportes',
     component: DeportesComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard], // Incluye authguard: es necesario iniciar sesion previamente para accesar a esta ruta
   },
   {
     path: 'deportes/:id',
     component: DeporteSeleccionadoComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard], // Incluye authguard: es necesario iniciar sesion previamente para accesar a esta ruta
   },
   {
     path: 'deporte/nuevo',
     component: NuevoDeporteComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard], // Incluye authguard: es necesario iniciar sesion previamente para accesar a esta ruta
   },
   {
     path: 'editar-deporte/:id',
     component: EditarDeporteComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard], // Incluye authguard: es necesario iniciar sesion previamente para accesar a esta ruta
   },
   {
     path: 'editar-espacio/:id',
     component: EditarEspacioComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard], // Incluye authguard: es necesario iniciar sesion previamente para accesar a esta ruta
   },
   {
     path: 'espacios/nuevo',
     component: EspaciosFormularioComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard], // Incluye authguard: es necesario iniciar sesion previamente para accesar a esta ruta
   },
   {
     path: 'reservaciones',
     component: ReservacionesComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard], // Incluye authguard: es necesario iniciar sesion previamente para accesar a esta ruta
   },
   {
     path: 'credencial',
     component: CredencialComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard], // Incluye authguard: es necesario iniciar sesion previamente para accesar a esta ruta
   },
-  // {
-  //   path: 'calendario',
-  //   component: CalendarioComponent,
-  //
-  // },
   {
     path: 'noticias',
     component: NoticiasComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard], // Incluye authguard: es necesario iniciar sesion previamente para accesar a esta ruta
   },
   {
     path: 'mapa',
     component: MapaComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard], // Incluye authguard: es necesario iniciar sesion previamente para accesar a esta ruta
   },
   {
     path: 'encuesta',
     component: EncuestaComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard], // Incluye authguard: es necesario iniciar sesion previamente para accesar a esta ruta
   },
   {
     path: 'encuesta-admin',
     component: EncuestasAdminComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard], // Incluye authguard: es necesario iniciar sesion previamente para accesar a esta ruta
   },
   {
     path: 'home-entrenador',
     component: HomeEntrenadorComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard], // Incluye authguard: es necesario iniciar sesion previamente para accesar a esta ruta
   },
   {
     path: 'formulario-noticia',
     component: NuevaNoticiaComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard], // Incluye authguard: es necesario iniciar sesion previamente para accesar a esta ruta
   },
 ];
 

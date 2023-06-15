@@ -11,15 +11,15 @@ import { Subscription, switchMap, timer } from 'rxjs';
   templateUrl: './bar-chart.component.html',
   styleUrls: ['./bar-chart.component.css'],
 })
-
 export class BarChartComponent implements OnInit {
-  timerSubscription: Subscription;
+  timerSubscription: Subscription; // Subscripcion de tiempo para recargar la grafica de aforo actual
 
-  constructor(private _apiService: ApiService) { }
+  constructor(private _apiService: ApiService) {}
 
-  data: ConcurrenciaGimnasio[] = [];
+  data: ConcurrenciaGimnasio[] = []; // Datos de concurrencias del gimnasio para mostrar en la grafica de barras
   //num_semana!: number;
 
+  // Funcion para convertir un numero a un dia de la semana en espanol
   private convertNumDayToWeekDay(numDay: number) {
     if (numDay === 1) {
       return 'lunes';
@@ -39,18 +39,17 @@ export class BarChartComponent implements OnInit {
     // Add a default return statement here
     return ''; // Or any other default value or error handling
   }
-  
-//  selectedOption : String = this.convertNumDayToWeekDay(this.currentDayOfWeek);
-  currentDate: Date = new Date();
-  currentDayOfWeek = this.currentDate.getDay();
-  selectedOption :String = this.convertNumDayToWeekDay(this.currentDayOfWeek);
 
-  dia_semana: number = this.currentDayOfWeek;
+  currentDate: Date = new Date(); // Dia actual
+  currentDayOfWeek = this.currentDate.getDay(); // Dia actual de la semana
+  selectedOption: String = this.convertNumDayToWeekDay(this.currentDayOfWeek); // Dia seleccionado de la semana
+
+  dia_semana: number = this.currentDayOfWeek; // Dia de la semana seleccionado, se inicializa con el dia actual
 
   url: string = '';
   percent: any;
-  aforo: any;
-  actual: any;
+  aforo: any; // Aforo auxiliar
+  actual: any; // Aforo Actual auxiliar
 
   fechaInicio = new Date(2023, 1, 13);
   fechaFin = new Date(2023, 5, 25);
@@ -69,6 +68,7 @@ export class BarChartComponent implements OnInit {
     this.diasExcluidos
   );
 
+  // Obtiene el numero de la semana, es decir semana 1, semana 2, semana 3, semana 4, semana 5 o semana tec del bloque
   private getNumSemana(
     fechaInicio: Date,
     fechaFin: Date,
@@ -88,6 +88,7 @@ export class BarChartComponent implements OnInit {
     return ((weekNumber - 1) % 6) + 1; // Convert the value to the range of 1-6, looping back to 1 if it exceeds 6
   }
 
+  // Cambiar el timestamp a una hora numerica para desplegar
   public convertTimeToHour(timeString: string) {
     const hour = timeString.split(':')[0];
     return Number(hour);
@@ -197,6 +198,7 @@ export class BarChartComponent implements OnInit {
 
   private svg: any;
 
+  // Margen de la agrafica
   private margin = {
     top: 20,
     right: 20,
@@ -204,8 +206,8 @@ export class BarChartComponent implements OnInit {
     left: 30,
   };
 
-  private width = 820 - this.margin.left - this.margin.right;
-  private height = 320 - this.margin.top - this.margin.bottom;
+  private width = 820 - this.margin.left - this.margin.right; // Ancho de la grafica
+  private height = 320 - this.margin.top - this.margin.bottom; // Altura de la grafica
 
   private timeParser = timeParse('%Y%m%d %H:%M:%S');
   public hourParser = timeParse('%H:%M:%S');
@@ -222,6 +224,7 @@ export class BarChartComponent implements OnInit {
   private xAxis = d3.axisBottom<Number>(this.x);
   //.tickFormat(d3.timeFormat("%H"));
 
+  // DefinicioN del eje Y DE LA GRAFICA
   private yAxis = d3
     .axisLeft(this.y)
     .tickSize(-this.width)
@@ -230,6 +233,7 @@ export class BarChartComponent implements OnInit {
     .tickSizeInner(-this.width)
     .tickSizeOuter(0);
 
+  // Creacion del SVG de la grafica
   private createSvg(): void {
     this.svg = d3
       .select(document.querySelector('#chart-container'))
@@ -243,14 +247,15 @@ export class BarChartComponent implements OnInit {
       );
   }
 
+  // Creacion de las bnarras de la grafica
   private drawBars(data: ConcurrenciaGimnasio[]): void {
     //console.log("Draw Bars: " + this.data);
     // Create the X-axis band scale
 
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-    const day = currentDate.getDate().toString().padStart(2, '0');
+    const currentDate = new Date(); // Dia en formato DATE
+    const year = currentDate.getFullYear(); // Year actual
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Mes actual
+    const day = currentDate.getDate().toString().padStart(2, '0'); // Dia actual
     const currentDateStr = `${year}${month}${day}`;
 
     var x = d3
@@ -332,7 +337,6 @@ export class BarChartComponent implements OnInit {
       .attr('rx', 5) // add rounded edges
       .attr('ry', 5)
       .attr('fill', '#e8e8e8');
-
 
     //This is Real Time Data bar
     const bars1 = this.svg
@@ -428,10 +432,13 @@ export class BarChartComponent implements OnInit {
 
     */
 
-
-    //Pass current date and corresponding week 
+    //Pass current date and corresponding week
     this.changeDateSelected(this.num_semana, this.dia_semana);
-    console.log("DEBUG: Get day/week of the week: ", this.num_semana, this.dia_semana);
+    console.log(
+      'DEBUG: Get day/week of the week: ',
+      this.num_semana,
+      this.dia_semana
+    );
   }
 
   onOptionChange() {
@@ -457,6 +464,10 @@ export class BarChartComponent implements OnInit {
     //Pass current date and corresponding week based on ribbon date change
     this.changeDateSelected(this.num_semana, this.dia_semana);
 
-    console.log("DEBUG: Get day/week of the week: ", this.num_semana, this.dia_semana)
+    console.log(
+      'DEBUG: Get day/week of the week: ',
+      this.num_semana,
+      this.dia_semana
+    );
   }
 }

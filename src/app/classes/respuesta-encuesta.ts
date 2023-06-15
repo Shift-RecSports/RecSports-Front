@@ -1,3 +1,4 @@
+// ENCUESTA
 export class RespuestaEncuesta {
   id: string;
   fecha: string;
@@ -6,8 +7,16 @@ export class RespuestaEncuesta {
   calificacion3: number;
   tema: string;
   comentario: string;
-  
-  constructor(id: string, fecha: string, calificacion1: number, calificacion2: number, tema: string, calificacion3: number, comentario: string) {
+
+  constructor(
+    id: string,
+    fecha: string,
+    calificacion1: number,
+    calificacion2: number,
+    tema: string,
+    calificacion3: number,
+    comentario: string
+  ) {
     this.id = id;
     this.fecha = fecha;
     this.calificacion1 = calificacion1;

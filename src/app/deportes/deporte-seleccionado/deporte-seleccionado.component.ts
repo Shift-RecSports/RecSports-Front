@@ -12,6 +12,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { distinctUntilChanged, map, shareReplay, tap } from 'rxjs/operators';
 
+// Interfaz para la creacion de una nueva reservacion
 interface newHorarioReservacion {
   disabled: boolean;
   id: string;
@@ -42,6 +43,7 @@ interface newHorarioReservacion {
     | '22:00:00';
 }
 
+// Horarios disponibes para reservaciones
 type MyType = {
   '06:00:00': newHorarioReservacion[];
   '07:00:00': newHorarioReservacion[];
@@ -62,6 +64,7 @@ type MyType = {
   '22:00:00': newHorarioReservacion[];
 };
 
+// Arreglo de Horarios disponibles para mostrar en la tabla de reservaciones
 type arrOfHorarios =
   | '06:00:00'
   | '07:00:00'
@@ -90,14 +93,14 @@ export class DeporteSeleccionadoComponent {
   // Routing
   private sub: any;
   private sub2: any;
-  deporte: Deporte;
+  deporte: Deporte; // Informacion del deporte seleccionado
 
-  listaEspacios: Espacio[] = [];
+  listaEspacios: Espacio[] = []; // Lista de espacios disponibles para el espacio
   url: string = '';
 
   displayedColumns: string[] = ['demo-position', 'demo-name'];
 
-  horariosDisponibles: newHorarioReservacion[] = [];
+  horariosDisponibles: newHorarioReservacion[] = []; // Arreglo de Reservervaciones (horario) por cada Hora
   arrayReservacion: MyType = {
     '06:00:00': [],
     '07:00:00': [],
@@ -118,19 +121,20 @@ export class DeporteSeleccionadoComponent {
     '22:00:00': [],
   };
 
-  dataSource: arrOfHorarios[] = [];
+  dataSource: arrOfHorarios[] = []; // Reservaciones mostradas en la tabla de reservaciones
 
-  showEditButton = false;
-  showAddEspacio = false;
-  showAllReservaciones = false;
-  showDeleteEspacio = false;
+  showEditButton = false; // Bandera para mostrar el boton de edicion, unicamente para ADMIN
+  showAddEspacio = false; // Bandera para mostrar el boton de anadir espacio, unicamente para ADMIN
+  showAllReservaciones = false; // Bandera para mostrar todas las reservaciones con cualquier estatus, unicamente para ADMIN
+  showDeleteEspacio = false; // Bandera para mostrar el boton para borrar un espacio
 
-  selectedDay: number = 5;
-  todayDay: number = 0;
-  daySelected: string = '';
-  daysOfTheWeek: Date[] = [];
-  todayDate: Date = new Date();
+  selectedDay: number = 5; // Dia de la semana seleccionado para mostrar las reservaciones disponibles
+  todayDay: number = 0; // Dia actual
+  daySelected: string = ''; // Dia seleccionado
+  daysOfTheWeek: Date[] = []; // Dia de la Semana en formato DATE
+  todayDate: Date = new Date(); // Dia actual en formato DATE
   daysOfTheWeekInString = [
+    // String de dia para mostrar en la UI
     'Dom.',
     'Lun.',
     'Mar.',
@@ -140,7 +144,7 @@ export class DeporteSeleccionadoComponent {
     'Sab.',
   ];
 
-  currentBreakpoint: string = '';
+  currentBreakpoint: string = ''; // Breakpoint para detectar si la vista es movil o de orderandor
   panelOpenState = false;
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.XSmall)
@@ -157,6 +161,7 @@ export class DeporteSeleccionadoComponent {
     private route: ActivatedRoute,
     private _apiService: ApiService
   ) {
+    // Si el usuario es tipo ADMIN, entonces activa las banderas
     if (this.service.isLoggedIn() && this.service.GetUserRole() == 'ADMIN') {
       this.showEditButton = true;
       this.showAddEspacio = true;
@@ -165,11 +170,13 @@ export class DeporteSeleccionadoComponent {
     }
   }
 
+  // Al iniciar la pagina, se realiza la peticion para obtener la informacion del deporte seleccionado
   ngOnInit() {
     const today = new Date();
     this.daySelected = this.DateToString(today);
     this.initializeDate(today);
 
+    // Informacion del Deporte
     this.sub = this.route.params.subscribe((params) => {
       const url = `/deportes/${params['id']}`;
       this._apiService.get(url).subscribe((data) => {
@@ -179,10 +186,12 @@ export class DeporteSeleccionadoComponent {
           this.deporte.imagen
         );
 
+        // Espacios disponbibles para el DDeporte
         this.url = `/espacios/deporte/${params['id']}`;
         this._apiService.get(this.url).subscribe((data) => {
           this.listaEspacios = data;
 
+          // Se almacena la informacion de los espacio en el arreglo listaEspacios
           for (let i = 0; i < this.listaEspacios.length; i++) {
             this.listaEspacios[i].imagen = this._apiService.getImage(
               '/espacios',
@@ -194,12 +203,14 @@ export class DeporteSeleccionadoComponent {
       });
     });
 
+    // Peticion a la API para obtener las reservaciones disponibles para el deporte
     this.sub2 = this.route.params.subscribe((params) => {
       const url = `/reservaciones/deporte=${params['id']}/fecha=${this.daySelected}`;
 
       this._apiService.get(url).subscribe((data) => {
         this.horariosDisponibles = data;
 
+        // Si la bandera esta activa, entonces se muestran todas las reservaciones para ADMIN
         if (this.showAllReservaciones) {
           this.horariosDisponibles.forEach((reservacion) => {
             console.log(reservacion);
@@ -207,6 +218,8 @@ export class DeporteSeleccionadoComponent {
               reservacion
             );
           });
+
+          // Si la bandera no esta activa, entonces solo se muestran las reservaciones con estatus libre para el ALUMNO
         } else {
           this.horariosDisponibles.forEach((reservacion) => {
             if (reservacion.estatus == 1) {
@@ -217,6 +230,7 @@ export class DeporteSeleccionadoComponent {
           });
         }
 
+        // Se almcenan las reservaciones en el dataSource para mostrar en la tabla
         this.dataSource = Object.keys(this.arrayReservacion) as arrOfHorarios[];
       });
     });
@@ -227,6 +241,7 @@ export class DeporteSeleccionadoComponent {
     this.sub2.unsubscribe();
   }
 
+  // Se inicializa la informacion del dia
   initializeDate(day: Date = new Date()) {
     this.todayDate = day;
     this.todayDay = day.getDay();
@@ -243,6 +258,7 @@ export class DeporteSeleccionadoComponent {
     ];
   }
 
+  // Funcion para cambiar el Date a un string para desplegar al usuario
   DateToString(day: Date = new Date()) {
     const DateString = `${day.getFullYear()}-${
       day.getMonth() + 1 < 10 ? `0${day.getMonth() + 1}` : day.getMonth() + 1
@@ -251,6 +267,7 @@ export class DeporteSeleccionadoComponent {
     return DateString;
   }
 
+  // Al seleccionar un dia se realiza la peticion de reserrvaciones para el dia seleccionado y se actualiza la informacion en la tabla
   onSelectDay(day: number) {
     this.selectedDay = day;
     this.daySelected = this.DateToString(this.daysOfTheWeek[this.selectedDay]);
@@ -302,26 +319,31 @@ export class DeporteSeleccionadoComponent {
     });
   }
 
+  // Funcion para activar el modal de Reservacion
   openDialog(reservacion: newHorarioReservacion): void {
     const dialogRef = this.dialog.open(ModalReservacionComponent, {
       data: { reservacion: reservacion, refreshDay: this.onSelectDay },
     });
   }
 
+  // Funcion para Activar el modal de Borrar un espacio
   openDeleteEspacio(espacio: Espacio): void {
     const dialogRef = this.dialog.open(ModalBorrarEspacioComponent, {
       data: { espacio: espacio },
     });
   }
 
+  // Funcion para redirigir al usuarrio a la pagina de editar un deporte
   onEditDeporte(deportedId: Deporte) {
     this.router.navigate([`/editar-deporte/${deportedId.id}`]);
   }
 
+  // Funcion para redirigir al usuarrio a la pagina de editar un espacio
   onEditEspacio(espacioId: Espacio) {
     this.router.navigate([`/editar-espacio/${espacioId.id}`]);
   }
 
+  // Funcion para redirigir al usuarrio a la pagina de crear un deporte
   onCrearEspacio() {
     this.router.navigate(['/espacios/nuevo']);
   }

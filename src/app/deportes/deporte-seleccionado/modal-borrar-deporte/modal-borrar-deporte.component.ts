@@ -13,9 +13,8 @@ interface espacioType {
 @Component({
   selector: 'app-modal-borrar-deporte',
   templateUrl: './modal-borrar-deporte.component.html',
-  styleUrls: ['./modal-borrar-deporte.component.css']
+  styleUrls: ['./modal-borrar-deporte.component.css'],
 })
-
 export class ModalBorrarDeporteComponent {
   showLoading: boolean = false;
   showSucces: boolean = false;
@@ -28,12 +27,13 @@ export class ModalBorrarDeporteComponent {
     private router: Router,
     private notification: NzNotificationService,
     @Inject(MAT_DIALOG_DATA) public data: espacioType
-  ) { }
+  ) {}
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
+  // Modal para borrar un deporte
   async onCancelReservacion() {
     if (this.service.isLoggedIn() && this.service.GetUserRole() == 'ADMIN') {
       const url = `/deportes/${this.data.deporte.id}`;
@@ -49,11 +49,10 @@ export class ModalBorrarDeporteComponent {
       const description = `Operación exitosa`;
       this.deleteNotification(type, title, description);
     }
-
   }
 
+  // Notificacon
   deleteNotification(type: string, title: string, description: string): void {
     this.notification.create(type, title, description);
   }
 }
-
