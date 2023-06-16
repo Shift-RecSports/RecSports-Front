@@ -1,16 +1,11 @@
-// export class DeporteItem {
-//   idDeporte: string;
-//   nombre: string;
-//   areas: string[]; // Areas - CBD1, CBD2
-//   imagen: string;
-// }
-
+// ESPACIO
 export class EspacioItem {
   idEspacio: string;
   nombre: string;
   area: string;
 }
 
+// NUEVO DEPORTE
 export class newDeporte {
   nombre: string;
   espacios: string[]; // idEspacios
@@ -18,6 +13,7 @@ export class newDeporte {
   descripcion: string;
 }
 
+// DEPORTE
 export class Deporte {
   id: string;
   nombre: string;

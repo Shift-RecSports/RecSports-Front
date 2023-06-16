@@ -11,11 +11,11 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
   styleUrls: ['./nuevo-deporte.component.css'],
 })
 export class NuevoDeporteComponent {
-  formularioDeporte: FormGroup = new FormGroup({});
+  formularioDeporte: FormGroup = new FormGroup({}); // Formulario del Deporte
 
-  selectedFiles?: FileList;
-  selectedFileNames: string[] = [];
-  preview: string = '';
+  selectedFiles?: FileList; // IMAGEN
+  selectedFileNames: string[] = []; // Nombre de la imagen
+  preview: string = ''; // Previsualizacion de la Imagen
 
   constructor(
     private service: AuthService,
@@ -25,6 +25,7 @@ export class NuevoDeporteComponent {
     private notification: NzNotificationService
   ) {}
 
+  // Al iniciar la pagina, se inicializa el formulario vacio
   ngOnInit() {
     this.formularioDeporte = this.formulario.group({
       nombre: ['', Validators.required],
@@ -35,6 +36,7 @@ export class NuevoDeporteComponent {
     });
   }
 
+  // Se selecciona una la imagen
   selectFiles(event: any): void {
     this.selectedFileNames = [];
     this.selectedFiles = event.target.files;
@@ -52,6 +54,7 @@ export class NuevoDeporteComponent {
     }
   }
 
+  // Funcion para convertir la informacion en un FORMDATA y generar una peticion POST a la API
   enviarDatos() {
     console.log('Boton presionado');
     console.log(this.formularioDeporte.value);
@@ -123,6 +126,7 @@ export class NuevoDeporteComponent {
     }
   }
 
+  // Crear notificacion
   createNotification(type: string, title: string, description: string): void {
     this.notification.create(type, title, description);
   }

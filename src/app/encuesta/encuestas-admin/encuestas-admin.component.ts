@@ -11,23 +11,25 @@ interface Promedios {
 @Component({
   selector: 'app-encuestas-admin',
   templateUrl: './encuestas-admin.component.html',
-  styleUrls: ['./encuestas-admin.component.css']
+  styleUrls: ['./encuestas-admin.component.css'],
 })
 export class EncuestasAdminComponent implements OnInit {
-  respuestasEncuesta: RespuestaEncuesta[] = [];
+  respuestasEncuesta: RespuestaEncuesta[] = []; // Lista de respuesta de la encuesta
   promediosEncuesta: Promedios = {
+    // Promedios
     promedio1: 0,
     promedio2: 0,
-    promedio3: 0
+    promedio3: 0,
   };
   //arreglo para numeros abajo de slider
   tickValues = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   //valor de promedio de slider hardcodeado
-  value = 8
+  value = 8;
 
-  constructor(private _apiService: ApiService){}
+  constructor(private _apiService: ApiService) {}
 
+  // Al iniciar la pagina, se realiza una peticion GET para obtener la nformacion de las encuestas
   ngOnInit() {
     const url1 = '/encuestas/promedios';
     this._apiService.get(url1).subscribe((data1) => {

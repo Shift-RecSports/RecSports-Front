@@ -12,18 +12,18 @@ import { Subscription, switchMap, timer } from 'rxjs';
 export class DonutChartComponent implements OnInit {
   //aforo: Aforo = new Aforo(0, 1);
 
-  aforo: number = 0;
-  total: number = 0;
-  actual: number = 0;
-  percent: number = 0;
+  aforo: number = 0; // Afoto
+  total: number = 0; // Aforo total posible
+  actual: number = 0; // Aforo actual
+  percent: number = 0; // Porcetanke del aforo (Aforo actual / Aforo total)
 
-  constructor(private _apiService: ApiService) { }
+  constructor(private _apiService: ApiService) {}
 
-  timerSubscription: Subscription;
+  timerSubscription: Subscription; // Subscripcion de tiempo para refrescar la pagina
 
+  // Al iniciar la pagina, se ejecuta un GET para obtener la informacion del aforo desde la API
   ngOnInit(): void {
     const url = '/registros-gimnasio/aforo/actual';
-
     this.timerSubscription = timer(0, 900000)
       .pipe(switchMap(() => this._apiService.get(url)))
       .subscribe((data) => {

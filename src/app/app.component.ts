@@ -11,10 +11,12 @@ export class AppComponent {
 
   showSidebar: boolean;
 
+  // Booleano para visualizar o no labarra de navegación vertical
   constructor(private router: Router) {
     this.showSidebar = false;
   }
 
+  // Si se encuentra en cualquier página que no sea la de Inicio de Sesión, entonces se muestra la barra de navegación vertical
   ngOnInit() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {

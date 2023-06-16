@@ -1,5 +1,7 @@
+<!-- Modal para crear una notificacion -->
 <div mat-dialog-content class="modal-container">
   <div class="modal-header">
+    <!-- Se muestra el titulo de Activo, Fallido y cargando -->
     <div
       *ngIf="showLoading == false && showFailed == false && showSucces == false"
       class="modal-title title-info"
@@ -25,6 +27,7 @@
       Reservacion fallida
     </div>
 
+    <!-- Boton para cerrar el modal -->
     <div>
       <button
         mat-mini-fab
@@ -37,17 +40,20 @@
     </div>
   </div>
 
+  <!-- Se muestran los detalles de la Reservacion -->
   <div
     *ngIf="
       (showLoading == false && showFailed == false && showSucces == false) ||
       showSucces
     "
   >
+    <!-- FECHA -->
     <div class="modal-info">
       <span class="modal-title">Fecha: </span>
       <span class="modal-text">{{ this.data.reservacion.fecha }}</span>
     </div>
 
+    <!-- HORA -->
     <div>
       <span class="modal-title">Hora: </span>
       <span class="modal-text">{{
@@ -55,16 +61,19 @@
       }}</span>
     </div>
 
+    <!-- ESPACIO -->
     <div>
       <span class="modal-title">Cancha: </span>
       <span class="modal-text">{{ this.data.reservacion.espacio_nombre }}</span>
     </div>
 
+    <!-- AREA -->
     <div>
       <span class="modal-title">Zona: </span>
       <span class="modal-text">{{ this.data.reservacion.zona }}</span>
     </div>
 
+    <!-- ALUMNO en caso de que este reservado por un alumno, muestra el alumno -->
     <div *ngIf="this.data.reservacion.estatus == '2'">
       <span class="modal-title">Alumno: </span>
       <span class="modal-text">{{
@@ -72,16 +81,20 @@
       }}</span>
     </div>
 
+    <!-- Modal de Exito -->
     <div *ngIf="showSucces">
       <span class="modal-text remainder-text"
         >Tienes 15 minutos de tolerancia para tu reservación</span
       >
     </div>
   </div>
+
+  <!-- Detalles para confirmar la reservacion -->
   <div
     class="modal-confirmar"
     *ngIf="showLoading == false && showFailed == false && showSucces == false"
   >
+    <!-- Boton de Confirmacion -->
     <button
       *ngIf="this.data.reservacion.estatus == '1'"
       color="confirm-button"
@@ -91,6 +104,7 @@
       Confirmar Reservación
     </button>
 
+    <!-- Boton para cancelara la Reserevacion para el Admin -->
     <button
       *ngIf="this.data.reservacion.estatus == '2'"
       color="cancel-reservacion-button"
@@ -101,6 +115,7 @@
     </button>
   </div>
 
+  <!-- Boton para navegar a mis reservaciones -->
   <div class="modal-confirmar" *ngIf="showSucces">
     <button
       color="success-button"

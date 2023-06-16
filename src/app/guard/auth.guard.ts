@@ -15,7 +15,7 @@ import { AuthService } from '../service/auth.service';
 export class AuthGuard implements CanActivate {
   constructor(private service: AuthService, private router: Router) {}
 
-  // TODO: Search for specific routes that a certain user cannot access
+  // Si el usuario tiene credenciales validas, entonces puede entrar a la pagina seleccionada
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -25,8 +25,10 @@ export class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
     if (this.service.isLoggedIn()) {
+      // Si el usuario ha iniciado sesion, entonces puede entrar a la ruta especificada
       return true;
     } else {
+      // Si el usuario no ha iniciado sesion y quiere navegar a una ruta, sera redirigido a la pagina de inicio de sesion
       this.router.navigate(['login']);
       return false;
     }

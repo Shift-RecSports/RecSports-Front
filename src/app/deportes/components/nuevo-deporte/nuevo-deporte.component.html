@@ -1,9 +1,15 @@
+<!-- Contenedor para crear un nuevo deporte -->
 <div class="grid-container">
   <div class="nuevo-deporte-container">
     <div class="nuevo-container">
       <div class="nuevo-header">Crear nuevo deporte</div>
 
-      <form class="nuevo-form" [formGroup]="formularioDeporte" (ngSubmit)="enviarDatos()">
+      <!-- Formulario para crear un deporte -->
+      <form
+        class="nuevo-form"
+        [formGroup]="formularioDeporte"
+        (ngSubmit)="enviarDatos()"
+      >
         <div>
           <div nz-row>
             <!-- NOMBRE  -->
@@ -18,14 +24,24 @@
             >
               <div class="nuevo-form-title">Nombre del deporte</div>
               <mat-form-field appearance="outline" class="input-container">
-                <input matInput placeholder="Escribe..." formControlName="nombre" class="custom-input" />
+                <input
+                  matInput
+                  placeholder="Escribe..."
+                  formControlName="nombre"
+                  class="custom-input"
+                />
               </mat-form-field>
-              <div *ngIf="formularioDeporte.get('nombre')?.invalid && formularioDeporte.get('nombre')?.touched"
-              class="error-text">
-              Ingrese un nombre
+              <div
+                *ngIf="
+                  formularioDeporte.get('nombre')?.invalid &&
+                  formularioDeporte.get('nombre')?.touched
+                "
+                class="error-text"
+              >
+                Ingrese un nombre
               </div>
             </div>
-  
+
             <!-- DURACION  -->
             <div
               nz-col
@@ -38,11 +54,21 @@
             >
               <div class="nuevo-form-title">Duracion</div>
               <mat-form-field appearance="outline" class="input-container">
-                <input matInput placeholder="Escribe..." formControlName="duracion" class="custom-input" />
+                <input
+                  matInput
+                  placeholder="Escribe..."
+                  formControlName="duracion"
+                  class="custom-input"
+                />
               </mat-form-field>
-              <div *ngIf="formularioDeporte.get('duracion')?.invalid && formularioDeporte.get('duracion')?.touched"
-              class="error-text">
-              Ingrese una duración
+              <div
+                *ngIf="
+                  formularioDeporte.get('duracion')?.invalid &&
+                  formularioDeporte.get('duracion')?.touched
+                "
+                class="error-text"
+              >
+                Ingrese una duración
               </div>
             </div>
 
@@ -61,16 +87,21 @@
                 <input
                   matInput
                   placeholder="Escribe..."
-                  formControlName="materiales" 
+                  formControlName="materiales"
                   class="custom-input"
                 />
               </mat-form-field>
-              <div *ngIf="formularioDeporte.get('materiales')?.invalid && formularioDeporte.get('materiales')?.touched"
-              class="error-text">
-              Ingrese materiales
+              <div
+                *ngIf="
+                  formularioDeporte.get('materiales')?.invalid &&
+                  formularioDeporte.get('materiales')?.touched
+                "
+                class="error-text"
+              >
+                Ingrese materiales
               </div>
             </div>
-  
+
             <!-- DESCRIPCION  -->
             <div
               nz-col
@@ -86,16 +117,21 @@
                 <input
                   matInput
                   placeholder="Escribe..."
-                  formControlName="descripcion" 
+                  formControlName="descripcion"
                   class="custom-input"
                 />
               </mat-form-field>
-              <div *ngIf="formularioDeporte.get('descripcion')?.invalid && formularioDeporte.get('descripcion')?.touched"
-              class="error-text">
-              Ingrese una descripción
+              <div
+                *ngIf="
+                  formularioDeporte.get('descripcion')?.invalid &&
+                  formularioDeporte.get('descripcion')?.touched
+                "
+                class="error-text"
+              >
+                Ingrese una descripción
               </div>
             </div>
-  
+
             <div
               nz-col
               nzXs="24"
@@ -106,36 +142,61 @@
               class="nuevo-form-item"
             >
               <div class="nuevo-form-title">Carga de archivos</div>
-  
+
               <!-- CARGA DE IMAGEN -->
               <mat-form-field appearance="outline" class="input-container">
                 <mat-toolbar>
                   <div>
                     <input hidden matInput />
-                    <input style="width: 100%; background-color: white" type="file" id="fileInput" name="fileInput"
-                      accept="image/*" (change)="selectFiles($event)" formControlName="imagen" required />
+                    <input
+                      style="width: 100%; background-color: white"
+                      type="file"
+                      id="fileInput"
+                      name="fileInput"
+                      accept="image/*"
+                      (change)="selectFiles($event)"
+                      formControlName="imagen"
+                      required
+                    />
                     <div class="image-text">
                       <span class="drop-image-text">Arrastra y suelta o </span>
-                      <span class="navigate-image-text">Navega dispositivo</span>
+                      <span class="navigate-image-text"
+                        >Navega dispositivo</span
+                      >
                     </div>
                   </div>
                 </mat-toolbar>
               </mat-form-field>
-              <div *ngIf="formularioDeporte.get('imagen')?.invalid && formularioDeporte.get('imagen')?.touched"
-                class="error-text">
+              <div
+                *ngIf="
+                  formularioDeporte.get('imagen')?.invalid &&
+                  formularioDeporte.get('imagen')?.touched
+                "
+                class="error-text"
+              >
                 Seleccione una imagen
               </div>
               <div *ngIf="preview != ''" class="nuevo-form-archivo">
                 <b>Imagen:</b> {{ selectedFileNames[0] }}
               </div>
             </div>
-  
-            <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12" class="nuevo-form-item">
+
+            <div
+              nz-col
+              nzXs="24"
+              nzSm="24"
+              nzMd="12"
+              nzLg="12"
+              nzXl="12"
+              class="nuevo-form-item"
+            >
               <div *ngIf="preview != ''" class="image-preview">
                 <div class="preview-container">
                   <div class="preview-filter">
-                    <div class="title_container"> 
-                      <div class="nombre_canchas capitals">WELLNESS CENTER & CDB1</div>
+                    <div class="title_container">
+                      <div class="nombre_canchas capitals">
+                        WELLNESS CENTER & CDB1
+                      </div>
                       <div class="nombre_deporte capitals">BÁSQUETBOL</div>
                     </div>
                     <div class="reserva_ahora capitals">RESERVA AHORA</div>
@@ -144,7 +205,7 @@
                 </div>
               </div>
             </div>
-  
+
             <!-- BUTTONS  -->
             <div
               nz-col

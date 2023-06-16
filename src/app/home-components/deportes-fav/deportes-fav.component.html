@@ -1,24 +1,41 @@
+<!-- Contenerdor para componente Deportes favoritos -->
 <div *ngIf="showedDeportes.length == 0" class="deportes-empty">
-  <img class="deportes-empty-icon" src="./assets/img/recsports_logo_icon.png" alt="" />
+  <img
+    class="deportes-empty-icon"
+    src="./assets/img/recsports_logo_icon.png"
+    alt=""
+  />
   <div class="deportes-empty-text">No se encontraron resultados</div>
 </div>
 
+<!-- Se  muestran en tarjetas los deportes favoritos obtenidos de la API -->
 <div nz-row>
-  <div nz-col nzXs="12" nzSm="12" nzMd="6" nzLg="6" nzXl="6" *ngFor="let deporte of showedDeportes">
+  <div
+    nz-col
+    nzXs="12"
+    nzSm="12"
+    nzMd="6"
+    nzLg="6"
+    nzXl="6"
+    *ngFor="let deporte of showedDeportes"
+  >
     <div class="card-deporte">
       <button class="button" (click)="onSelectDeporte(deporte)">
         <div class="description">
-
           <div class="name_deporte">
             {{ deporte.nombre }}
           </div>
         </div>
-        <img [src]="deporte.imagen" onerror="this.onerror=null;this.src='./assets/img/recsports_logo_icon.png';"
-          class="image">
+
+        <!-- Imagen del deporte, en caso de que ocurra un error al recibir imagen, se muestra una por defecto -->
+        <img
+          [src]="deporte.imagen"
+          onerror="this.onerror=null;this.src='./assets/img/recsports_logo_icon.png';"
+          class="image"
+        />
       </button>
     </div>
   </div>
 </div>
-
 
 <!-- [src]="deporte.imagen" -->

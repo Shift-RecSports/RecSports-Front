@@ -1,38 +1,40 @@
-<div style="padding-right: 1rem; padding-left: 1rem" >
-<div class="upper-div">
-    <div class="title">
-        Pronóstico del aforo del gimnasio
-    </div>
+<div style="padding-right: 1rem; padding-left: 1rem">
+  <div class="upper-div">
+    <!-- Cnomponente Grafica de pronostica historico del gimnasio  -->
+    <div class="title">Pronóstico del aforo del gimnasio</div>
     <div class="upper-right-div">
-        <div>
-            <nz-select [(ngModel)]="selectedOption" (ngModelChange)="onOptionChange()">
-                <nz-option nzValue="lunes" nzLabel="Lunes"></nz-option>
-                <nz-option nzValue="martes" nzLabel="Martes"></nz-option>
-                <nz-option nzValue="miercoles" nzLabel="Miércoles"></nz-option>
-                <nz-option nzValue="jueves" nzLabel="Jueves"></nz-option>
-                <nz-option nzValue="viernes" nzLabel="Viernes"></nz-option>
-                <nz-option nzValue="sabado" nzLabel="Sábado"></nz-option>
-                <nz-option nzValue="domingo" nzLabel="Domingo"></nz-option>
-            </nz-select>
-        </div>
-        <div class="realtime-minicard">
-            <div class="realtime-minicard-text">
-                TIEMPO REAL
-            </div>
-        </div>
+      <!-- Dropdown para seleccionar una fecha para recargar la grafica  -->
+      <div>
+        <nz-select
+          [(ngModel)]="selectedOption"
+          (ngModelChange)="onOptionChange()"
+        >
+          <nz-option nzValue="lunes" nzLabel="Lunes"></nz-option>
+          <nz-option nzValue="martes" nzLabel="Martes"></nz-option>
+          <nz-option nzValue="miercoles" nzLabel="Miércoles"></nz-option>
+          <nz-option nzValue="jueves" nzLabel="Jueves"></nz-option>
+          <nz-option nzValue="viernes" nzLabel="Viernes"></nz-option>
+          <nz-option nzValue="sabado" nzLabel="Sábado"></nz-option>
+          <nz-option nzValue="domingo" nzLabel="Domingo"></nz-option>
+        </nz-select>
+      </div>
+      <div class="realtime-minicard">
+        <div class="realtime-minicard-text">TIEMPO REAL</div>
+      </div>
     </div>
-    
-</div>
-    <div style="display: flex" class = "sashaCenteredBarchart">
-        <div class="container">
-            <p class="vertical-text">Cantidad de personas</p>
-        </div>
-        
-        <div>
-            <div id="chart-container"></div>
-            <p class="horizontal-text">Hora</p>
-        </div>
+
+    <!-- Grafica de Barras pronsotico  -->
+  </div>
+  <div style="display: flex" class="sashaCenteredBarchart">
+    <div class="container">
+      <p class="vertical-text">Cantidad de personas</p>
     </div>
+
+    <div>
+      <div id="chart-container"></div>
+      <p class="horizontal-text">Hora</p>
+    </div>
+  </div>
 </div>
 
 <!--

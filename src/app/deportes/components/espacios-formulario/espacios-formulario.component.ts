@@ -18,16 +18,17 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
   styleUrls: ['./espacios-formulario.component.css'],
 })
 export class EspaciosFormularioComponent {
-  formularioEspacios: FormGroup = new FormGroup({});
-  areas = new FormControl('');
-  options: string[] = ['CBD1', 'CBD2', 'Wellness Center'];
+  formularioEspacios: FormGroup = new FormGroup({}); // Formulario de Espacios
+  areas = new FormControl(''); // Areas
+  options: string[] = ['CBD1', 'CBD2', 'Wellness Center']; // Opciones de Area
 
-  selectedFiles?: FileList;
-  selectedFileNames: string[] = [];
-  preview: string = '';
+  selectedFiles?: FileList; // IMAGEN
+  selectedFileNames: string[] = []; // Nombre de la imagen
+  preview: string = ''; // Previsualizacion de la imagen
 
-  listaDeportes: Deporte[] = [];
+  listaDeportes: Deporte[] = []; // Llista de Deportes para agregarlo al espacio
 
+  // Horarios
   horarios = new FormControl('');
   horariosSelected: string[] = [];
   horariosSet = new Set();
@@ -62,6 +63,7 @@ export class EspaciosFormularioComponent {
   ) {}
 
   @ViewChild('matRef') matRef: MatSelect;
+  // Deseleccionado el Hoarario
   removeSelectedHorario(horariosSelected: string) {
     this.matRef.options.forEach((data: MatOption) => {
       if (data._text?.nativeElement.innerHTML == horariosSelected) {
@@ -70,17 +72,20 @@ export class EspaciosFormularioComponent {
     });
   }
 
+  // Cambia el area seleccionada
   changeSelectedEspacios(espacios: string[]) {
     this.horariosSelected = espacios;
     //console.log("ARRAY DE HORARIOS", this.horariosSelected);
   }
 
+  // Cambia el formato del horario
   horariosToString(): string {
     // Reformats array ["7:00", "8:00", "9:00"] to string "{"7:00", "8:00", "9:00"}"
     const horarioString = `{${this.horariosSelected.join(', ')}}`;
     return horarioString;
   }
 
+  // Al iniciar el componente, se obtienen todos los deportes para mostrarlos al usuario
   ngOnInit() {
     const urlDeportes = '/deportes';
     this._apiService.get(urlDeportes).subscribe((data) => {
@@ -107,6 +112,7 @@ export class EspaciosFormularioComponent {
     });
   }
 
+  // Filtro
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
@@ -115,6 +121,7 @@ export class EspaciosFormularioComponent {
     );
   }
 
+  // Seleccion de Imagen
   selectFiles(event: any): void {
     this.selectedFileNames = [];
     this.selectedFiles = event.target.files;
@@ -132,6 +139,7 @@ export class EspaciosFormularioComponent {
     }
   }
 
+  // Obntiene el ID de un deporte seleccionado
   getIdOfSelectedDeporte(): string {
     const selectedDeporteNombre = this.formularioEspacios.get('deporte')?.value;
     //console.log("VALUE EN FORM-DEPORTE-FIELD" + this.formularioEspacios.get('deporte')?.value);
@@ -145,6 +153,7 @@ export class EspaciosFormularioComponent {
     return selectedDeporte!.id.toString();
   }
 
+  // POST para crear un espacio y convertir la informacion a FORM Data
   enviarDatos() {
     console.log('Boton presionado');
     console.log(this.formularioEspacios.value);
@@ -210,6 +219,7 @@ export class EspaciosFormularioComponent {
     }
   }
 
+  // Funcion para crear notificaciones
   createNotification(type: string, title: string, description: string): void {
     this.notification.create(type, title, description);
   }

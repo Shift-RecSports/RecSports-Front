@@ -14,17 +14,18 @@ import { MatDrawer } from '@angular/material/sidenav';
   styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent {
-  user: User;
-  userName: string;
-  navbarFlags: navbarFlags;
+  user: User; // Usuario, matricula y rol
+  userName: string; // String que se mostrara en la barra del perfil
+  navbarFlags: navbarFlags; // Banderas para activar/desactivar opciones de la barra de navegacion dependiendo del tipo de usuario
 
-  showSidebar: boolean = false;
-  manualInfoURL: string = '';
-  videoInfoURL: string = '';
+  showSidebar: boolean = false; // booleano para activar/desactivar la barra de navegacion vertica;
+  manualInfoURL: string = ''; // URL del manual de usuario
+  videoInfoURL: string = ''; // URL del video explicativo
 
-  showCredencial: boolean = false;
-  showMisReservaciones: boolean = false;
+  showCredencial: boolean = false; // Bandera para activar/desactivar la opcion de ver credencial
+  showMisReservaciones: boolean = false; // Bandera para activar/desactivar la opcion de ver mis reservaciones
 
+  // Variable para reconocer el tipo de dispositivo (movil o ordenador)
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.XSmall)
     .pipe(
@@ -43,22 +44,22 @@ export class SidebarComponent {
     this.navbarFlags = defaultNavbarFlags;
     this.userName = '';
 
+    // Se valida si el usuario ha iniciado sesiion para asingarle las credenciales
     if (this.service.isLoggedIn()) {
       this.user = {
         matricula: this.service.GetUserName() ? this.service.GetUserName() : '',
         userRole: this.service.GetUserRole(),
         nombre: this.service.GetUserNameString(),
       };
-
-      // TODO: Change user name
       this.userName = this.user.nombre!;
 
-      // Activate/Disactivate Navbar components
+      // Se activan y desactivan banderas para la opciones de navegacion
       this.navbarFlags = activateNavbarFlags(
         this.user.userRole ? this.user.userRole : '',
         defaultNavbarFlags
       );
 
+      // Dependiendo del usuario se muestra el manual de usuario y video explicativo referente
       if (this.user.userRole == 'ADMIN') {
         this.manualInfoURL =
           'https://docs.google.com/document/d/1kBH0USzhfthzlSacMdIBvl-7OVCL28aXdgmgxf4lQVY/edit?usp=sharing';
@@ -84,25 +85,30 @@ export class SidebarComponent {
     }
   }
 
+  // Abre/Cierra la barra de navegacion
   openSidebar(open: boolean) {
     this.showSidebar = open;
     this.drawer.toggle(this.showSidebar);
     this.showSidebar = this.drawer.opened;
   }
 
+  // Funcion para cerrar sesion
   onLogOut() {
     this.router.navigate(['login']);
   }
 
+  // Funcion para navegar al apartado "credencial"
   onCredencial() {
     this.router.navigate(['credencial']);
   }
 
+  // Funcion para navegar al apartado "reservaciones"
   onMisReservaciones() {
     this.router.navigate(['reservaciones']);
   }
 }
 
+// Se inicializan las banderas para las ocpiones de la barra de navegacion
 const defaultNavbarFlags = {
   inicioFlag: false,
   gimnasioFlag: false,
@@ -117,6 +123,7 @@ const defaultNavbarFlags = {
   inicioEntrenadorFlag: false,
 };
 
+// Funcion para activar las banderas con las opciones de la barra de nagevacion dependiendo del tipo de usuario
 function activateNavbarFlags(userRole: string, navbarFlags: navbarFlags) {
   if (userRole == 'ADMIN') {
     navbarFlags.inicioFlag = true;
