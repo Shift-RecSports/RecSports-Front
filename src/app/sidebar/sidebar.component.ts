@@ -62,22 +62,22 @@ export class SidebarComponent {
       // Dependiendo del usuario se muestra el manual de usuario y video explicativo referente
       if (this.user.userRole == 'ADMIN') {
         this.manualInfoURL =
-          'https://docs.google.com/document/d/1kBH0USzhfthzlSacMdIBvl-7OVCL28aXdgmgxf4lQVY/edit?usp=sharing';
-        this.videoInfoURL = '#';
+          'https://docs.google.com/document/d/1QhRuK7uoxAu9ECZ9SM6jZRFdXIxeE-VgeY7EPU91NRA/edit?usp=sharing';
+        this.videoInfoURL = 'https://youtu.be/T__rGb9PFXk';
 
         this.showCredencial = false;
         this.showMisReservaciones = true;
       } else if (this.user.userRole == 'GIMNASIO') {
         this.manualInfoURL =
-          'https://docs.google.com/document/d/1XfS2-LAmMJ6BqnLK2dtnMyVs0krIORFDsRVfl9iQY_s/edit?usp=sharing';
+          'https://docs.google.com/document/d/1QhRuK7uoxAu9ECZ9SM6jZRFdXIxeE-VgeY7EPU91NRA/edit?usp=sharing';
         this.videoInfoURL = 'https://youtu.be/NnPm2KZJ1_o';
 
         this.showCredencial = false;
         this.showMisReservaciones = false;
       } else {
         this.manualInfoURL =
-          'https://docs.google.com/document/d/1xbz5Gd9mTTa__G4--KzUw4lnxZk6pYBXsm2OfbY1JOk/edit?usp=sharing';
-        this.videoInfoURL = '#';
+          'https://docs.google.com/document/d/1QhRuK7uoxAu9ECZ9SM6jZRFdXIxeE-VgeY7EPU91NRA/edit?usp=sharing';
+        this.videoInfoURL = 'https://youtu.be/S3PKN9BCrAI';
 
         this.showCredencial = true;
         this.showMisReservaciones = true;
