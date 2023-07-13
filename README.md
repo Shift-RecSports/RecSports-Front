@@ -29,7 +29,7 @@ https://github.com/Shift-RecSports/RecSports-Front/assets/70775459/6d942898-79b3
 https://github.com/Shift-RecSports/RecSports-Front/assets/70775459/3e10fa4d-3888-4c25-8e87-2c7952639865
 
 
-# More detail Functionalities Explanation
+# A Detailed Explanation of How the Software Works
 https://github.com/Shift-RecSports/RecSports-Front/assets/70775459/d4bbd373-1091-4ffb-acb5-c3f4caef443c
 
 
