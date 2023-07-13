@@ -14,15 +14,19 @@ Finally, the pérfil de administrador has all the functionalities mentioned abov
 ## Videos of the Athletic Web:
 
 
-
+# Student and Admin users
 https://github.com/Shift-RecSports/RecSports-Front/assets/70775459/a11ab2d1-8bf9-4ada-9c96-2fd1e2750741
 
 
-
+# Gymnasium user
 https://github.com/Shift-RecSports/RecSports-Front/assets/70775459/6d942898-79b3-420c-a6e1-4e6c9626f5c1
 
 
+# Mobile View
+https://github.com/Shift-RecSports/RecSports-Front/assets/70775459/3e10fa4d-3888-4c25-8e87-2c7952639865
 
+
+# More detail Functionalities Explanation
 https://github.com/Shift-RecSports/RecSports-Front/assets/70775459/d4bbd373-1091-4ffb-acb5-c3f4caef443c
 
 
