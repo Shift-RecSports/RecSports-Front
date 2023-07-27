@@ -2,7 +2,7 @@
 
 https://github.com/Shift-RecSports/RecSports-Front/assets/70775459/b896d73e-139a-4ff4-839c-5ae8a0c1c782
 
-# Purpose
+# Overview
 Athletic Web is a web application specifically designed to address and overcome the challenges faced by the Athletics department at Tec de Monterrey. It aims to optimize the usage of the Wellness Center gym and various other sports facilities on campus while enhancing the user experience for students, gym staff, and administration. The application offers three distinct user interfaces, each tailored to cater to the unique needs of these user groups.
 
 # Benefits
